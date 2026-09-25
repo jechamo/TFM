@@ -1,8 +1,10 @@
 name: Publicar slides
 
+# Publica la carpeta slides/ en GitHub Pages. Requiere activar una vez
+# Settings → Pages → Source: GitHub Actions.
 on:
   push:
-    branches: [main]
+    branches: [main, claude/wonderful-mayer-8d0vkf]
     paths: ["slides/**", ".github/workflows/pages.yml"]
   workflow_dispatch:
 

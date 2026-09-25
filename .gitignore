@@ -1,0 +1,5 @@
+# Vídeos en bruto y exportados: nunca al repositorio (límite de 100 MB de GitHub)
+media/
+*.mp4
+*.mov
+*.mkv
