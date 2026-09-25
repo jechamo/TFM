@@ -28,7 +28,7 @@
 
   /* Escenario 1280×720 escalado al viewport */
   .deck { position: fixed; inset: 0; display: grid; place-items: center; }
-  .stage { width: 1280px; height: 720px; position: relative; transform-origin: center center; }
+  .stage { width: 1280px; height: 720px; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); transform-origin: center center; }
   .slide {
     position: absolute; inset: 0; padding: 64px 80px;
     background:
@@ -115,7 +115,7 @@
   @media print {
     html, body { overflow: visible; height: auto; background: var(--bg); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .deck { position: static; display: block; }
-    .stage { transform: none !important; width: 1280px; height: auto; }
+    .stage { transform: none !important; position: static; width: 1280px; height: auto; }
     .slide { position: relative; opacity: 1; visibility: visible; width: 1280px; height: 720px; border-radius: 0; border: 0; page-break-after: always; break-after: page; }
     .progress, .counter, .nav, .help { display: none; }
   }
@@ -505,7 +505,7 @@
   }
   function fit() {
     var s = Math.min(window.innerWidth / 1280, window.innerHeight / 720) * 0.96;
-    stage.style.transform = 'scale(' + s + ')';
+    stage.style.transform = 'translate(-50%, -50%) scale(' + s + ')';
   }
   document.addEventListener('keydown', function (e) {
     if (['ArrowRight', 'PageDown', ' ', 'Enter'].indexOf(e.key) >= 0) { e.preventDefault(); show(i + 1); }

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<!--
+  Plantilla única de gráficos del vídeo del TFM.
+  Parámetros por query string: kind=intro|section|lower|outro|bg|phone|mask|speed
+  y title, sub, n (número de sección), url.
+  La animación es función pura del tiempo: el renderizador llama a window.setT(segundos)
+  antes de cada captura, así que no depende del reloj real.
+-->
+<style>
+  :root {
+    --bg: #0a0c12; --card: #161a26; --line: #262c3d; --text: #e8ebf3; --muted: #97a0b5;
+    --indigo: #7c83ff; --teal: #2dd4bf;
+    --grad: linear-gradient(120deg, #7c83ff 0%, #2dd4bf 100%);
+    --font: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; font-family: var(--font); color: var(--text); background: transparent; }
+  .full {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(1300px 700px at 100% 0%, rgba(124,131,255,.18), transparent 60%),
+      radial-gradient(1000px 600px at 0% 100%, rgba(45,212,191,.13), transparent 60%),
+      var(--bg);
+  }
+  .grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .kicker { font-size: 26px; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); font-weight: 700; }
+  .center { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 160px; }
+  h1 { font-size: 118px; line-height: 1.02; font-weight: 800; letter-spacing: -.02em; }
+  h2 { font-size: 96px; line-height: 1.05; font-weight: 800; letter-spacing: -.02em; }
+  .sub { font-size: 38px; color: var(--muted); margin-top: 28px; max-width: 1400px; line-height: 1.35; }
+  .bar { height: 8px; width: 220px; border-radius: 8px; background: var(--grad); margin: 34px 0 0; transform-origin: left center; }
+  .num { font-size: 260px; font-weight: 800; position: absolute; right: 150px; bottom: 60px; opacity: .08; line-height: 1; }
+
+  /* Rótulo inferior */
+  .lower { position: absolute; left: 90px; bottom: 96px; display: flex; align-items: stretch; filter: drop-shadow(0 18px 40px rgba(0,0,0,.45)); }
+  .lower .accent { width: 10px; border-radius: 10px 0 0 10px; background: var(--grad); }
+  .lower .body { background: rgba(16,19,28,.92); border: 1px solid var(--line); border-left: 0; border-radius: 0 16px 16px 0; padding: 20px 34px 22px 26px; }
+  .lower .t { font-size: 42px; font-weight: 800; }
+  .lower .u { font-size: 26px; color: var(--teal); margin-top: 4px; font-weight: 600; }
+
+  /* Etiqueta de acelerado */
+  .speed { position: absolute; right: 70px; top: 60px; background: rgba(16,19,28,.9); border: 1px solid var(--line); border-radius: 999px; padding: 12px 26px; font-size: 32px; font-weight: 800; }
+
+  /* Marco de móvil: 460×950 con la pantalla transparente en (20,20) 420×910 */
+  .phone { position: absolute; left: 0; top: 0; width: 460px; height: 950px; border-radius: 74px;
+           box-shadow: 0 0 0 18px #1b1f2b inset, 0 0 0 20px #3a4154 inset; }
+  .phone::after { content: ""; position: absolute; left: 50%; top: 34px; width: 120px; height: 32px; margin-left: -60px; border-radius: 20px; background: #05060a; }
+
+  /* Estado inicial de los elementos animados */
+  [data-in] { opacity: 0; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+const q = new URLSearchParams(location.search);
+const kind = q.get('kind') || 'intro';
+const esc = s => (s || '').replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+const title = esc(q.get('title')), sub = esc(q.get('sub')), n = esc(q.get('n')), url = esc(q.get('url'));
+// Resalta en degradado el texto entre *asteriscos*; «|» es un salto de línea.
+// win=x,y,w,h,r dibuja la sombra de la ventana flotante sobre el fondo.
+const win = q.get('win') ? q.get('win').split(',').map(Number) : null;
+const rich = s => s.replace(/\*(.+?)\*/g, '<span class="grad">$1</span>').replace(/\|/g, '<br>');
+
+const html = {
+  bg: `<div class="full"></div>${win ? `<div style="position:absolute;left:${win[0]}px;top:${win[1]}px;width:${win[2]}px;height:${win[3]}px;border-radius:${win[4]}px;background:#000;box-shadow:0 30px 90px rgba(0,0,0,.65),0 0 0 1px rgba(124,131,255,.35)"></div>` : ''}`,
+  intro: `<div class="full"></div><div class="center">
+      <div class="kicker" data-in="0.2">Trabajo de Fin de Máster · 2026</div>
+      <h1 data-in="0.45">${rich(title)}</h1>
+      <div class="bar" data-in="0.9" data-kind="bar"></div>
+      <div class="sub" data-in="1.1">${rich(sub)}</div></div>`,
+  section: `<div class="full"></div><div class="num" data-in="0.1">${n}</div><div class="center">
+      <div class="kicker" data-in="0.15">Parte ${n}</div>
+      <h2 data-in="0.35">${rich(title)}</h2>
+      <div class="bar" data-in="0.7" data-kind="bar"></div>
+      <div class="sub" data-in="0.85">${rich(sub)}</div></div>`,
+  outro: `<div class="full"></div><div class="center">
+      <h1 data-in="0.2">${rich(title || '¡Gracias!')}</h1>
+      <div class="bar" data-in="0.6" data-kind="bar"></div>
+      <div class="sub" data-in="0.8">${rich(sub)}</div></div>`,
+  lower: `<div class="lower" data-in="0" data-kind="slide"><div class="accent"></div><div class="body">
+      <div class="t">${rich(title)}</div>${url ? `<div class="u">${url}</div>` : ''}</div></div>`,
+  speed: `<div class="speed" data-in="0" data-kind="pop">${title || '⏩ ×4'}</div>`,
+  phone: `<div class="phone"></div>`,
+  mask: `<div style="position:absolute;left:0;top:0;width:${q.get('w') || 420}px;height:${q.get('h') || 910}px;border-radius:${q.get('r') || 56}px;background:#fff"></div>`,
+}[kind];
+document.getElementById('root').innerHTML = html;
+
+const ease = x => 1 - Math.pow(1 - Math.min(Math.max(x, 0), 1), 3);   // easeOutCubic
+const D = parseFloat(q.get('dur') || '0');   // duración total: si se da, hay salida animada
+window.setT = function (t) {
+  const out = D ? ease((t - (D - 0.45)) / 0.45) : 0;                  // 0 → 1 en los últimos 0,45 s
+  document.querySelectorAll('[data-in]').forEach(el => {
+    const p = ease((t - parseFloat(el.dataset.in)) / 0.6);
+    const k = el.dataset.kind;
+    let tr = `translateY(${(1 - p) * 40}px)`;
+    if (k === 'bar') tr = `scaleX(${p})`;
+    if (k === 'slide') tr = `translateX(${(1 - p) * -120 - out * 120}px)`;
+    if (k === 'pop') tr = `scale(${0.8 + 0.2 * p})`;
+    el.style.transform = tr;
+    el.style.opacity = String(p * (1 - out));
+  });
+};
+window.setT(parseFloat(q.get('t') || '99'));
+</script>
+</body>
+</html>

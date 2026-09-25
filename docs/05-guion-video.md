@@ -32,3 +32,10 @@
 - [ ] Ajustes de RRSS Studio: comprobar que no se ve ninguna clave (la UI las enmascara).
 - [ ] Móvil con espejo de pantalla (QuickTime en iOS o `scrcpy` en Android).
 - [ ] Audio probado: micrófono cerca y sala sin eco.
+
+## Postproducción
+
+El montaje es reproducible con [`tfm-video/`](../tfm-video/README.md): ventana flotante y móvil en marco,
+zooms suaves, corte automático de silencios, esperas aceleradas, cartelas animadas con el estilo de las
+slides, subtítulos, música con *ducking* y audio a -14 LUFS, capítulos y miniatura. Allí se explica también
+cómo grabar para facilitar el montaje y cómo pasar los archivos.

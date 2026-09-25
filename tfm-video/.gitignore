@@ -1,0 +1,7 @@
+raw/
+work/
+final/
+assets/
+*.mp4
+*.mov
+__pycache__/

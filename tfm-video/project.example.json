@@ -1,0 +1,72 @@
+{
+  "raw_dir": "raw",
+  "final_dir": "final",
+  "music": "assets/music.mp3",
+  "music_db": -24,
+  "sfx_transition": "assets/whoosh.ogg",
+  "sfx_db": -12,
+  "transcribe": true,
+  "whisper_model": "small",
+  "transition": 0.6,
+
+  "intro": {
+    "title": "De la *especificación*|a producción",
+    "sub": "Un ecosistema SDD con agentes de IA, aplicado a tres productos reales",
+    "dur": 4.5,
+    "chapter": "Presentación"
+  },
+
+  "sections": [
+    {
+      "title": "El *problema*",
+      "sub": "La IA abarata el código; lo caro es gobernarlo",
+      "chapter": "Problema y propuesta",
+      "clips": [{ "file": "01-intro.mp4", "layout": "full" }]
+    },
+    {
+      "title": "Estructura_inicial",
+      "sub": "La plantilla SDD multiagente",
+      "chapter": "Plantilla SDD",
+      "clips": [{
+        "file": "02-plantilla.mp4",
+        "layout": "screen",
+        "zooms": [{ "t0": 42.0, "t1": 50.5, "cx": 0.25, "cy": 0.7, "factor": 1.8 }],
+        "speedups": [[61.0, 79.0, 4]]
+      }]
+    },
+    {
+      "title": "RRSS *Studio*",
+      "sub": "Del producto al contenido publicado",
+      "chapter": "RRSS Studio (demo)",
+      "lower": { "title": "RRSS Studio", "url": "github.com/jechamo/rrss-automation-app", "at": 1.0, "dur": 5 },
+      "clips": [
+        { "file": "04-rrss-a.mp4", "layout": "screen", "speedups": [[120.0, 165.0, 6]] },
+        { "file": "04-rrss-b.mp4", "layout": "screen", "in": 3.0, "out": 95.0 }
+      ]
+    },
+    {
+      "title": "ICG *Vault*",
+      "sub": "Vota cine, series y juegos como en un RPG",
+      "chapter": "ICG Vault",
+      "lower": { "title": "ICG Vault", "url": "icgvault.es · App Store · Google Play", "at": 1.0, "dur": 5 },
+      "clips": [{ "file": "06-icg-web.mp4", "layout": "side", "phone": "06-icg-movil.mp4", "phone_offset": -1.4 }]
+    },
+    {
+      "title": "Chafit*360*",
+      "sub": "Entrenamiento integral con IA",
+      "chapter": "Chafit360",
+      "lower": { "title": "Chafit360", "url": "chafit.es · App Store · Google Play", "at": 1.0, "dur": 5 },
+      "clips": [
+        { "file": "07-chafit-web.mp4", "layout": "screen" },
+        { "file": "07-chafit-movil.mp4", "layout": "phone" }
+      ]
+    }
+  ],
+
+  "outro": {
+    "title": "¡Gracias!",
+    "sub": "github.com/jechamo/TFM · icgvault.es · chafit.es",
+    "dur": 5,
+    "chapter": "Cierre"
+  }
+}
