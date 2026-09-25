@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <!--
   Plantilla única de gráficos del vídeo del TFM.
-  Parámetros por query string: kind=intro|section|lower|outro|bg|phone|mask|speed
+  Parámetros por query string: kind=intro|section|lower|outro|bg|phone|mask|speed|callout
   y title, sub, n (número de sección), url.
   La animación es función pura del tiempo: el renderizador llama a window.setT(segundos)
   antes de cada captura, así que no depende del reloj real.
@@ -40,6 +40,13 @@
   .lower .body { background: rgba(16,19,28,.92); border: 1px solid var(--line); border-left: 0; border-radius: 0 16px 16px 0; padding: 20px 34px 22px 26px; }
   .lower .t { font-size: 42px; font-weight: 800; }
   .lower .u { font-size: 26px; color: var(--teal); margin-top: 4px; font-weight: 600; }
+
+  /* Leyenda junto al móvil (vídeos sin voz) */
+  .callout { position: absolute; left: 150px; top: 50%; transform: translateY(-50%); width: 560px; }
+  .callout .k { font-size: 24px; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); font-weight: 700; margin-bottom: 14px; }
+  .callout .t { font-size: 58px; line-height: 1.08; font-weight: 800; letter-spacing: -.01em; }
+  .callout .d { font-size: 30px; line-height: 1.4; color: var(--muted); margin-top: 18px; }
+  .callout .b { height: 6px; width: 140px; border-radius: 6px; background: var(--grad); margin-top: 26px; }
 
   /* Etiqueta de acelerado */
   .speed { position: absolute; right: 70px; top: 60px; background: rgba(16,19,28,.9); border: 1px solid var(--line); border-radius: 999px; padding: 12px 26px; font-size: 32px; font-weight: 800; }
@@ -83,6 +90,7 @@ const html = {
       <div class="sub" data-in="0.8">${rich(sub)}</div></div>`,
   lower: `<div class="lower" data-in="0" data-kind="slide"><div class="accent"></div><div class="body">
       <div class="t">${rich(title)}</div>${url ? `<div class="u">${url}</div>` : ''}</div></div>`,
+  callout: `<div class="callout"><div class="k">${esc(q.get('n'))}</div><div class="t">${rich(title)}</div>${sub ? `<div class="d">${rich(sub)}</div>` : ''}<div class="b"></div></div>`,
   speed: `<div class="speed" data-in="0" data-kind="pop">${title || '⏩ ×4'}</div>`,
   phone: `<div class="phone"></div>`,
   mask: `<div style="position:absolute;left:0;top:0;width:${q.get('w') || 420}px;height:${q.get('h') || 910}px;border-radius:${q.get('r') || 56}px;background:#fff"></div>`,

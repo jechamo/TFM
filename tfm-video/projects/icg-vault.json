@@ -1,0 +1,38 @@
+{
+  "raw_dir": "../raw",
+  "final_dir": "../final/icg-vault",
+  "music": "../assets/music.mp3",
+  "music_db": -16,
+  "sfx_transition": "../assets/whoosh.ogg",
+  "transcribe": false,
+  "transition": 0.6,
+
+  "intro": { "title": "ICG *Vault*", "sub": "Vota cine, series y juegos como en un RPG", "dur": 3.5 },
+
+  "sections": [
+    {
+      "title": "ICG *Vault*",
+      "sub": "icgvault.es · App Store · Google Play",
+      "chapter": "ICG Vault",
+      "lower": { "title": "ICG Vault", "url": "icgvault.es", "at": 0.8, "dur": 5 },
+      "clips": [
+        {
+          "file": "icg-vault-movil.mp4",
+          "layout": "phone",
+          "trim_silence": false,
+          "speedups": [],
+          "zooms": [],
+          "callouts": [
+            { "t0": 1.0,  "t1": 9.0,  "kicker": "Catálogo",   "title": "Vota *películas*, series y juegos", "sub": "Datos de TMDB, IGDB, HowLongToBeat y Metacritic" },
+            { "t0": 10.0, "t1": 18.0, "kicker": "Progresión", "title": "Sube de *nivel*", "sub": "Tu voto pesa más cuanto más participas" },
+            { "t0": 19.0, "t1": 27.0, "kicker": "Recompensas", "title": "Abre *cofres*", "sub": "Objetos, mascotas y guardianes generados con IA" },
+            { "t0": 28.0, "t1": 36.0, "kicker": "Juegos",     "title": "ICG *Duelo* e Inmortales", "sub": "Cartas por turnos, arena PvP y retos diarios" },
+            { "t0": 37.0, "t1": 45.0, "kicker": "Comunidad",  "title": "*Rankings* y listas", "sub": "Sigue a gente con criterio y comparte tus listas" }
+          ]
+        }
+      ]
+    }
+  ],
+
+  "outro": { "title": "icgvault.es", "sub": "Disponible en App Store y Google Play", "dur": 4 }
+}

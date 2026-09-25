@@ -20,6 +20,7 @@ raw/*.mp4 ──► edit.py (pasada 1: encuadre · zooms · cortes · acelerados
 | **Zooms suaves** | Zoom con *easing* hacia un punto (`cx`, `cy` de 0 a 1) entre `t0` y `t1` de la grabación. |
 | **Cortes automáticos** | Detecta los silencios de más de 0,7 s y los recorta dejando algo de aire. |
 | **Acelerados** | Las esperas (builds, cargas, IA pensando) se aceleran con la etiqueta `⏩ ×4`; la música cubre ese hueco. |
+| **Leyendas en pantalla** | Para vídeos sin voz: bloques de texto junto al móvil que aparecen y se van con fundido (`callouts`). |
 | **Cartelas animadas** | Intro, una cartela numerada por sección y cierre, con la tipografía y los colores de las slides. |
 | **Rótulos inferiores** | Nombre y URL del producto entran y salen deslizándose. |
 | **Transiciones** | Fundidos variados entre secciones (fade, deslizamiento, apertura circular) con un golpe sonoro suave. |
@@ -59,6 +60,7 @@ python edit.py project.json --only-finish      # rehace solo audio y subtítulos
 ```
 
 Ejemplo comentado de proyecto: [`project.example.json`](project.example.json).
+Proyecto listo para el clip de ICG Vault: [`projects/icg-vault.json`](projects/icg-vault.json) (pasos en [`EN-CASA.md`](EN-CASA.md)).
 
 ## Música y efectos
 

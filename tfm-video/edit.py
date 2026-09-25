@@ -134,6 +134,11 @@ def render_graphics(cfg: dict, gfx: Path) -> None:
             lw = sec["lower"]
             jobs.append({"name": f"lower_s{i:02d}", "kind": "lower", "transparent": True, "dur": lw.get("dur", 5),
                          "params": {"title": lw["title"], "url": lw.get("url", "")}})
+    for i, sec in enumerate(cfg["sections"], 1):
+        for j, clip in enumerate(sec["clips"]):
+            for k, co in enumerate(clip.get("callouts", [])):
+                jobs.append({"name": f"callout_s{i:02d}_c{j}_{k}", "kind": "callout", "transparent": True,
+                             "params": {"title": co["title"], "sub": co.get("sub", ""), "n": co.get("kicker", "")}})
     speeds = sorted({sp[2] for sec in cfg["sections"] for c in sec["clips"] for sp in c.get("speedups", [])})
     for s in speeds:
         jobs.append({"name": f"speed_{s:g}", "kind": "speed", "transparent": True, "params": {"title": f"⏩ ×{s:g}"}})
@@ -259,6 +264,8 @@ def build_clip(clip: dict, raw: Path, gfx: Path, out: Path, enc: list[str]) -> N
         add("frame", gfx / "phone.png")
         add("pmask", gfx / "mask_phone.png")
         px, py = PHONE[layout]
+        if layout == "phone" and clip.get("callouts"):
+            px = 1250   # con leyendas, el móvil se desplaza a la derecha y el texto ocupa la izquierda
         sx, sy, sw, sh = PHONE_SCREEN
         fc.append(f"[{ph_in}]fps={FPS},scale={sw}:{sh}:force_original_aspect_ratio=increase,crop={sw}:{sh},setsar=1,format=rgba[ph0]")
         fc.append(f"[{idx['pmask']}:v]format=gray[pm]")
@@ -270,10 +277,21 @@ def build_clip(clip: dict, raw: Path, gfx: Path, out: Path, enc: list[str]) -> N
     else:
         fc.append("[v0]null[vl]")
 
+    # Leyendas en pantalla (para vídeos sin voz): aparecen y se van con fundido, en tiempo de la grabación.
+    cur = "vl"
+    for k, co in enumerate(clip.get("callouts", [])):
+        name = f"co{k}"
+        add(name, gfx / f"{clip['_tag']}_{k}.png")
+        t0, t1 = co["t0"], co["t1"]
+        fc.append(f"[{idx[name]}:v]format=rgba,fps={FPS},trim=duration={t1 - t0},fade=t=in:d=0.4:alpha=1,"
+                  f"fade=t=out:st={max(t1 - t0 - 0.4, 0)}:d=0.4:alpha=1,setpts=PTS-STARTPTS+{t0}/TB[cof{k}]")
+        fc.append(f"[{cur}][cof{k}]overlay=0:0:eof_action=pass[vc{k}]")
+        cur = f"vc{k}"
+
     # Recorte en tramos + acelerados (la etiqueta ⏩ solo en los acelerados).
     n = len(pieces)
     has_audio = info["audio"]
-    fc.append(f"[vl]split={n}" + "".join(f"[vs{i}]" for i in range(n)))
+    fc.append(f"[{cur}]split={n}" + "".join(f"[vs{i}]" for i in range(n)))
     if has_audio:
         fc.append(f"[0:a]aresample=48000,aformat=channel_layouts=stereo,asplit={n}" + "".join(f"[as{i}]" for i in range(n)))
     for i, (s, e, sp) in enumerate(pieces):
@@ -352,6 +370,7 @@ def assemble(cfg: dict, base: Path, work: Path, enc: list[str]) -> dict:
         sequence_to_video(gfx / f"card_{tag}", card(f"card_{tag}"), False, enc)
         clips = []
         for j, clip in enumerate(sec["clips"]):
+            clip["_tag"] = f"callout_{tag}_c{j}"
             out = work / f"{tag}_c{j}.mp4"
             build_clip(clip, raw, gfx, out, enc)
             clips.append(out)
