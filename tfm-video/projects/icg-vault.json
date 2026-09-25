@@ -24,47 +24,66 @@
       },
       "clips": [
         {
-          "file": "Screen_Recording_20260925_141002_Chrome.mp4",
+          "file": "icgvault.mp4",
           "layout": "phone",
           "trim_silence": false,
-          "speedups": [],
-          "zooms": [],
+          "out": 385.7,
+          "phone_crop": [0, 54],
+          "cuts": [[5.5, 10.2]],
+          "speedups": [
+            [10.2, 14.0, 4],
+            [35.0, 47.3, 4],
+            [57.7, 66.0, 4],
+            [81.2, 86.0, 4],
+            [104.0, 134.0, 4],
+            [150.0, 206.0, 4],
+            [222.0, 240.0, 4],
+            [256.0, 282.0, 4],
+            [308.0, 311.0, 4],
+            [354.0, 362.0, 4]
+          ],
+          "zooms": [
+            {"t0": 283.0, "t1": 288.5, "cx": 0.5, "cy": 0.47, "factor": 1.4},
+            {"t0": 367.0, "t1": 375.5, "cx": 0.5, "cy": 0.6, "factor": 1.4},
+            {"t0": 379.5, "t1": 385.6, "cx": 0.5, "cy": 0.45, "factor": 1.4}
+          ],
           "callouts": [
-            {
-              "t0": 1.0,
-              "t1": 9.0,
-              "kicker": "Catálogo",
-              "title": "Vota *películas*, series y juegos",
-              "sub": "Datos de TMDB, IGDB, HowLongToBeat y Metacritic"
-            },
-            {
-              "t0": 10.0,
-              "t1": 18.0,
-              "kicker": "Progresión",
-              "title": "Sube de *nivel*",
-              "sub": "Tu voto pesa más cuanto más participas"
-            },
-            {
-              "t0": 19.0,
-              "t1": 27.0,
-              "kicker": "Recompensas",
-              "title": "Abre *cofres*",
-              "sub": "Objetos, mascotas y guardianes generados con IA"
-            },
-            {
-              "t0": 28.0,
-              "t1": 36.0,
-              "kicker": "Juegos",
-              "title": "ICG *Duelo* e Inmortales",
-              "sub": "Cartas por turnos, arena PvP y retos diarios"
-            },
-            {
-              "t0": 37.0,
-              "t1": 45.0,
-              "kicker": "Comunidad",
-              "title": "*Rankings* y listas",
-              "sub": "Sigue a gente con criterio y comparte tus listas"
-            }
+            {"t0": 0.3, "t1": 5.5, "kicker": "Bienvenida",
+             "title": "Una sola página para *reunirlos* a todos", "sub": "Videojuegos, películas y series"},
+            {"t0": 14.1, "t1": 21.0, "kicker": "Hoy",
+             "title": "Hoy en *ICG*", "sub": "Avisos del día y premios de la semana"},
+            {"t0": 21.5, "t1": 34.8, "kicker": "Inicio",
+             "title": "*Social* Hub", "sub": "Reseñas, debates y la gente que sigues"},
+            {"t0": 47.5, "t1": 57.6, "kicker": "Para ti",
+             "title": "*Recomendaciones*", "sub": "Juegos, películas y series por plataforma"},
+            {"t0": 66.1, "t1": 81.1, "kicker": "Descubrir",
+             "title": "*Noticias*, encuestas y calendario", "sub": "Fuentes españolas y próximos lanzamientos"},
+            {"t0": 86.1, "t1": 103.9, "kicker": "Rankings",
+             "title": "*Leaderboard* global", "sub": "Contenidos y agentes mejor valorados"},
+            {"t0": 134.1, "t1": 149.9, "kicker": "Reto diario",
+             "title": "Zoom *Out*", "sub": "Adivina el videojuego con pistas"},
+            {"t0": 206.1, "t1": 213.0, "kicker": "Resultado",
+             "title": "¡Juego *adivinado*!", "sub": "Puntos, racha y ranking del día"},
+            {"t0": 213.5, "t1": 221.9, "kicker": "Minijuego",
+             "title": "*Timeline*", "sub": "Ordena 5 videojuegos del más antiguo al más nuevo"},
+            {"t0": 240.1, "t1": 255.9, "kicker": "Minijuego",
+             "title": "*FlashOut*", "sub": "Una imagen difuminada, 4 opciones y 5 segundos"},
+            {"t0": 282.1, "t1": 289.3, "kicker": "Resultado",
+             "title": "*#1* del día", "sub": "10/10 aciertos y 321 puntos en FlashOut"},
+            {"t0": 289.5, "t1": 297.7, "kicker": "Juegos",
+             "title": "ICG *Duelo* e Inmortales", "sub": "Reta a otros jugadores · «Solo puede quedar uno»"},
+            {"t0": 298.0, "t1": 307.9, "kicker": "Colección",
+             "title": "Tu *biblioteca*", "sub": "Listas en curso, completadas y pendientes"},
+            {"t0": 311.1, "t1": 324.5, "kicker": "Voto rápido",
+             "title": "Desliza y *vota*", "sub": "Tarjetas de tendencias: desliza o toca"},
+            {"t0": 325.5, "t1": 345.5, "kicker": "Perfil",
+             "title": "Sube de *nivel*", "sub": "Nivel, rupias, equipamiento y avatares IA"},
+            {"t0": 346.0, "t1": 353.9, "kicker": "Manual",
+             "title": "*Poder* de voto", "sub": "Base 1.0 y +10 % por cada nivel"},
+            {"t0": 362.1, "t1": 376.8, "kicker": "Ficha",
+             "title": "Vota con tu *veredicto*", "sub": "Infame, decepcionante, sólido o full"},
+            {"t0": 377.2, "t1": 385.7, "kicker": "Recompensa",
+             "title": "¡Voto *registrado*!", "sub": "+10 XP y una imagen para compartir"}
           ]
         }
       ]

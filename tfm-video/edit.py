@@ -68,7 +68,7 @@ FF = ffmpeg_exe()
 
 def run(args: list[str], quiet: bool = True) -> subprocess.CompletedProcess:
     cmd = [FF, "-hide_banner", "-y"] + (["-loglevel", "error"] if quiet else []) + args
-    res = subprocess.run(cmd, capture_output=True, text=True)
+    res = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace")
     if res.returncode != 0:
         sys.exit(f"ffmpeg falló:\n{' '.join(cmd)}\n{res.stderr[-3000:]}")
     return res
@@ -76,7 +76,7 @@ def run(args: list[str], quiet: bool = True) -> subprocess.CompletedProcess:
 
 def probe(path: Path) -> dict:
     """Duración y si hay audio, leyendo la salida de ffmpeg -i (no hace falta ffprobe)."""
-    res = subprocess.run([FF, "-hide_banner", "-i", str(path)], capture_output=True, text=True)
+    res = subprocess.run([FF, "-hide_banner", "-i", str(path)], capture_output=True, text=True, encoding="utf-8", errors="replace")
     m = re.search(r"Duration: (\d+):(\d+):([\d.]+)", res.stderr)
     dur = int(m[1]) * 3600 + int(m[2]) * 60 + float(m[3]) if m else 0.0
     return {"duration": dur, "audio": " Audio:" in res.stderr}
@@ -86,7 +86,7 @@ def silences(path: Path, start: float, end: float, noise_db: float, min_len: flo
     res = subprocess.run(
         [FF, "-hide_banner", "-ss", f"{start}", "-to", f"{end}", "-i", str(path), "-vn",
          "-af", f"silencedetect=noise={noise_db}dB:d={min_len}", "-f", "null", "-"],
-        capture_output=True, text=True)
+        capture_output=True, text=True, encoding="utf-8", errors="replace")
     starts = [float(x) for x in re.findall(r"silence_start: ([\d.]+)", res.stderr)]
     ends = [float(x) for x in re.findall(r"silence_end: ([\d.]+)", res.stderr)]
     out = []
@@ -96,10 +96,10 @@ def silences(path: Path, start: float, end: float, noise_db: float, min_len: flo
     return out
 
 
-def smooth(t0: float, t1: float, ramp: float = 0.6) -> str:
+def smooth(t0: float, t1: float, ramp: float = 0.6, var: str = "t") -> str:
     """Expresión ffmpeg 0→1→0 con subida y bajada suavizadas (smoothstep) entre t0 y t1."""
-    up = f"clip((t-{t0})/{ramp},0,1)"
-    down = f"clip(({t1}-t)/{ramp},0,1)"
+    up = f"clip(({var}-{t0})/{ramp},0,1)"
+    down = f"clip(({t1}-{var})/{ramp},0,1)"
     s = f"min({up},{down})"
     return f"({s})*({s})*(3-2*({s}))"
 
@@ -161,8 +161,8 @@ def render_graphics(cfg: dict, gfx: Path) -> None:
     if not todo:
         return
     jobs_file = gfx / "jobs.json"
-    jobs_file.write_text(json.dumps(todo, ensure_ascii=False))
-    res = subprocess.run(["node", str(HERE / "render.cjs"), str(jobs_file), str(gfx)], capture_output=True, text=True)
+    jobs_file.write_text(json.dumps(todo, ensure_ascii=False), encoding="utf-8")
+    res = subprocess.run(["node", str(HERE / "render.cjs"), str(jobs_file), str(gfx)], capture_output=True, text=True, encoding="utf-8", errors="replace")
     if res.returncode != 0:
         sys.exit("Falló el renderizado de gráficos:\n" + res.stderr[-2000:])
 
@@ -191,6 +191,9 @@ def plan_pieces(clip: dict, src: Path, start: float, end: float) -> list[tuple[f
             cur = max(cur, e - pad)
         if cur < end:
             keep.append((cur, end))
+    # Tramos que se quitan a mano (p. ej. una pantalla con datos personales).
+    for a, b in clip.get("cuts", []):
+        keep = [piece for s, e in keep for piece in ((s, min(e, a)), (max(s, b), e)) if piece[1] > piece[0]]
     # Los tramos acelerados se conservan enteros aunque sean silenciosos (son esperas visibles).
     speedups = sorted(clip.get("speedups", []))
     for a, b, _ in speedups:
@@ -211,6 +214,25 @@ def plan_pieces(clip: dict, src: Path, start: float, end: float) -> list[tuple[f
         if e - s >= 0.25:
             pieces.append((s, e, sp))
     return pieces
+
+
+def zoom_chain(zooms: list[dict], w: int, h: int) -> str:
+    """Zooms suaves hacia (cx, cy), en coordenadas 0-1 del encuadre, sobre una imagen de w×h.
+
+    Se hace con zoompan (tamaño de salida fijo): con scale eval=frame + crop, el crop se quedaba con el
+    tamaño inicial y el zoom salía anclado a la esquina superior izquierda. Se escala ×2 antes para que
+    el encuadre se mueva en medios píxeles y no tiemble.
+    """
+    if not zooms:
+        return ""
+    z_expr = "1" + "".join(f"+{z.get('factor', 1.8) - 1}*{smooth(z['t0'], z['t1'], z.get('ramp', 0.6), 'it')}"
+                           for z in zooms)
+    cx = cy = "0.5"
+    for z in reversed(zooms):   # los zooms no se solapan: cada uno manda en su intervalo
+        cx = f"if(between(it,{z['t0']},{z['t1']}),{z['cx']},{cx})"
+        cy = f"if(between(it,{z['t0']},{z['t1']}),{z['cy']},{cy})"
+    return (f",scale={2 * w}:{2 * h},zoompan=z='{z_expr}':d=1:s={w}x{h}:fps={FPS}"
+            f":x='clip({cx}*iw-iw/zoom/2,0,iw-iw/zoom)':y='clip({cy}*ih-ih/zoom/2,0,ih-ih/zoom)'")
 
 
 def build_clip(clip: dict, raw: Path, gfx: Path, out: Path, enc: list[str]) -> None:
@@ -236,12 +258,7 @@ def build_clip(clip: dict, raw: Path, gfx: Path, out: Path, enc: list[str]) -> N
         x, y, w, h = WINDOW.get(layout, (0, 0, W, H))
         chain = (f"[0:v]fps={FPS},scale={w}:{h}:force_original_aspect_ratio=decrease,"
                  f"crop='min(iw,{w})':'min(ih,{h})',pad={w}:{h}:(ow-iw)/2:(oh-ih)/2:color=0x0a0c12,setsar=1")
-        for z in clip.get("zooms", []):
-            # Zoom suave hacia (cx, cy), en coordenadas 0-1 de la grabación.
-            e = smooth(z["t0"], z["t1"], z.get("ramp", 0.6))
-            f = z.get("factor", 1.8)
-            chain += (f",scale=w='{w}*(1+{f - 1}*{e})':h='{h}*(1+{f - 1}*{e})':eval=frame,"
-                      f"crop={w}:{h}:x='clip({z['cx']}*in_w-{w}/2,0,in_w-{w})':y='clip({z['cy']}*in_h-{h}/2,0,in_h-{h})'")
+        chain += zoom_chain(clip.get("zooms", []), w, h)
         if layout == "full":
             fc.append(chain + "[win]")
             fc.append("[bg][win]overlay=0:0:shortest=1[v0]")
@@ -267,7 +284,18 @@ def build_clip(clip: dict, raw: Path, gfx: Path, out: Path, enc: list[str]) -> N
         if layout == "phone" and clip.get("callouts"):
             px = 1250   # con leyendas, el móvil se desplaza a la derecha y el texto ocupa la izquierda
         sx, sy, sw, sh = PHONE_SCREEN
-        fc.append(f"[{ph_in}]fps={FPS},scale={sw}:{sh}:force_original_aspect_ratio=increase,crop={sw}:{sh},setsar=1,format=rgba[ph0]")
+        # En «phone» los zooms van dentro de la pantalla del móvil (en «side» se aplican a la ventana).
+        ph_zoom = zoom_chain(clip.get("zooms", []), sw, sh) if layout == "phone" else ""
+        # phone_crop = [arriba, abajo] en píxeles de la grabación (p. ej. la barra de navegación de Android).
+        # Con él, la imagen se encaja entera en vez de recortarse, para que la isla del marco caiga
+        # sobre la barra de estado y no sobre la de direcciones.
+        if clip.get("phone_crop"):
+            top, bottom = clip["phone_crop"]
+            fit = (f"crop=iw:ih-{top + bottom}:0:{top},scale={sw}:{sh}:force_original_aspect_ratio=decrease,"
+                   f"pad={sw}:{sh}:(ow-iw)/2:(oh-ih)/2:color=0x05060a")
+        else:
+            fit = f"scale={sw}:{sh}:force_original_aspect_ratio=increase,crop={sw}:{sh}"
+        fc.append(f"[{ph_in}]fps={FPS},{fit},setsar=1{ph_zoom},format=rgba[ph0]")
         fc.append(f"[{idx['pmask']}:v]format=gray[pm]")
         fc.append("[ph0][pm]alphamerge[ph]")
         # Lado a lado: manda la grabación de pantalla. Solo móvil: manda el vídeo del móvil.
@@ -394,7 +422,7 @@ def assemble(cfg: dict, base: Path, work: Path, enc: list[str]) -> dict:
     meta = {"chapters": [{"t": round(s, 2), "title": c} for s, c in zip(starts, chapters)],
             "transitions": [round(s, 2) for s in starts[1:]]}
     meta["chapters"][0]["t"] = 0.0
-    (work / "assembled.json").write_text(json.dumps(meta, ensure_ascii=False, indent=2))
+    (work / "assembled.json").write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
     return meta
 
 
@@ -434,7 +462,7 @@ def transcribe(audio_src: Path, srt: Path, model_name: str) -> bool:
 
 
 def finish(cfg: dict, base: Path, work: Path, final: Path, enc: list[str]) -> None:
-    meta = json.loads((work / "assembled.json").read_text())
+    meta = json.loads((work / "assembled.json").read_text(encoding="utf-8"))
     src = work / "assembled.mp4"
     dur = probe(src)["duration"]
     final.mkdir(parents=True, exist_ok=True)
@@ -492,6 +520,8 @@ def finish(cfg: dict, base: Path, work: Path, final: Path, enc: list[str]) -> No
 
 
 def main() -> None:
+    if hasattr(sys.stdout, "reconfigure"):   # consola de Windows (cp1252): que «✓» y «⏩» no rompan
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("project")
     ap.add_argument("--draft", action="store_true", help="codificación rápida para revisar")
