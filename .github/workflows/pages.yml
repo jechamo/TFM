@@ -5,7 +5,8 @@ name: Publicar web del TFM
 # indicado en site/data/videos.json. Requiere Settings → Pages → Source: GitHub Actions.
 on:
   push:
-    branches: [main, claude/wonderful-mayer-8d0vkf]
+    # Solo la rama por defecto: el entorno github-pages no admite desplegar desde main.
+    branches: [claude/wonderful-mayer-8d0vkf]
     paths: ["site/**", "architecture/exported/**", "tools/build-site.mjs", ".github/workflows/pages.yml"]
   # Tras crear o actualizar el release de vídeos, relanzar a mano (Actions → Run workflow).
   workflow_dispatch:
