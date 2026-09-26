@@ -10,9 +10,9 @@ Documentación:   COMPLETADO   (docs/: visión, método, arquitectura, casos, au
 Arquitectura:    COMPLETADO   (modelo C4 como código en architecture/model, 5 modelos)
 Diagramas:       COMPLETADO   (56 SVG + PNG, 12 Archify interactivos, workspace Structurizr generado)
 Código:          COMPLETADO   (sin cambios en los productos; tests re-ejecutados el 26/09/2026)
-Deploy:          PENDIENTE    → publicar la web del TFM en GitHub Pages (ver acción 1)
-Slides:          COMPLETADO   (21 diapositivas HTML + PDF con 32 enlaces activos); URL pública tras la acción 1
-Vídeo:           COMPLETADO   (montado: 16:30 y 8:08); URL pública tras la acción 1
+Deploy:          COMPLETADO   (GitHub Pages desde la rama claude/wonderful-mayer-8d0vkf, 26/09/2026)
+Slides:          COMPLETADO   (21 diapositivas HTML + PDF con 32 enlaces activos), publicadas
+Vídeo:           COMPLETADO   (16:30 y 8:08 + 7 vídeos por producto), publicados en Pages y en el release media-v1
 Credenciales:    PENDIENTE    → probar las cuentas demo (acción 3) y darlas solo en el formulario privado
 Capturas:        COMPLETADO   (fotogramas reales y capturas públicas); opcionales en SCREENSHOTS_REQUIRED.md
 ```
@@ -36,11 +36,16 @@ Usuario DEMO:     en el formulario privado
 Contraseña DEMO:  en el formulario privado
 ```
 
-Estas URLs **no funcionan todavía**: hoy `https://jechamo.github.io/TFM/` sigue sirviendo las slides antiguas hasta que se publique (acción 1).
+Comprobado el 26/09/2026 con un navegador limpio: la web, las slides, el PDF, los diagramas interactivos y el vídeo cargan con sus estilos; el vídeo se reproduce y salta a cada capítulo.
 
 ## ACCIONES REQUERIDAS DEL AUTOR
 
-### 1 · Publicar web, slides y vídeos (imprescindible)
+### 1 · Publicar web, slides y vídeos · ✅ HECHO (26/09/2026)
+
+Publicado: commit `f9af83b`, release [`media-v1`](https://github.com/jechamo/TFM/releases/tag/media-v1) con los 9 MP4 y despliegue de Pages correcto. Si se cambia la web o los vídeos, basta con hacer push (o relanzar el workflow «Publicar web del TFM» tras actualizar el release).
+
+<details><summary>Detalle del procedimiento</summary>
+
 
 | | |
 |---|---|
@@ -52,6 +57,8 @@ Estas URLs **no funcionan todavía**: hoy `https://jechamo.github.io/TFM/` sigue
 | Comprobación | abrir la web, las slides y `video.html?v=tfm-completo` en una ventana privada: estilos, diagramas y reproducción |
 
 `tfm-completo.mp4` pesa 117 MB y GitHub no admite ficheros de más de 100 MB en git, por eso los vídeos van en el release y no en el repositorio.
+
+</details>
 
 ### 2 · Acceso a los repositorios privados
 
@@ -90,6 +97,6 @@ Valores en [`docs/delivery/submission-checklist.md`](docs/delivery/submission-ch
 | RRSS Studio: Vitest y contratos | 71 + 138 en verde |
 | ChaFit: contratos Node y Deno | 109 + 100 en verde |
 | Árboles de trabajo de los productos | sin cambios tras la inspección |
-| Web del TFM en local (escritorio y 390 px) | sin desbordamiento horizontal; diagramas y catálogo de vídeos cargan también abriendo el HTML como fichero |
+| Web del TFM publicada y en local (escritorio y 390 px) | sin desbordamiento horizontal; diagramas y catálogo de vídeos cargan también abriendo el HTML como fichero |
 | Slides: 21 diapositivas a 1920×1080 | sin elementos fuera del lienzo; PDF de 21 páginas con 32 enlaces absolutos |
 | Auditorías publicadas | solo resúmenes saneados; informes completos fuera del repositorio |

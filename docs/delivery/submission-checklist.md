@@ -8,9 +8,9 @@
 |---|---|---|
 | README completo (descripción, stack, instalación, ejecución, estructura, funcionalidades, arquitectura, integraciones, demo, URLs) | ✅ | [`README.md`](../../README.md) |
 | Código fuente en GitHub | ✅ sistema y RRSS públicos · ⚠️ ChaFit e ICG Vault privados | [enlaces](../../README.md#repositorios) |
-| Versión desplegada | ✅ chafit.es · icgvault.es · web del sistema · web del TFM (tras publicar) | README |
-| Slides | ✅ generadas · ⏳ URL pública tras publicar | `site/slides/` |
-| Vídeo | ✅ montado (16:30 y 8:08) · ⏳ URL pública tras subir | `site/video.html`, `media/final/tfm-*` |
+| Versión desplegada | ✅ chafit.es · icgvault.es · web del sistema · web del TFM | README |
+| Slides | ✅ publicadas | https://jechamo.github.io/TFM/slides/ |
+| Vídeo | ✅ publicado (16:30 y 8:08) | https://jechamo.github.io/TFM/video.html?v=tfm-completo |
 | Usuario y contraseña DEMO | ⏳ en el formulario privado | [criterio](../security/security.md#credenciales-demo-criterio) |
 
 ## Formulario final
@@ -28,8 +28,8 @@
 
 ## Antes de enviar
 
-- [ ] Publicar vídeos (GitHub Release `media-v1`) y web/slides (push de la rama con Pages activo).
-- [ ] Comprobar que `https://jechamo.github.io/TFM/`, `/slides/` y `/video.html` cargan y reproducen.
+- [x] Publicar vídeos (GitHub Release `media-v1`) y web/slides (push de la rama con Pages activo).
+- [x] Comprobar que `https://jechamo.github.io/TFM/`, `/slides/` y `/video.html` cargan y reproducen.
 - [ ] Dar acceso de lectura al tribunal a `chafit360` e `icgbolt`, o decidir hacerlos públicos tras corregir las críticas.
 - [ ] Probar el login de las cuentas demo en web y móvil.
 - [ ] Confirmar con el tutor que la narración sintética es aceptable (o grabar la introducción con voz propia).
