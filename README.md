@@ -11,8 +11,8 @@ Trabajo de Fin de Máster · **Jorge Chamorro** ([@jechamo](https://github.com/j
 | 🎬 **Vídeo (16:30)** | <https://jechamo.github.io/TFM/video.html?v=tfm-completo> · [resumen de 8 min](https://jechamo.github.io/TFM/video.html?v=tfm-resumen) |
 | 🧱 **Sistema SDD/TDD** | [github.com/jechamo/Estructura_inicial_claude](https://github.com/jechamo/Estructura_inicial_claude) · [web](https://jechamo.github.io/Estructura_inicial_claude/) |
 | 🎥 **RRSS Studio** | [github.com/jechamo/rrss-automation-app](https://github.com/jechamo/rrss-automation-app) (aplicación local) |
-| 🏋️ **ChaFit** | [chafit.es](https://chafit.es) · [App Store](https://apps.apple.com/app/chafit/id6759172876) · [Google Play](https://play.google.com/store/apps/details?id=com.chafit.app) |
-| 🎮 **ICG Vault** | [icgvault.es](https://icgvault.es) · [App Store](https://apps.apple.com/es/app/icg-vault/id6759173751) · [Google Play](https://play.google.com/store/apps/details?id=com.icgvault.app) |
+| 🏋️ **ChaFit** | [github.com/jechamo/chafit360](https://github.com/jechamo/chafit360) · [chafit.es](https://chafit.es) · [App Store](https://apps.apple.com/app/chafit/id6759172876) · [Google Play](https://play.google.com/store/apps/details?id=com.chafit.app) |
+| 🎮 **ICG Vault** | [github.com/jechamo/icgbolt](https://github.com/jechamo/icgbolt) · [icgvault.es](https://icgvault.es) · [App Store](https://apps.apple.com/es/app/icg-vault/id6759173751) · [Google Play](https://play.google.com/store/apps/details?id=com.icgvault.app) |
 
 ![Del máster al sistema SDD/TDD y de ahí a los tres productos](architecture/exported/svg/tfm-overview.svg)
 
@@ -153,7 +153,17 @@ La narración de los vídeos es sintética.
 
 ChaFit e ICG Vault tienen login. Las cuentas de demo se entregan **solo en el formulario privado de entrega** y no se publican en el repositorio mientras las correcciones críticas de las auditorías estén pendientes. → [criterio](docs/security/security.md)
 
-## 20. Documentación
+## 20. Repositorios
+
+| Repositorio | Contenido |
+|---|---|
+| [jechamo/TFM](https://github.com/jechamo/TFM) | esta entrega: documentación, arquitectura como código, web, slides y pipeline de vídeo |
+| [jechamo/Estructura_inicial_claude](https://github.com/jechamo/Estructura_inicial_claude) | sistema SDD/TDD (v0.9.1) |
+| [jechamo/rrss-automation-app](https://github.com/jechamo/rrss-automation-app) | RRSS Studio · LeadView |
+| [jechamo/chafit360](https://github.com/jechamo/chafit360) | ChaFit |
+| [jechamo/icgbolt](https://github.com/jechamo/icgbolt) | ICG Vault |
+
+## 21. Documentación
 
 | | |
 |---|---|

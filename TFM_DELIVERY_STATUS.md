@@ -60,13 +60,15 @@ Publicado: commit `f9af83b`, release [`media-v1`](https://github.com/jechamo/TFM
 
 </details>
 
-### 2 · Acceso a los repositorios privados
+### 2 · Repositorios de ChaFit e ICG Vault
 
 | | |
 |---|---|
-| Qué | `jechamo/chafit360` y `jechamo/icgbolt` son privados |
-| Por qué | el tribunal no podrá ver el código de ChaFit ni de ICG Vault |
-| Cómo | invitar al tribunal como colaborador de solo lectura, o indicar en el formulario que el acceso se da bajo petición. **No hacerlos públicos** hasta aplicar las correcciones críticas de las auditorías |
+| Qué | [`jechamo/chafit360`](https://github.com/jechamo/chafit360) y [`jechamo/icgbolt`](https://github.com/jechamo/icgbolt) ya están enlazados en README, web y slides, pero siguen privados |
+| Por qué | mientras sean privados, el tribunal verá un 404 al pinchar |
+| Cómo | hacerlos públicos (Settings → General → Danger Zone → Change visibility) o invitar al tribunal como lectores |
+| Antes de publicarlos | las migraciones dejan a la vista las políticas y funciones de base de datos que las auditorías marcan como críticas: conviene aplicar al menos esas correcciones (son retiradas de permisos, rápidas y reversibles) |
+| Historial revisado (26/09/2026) | ambos repositorios versionaron `.env` (ChaFit ya no; ICG Vault todavía sí), pero solo con variables `VITE_*` de cliente, que ya viajan en el *bundle* público: URL y clave publicable de Supabase, id de proyecto, token público `pk.` de Mapbox e ids de cliente de Google. Ningún commit contiene claves de OpenAI, Stripe, Resend, GitHub, `service_role` ni claves privadas. Recomendable: restringir por URL el token de Mapbox |
 
 ### 3 · Probar las cuentas demo
 

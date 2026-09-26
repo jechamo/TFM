@@ -1,6 +1,6 @@
 # Caso de estudio · ChaFit
 
-> Producción: [chafit.es](https://chafit.es) · [App Store](https://apps.apple.com/app/chafit/id6759172876) · [Google Play](https://play.google.com/store/apps/details?id=com.chafit.app) · repositorio privado `jechamo/chafit360` · release 35
+> Producción: [chafit.es](https://chafit.es) · [App Store](https://apps.apple.com/app/chafit/id6759172876) · [Google Play](https://play.google.com/store/apps/details?id=com.chafit.app) · repositorio [`jechamo/chafit360`](https://github.com/jechamo/chafit360) · release 35
 
 ![ChaFit en producción](../../site/assets/img/screens/chafit-landing.webp)
 
