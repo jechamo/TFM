@@ -1,0 +1,178 @@
+{
+ "schema_version": 1,
+ "diagram_type": "sequence",
+ "meta": {
+  "title": "Una funcionalidad por el circuito",
+  "viewBox": [
+   1280,
+   670
+  ],
+  "column_fit": "spread",
+  "quality_profile": "standard"
+ },
+ "participants": [
+  {
+   "id": "dev",
+   "type": "external",
+   "label": "Desarrollador",
+   "sublabel": "pide, revisa y aprueba"
+  },
+  {
+   "id": "host",
+   "type": "cloud",
+   "label": "Host",
+   "sublabel": "Claude Code u otro"
+  },
+  {
+   "id": "a-orch",
+   "type": "frontend",
+   "label": "orchestrator"
+  },
+  {
+   "id": "a-spec",
+   "type": "frontend",
+   "label": "spec-analyst"
+  },
+  {
+   "id": "a-plan",
+   "type": "frontend",
+   "label": "planner"
+  },
+  {
+   "id": "a-impl",
+   "type": "frontend",
+   "label": "implementer"
+  },
+  {
+   "id": "hooks",
+   "type": "security",
+   "label": "Hooks + CLI",
+   "sublabel": "guardas · run · trazas"
+  },
+  {
+   "id": "a-rev",
+   "type": "frontend",
+   "label": "code-reviewer",
+   "sublabel": "+ security-auditor"
+  },
+  {
+   "id": "a-rel",
+   "type": "frontend",
+   "label": "release-manager"
+  }
+ ],
+ "messages": [
+  {
+   "id": "m1",
+   "from": "dev",
+   "to": "host",
+   "y": 170,
+   "label": "/sdd-specify «nueva funcionalidad»",
+   "variant": "default"
+  },
+  {
+   "id": "m2",
+   "from": "host",
+   "to": "hooks",
+   "y": 200,
+   "label": "UserPromptSubmit → sdd-router sugiere la fase",
+   "variant": "dashed"
+  },
+  {
+   "id": "m3",
+   "from": "host",
+   "to": "a-orch",
+   "y": 230,
+   "label": "clasifica y enruta",
+   "variant": "default"
+  },
+  {
+   "id": "m4",
+   "from": "a-orch",
+   "to": "a-spec",
+   "y": 260,
+   "label": "spec.md: requisitos EARS + criterios Gherkin",
+   "variant": "default"
+  },
+  {
+   "id": "m5",
+   "from": "a-spec",
+   "to": "dev",
+   "y": 290,
+   "label": "clarify: sin ambigüedades",
+   "variant": "return"
+  },
+  {
+   "id": "m6",
+   "from": "dev",
+   "to": "a-plan",
+   "y": 320,
+   "label": "Gate 3: aprueba la spec",
+   "variant": "security"
+  },
+  {
+   "id": "m7",
+   "from": "a-plan",
+   "to": "dev",
+   "y": 350,
+   "label": "plan.md · data-model · contratos · tasks.md",
+   "variant": "return"
+  },
+  {
+   "id": "m8",
+   "from": "dev",
+   "to": "a-impl",
+   "y": 380,
+   "label": "Gate 5: aprueba el plan",
+   "variant": "security"
+  },
+  {
+   "id": "m9",
+   "from": "a-impl",
+   "to": "hooks",
+   "y": 410,
+   "label": "guard-write / guard-bash: territorio y comandos",
+   "variant": "security"
+  },
+  {
+   "id": "m10",
+   "from": "a-impl",
+   "to": "hooks",
+   "y": 440,
+   "label": "run --fast: test en ROJO demostrado → GREEN → REFACTOR",
+   "variant": "default"
+  },
+  {
+   "id": "m12",
+   "from": "a-impl",
+   "to": "a-rev",
+   "y": 470,
+   "label": "verify: calidad, usabilidad y OWASP (solo lectura)",
+   "variant": "default"
+  },
+  {
+   "id": "m13",
+   "from": "a-rev",
+   "to": "a-rel",
+   "y": 500,
+   "label": "GO con informe sin CRÍTICO/ALTO",
+   "variant": "default"
+  },
+  {
+   "id": "m14",
+   "from": "a-rel",
+   "to": "dev",
+   "y": 530,
+   "label": "PR + CHANGELOG + plan de reversión",
+   "variant": "return"
+  },
+  {
+   "id": "m15",
+   "from": "dev",
+   "to": "a-rel",
+   "y": 560,
+   "label": "Gate 6: aprueba la entrega",
+   "variant": "security"
+  }
+ ]
+}

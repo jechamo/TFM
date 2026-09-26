@@ -1,0 +1,487 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:01.960
+¿Qué pasa cuando le pides a un agente de
+
+00:00:02.000 --> 00:00:04.350
+inteligencia artificial que programe por ti?
+
+00:00:04.980 --> 00:00:09.060
+Que escribe rápido… pero nadie sabe muy bien qué ha decidido,
+
+00:00:09.100 --> 00:00:11.430
+ni por qué, ni si funciona de verdad.
+
+00:00:12.060 --> 00:00:14.250
+Esta es la respuesta de este trabajo:
+
+00:00:14.400 --> 00:00:18.470
+un ecosistema de veinte agentes que no escriben una línea sin especificación.
+
+00:00:18.600 --> 00:00:20.860
+Un circuito completo para especificar,
+
+00:00:20.900 --> 00:00:24.130
+planificar, implementar, verificar y entregar.
+
+00:00:24.260 --> 00:00:28.930
+Con veintisiete skills, siete entornos compatibles… y cero dependencias.
+
+00:00:29.520 --> 00:00:31.260
+Instalarlo lleva tres pasos.
+
+00:00:31.300 --> 00:00:34.550
+Primero, escribes la ruta de tu proyecto y eliges el modo:
+
+00:00:34.860 --> 00:00:36.790
+greenfield si empiezas de cero,
+
+00:00:37.100 --> 00:00:40.970
+brownfield si ya tienes código… o automático, y que decida él.
+
+00:00:41.120 --> 00:00:45.210
+También puedes quitar los ganchos de git o añadir las plantillas de documentación.
+
+00:00:45.340 --> 00:00:47.810
+Con eso, la página construye los comandos.
+
+00:00:48.000 --> 00:00:51.020
+El primero simula: te dice qué ficheros escribiría,
+
+00:00:51.060 --> 00:00:54.770
+cuáles fusionaría y cuáles conservaría… sin tocar el disco.
+
+00:00:55.120 --> 00:00:56.320
+El segundo instala.
+
+00:00:56.360 --> 00:01:02.030
+Y el tercero verifica: cuenta lo que hay realmente en disco, y si no cuadra, falla.
+
+00:01:02.280 --> 00:01:03.830
+¿Y cuando sale una versión nueva?
+
+00:01:04.100 --> 00:01:05.470
+Para eso está update.
+
+00:01:05.760 --> 00:01:08.630
+No sobrescribe tu proyecto: lo reconcilia.
+
+00:01:08.780 --> 00:01:10.850
+Lo que es de la plantilla se actualiza.
+
+00:01:11.100 --> 00:01:13.090
+Los ficheros compartidos se fusionan.
+
+00:01:13.260 --> 00:01:17.030
+Tus specs, tus decisiones y tu bitácora no se tocan nunca.
+
+00:01:17.140 --> 00:01:19.230
+Y si modificaste algo de la plantilla,
+
+00:01:19.300 --> 00:01:21.880
+la versión nueva se deja al lado, para que decidas tú.
+
+00:01:21.920 --> 00:01:24.830
+El corazón del sistema es el circuito.
+
+00:01:24.920 --> 00:01:27.390
+Cada fase produce lo que la siguiente necesita.
+
+00:01:27.840 --> 00:01:30.460
+Especificar: la idea se convierte en requisitos
+
+00:01:30.500 --> 00:01:33.160
+con criterios de aceptación que se pueden probar.
+
+00:01:33.200 --> 00:01:36.310
+Aquí se decide qué y para quién, nunca cómo.
+
+00:01:36.760 --> 00:01:39.270
+Planificar: ahora sí, el cómo.
+
+00:01:39.420 --> 00:01:44.250
+Plan técnico, datos, contratos… y tareas pequeñas, cada una con su test.
+
+00:01:44.820 --> 00:01:47.500
+Implementar: rojo, verde, refactor.
+
+00:01:47.540 --> 00:01:51.550
+El test tiene que fallar primero… y hay que enseñarlo fallando.
+
+00:01:51.920 --> 00:01:54.670
+Verificar: todos los controles a la vez.
+
+00:01:54.760 --> 00:01:57.600
+Tests, cobertura, revisión y seguridad.
+
+00:01:57.640 --> 00:02:00.470
+Lo que no se ha ejecutado, no cuenta como aprobado.
+
+00:02:00.740 --> 00:02:03.990
+Y entregar: la pull request con su trazabilidad,
+
+00:02:04.060 --> 00:02:06.830
+su registro de cambios y su plan de vuelta atrás.
+
+00:02:07.400 --> 00:02:10.130
+No todos los cambios necesitan el mismo papeleo.
+
+00:02:10.200 --> 00:02:11.670
+Por eso hay tres niveles.
+
+00:02:11.920 --> 00:02:14.090
+Light, para un texto o un estilo.
+
+00:02:14.440 --> 00:02:17.350
+Compact, para un cambio acotado en un solo módulo.
+
+00:02:17.400 --> 00:02:21.160
+Y full, para seguridad, datos o varios módulos a la vez.
+
+00:02:21.200 --> 00:02:25.000
+Ninguno se salta los controles… y el nivel no lo decide el agente:
+
+00:02:25.040 --> 00:02:27.750
+lo comprueba un script contra el cambio real.
+
+00:02:28.120 --> 00:02:31.340
+En todo el recorrido hay seis puertas de aprobación humana:
+
+00:02:31.380 --> 00:02:36.290
+producto, arquitectura, especificación, diseño, plan y entrega.
+
+00:02:36.480 --> 00:02:39.150
+La máquina propone… la persona decide.
+
+00:02:39.500 --> 00:02:42.460
+Los veinte agentes están organizados en cinco familias,
+
+00:02:42.500 --> 00:02:44.440
+y cada uno tiene su territorio.
+
+00:02:44.480 --> 00:02:47.370
+Los del circuito llevan el flujo de una fase a otra.
+
+00:02:47.520 --> 00:02:49.690
+Los de arquitectura deciden las fronteras.
+
+00:02:49.760 --> 00:02:51.910
+Los de construcción hacen el trabajo.
+
+00:02:52.160 --> 00:02:54.000
+Los de calidad ponen el listón.
+
+00:02:54.040 --> 00:02:56.010
+Y los auditores miran sin tocar.
+
+00:02:56.180 --> 00:03:00.050
+Solo tres pueden delegar… y ninguna cadena pasa de dos saltos.
+
+00:03:00.380 --> 00:03:02.700
+Todo esto se maneja con veintisiete skills
+
+00:03:02.740 --> 00:03:04.860
+que se llaman desde el chat con una barra.
+
+00:03:04.900 --> 00:03:08.840
+Catorce son del propio circuito: empezar, especificar,
+
+00:03:08.880 --> 00:03:11.960
+planificar, implementar, verificar, entregar…
+
+00:03:12.000 --> 00:03:14.350
+Y el resto cubre el terreno, la calidad,
+
+00:03:14.540 --> 00:03:17.590
+la seguridad, la memoria del proyecto y el diseño.
+
+00:03:18.120 --> 00:03:21.970
+El circuito da cuatro garantías que no dependen de que alguien se acuerde.
+
+00:03:22.200 --> 00:03:24.270
+Sin especificación, no hay código.
+
+00:03:24.680 --> 00:03:26.090
+Rojo antes que verde.
+
+00:03:26.320 --> 00:03:28.360
+Seguridad auditada con OWASP.
+
+00:03:28.400 --> 00:03:31.080
+Y usabilidad con un suelo mínimo de accesibilidad.
+
+00:03:31.120 --> 00:03:35.320
+Además, la bitácora y los registros de decisiones guardan el porqué…
+
+00:03:35.360 --> 00:03:37.560
+y la deuda que se aceptó a sabiendas.
+
+00:03:37.600 --> 00:03:40.630
+Y funciona igual en todas partes: Claude Code,
+
+00:03:40.800 --> 00:03:46.330
+GitHub Copilot, VS Code, Cursor, Codex, Gemini y Antigravity.
+
+00:03:46.600 --> 00:03:51.170
+Los perfiles se escriben una vez… y el instalador los adapta a cada herramienta.
+
+00:03:51.500 --> 00:03:53.290
+Quedan las preguntas de siempre.
+
+00:03:53.480 --> 00:03:55.670
+¿El modo rápido se salta los controles?
+
+00:03:55.920 --> 00:03:58.300
+No: ahorra documentos, no puertas.
+
+00:03:58.340 --> 00:04:00.870
+¿Y si ya tengo mi propia configuración?
+
+00:04:01.020 --> 00:04:03.070
+Se fusiona, no se reemplaza.
+
+00:04:03.160 --> 00:04:04.790
+¿Puedo instalarlo desde la web?
+
+00:04:04.900 --> 00:04:09.230
+No, y es a propósito: ninguna página debería poder instalarte nada.
+
+00:04:09.500 --> 00:04:10.730
+¿Añade dependencias?
+
+00:04:10.900 --> 00:04:11.710
+Ninguna.
+
+00:04:11.840 --> 00:04:13.630
+¿Y si mi proyecto no es de Node?
+
+00:04:13.760 --> 00:04:17.970
+Da igual: funciona con Python, Java, Go… lo que uses.
+
+00:04:18.200 --> 00:04:19.530
+¿Y cómo se desinstala?
+
+00:04:19.600 --> 00:04:20.950
+Con un git checkout.
+
+00:04:21.060 --> 00:04:23.490
+No deja nada fuera del repositorio.
+
+00:04:23.640 --> 00:04:24.690
+Veinte agentes.
+
+00:04:24.960 --> 00:04:25.810
+Seis puertas.
+
+00:04:26.000 --> 00:04:26.980
+Un solo circuito.
+
+00:04:27.020 --> 00:04:30.070
+La inteligencia artificial escribe el código…
+
+00:04:30.380 --> 00:04:32.830
+y el circuito se asegura de que esté bien hecho.
+
+00:04:39.000 --> 00:04:40.470
+Has construido una app.
+
+00:04:40.680 --> 00:04:41.490
+Funciona.
+
+00:04:41.660 --> 00:04:45.190
+Está publicada… ¿Y ahora quién se entera?
+
+00:04:45.740 --> 00:04:47.110
+Esto es LeadView.
+
+00:04:47.340 --> 00:04:50.530
+Le das la web y el código de tu app… y se pone a trabajar.
+
+00:04:50.920 --> 00:04:56.140
+Primero la entiende: recorre la web, lee el código, dibuja el mapa de la aplicación…
+
+00:04:56.180 --> 00:05:02.050
+y escribe su dossier de negocio: qué es, a quién se dirige y cómo habla tu marca.
+
+00:05:02.780 --> 00:05:04.210
+Luego mira alrededor.
+
+00:05:04.620 --> 00:05:07.550
+Tu competencia, con sus puntos fuertes y débiles.
+
+00:05:08.000 --> 00:05:11.720
+Clientes potenciales reales, en el mapa, con el correo ya escrito.
+
+00:05:11.760 --> 00:05:14.590
+Y los vídeos virales de tu nicho.
+
+00:05:15.000 --> 00:05:17.650
+Y con todo eso… crea contenido.
+
+00:05:18.360 --> 00:05:20.960
+Clona el formato de un viral o graba tu propia app,
+
+00:05:21.000 --> 00:05:24.750
+y te dice lo que va a costar antes de gastar un céntimo.
+
+00:05:25.260 --> 00:05:26.410
+¿Tienes un vídeo largo?
+
+00:05:26.900 --> 00:05:30.040
+El laboratorio de clips lo convierte en cortos verticales,
+
+00:05:30.080 --> 00:05:32.140
+con subtítulos, listos para redes.
+
+00:05:32.180 --> 00:05:37.070
+Y todo lo mueve Claude Code, con tus claves guardadas y cifradas.
+
+00:05:37.720 --> 00:05:39.960
+Tu app, tu mercado y tu contenido.
+
+00:05:40.000 --> 00:05:41.790
+En un solo sitio.
+
+00:05:42.480 --> 00:05:43.280
+LeadView.
+
+00:05:43.380 --> 00:05:45.250
+Del código… a las redes.
+
+00:05:49.200 --> 00:05:53.010
+¿Entrenas por tu cuenta… y nunca sabes si lo estás haciendo bien?
+
+00:05:53.420 --> 00:05:54.850
+Esto es Chafit.
+
+00:05:55.000 --> 00:05:58.290
+Tu rutina, tu dieta y tu entrenador… en una sola app.
+
+00:05:58.740 --> 00:06:01.770
+Eliges el día, calientas… y a entrenar.
+
+00:06:02.100 --> 00:06:03.810
+Pasas de ejercicio en ejercicio,
+
+00:06:04.000 --> 00:06:07.710
+apuntas el peso de cada serie… y la app te cuenta el descanso.
+
+00:06:07.940 --> 00:06:11.030
+Y si tienes que irte a mitad, se guarda donde lo dejaste.
+
+00:06:11.420 --> 00:06:12.850
+¿La máquina está ocupada?
+
+00:06:13.100 --> 00:06:16.510
+Cambias el ejercicio con inteligencia artificial y sigues.
+
+00:06:16.820 --> 00:06:18.190
+En la cocina, lo mismo.
+
+00:06:18.480 --> 00:06:22.870
+Le haces una foto a tu plato… y la IA te calcula las calorías y los macros.
+
+00:06:23.220 --> 00:06:25.590
+Aceptas… y queda apuntado en tu día.
+
+00:06:26.080 --> 00:06:30.130
+Tu peso, tus sesiones, tus logros… todo queda registrado.
+
+00:06:30.420 --> 00:06:33.110
+Compites en los rankings con tu gimnasio y tus amigos.
+
+00:06:33.480 --> 00:06:37.770
+Y si te surge una duda, escribes a tu entrenador o preguntas al asistente.
+
+00:06:38.320 --> 00:06:39.510
+¿Eres entrenador?
+
+00:06:39.820 --> 00:06:42.150
+Gestiona a tus clientes y aparece en el mapa.
+
+00:06:42.660 --> 00:06:43.910
+¿Tienes un gimnasio?
+
+00:06:44.080 --> 00:06:46.910
+Controla a tu equipo y a tus socios desde un solo panel.
+
+00:06:47.480 --> 00:06:48.200
+Chafit.
+
+00:06:48.240 --> 00:06:50.410
+Tu entrenamiento, al siguiente nivel.
+
+00:06:50.820 --> 00:06:52.810
+En la web, en iPhone y en Android.
+
+00:06:56.400 --> 00:06:58.440
+¿Cuántas veces has terminado una película…
+
+00:06:58.480 --> 00:07:01.990
+y te has quedado con las ganas de decir lo que pensabas?
+
+00:07:02.680 --> 00:07:04.470
+Bienvenido a ICG Vault.
+
+00:07:04.680 --> 00:07:07.360
+El sitio donde votas películas, series y videojuegos…
+
+00:07:07.400 --> 00:07:09.610
+¡y tu opinión cuenta de verdad!
+
+00:07:09.960 --> 00:07:13.790
+Buscas cualquier título y tienes toda su información al momento:
+
+00:07:14.140 --> 00:07:17.650
+sinopsis, notas, duración… todo en un mismo sitio.
+
+00:07:18.060 --> 00:07:19.370
+Pero aquí viene lo bueno.
+
+00:07:19.780 --> 00:07:22.770
+En ICG Vault no todos los votos valen lo mismo.
+
+00:07:23.120 --> 00:07:26.230
+Cuanto más participas, más experiencia ganas.
+
+00:07:26.480 --> 00:07:29.570
+Subes de nivel… ¡y tu voto pesa más que el de los demás!
+
+00:07:30.000 --> 00:07:32.290
+Y cada nivel… tiene premio.
+
+00:07:32.620 --> 00:07:33.650
+¡Abres cofres!
+
+00:07:33.920 --> 00:07:38.130
+Objetos, mascotas y guardianes creados con inteligencia artificial.
+
+00:07:38.620 --> 00:07:39.420
+Únicos.
+
+00:07:39.800 --> 00:07:40.600
+TUYOS.
+
+00:07:40.940 --> 00:07:41.870
+¿Te sabe a poco?
+
+00:07:42.380 --> 00:07:46.770
+Reta a otros jugadores en ICG Duelo, un juego de cartas por turnos.
+
+00:07:47.040 --> 00:07:51.290
+O entra en Inmortales… donde solo los mejores sobreviven a la temporada.
+
+00:07:51.840 --> 00:07:57.330
+Crea tus listas, compártelas, sigue a gente con criterio… y escala en los rankings.
+
+00:07:58.000 --> 00:07:59.210
+ICG Vault.
+
+00:07:59.460 --> 00:08:01.330
+¡Tu opinión, a otro nivel!
+
+00:08:01.640 --> 00:08:03.730
+En la web, en iPhone y en Android.
+
+00:08:04.140 --> 00:08:05.690
+¿Te atreves a subir de nivel?

@@ -1,0 +1,105 @@
+{
+ "schema_version": 1,
+ "diagram_type": "sequence",
+ "meta": {
+  "title": "ICG Vault · votar con poder de voto",
+  "viewBox": [
+   1280,
+   490
+  ],
+  "column_fit": "spread",
+  "quality_profile": "standard"
+ },
+ "participants": [
+  {
+   "id": "users",
+   "type": "external",
+   "label": "Votantes y jugadores",
+   "sublabel": "usuarios e influencers"
+  },
+  {
+   "id": "spa",
+   "type": "frontend",
+   "label": "VoteModal",
+   "sublabel": "cliente web/móvil"
+  },
+  {
+   "id": "dataapi",
+   "type": "backend",
+   "label": "RPC",
+   "sublabel": "submit_review_once"
+  },
+  {
+   "id": "db",
+   "type": "database",
+   "label": "PostgreSQL",
+   "sublabel": "reviews · content_stats · p…"
+  }
+ ],
+ "messages": [
+  {
+   "id": "m1",
+   "from": "users",
+   "to": "spa",
+   "y": 170,
+   "label": "Elige veredicto (Infame → Full) y escribe reseña",
+   "variant": "default"
+  },
+  {
+   "id": "m2",
+   "from": "spa",
+   "to": "dataapi",
+   "y": 200,
+   "label": "rpc('submit_review_once') + JWT",
+   "variant": "default"
+  },
+  {
+   "id": "m3",
+   "from": "dataapi",
+   "to": "db",
+   "y": 230,
+   "label": "calculate_vote_power(auth.uid())",
+   "variant": "default"
+  },
+  {
+   "id": "m4",
+   "from": "dataapi",
+   "to": "db",
+   "y": 260,
+   "label": "INSERT/UPDATE reviews con vote_power",
+   "variant": "default"
+  },
+  {
+   "id": "m5",
+   "from": "dataapi",
+   "to": "db",
+   "y": 290,
+   "label": "activity_log + add_xp_and_check_level()",
+   "variant": "default"
+  },
+  {
+   "id": "m6",
+   "from": "db",
+   "to": "dataapi",
+   "y": 320,
+   "label": "xp_gained · vote_power · was_updated",
+   "variant": "return"
+  },
+  {
+   "id": "m7",
+   "from": "dataapi",
+   "to": "spa",
+   "y": 350,
+   "label": "resultado del voto",
+   "variant": "return"
+  },
+  {
+   "id": "m9",
+   "from": "spa",
+   "to": "users",
+   "y": 380,
+   "label": "Nota de la comunidad actualizada y XP ganada",
+   "variant": "return"
+  }
+ ]
+}

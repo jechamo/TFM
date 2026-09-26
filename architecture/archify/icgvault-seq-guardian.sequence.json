@@ -1,0 +1,125 @@
+{
+ "schema_version": 1,
+ "diagram_type": "sequence",
+ "meta": {
+  "title": "ICG Vault · crear un guardián con IA",
+  "viewBox": [
+   1280,
+   520
+  ],
+  "column_fit": "spread",
+  "quality_profile": "standard"
+ },
+ "participants": [
+  {
+   "id": "users",
+   "type": "external",
+   "label": "Votantes y jugadores",
+   "sublabel": "usuarios e influencers"
+  },
+  {
+   "id": "spa",
+   "type": "frontend",
+   "label": "GuardianCreator",
+   "sublabel": "cliente web/móvil"
+  },
+  {
+   "id": "edge",
+   "type": "backend",
+   "label": "generate-guardian",
+   "sublabel": "Edge Function"
+  },
+  {
+   "id": "db",
+   "type": "database",
+   "label": "PostgreSQL",
+   "sublabel": "rupias · user_custom_guardi…"
+  },
+  {
+   "id": "openai",
+   "type": "external",
+   "label": "OpenAI",
+   "sublabel": "images/generations · edits"
+  },
+  {
+   "id": "storage",
+   "type": "database",
+   "label": "Storage",
+   "sublabel": "bucket guardians"
+  }
+ ],
+ "messages": [
+  {
+   "id": "m1",
+   "from": "users",
+   "to": "spa",
+   "y": 170,
+   "label": "Estilo, descripción y foto de referencia opcional",
+   "variant": "default"
+  },
+  {
+   "id": "m2",
+   "from": "spa",
+   "to": "edge",
+   "y": 200,
+   "label": "POST + JWT",
+   "variant": "default"
+  },
+  {
+   "id": "m4",
+   "from": "edge",
+   "to": "db",
+   "y": 230,
+   "label": "rpc can_generate_guardian → spend_rupias (200)",
+   "variant": "default"
+  },
+  {
+   "id": "m5",
+   "from": "edge",
+   "to": "openai",
+   "y": 260,
+   "label": "con foto: /images/edits · sin foto: /images/generations",
+   "variant": "emphasis"
+  },
+  {
+   "id": "m6",
+   "from": "openai",
+   "to": "edge",
+   "y": 290,
+   "label": "imagen (modelo configurado, con respaldo)",
+   "variant": "return"
+  },
+  {
+   "id": "m7",
+   "from": "edge",
+   "to": "storage",
+   "y": 320,
+   "label": "upload PNG → URL pública",
+   "variant": "default"
+  },
+  {
+   "id": "m8",
+   "from": "edge",
+   "to": "db",
+   "y": 350,
+   "label": "INSERT user_custom_guardians",
+   "variant": "default"
+  },
+  {
+   "id": "m9",
+   "from": "edge",
+   "to": "spa",
+   "y": 380,
+   "label": "guardián listo para equipar",
+   "variant": "return"
+  },
+  {
+   "id": "m10",
+   "from": "spa",
+   "to": "users",
+   "y": 410,
+   "label": "Galería actualizada",
+   "variant": "return"
+  }
+ ]
+}

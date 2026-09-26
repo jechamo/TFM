@@ -1,0 +1,135 @@
+{
+ "schema_version": 1,
+ "diagram_type": "sequence",
+ "meta": {
+  "title": "ChaFit · generar una rutina con IA",
+  "viewBox": [
+   1280,
+   580
+  ],
+  "column_fit": "spread",
+  "quality_profile": "standard"
+ },
+ "participants": [
+  {
+   "id": "users",
+   "type": "external",
+   "label": "Clientes, entrenadores…",
+   "sublabel": "3 roles de negocio"
+  },
+  {
+   "id": "spa",
+   "type": "frontend",
+   "label": "Cliente web/móvil",
+   "sublabel": "ClientDashboard"
+  },
+  {
+   "id": "edge",
+   "type": "backend",
+   "label": "generate-workout",
+   "sublabel": "Edge Function (Deno)"
+  },
+  {
+   "id": "db",
+   "type": "database",
+   "label": "PostgreSQL",
+   "sublabel": "workout_generation_jobs · w…"
+  },
+  {
+   "id": "openai",
+   "type": "external",
+   "label": "OpenAI",
+   "sublabel": "chat/completions"
+  }
+ ],
+ "messages": [
+  {
+   "id": "m1",
+   "from": "users",
+   "to": "spa",
+   "y": 170,
+   "label": "Describe el encargo (texto, voz o foto de una tabla)",
+   "variant": "default"
+  },
+  {
+   "id": "m2",
+   "from": "spa",
+   "to": "edge",
+   "y": 200,
+   "label": "functions.invoke('generate-workout') + JWT",
+   "variant": "default"
+  },
+  {
+   "id": "m3",
+   "from": "edge",
+   "to": "db",
+   "y": 230,
+   "label": "INSERT job (status = pending)",
+   "variant": "default"
+  },
+  {
+   "id": "m4",
+   "from": "edge",
+   "to": "spa",
+   "y": 260,
+   "label": "200 { job_id } inmediato",
+   "variant": "return"
+  },
+  {
+   "id": "m6",
+   "from": "edge",
+   "to": "db",
+   "y": 290,
+   "label": "UPDATE job → processing · lee perfil y restricciones",
+   "variant": "default"
+  },
+  {
+   "id": "m7",
+   "from": "edge",
+   "to": "openai",
+   "y": 320,
+   "label": "Prompt profesional + response_format (JSON Schema estrict…",
+   "variant": "emphasis"
+  },
+  {
+   "id": "m8",
+   "from": "openai",
+   "to": "edge",
+   "y": 350,
+   "label": "Rutina estructurada (JSON)",
+   "variant": "return"
+  },
+  {
+   "id": "m10",
+   "from": "edge",
+   "to": "db",
+   "y": 380,
+   "label": "INSERT plan (plan_json + HTML compatible) · job → complet…",
+   "variant": "default"
+  },
+  {
+   "id": "m11",
+   "from": "spa",
+   "to": "db",
+   "y": 410,
+   "label": "Consulta periódica del job por id (polling)",
+   "variant": "default"
+  },
+  {
+   "id": "m12",
+   "from": "db",
+   "to": "spa",
+   "y": 440,
+   "label": "completed → muestra la rutina",
+   "variant": "return"
+  },
+  {
+   "id": "m13",
+   "from": "spa",
+   "to": "users",
+   "y": 470,
+   "label": "Tabla de rutina lista para entrenar",
+   "variant": "return"
+  }
+ ]
+}

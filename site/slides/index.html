@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Presentación · Del máster a producción · Jorge Chamorro</title>
+<meta name="description" content="Presentación del TFM de Jorge Chamorro: sistema SDD/TDD con agentes aplicado a RRSS Studio, ChaFit e ICG Vault.">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #0D1015; --card: #151A21; --ink: #E7EBF0; --ink2: #C3CAD4; --muted: #8D97A6; --rule: #262D38;
+    --accent: #34D0B7; --ai: #FF9A5A; --human: #FF6F8E; --warn: #F2B84B;
+    --rrss: #A78BFA; --chafit: #38BDF8; --icg: #818CF8;
+    --serif: "Newsreader", Georgia, serif; --sans: "Inter", "Segoe UI", system-ui, sans-serif; --mono: "JetBrains Mono", Consolas, monospace; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #05070A; color: var(--ink); font-family: var(--sans); overflow: hidden; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  code { font-family: var(--mono); font-size: .9em; }
+  .deck { position: fixed; inset: 0; display: grid; place-items: center; }
+  .slide { position: absolute; width: 1920px; height: 1080px; background: var(--bg); padding: 88px 120px 128px; display: none; flex-direction: column; transform-origin: center center; overflow: hidden; }
+  .slide.on { display: flex; }
+  .slide::after { content: attr(data-n); position: absolute; right: 120px; bottom: 48px; font: 500 20px var(--mono); color: #4B5563; }
+  .foot { position: absolute; left: 120px; bottom: 46px; font: 500 20px var(--sans); color: #5E6878; display: flex; gap: 30px; align-items: center; }
+  .foot b { color: #8D97A6; font-weight: 600; }
+  .body { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: center; }
+  .kicker { font: 600 22px var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  h1, h2 { font-family: var(--serif); font-weight: 500; letter-spacing: -.02em; line-height: 1.04; margin: 0; }
+  h1 { font-size: 146px; }
+  h2 { font-size: 76px; margin-top: 20px; }
+  h2.xl { font-size: 92px; }
+  h1 em, h2 em { font-style: italic; color: var(--accent); }
+  .lead { font-size: 34px; line-height: 1.4; color: var(--ink2); margin-top: 30px; }
+  p { margin: 0; }
+  .cols { display: grid; gap: 48px; }
+  .c2 { grid-template-columns: 1fr 1fr; } .c3 { grid-template-columns: repeat(3, 1fr); } .c4 { grid-template-columns: repeat(4, 1fr); }
+  .card { background: var(--card); border: 1px solid var(--rule); border-radius: 22px; padding: 40px 38px; }
+  .card .n { font: 500 23px var(--mono); color: var(--accent); }
+  .card h3 { font: 600 38px/1.18 var(--sans); margin: 22px 0 16px; }
+  .card p { font-size: 28px; line-height: 1.45; color: var(--ink2); }
+  .card.bad { border-top: 5px solid var(--human); } .card.bad .n { color: var(--human); }
+  .card.good { border-top: 5px solid var(--accent); }
+  .big { font: 500 124px/1 var(--serif); letter-spacing: -.03em; }
+  .num { display: flex; flex-direction: column; gap: 14px; }
+  .num span { font-size: 26px; color: var(--muted); line-height: 1.35; }
+  .dg { position: relative; flex: 1; min-height: 0; margin-top: 30px; }
+  .dg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+  .chips { display: flex; flex-wrap: wrap; gap: 12px; }
+  .chip { font: 500 23px var(--sans); padding: 10px 18px; border: 1px solid var(--rule); border-radius: 999px; color: var(--ink2); background: #10141A; }
+  .chip.ai { color: var(--ai); border-color: #5C3E2C; } .chip.ok { color: var(--accent); border-color: #1f4a44; }
+  .phone { border-radius: 38px; padding: 9px; background: #1B2029; box-shadow: 0 0 0 1px #2B323E, 0 40px 80px -30px #000; }
+  .phone img { width: 100%; border-radius: 30px; aspect-ratio: 460/956; object-fit: cover; object-position: top; display: block; }
+  .desk { border-radius: 14px; padding: 28px 9px 9px; background: #1B2029; position: relative; box-shadow: 0 0 0 1px #2B323E, 0 40px 80px -30px #000; }
+  .desk::before { content: ""; position: absolute; top: 10px; left: 14px; width: 52px; height: 9px; background: radial-gradient(circle, #4B5563 4px, transparent 4.5px) 0 0/18px 9px repeat-x; }
+  .desk img { width: 100%; border-radius: 7px; display: block; }
+  .cap { font-size: 22px; color: var(--muted); margin-top: 16px; line-height: 1.3; }
+  .links { display: flex; flex-wrap: wrap; gap: 14px 34px; font-size: 27px; }
+  .play::before { content: "▶"; font-size: .72em; margin-right: 10px; position: relative; top: -2px; }
+  .meta4 { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--rule); border-radius: 18px; overflow: hidden; }
+  .meta4 div { padding: 24px 26px; border-right: 1px solid var(--rule); background: var(--card); }
+  .meta4 div:last-child { border-right: 0; }
+  .meta4 b { display: block; font: 500 68px/1 var(--serif); }
+  .meta4 span { font-size: 21px; color: var(--muted); }
+  .dot { display: inline-block; width: 16px; height: 16px; border-radius: 50%; margin-right: 14px; vertical-align: 1px; }
+  .term { background: #080A0E; border: 1px solid var(--rule); border-radius: 18px; padding: 34px 38px; font: 24px/1.75 var(--mono); color: #D5DDE7; white-space: pre; }
+  .term .c { color: #5E6878; } .term .r { color: var(--human); } .term .g { color: var(--accent); }
+  table { border-collapse: collapse; width: 100%; font-size: 27px; line-height: 1.35; }
+  th, td { text-align: left; padding: 20px 20px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font: 600 20px var(--sans); letter-spacing: .1em; text-transform: uppercase; }
+  td:first-child { color: var(--muted); font-weight: 600; width: 230px; }
+  ul.clean { list-style: none; padding: 0; margin: 0; display: grid; gap: 26px; }
+  ul.clean li { font-size: 31px; line-height: 1.38; color: var(--ink2); padding-left: 42px; position: relative; }
+  ul.clean li::before { content: ""; position: absolute; left: 0; top: 19px; width: 20px; height: 3px; background: var(--accent); }
+  ul.clean li b { color: var(--ink); }
+  .pend { font: 600 20px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--warn); border: 1px solid #5c4516; padding: 8px 16px; border-radius: 999px; white-space: nowrap; }
+  .notes { display: grid; gap: 34px; align-content: center; }
+  .notes div { border-left: 3px solid var(--rule); padding-left: 26px; }
+  .notes b { display: block; white-space: nowrap; font: 500 50px/1 var(--serif); color: var(--ink); margin-bottom: 10px; }
+  .notes span { font-size: 25px; line-height: 1.4; color: var(--ink2); display: block; }
+  .arch { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 400px; gap: 60px; margin-top: 34px; }
+  .arch .dg { margin-top: 0; }
+  .sbar { display: grid; grid-template-columns: 270px 1fr 56px; gap: 18px; align-items: center; font-size: 22px; color: var(--ink2); margin-top: 16px; }
+  .sbar .t { height: 22px; display: flex; gap: 3px; }
+  .sbar .t i { display: block; height: 100%; border-radius: 3px; }
+  .sbar .v { font: 500 24px var(--mono); text-align: right; color: var(--ink); }
+  .i-c { background: var(--human); } .i-d { background: var(--warn); } .i-m { background: #4B5563; }
+  .legend { display: flex; gap: 28px; font-size: 21px; color: var(--muted); margin-top: 26px; }
+  .legend i { display: inline-block; width: 16px; height: 16px; border-radius: 3px; margin-right: 10px; vertical-align: -2px; }
+  /* Navegación */
+  .hud { position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%); display: flex; gap: 10px; align-items: center; background: rgba(13,16,21,.85); border: 1px solid #1f2630; border-radius: 999px; padding: 6px 10px; font: 500 13px var(--sans); color: #8D97A6; z-index: 5; opacity: .25; transition: opacity .2s; }
+  .hud:hover, .hud:focus-within { opacity: 1; }
+  .hud button, .hud a { all: unset; cursor: pointer; padding: 4px 10px; border-radius: 999px; color: #C3CAD4; }
+  .hud button:hover, .hud button:focus-visible, .hud a:hover, .hud a:focus-visible { background: #1f2630; }
+  .progress { position: fixed; left: 0; top: 0; height: 3px; background: var(--accent); z-index: 5; transition: width .25s; }
+  @media print {
+    @page { size: 1920px 1080px; margin: 0; }
+    html, body { overflow: visible; height: auto; background: var(--bg); }
+    .deck { position: static; display: block; }
+    .slide { display: flex !important; position: relative; transform: none !important; break-after: page; }
+    .hud, .progress { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<main class="deck" id="deck">
+
+<!-- 1 · Portada -->
+<section class="slide" aria-label="Portada">
+  <div style="position:absolute;left:120px;top:120px;width:860px">
+    <span class="kicker">Trabajo de Fin de Máster · 2026</span>
+    <h1 style="margin-top:40px">Del máster a <em>producción</em></h1>
+    <p class="lead" style="font-size:36px;margin-top:40px">Ingeniería de software dirigida por especificaciones con agentes de IA, aplicada a tres productos reales.</p>
+    <p style="margin-top:56px;font-size:36px"><b>Jorge Chamorro</b></p>
+    <p style="margin-top:8px;font-size:26px;color:var(--muted)">Máster en Desarrollo de Software con IA</p>
+    <div class="links" style="margin-top:48px;font-size:25px"><a href="https://jechamo.github.io/TFM/">jechamo.github.io/TFM</a><a class="play" href="../video.html?v=tfm-completo">Vídeo del TFM · 16:30</a></div>
+  </div>
+  <div class="desk" style="position:absolute;right:120px;top:110px;width:800px"><img src="../assets/img/frames/rrss/appmap.webp" alt="RRSS Studio: mapa funcional de una app analizada, con evidencias"></div>
+  <div class="phone" style="position:absolute;left:1090px;top:520px;width:200px"><img src="../assets/img/frames/chafit/warmup.webp" alt="ChaFit: calentamiento guiado"></div>
+  <div class="phone" style="position:absolute;left:1340px;top:470px;width:200px"><img src="../assets/img/frames/icg/detail.webp" alt="ICG Vault: ficha de un videojuego"></div>
+  <div class="phone" style="position:absolute;left:1590px;top:560px;width:200px"><img src="../assets/img/frames/chafit/machine-photo.webp" alt="ChaFit: ilustración a partir de la foto de la máquina"></div>
+  <div class="foot"><span>RRSS Studio · ChaFit · ICG Vault</span></div>
+</section>
+
+<!-- 2 · Problema -->
+<section class="slide" aria-label="El problema">
+  <span class="kicker">El problema</span>
+  <h2 class="xl">Los agentes escriben deprisa.<br><em>Sin método</em>, esa velocidad se paga.</h2>
+  <div class="body">
+    <div class="cols c4">
+      <div class="card bad"><span class="n">01</span><h3>Se autocertifican</h3><p>El mismo agente planifica, implementa y se da por bueno.</p></div>
+      <div class="card bad"><span class="n">02</span><h3>Contratos implícitos</h3><p>La IA devolvía 7 u 8 columnas; la app esperaba 9: <b style="color:var(--ink)">317 filas</b> desplazadas en ChaFit.</p></div>
+      <div class="card bad"><span class="n">03</span><h3>Sin rastro</h3><p>Nadie sabe por qué se decidió algo ni qué llegó a producción.</p></div>
+      <div class="card bad"><span class="n">04</span><h3>Seguridad al final</h3><p>Permisos demasiado amplios en la capa de datos, descubiertos tarde.</p></div>
+    </div>
+    <p class="lead" style="margin-top:64px;font-size:31px">ChaFit e ICG Vault nacieron en un generador <i>low-code</i> y crecieron a base de chat. Funcionaban, pero no eran mantenibles.</p>
+  </div>
+</section>
+
+<!-- 3 · Solución -->
+<section class="slide" aria-label="La solución">
+  <span class="kicker">La solución</span>
+  <h2 class="xl">La spec manda, el test demuestra<br>y <em>la persona decide</em>.</h2>
+  <div class="body">
+    <div class="cols c4">
+      <div class="card good"><span class="n">SDD</span><h3>Especificación primero</h3><p>Nada de código sin spec aprobada: EARS, Gherkin, seguridad y usabilidad.</p></div>
+      <div class="card good"><span class="n">TDD</span><h3>El rojo, a la vista</h3><p>RED demostrado → GREEN → REFACTOR. «Pasa» sin ejecutar no cuenta.</p></div>
+      <div class="card good"><span class="n">Hooks + CLI</span><h3>Verificación fuera del modelo</h3><p>Territorios, trazas, secretos y gates los comprueba código, no el agente.</p></div>
+      <div class="card good"><span class="n">6 gates</span><h3>La persona decide</h3><p>Producto, arquitectura, spec, diseño, plan y entrega.</p></div>
+    </div>
+    <p class="lead" style="margin-top:64px;font-size:30px">Un kit instalable con <code style="color:var(--accent)">npx</code> en cualquier repositorio · Claude Code · Copilot · Cursor · Codex · Gemini CLI · Antigravity · Node ≥ 18, sin dependencias.</p>
+  </div>
+</section>
+
+<!-- 4 · SDD/TDD -->
+<section class="slide" aria-label="SDD y TDD">
+  <span class="kicker">SDD + TDD</span>
+  <h2>Diez fases, seis puertas, <em>tres niveles</em>.</h2>
+  <div class="dg"><img src="img/sdd-circuit-dark.svg" alt="Circuito SDD: diez fases con seis gates humanos, TDD por tarea y gates deterministas"></div>
+  <div class="foot"><span><b style="color:var(--ink)">light</b> · un fichero no ejecutable</span><span><b style="color:var(--ink)">compact</b> · un módulo, TDD completo</span><span><b style="color:var(--ink)">full</b> · seguridad, datos, API o varios módulos</span><a class="play" href="../video.html?v=tfm-completo&amp;t=82">Vídeo · 1:22</a></div>
+</section>
+
+<!-- 5 · Agentes -->
+<section class="slide" aria-label="Arquitectura agentic">
+  <span class="kicker">Sistema de agentes</span>
+  <h2>20 agentes. Solo 3 delegan. <em>Quien juzga no escribe.</em></h2>
+  <div class="dg"><img src="img/sdd-agents-dark.svg" alt="Jerarquía de delegación de los 20 agentes: orchestrator, fases y especialistas"></div>
+  <div class="foot"><span>27 skills · 7 hooks · profundidad máxima de dos saltos · auditores de solo lectura</span><a class="play" href="../video.html?v=tfm-completo&amp;t=160">Vídeo · 2:40</a></div>
+</section>
+
+<!-- 6 · Workflow -->
+<section class="slide" aria-label="Flujo de trabajo">
+  <span class="kicker">Flujo de trabajo</span>
+  <h2>Agentes que proponen, <em>scripts que verifican</em>.</h2>
+  <div class="body">
+    <div class="cols" style="grid-template-columns:1fr 820px;gap:70px;align-items:center">
+      <ul class="clean">
+        <li><b>spec-analyst</b> escribe requisitos EARS y criterios Gherkin. <span style="color:var(--human)">Gate 3</span></li>
+        <li><b>planner</b>: plan, datos, contratos y tareas atómicas, cada una con su test. <span style="color:var(--human)">Gate 5</span></li>
+        <li><b>implementer</b>: TDD tarea a tarea; <code>guard-write</code> y <code>guard-bash</code> vigilan y los hooks registran.</li>
+        <li><b>code-reviewer</b> y <b>security-auditor</b>, de solo lectura: GO sin CRÍTICO ni ALTO.</li>
+        <li><b>release-manager</b>: PR, CHANGELOG y reversión. <span style="color:var(--human)">Gate 6</span></li>
+      </ul>
+      <div>
+        <div class="term"><span class="c"># ChaFit · spec 001 · 09/08/2026</span>
+18:25  T-001-01  deno test       <span class="r">RED</span>    0/4
+18:27  T-001-01  deno test       <span class="g">GREEN</span>  4/4
+18:34  T-001-03  filas (MCP)     <span class="r">RED</span>    317 ≠ 9 celdas
+18:41  T-001-03  migración       <span class="g">GREEN</span>  0 inválidas
+18:50  T-001-04  despliegue MCP  <span class="g">GREEN</span>  v22 · v6
+<span class="c"># después de migrar</span>
+437/437 filas · 0 discrepancias</div>
+        <p class="cap" style="margin-top:18px">Evidencia real de la spec 001 de ChaFit: el rojo se demuestra antes del verde.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · Arquitectura global -->
+<section class="slide" aria-label="Arquitectura global">
+  <span class="kicker">Arquitectura global</span>
+  <h2>Un sistema, <em>tres aplicaciones</em>.</h2>
+  <div class="dg"><img src="img/tfm-overview-dark.svg" alt="Del máster al sistema SDD/TDD y de ahí a RRSS Studio, ChaFit e ICG Vault, con evidencia verificable"></div>
+  <div class="foot"><a href="https://github.com/jechamo/Estructura_inicial_claude">github.com/jechamo/Estructura_inicial_claude</a><a href="https://jechamo.github.io/Estructura_inicial_claude/">Web del sistema</a></div>
+</section>
+
+<!-- 8 · RRSS -->
+<section class="slide" aria-label="RRSS Studio">
+  <span class="kicker"><span class="dot" style="background:var(--rrss)"></span>Greenfield · aplicación local</span>
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:60px">
+    <div><h2 class="xl">RRSS Studio <span style="color:var(--muted);font-style:italic">· LeadView</span></h2>
+    <p class="lead" style="max-width:1000px;font-size:30px;margin-top:24px">Analiza tu app desde su URL y su código, estudia a tu competencia, encuentra clientes y produce vídeos verticales con IA, viendo el coste antes de gastar.</p></div>
+    <div class="meta4" style="width:560px;flex:none"><div><b>11</b><span>módulos</span></div><div><b>38</b><span>funciones</span></div><div><b>17</b><span>con IA</span></div><div><b>11</b><span>APIs</span></div></div>
+  </div>
+  <div class="body">
+    <div class="cols c3" style="gap:40px">
+      <div><div class="desk"><img src="../assets/img/frames/rrss/pipeline.webp" alt="Pipeline de análisis en vivo"></div><div class="cap">Análisis en vivo de un producto</div></div>
+      <div><div class="desk"><img src="../assets/img/frames/rrss/leads.webp" alt="Clientes potenciales"></div><div class="cap">Clientes potenciales reales, con su fuente</div></div>
+      <div><div class="desk"><img src="../assets/img/frames/rrss/montage-plan.webp" alt="Plan de montaje con coste"></div><div class="cap">Plan y coste antes de generar</div></div>
+    </div>
+  </div>
+  <div class="foot"><a href="https://github.com/jechamo/rrss-automation-app">github.com/jechamo/rrss-automation-app</a><a class="play" href="../video.html?v=tfm-completo&amp;t=279">Vídeo · 4:39</a><a class="play" href="../video.html?v=rrss-4min">Recorrido de 4 min</a></div>
+</section>
+
+<!-- 9 · Arquitectura RRSS -->
+<section class="slide" aria-label="Arquitectura de RRSS Studio">
+  <span class="kicker">RRSS Studio · arquitectura</span>
+  <h2>Monolito modular local: <em>un proceso, muchas IA</em>.</h2>
+  <div class="arch">
+    <div class="dg"><img src="img/rrss-slides-dark.svg" alt="Arquitectura de RRSS Studio: interfaz, servidor Next.js, SQLite y Vault, proveedores de IA y herramientas locales"></div>
+    <div class="notes">
+      <div><b>Claude Code</b><span>como motor, con la sesión del operador y herramientas mínimas por tarea.</span></div>
+      <div><b>AES-256-GCM</b><span>Vault local: las claves nunca van a <code>.env</code> ni vuelven a la interfaz.</span></div>
+      <div><b>71 + 138</b><span>tests en verde hoy, más 9 recorridos E2E sin red.</span></div>
+    </div>
+  </div>
+  <div class="foot"><a href="../../docs/architecture/rrss-architecture.md" data-gh="docs/architecture/rrss-architecture.md">Documento de arquitectura</a><a href="../diagrams/interactive/rrss-container.html">Diagrama interactivo</a></div>
+</section>
+
+<!-- 10 · ChaFit -->
+<section class="slide" aria-label="ChaFit">
+  <span class="kicker"><span class="dot" style="background:var(--chafit)"></span>Brownfield · web, iOS y Android</span>
+  <div class="cols" style="grid-template-columns:1fr 860px;gap:60px;flex:1;min-height:0">
+    <div>
+      <h2 class="xl">ChaFit</h2>
+      <p class="lead" style="font-size:30px;margin-top:24px">Clientes, entrenadores y gimnasios en una plataforma: rutinas y dietas con IA, ejecución guiada, la ilustración de tu propia máquina y foto al plato.</p>
+      <div class="meta4" style="margin-top:44px"><div><b>13</b><span>módulos</span></div><div><b>62</b><span>funciones</span></div><div><b>12</b><span>con IA</span></div><div><b>9</b><span>APIs</span></div></div>
+      <div class="chips" style="margin-top:36px"><span class="chip ai">Rutinas con IA</span><span class="chip">Ejecución</span><span class="chip ai">Catálogo de ejercicios</span><span class="chip ai">Nutrición</span><span class="chip">Progreso</span><span class="chip">Entrenadores</span><span class="chip">Gimnasios</span><span class="chip">Pagos</span><span class="chip">Comunidad</span></div>
+    </div>
+    <div style="display:flex;gap:30px;align-items:flex-start;justify-content:flex-end">
+      <div style="width:260px"><div class="phone"><img src="../assets/img/frames/chafit/ai-routine.webp" alt="Rutina generada con IA"></div><div class="cap">Rutina por voz o foto</div></div>
+      <div style="width:260px;margin-top:90px"><div class="phone"><img src="../assets/img/frames/chafit/exercise-sheet.webp" alt="Ficha de ejercicio con la máquina del gimnasio"></div><div class="cap">Ficha con «tu máquina»</div></div>
+      <div style="width:260px;margin-top:30px"><div class="phone"><img src="../assets/img/frames/chafit/meal-photo.webp" alt="Registro de comida a partir de una foto"></div><div class="cap">Foto al plato</div></div>
+    </div>
+  </div>
+  <div class="foot"><a href="https://chafit.es">chafit.es</a><a href="https://apps.apple.com/app/chafit/id6759172876">App Store</a><a href="https://play.google.com/store/apps/details?id=com.chafit.app">Google Play</a><a class="play" href="../video.html?v=tfm-completo&amp;t=518">Vídeo · 8:38</a><a class="play" href="../video.html?v=chafit-4min">Recorrido de 4 min</a></div>
+</section>
+
+<!-- 11 · Arquitectura ChaFit -->
+<section class="slide" aria-label="Arquitectura de ChaFit">
+  <span class="kicker">ChaFit · arquitectura</span>
+  <h2>Una SPA, tres plataformas; <em>claves solo en el servidor</em>.</h2>
+  <div class="arch">
+    <div class="dg"><img src="img/chafit-slides-dark.svg" alt="Arquitectura de ChaFit: cliente web y móvil, Supabase, Edge Functions, OpenAI, Stripe y Resend"></div>
+    <div class="notes">
+      <div><b>28</b><span>Edge Functions: OpenAI, Stripe y Resend con secretos de servidor.</span></div>
+      <div><b>7 specs</b><span>con TDD sobre producción y despliegue mediante Supabase MCP.</span></div>
+      <div><b>109 + 100</b><span>tests en verde hoy; JSON Schema estricto en la frontera de la IA.</span></div>
+    </div>
+  </div>
+  <div class="foot"><a href="../../docs/architecture/chafit-architecture.md" data-gh="docs/architecture/chafit-architecture.md">Documento de arquitectura</a><a href="../diagrams/interactive/chafit-container.html">Diagrama interactivo</a><span>Repositorio privado · acceso bajo petición</span></div>
+</section>
+
+<!-- 12 · ICG Vault -->
+<section class="slide" aria-label="ICG Vault">
+  <span class="kicker"><span class="dot" style="background:var(--icg)"></span>Brownfield · web, iOS y Android</span>
+  <div class="cols" style="grid-template-columns:1fr 860px;gap:60px;flex:1;min-height:0">
+    <div>
+      <h2 class="xl">ICG Vault</h2>
+      <p class="lead" style="font-size:30px;margin-top:24px">Vota cine, series y videojuegos con un voto que pesa más cuanto más nivel tienes; colecciona, personaliza con IA y juega cada día.</p>
+      <div class="meta4" style="margin-top:44px"><div><b>13</b><span>módulos</span></div><div><b>63</b><span>funciones</span></div><div><b>4</b><span>con IA</span></div><div><b>12</b><span>APIs</span></div></div>
+      <div class="chips" style="margin-top:36px"><span class="chip">Catálogo</span><span class="chip">Votación y reseñas</span><span class="chip">Rankings</span><span class="chip ai">Perfil y progresión RPG</span><span class="chip">Juegos diarios</span><span class="chip">Juegos competitivos</span><span class="chip">Comunidad</span><span class="chip">Noticias y podcast</span><span class="chip ai">Administración</span></div>
+    </div>
+    <div style="display:flex;gap:30px;align-items:flex-start;justify-content:flex-end">
+      <div style="width:260px"><div class="phone"><img src="../assets/img/frames/icg/leaderboard.webp" alt="Clasificación de usuarios"></div><div class="cap">Voto con poder</div></div>
+      <div style="width:260px;margin-top:90px"><div class="phone"><img src="../assets/img/frames/icg/rupias.webp" alt="Economía de rupias y avatares"></div><div class="cap">Avatares y guardianes con IA</div></div>
+      <div style="width:260px;margin-top:30px"><div class="phone"><img src="../assets/img/frames/icg/zoomout.webp" alt="Juego diario Zoom Out"></div><div class="cap">Juegos diarios</div></div>
+    </div>
+  </div>
+  <div class="foot"><a href="https://icgvault.es">icgvault.es</a><a href="https://apps.apple.com/es/app/icg-vault/id6759173751">App Store</a><a href="https://play.google.com/store/apps/details?id=com.icgvault.app">Google Play</a><a class="play" href="../video.html?v=tfm-completo&amp;t=743">Vídeo · 12:23</a><a class="play" href="../video.html?v=icg-vault-4min">Recorrido de 4 min</a></div>
+</section>
+
+<!-- 13 · Arquitectura ICG -->
+<section class="slide" aria-label="Arquitectura de ICG Vault">
+  <span class="kicker">ICG Vault · arquitectura</span>
+  <h2>Reglas del juego en SQL; <em>catálogo tras un proxy</em>.</h2>
+  <div class="arch">
+    <div class="dg"><img src="img/icgvault-slides-dark.svg" alt="Arquitectura de ICG Vault: cliente, Supabase, Edge Functions, OpenAI y APIs de catálogo"></div>
+    <div class="notes">
+      <div><b>175 RPC</b><span>voto ponderado, economía, cofres y juegos dentro de transacciones.</span></div>
+      <div><b>35</b><span>Edge Functions: TMDB, IGDB, HLTB, Metacritic y RSS con caché.</span></div>
+      <div><b>81 de 97</b><span>PR desde ramas de agentes, revisadas y fusionadas por el autor.</span></div>
+    </div>
+  </div>
+  <div class="foot"><a href="../../docs/architecture/icgvault-architecture.md" data-gh="docs/architecture/icgvault-architecture.md">Documento de arquitectura</a><a href="../diagrams/interactive/icgvault-container.html">Diagrama interactivo</a><span>Repositorio privado · acceso bajo petición</span></div>
+</section>
+
+<!-- 14 · Integraciones e IA -->
+<section class="slide" aria-label="Integraciones e IA">
+  <span class="kicker">Integraciones e IA</span>
+  <h2><em>32</em> integraciones, <em>33</em> funcionalidades con IA.</h2>
+  <div class="body">
+    <table>
+      <thead><tr><th></th><th style="color:var(--rrss)">RRSS Studio</th><th style="color:var(--chafit)">ChaFit</th><th style="color:var(--icg)">ICG Vault</th></tr></thead>
+      <tbody>
+        <tr><td>Modelos de IA</td><td>Claude Code CLI · Gemini · fal.ai · HeyGen · ElevenLabs · Whisper local</td><td>OpenAI: texto, visión, imagen, edición, Whisper y Assistants</td><td>OpenAI: imagen, edición y borradores editoriales</td></tr>
+        <tr><td>Con IA</td><td><b>17</b> de 38</td><td><b>12</b> de 62</td><td><b>4</b> de 63</td></tr>
+        <tr><td>Otros servicios</td><td>Scrape Creators · GitHub · web analizada</td><td>Stripe · Mapbox · Resend · n8n · Sentry</td><td>TMDB · IGDB · HLTB · Metacritic · RSS · Google · Apple</td></tr>
+        <tr><td>Credenciales</td><td>Vault cifrado local</td><td>Secretos de Edge Functions</td><td>Secretos de Edge Functions</td></tr>
+        <tr><td>Control de coste</td><td>Plan y coste antes de gastar</td><td>Cupos por usuario</td><td>Rupias y acciones de administración</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="foot"><a href="../../docs/architecture/external-integrations.md" data-gh="docs/architecture/external-integrations.md">Matriz de integraciones</a><a href="../../docs/architecture/ai-integrations.md" data-gh="docs/architecture/ai-integrations.md">Inventario de IA</a></div>
+</section>
+
+<!-- 15 · Auditorías -->
+<section class="slide" aria-label="Auditorías">
+  <span class="kicker">Auditorías con el modelo SDD</span>
+  <h2>El sistema también <em>audita</em> lo ya construido.</h2>
+  <div class="body">
+    <div class="cols c2" style="gap:56px">
+      <div class="card">
+        <span class="n">ChaFit · 23/09/2026</span>
+        <div style="display:flex;align-items:baseline;gap:24px;margin:18px 0 20px"><span class="big" style="font-size:104px">53</span><span style="font-size:27px;color:var(--ink2)">hallazgos · <b style="color:var(--human)">15 críticos</b></span></div>
+        <div class="sbar"><span>Seguridad de aplicación</span><span class="t"><i class="i-c" style="width:16%"></i><i class="i-d" style="width:36%"></i><i class="i-m" style="width:8%"></i></span><span class="v">15</span></div>
+        <div class="sbar"><span>Datos y Edge Functions</span><span class="t"><i class="i-c" style="width:20%"></i><i class="i-d" style="width:24%"></i><i class="i-m" style="width:8%"></i></span><span class="v">13</span></div>
+        <div class="sbar"><span>Calidad de código</span><span class="t"><i class="i-c" style="width:12%"></i><i class="i-d" style="width:24%"></i></span><span class="v">9</span></div>
+        <div class="sbar"><span>UI y accesibilidad</span><span class="t"><i class="i-c" style="width:12%"></i><i class="i-d" style="width:44%"></i><i class="i-m" style="width:8%"></i></span><span class="v">16</span></div>
+      </div>
+      <div class="card">
+        <span class="n">ICG Vault · 23/09/2026</span>
+        <div style="display:flex;align-items:baseline;gap:24px;margin:18px 0 20px"><span class="big" style="font-size:104px">48</span><span style="font-size:27px;color:var(--ink2)">hallazgos · <b style="color:var(--human)">16 críticos</b></span></div>
+        <div class="sbar"><span>Seguridad</span><span class="t"><i class="i-c" style="width:36%"></i><i class="i-d" style="width:40%"></i><i class="i-m" style="width:24%"></i></span><span class="v">25</span></div>
+        <div class="sbar"><span>Calidad y rendimiento</span><span class="t"><i class="i-c" style="width:16%"></i><i class="i-d" style="width:28%"></i><i class="i-m" style="width:20%"></i></span><span class="v">16</span></div>
+        <div class="sbar"><span>UI y accesibilidad</span><span class="t"><i class="i-c" style="width:12%"></i><i class="i-d" style="width:8%"></i><i class="i-m" style="width:8%"></i></span><span class="v">7</span></div>
+        <div class="legend"><span><i class="i-c"></i>crítica</span><span><i class="i-d"></i>deseable</span><span><i class="i-m"></i>mínima</span></div>
+      </div>
+    </div>
+    <div style="display:flex;gap:30px;align-items:center;margin-top:50px"><p style="font-size:27px;color:var(--ink2)">orchestrator → database-expert (MCP de solo lectura), security-auditor, code-reviewer y ux-designer → contraste con la base real → informe y plan por fases.</p><span class="pend">Correcciones pendientes</span></div>
+  </div>
+  <div class="foot"><a href="../../docs/audits/audit-methodology.md" data-gh="docs/audits/audit-methodology.md">Metodología</a><span>Informes completos privados; publicados solo los resúmenes saneados</span></div>
+</section>
+
+<!-- 16 · Calidad -->
+<section class="slide" aria-label="Calidad">
+  <span class="kicker">Calidad · ejecutado el 26/09/2026</span>
+  <h2>Tests ejecutados, <em>no declarados</em>.</h2>
+  <div class="body">
+    <div class="cols c4">
+      <div class="num"><div class="big" style="color:var(--accent)">375</div><span>comprobaciones del sistema SDD: hooks, circuito, traza y gates</span></div>
+      <div class="num"><div class="big">209</div><span>RRSS Studio: 71 Vitest + 138 de contrato, más 9 E2E sin red</span></div>
+      <div class="num"><div class="big">209</div><span>ChaFit: 109 de contrato en Node + 100 en Deno</span></div>
+      <div class="num"><div class="big" style="color:var(--human)">0</div><span>ICG Vault: sin tests todavía; es el primer paso del plan de auditoría</span></div>
+    </div>
+    <ul class="clean" style="margin-top:80px">
+      <li><b>run --fast</b> antes de commit, <b>run --slow</b> antes de push y <b>trace-audit</b> contra la base exacta en CI.</li>
+      <li>Cobertura con trinquete (<b>48,3 %</b> en el sistema SDD): el umbral solo puede subir.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 17 · Seguridad -->
+<section class="slide" aria-label="Seguridad">
+  <span class="kicker">Seguridad</span>
+  <h2>Desde el diseño, <em>no al final</em>.</h2>
+  <div class="body">
+    <div class="cols c2" style="gap:80px">
+      <ul class="clean">
+        <li><b>Cada spec</b> declara su impacto de seguridad; si es sensible: control → tarea → test → evidencia.</li>
+        <li><b>OWASP</b> Web 2025, API 2023, LLM 2025 y ASVS 5.0 dentro del circuito.</li>
+        <li><b>Guardas</b>: ningún agente lee ni escribe secretos; los comandos destructivos se deniegan.</li>
+        <li><b>MCP</b> desactivado por defecto; Supabase, en solo lectura.</li>
+      </ul>
+      <ul class="clean">
+        <li>ChaFit, spec 005: el asesor detectó una función invocable sin sesión → migración + rollback → <b>validado</b>.</li>
+        <li>Claves de pago y de IA <b>nunca en el cliente</b>, en ninguno de los tres productos.</li>
+        <li>Auditorías publicadas <b>solo como resumen saneado</b>.</li>
+        <li>Credenciales de demo solo en el <b>formulario privado</b> de entrega.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><a href="../../docs/security/security.md" data-gh="docs/security/security.md">Documento de seguridad</a></div>
+</section>
+
+<!-- 18 · Máster -->
+<section class="slide" aria-label="Relación con el máster">
+  <span class="kicker">Relación con el máster</span>
+  <h2>Del temario a la <em>evidencia</em>.</h2>
+  <div class="body">
+    <div class="cols" style="grid-template-columns:480px 1fr;gap:80px;align-items:center">
+      <div class="num"><div class="big" style="color:var(--accent);font-size:150px">46<span style="font-size:.38em;color:var(--muted)"> / 54</span></div><span>competencias aplicadas con evidencia, 5 parciales y 3 no aplicadas, declaradas como tales</span></div>
+      <div style="display:grid;gap:22px">
+        <div class="chips"><span class="chip ok">SDD</span><span class="chip ok">Requisitos EARS</span><span class="chip ok">TDD</span><span class="chip ok">Playwright</span><span class="chip ok">ADR</span><span class="chip ok">Docs as Code</span><span class="chip ok">Sentry</span></div>
+        <div class="chips"><span class="chip ok">AGENTS.md</span><span class="chip ok">Skills</span><span class="chip ok">MCP</span><span class="chip ok">Orquestación</span><span class="chip ok">Revisión de código con IA</span><span class="chip ai">APIs de IA</span><span class="chip ai">Multimodalidad</span></div>
+        <div class="chips"><span class="chip ok">OWASP Web · API · LLM</span><span class="chip ok">JWT</span><span class="chip ok">CI/CD</span><span class="chip ok">Cloud</span><span class="chip ok">Bases de datos</span><span class="chip ok">Apps móviles publicadas</span><span class="chip ok">n8n</span><span class="chip ok">Low-code</span></div>
+        <div class="chips"><span class="chip">Clean Architecture · parcial</span><span class="chip">Cobertura · trinquete</span><span class="chip">LLMOps · parcial</span><span class="chip">Docker · no</span><span class="chip">RAG · no</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><a href="../../docs/evidence/master-evidence-matrix.md" data-gh="docs/evidence/master-evidence-matrix.md">Matriz de evidencias del máster</a></div>
+</section>
+
+<!-- 19 · Resultados -->
+<section class="slide" aria-label="Resultados">
+  <span class="kicker">Resultados</span>
+  <h2>Lo que se puede <em>comprobar</em>.</h2>
+  <div class="body">
+    <div class="cols c4" style="row-gap:70px">
+      <div class="num"><div class="big">17</div><span>specs del propio sistema, 114 tareas cerradas · v0.9.1</span></div>
+      <div class="num"><div class="big">3</div><span>productos: uno greenfield y dos en App Store y Google Play</span></div>
+      <div class="num"><div class="big">163</div><span>funcionalidades en 37 módulos, cada una con su fichero</span></div>
+      <div class="num"><div class="big">32</div><span>integraciones externas con protocolo y credencial</span></div>
+      <div class="num"><div class="big">7</div><span>specs con TDD sobre producción en ChaFit</span></div>
+      <div class="num"><div class="big">81</div><span>PR de agentes en ICG Vault, revisadas por el autor</span></div>
+      <div class="num"><div class="big">101</div><span>hallazgos de auditoría con evidencia</span></div>
+      <div class="num"><div class="big">56</div><span>vistas de arquitectura generadas desde un único modelo</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 20 · Aprendizajes -->
+<section class="slide" aria-label="Aprendizajes">
+  <span class="kicker">Aprendizajes</span>
+  <h2>Lo que me llevo.</h2>
+  <div class="body">
+    <ul class="clean" style="max-width:1580px;gap:34px">
+      <li><b>La spec ahorra más de lo que cuesta cuando hay datos reales</b>: el fallo de ChaFit era un contrato implícito, no un bug.</li>
+      <li><b>La verificación tiene que vivir fuera del modelo</b>: un agente narra; un hook o un script demuestran.</li>
+      <li><b>Quien juzga no debe escribir</b>, y el orquestador debe contrastar: evitó una corrección que habría roto el alta en las apps instaladas.</li>
+      <li><b>La plataforma también opina</b>: los privilegios por defecto anularon un <code>revoke</code> aparentemente correcto.</li>
+      <li><b>Honestidad antes que cifras</b>: declarar lo no ejecutado y lo parcial da credibilidad.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 21 · Conclusión -->
+<section class="slide" aria-label="Conclusión y enlaces">
+  <span class="kicker">Conclusión</span>
+  <h2 class="xl" style="max-width:1560px">La IA escribe el código; <em>el sistema se asegura</em> de que esté bien hecho.</h2>
+  <div class="body">
+    <div class="cols c3" style="font-size:28px;gap:70px">
+      <div><p class="kicker" style="font-size:19px;margin-bottom:22px">Entrega</p><div style="display:grid;gap:16px"><a href="https://jechamo.github.io/TFM/">Web del TFM</a><a class="play" href="../video.html?v=tfm-completo">Vídeo completo · 16:30</a><a class="play" href="../video.html?v=tfm-resumen">Vídeo resumen · 8:08</a><a href="https://github.com/jechamo/TFM">Repositorio del TFM</a></div></div>
+      <div><p class="kicker" style="font-size:19px;margin-bottom:22px">Código</p><div style="display:grid;gap:16px"><a href="https://github.com/jechamo/Estructura_inicial_claude">Sistema SDD/TDD</a><a href="https://jechamo.github.io/Estructura_inicial_claude/">Web del sistema</a><a href="https://github.com/jechamo/rrss-automation-app">RRSS Studio</a><span style="color:var(--muted)">ChaFit e ICG Vault: privados, acceso bajo petición</span></div></div>
+      <div><p class="kicker" style="font-size:19px;margin-bottom:22px">En producción</p><div style="display:grid;gap:16px"><a href="https://chafit.es">chafit.es</a><a href="https://icgvault.es">icgvault.es</a><a class="play" href="../video.html?v=chafit-4min">ChaFit · recorrido</a><a class="play" href="../video.html?v=icg-vault-4min">ICG Vault · recorrido</a></div></div>
+    </div>
+  </div>
+  <div class="foot"><b style="color:var(--ink);font-size:28px">Jorge Chamorro</b><span style="font-size:26px">Gracias</span></div>
+</section>
+
+</main>
+<div class="hud" role="toolbar" aria-label="Navegación de la presentación"><button type="button" id="prev" aria-label="Diapositiva anterior">←</button><span id="pos">1 / 21</span><button type="button" id="next" aria-label="Diapositiva siguiente">→</button><button type="button" id="fs" aria-label="Pantalla completa">⤢</button><a href="TFM-Jorge-Chamorro.pdf">PDF</a></div>
+<script>
+(function () {
+  // Los documentos del repo se abren en GitHub cuando la presentación no está abierta como fichero local.
+  var GH = 'https://github.com/jechamo/TFM/blob/HEAD/';
+  if (location.protocol !== 'file:') document.querySelectorAll('a[data-gh]').forEach(function (a) { a.href = GH + a.dataset.gh; });
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide')), i = 0;
+  slides.forEach(function (s, k) {
+    s.dataset.n = (k + 1) + ' / ' + slides.length;
+    if (!s.querySelector('.foot')) s.insertAdjacentHTML('beforeend', '<div class="foot"><b>Del máster a producción</b><span>Jorge Chamorro · TFM 2026</span></div>');
+  });
+  function fit() { var sc = Math.min(innerWidth / 1920, innerHeight / 1080); slides.forEach(function (s) { s.style.transform = 'scale(' + sc + ')'; }); }
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function (s, k) { s.classList.toggle('on', k === i); s.setAttribute('aria-hidden', k === i ? 'false' : 'true'); });
+    document.getElementById('pos').textContent = (i + 1) + ' / ' + slides.length;
+    document.getElementById('progress').style.width = ((i + 1) / slides.length * 100) + '%';
+    if (location.hash !== '#' + (i + 1)) history.replaceState(null, '', '#' + (i + 1));
+  }
+  addEventListener('resize', fit);
+  addEventListener('hashchange', function () { var n = parseInt(location.hash.slice(1), 10); if (n && n - 1 !== i) show(n - 1); });
+  addEventListener('keydown', function (e) {
+    if (['ArrowRight', 'PageDown', ' '].indexOf(e.key) > -1) { e.preventDefault(); show(i + 1); }
+    else if (['ArrowLeft', 'PageUp'].indexOf(e.key) > -1) { e.preventDefault(); show(i - 1); }
+    else if (e.key === 'Home') show(0); else if (e.key === 'End') show(slides.length - 1);
+    else if (e.key === 'f') toggleFs();
+  });
+  var x0 = null;
+  addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  addEventListener('touchend', function (e) { if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 50) show(i + (dx < 0 ? 1 : -1)); x0 = null; });
+  function toggleFs() { if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(function () {}); else document.exitFullscreen(); }
+  document.getElementById('prev').onclick = function () { show(i - 1); };
+  document.getElementById('next').onclick = function () { show(i + 1); };
+  document.getElementById('fs').onclick = toggleFs;
+  fit(); show((parseInt(location.hash.slice(1), 10) || 1) - 1);
+})();
+</script>
+</body>
+</html>

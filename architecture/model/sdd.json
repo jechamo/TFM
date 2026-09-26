@@ -1,0 +1,1797 @@
+{
+ "id": "sdd",
+ "name": "Sistema SDD/TDD con agentes",
+ "summary": "Kit instalable que gobierna el desarrollo con agentes de IA: especificación antes que código, TDD, verificación fuera del modelo, trazabilidad y seis gates humanos. Portable entre seis entornos de agentes.",
+ "source": {
+  "repo": "jechamo/Estructura_inicial_claude",
+  "commit": "d4a16d3",
+  "visibility": "público",
+  "inspected": "26/09/2026",
+  "release": "v0.9.1"
+ },
+ "zones": [
+  {
+   "id": "repo",
+   "label": "Repositorio del proyecto · kit instalado",
+   "style": "platform",
+   "note": "v0.9.1 · Node ≥ 18 · 0 dependencias"
+  },
+  {
+   "id": "devenv",
+   "label": "Entorno del desarrollador",
+   "style": "trust"
+  },
+  {
+   "id": "ext",
+   "label": "Externos",
+   "style": "external"
+  }
+ ],
+ "elements": [
+  {
+   "id": "dev",
+   "type": "person",
+   "name": "Desarrollador",
+   "tech": "pide, revisa y aprueba",
+   "desc": "Aprueba producto, arquitectura, spec, diseño, plan y entrega",
+   "evidence": [
+    "AGENTS.md (Gates)"
+   ],
+   "resp": "Pide trabajo, revisa y aprueba los seis gates"
+  },
+  {
+   "id": "system",
+   "type": "system",
+   "name": "Sistema SDD/TDD con agentes",
+   "kind": "Sistema",
+   "tech": "Estructura_inicial_claude · v0.9.1",
+   "evidence": [
+    "package.json (sdd-agents 0.9.1)"
+   ]
+  },
+  {
+   "id": "host",
+   "type": "host",
+   "name": "Entorno de agentes",
+   "kind": "Host",
+   "tech": "Claude Code · Copilot/VS Code · Cursor · Codex · Gemini CLI · Antigravity",
+   "zone": "devenv",
+   "evidence": [
+    "docs/integrations/IDE-COMPATIBILITY.md",
+    ".claude/ .github/ .cursor/ .codex/ .gemini/ .agents/"
+   ],
+   "resp": "Ejecuta los agentes y los hooks; aporta el modelo de lenguaje"
+  },
+  {
+   "id": "llm",
+   "type": "ai",
+   "name": "Modelos de lenguaje",
+   "tech": "Anthropic · OpenAI · Google (según host)",
+   "zone": "devenv",
+   "evidence": [
+    "docs/agents/CATALOG.md (modelos sugeridos)"
+   ],
+   "resp": "Inferencia que usa el host"
+  },
+  {
+   "id": "router",
+   "type": "doc",
+   "name": "Router operativo",
+   "kind": "Contexto",
+   "tech": "AGENTS.md · OPERATING-MODEL.md · context --phase",
+   "zone": "repo",
+   "evidence": [
+    "AGENTS.md",
+    "docs/sdd/OPERATING-MODEL.md"
+   ],
+   "resp": "Contrato operativo vinculante y recorte de contexto por fase"
+  },
+  {
+   "id": "agents",
+   "type": "agent",
+   "name": "20 agentes",
+   "kind": "Perfiles",
+   "tech": ".claude/agents canónicos + adaptadores por host",
+   "zone": "repo",
+   "evidence": [
+    ".claude/agents/ (20)",
+    ".codex/agents/ (20)"
+   ],
+   "resp": "Roles con territorio, permisos y sucesor natural"
+  },
+  {
+   "id": "skills",
+   "type": "skill",
+   "name": "27 skills",
+   "kind": "Procedimientos",
+   "tech": ".agents/skills · estándar Agent Skills",
+   "zone": "repo",
+   "evidence": [
+    ".agents/skills/ (27)"
+   ],
+   "resp": "Procedimientos por fase y dominio con puertas de entrada y checks"
+  },
+  {
+   "id": "cli",
+   "type": "cli",
+   "name": "CLI determinista",
+   "tech": "sdd-project.mjs · check-sdd.mjs · scan-secrets · skills-sync",
+   "zone": "repo",
+   "evidence": [
+    "scripts/sdd-project.mjs",
+    "scripts/check-sdd.mjs"
+   ],
+   "resp": "Estado, scaffolds, trazas, checks y validación sin decidir requisitos ni veredictos"
+  },
+  {
+   "id": "hooks",
+   "type": "hook",
+   "name": "Hooks del host",
+   "kind": "Guardas y trazas",
+   "tech": "session-context · sdd-router · guard-write · guard-bash · subagent-log",
+   "zone": "repo",
+   "evidence": [
+    ".sdd/hooks/",
+    ".claude/settings.json"
+   ],
+   "resp": "Inyectan contexto, sugieren fase, bloquean escrituras y comandos peligrosos, registran subagentes"
+  },
+  {
+   "id": "config",
+   "type": "vault",
+   "name": "Contratos .sdd/",
+   "kind": "Configuración",
+   "tech": "territories · checks · circuit · docs · installed",
+   "zone": "repo",
+   "evidence": [
+    ".sdd/territories.json",
+    ".sdd/checks.json",
+    ".sdd/circuit.json"
+   ],
+   "resp": "Territorios, checks del proyecto, frontera del circuito y contrato documental"
+  },
+  {
+   "id": "artefacts",
+   "type": "doc",
+   "name": "Expediente durable",
+   "kind": "Memoria del proyecto",
+   "tech": "docs/specs/NNN · ADR · bitácora · execution-log.jsonl",
+   "zone": "repo",
+   "evidence": [
+    "docs/specs/ (17)",
+    "docs/bitacora/DECISIONS.md"
+   ],
+   "resp": "Specs, decisiones, ADR, bitácora y registros de ejecución append-only"
+  },
+  {
+   "id": "githooks",
+   "type": "cicd",
+   "name": "Git hooks y CI",
+   "kind": "Gates",
+   "tech": "pre-commit · pre-push · sdd-gates.yml · quality-gates.yml",
+   "brand": "github-actions",
+   "zone": "repo",
+   "evidence": [
+    ".sdd/githooks/",
+    ".github/workflows/sdd-gates.yml"
+   ],
+   "resp": "Ejecutan los gates antes de commit/push y en CI"
+  },
+  {
+   "id": "installer",
+   "type": "cli",
+   "name": "Instalador",
+   "kind": "npx",
+   "tech": "init · check · update · greenfield / brownfield / auto",
+   "evidence": [
+    "scripts/install.mjs"
+   ],
+   "resp": "Instala, comprueba y actualiza el kit sin sobrescribir el trabajo del proyecto"
+  },
+  {
+   "id": "products",
+   "type": "product",
+   "name": "RRSS · ChaFit · ICG Vault",
+   "kind": "Productos donde se aplica",
+   "tech": "greenfield y brownfield",
+   "evidence": [
+    ".sdd/installed.json en RRSS",
+    "docs/specs en ChaFit",
+    "auditoría ICG Vault"
+   ],
+   "resp": "Repositorios donde se ha aplicado el sistema"
+  },
+  {
+   "id": "gh",
+   "type": "cicd",
+   "name": "GitHub",
+   "kind": "Repositorio y CI",
+   "tech": "Actions · Pages · tags v0.3.0…v0.9.1",
+   "brand": "github",
+   "evidence": [
+    "git tag",
+    ".github/workflows/pages.yml"
+   ],
+   "resp": "Repositorio público, CI y sitio en Pages"
+  },
+  {
+   "id": "mcp",
+   "type": "api",
+   "name": "Servidores MCP",
+   "kind": "Opt-in",
+   "tech": "context7 · playwright · supabase · figma",
+   "evidence": [
+    ".mcp.json",
+    "docs/security/MCP-SECURITY.md"
+   ],
+   "resp": "Herramientas externas bajo política explícita"
+  },
+  {
+   "id": "p-intake",
+   "type": "doc",
+   "name": "Intake",
+   "kind": "Fase",
+   "tech": "PRD · casos · mapa de specs"
+  },
+  {
+   "id": "p-arch",
+   "type": "doc",
+   "name": "Arquitectura",
+   "kind": "Fase",
+   "tech": "constitución · ADR-0001"
+  },
+  {
+   "id": "p-spec",
+   "type": "doc",
+   "name": "Specify",
+   "kind": "Fase",
+   "tech": "EARS · Gherkin · MoSCoW"
+  },
+  {
+   "id": "p-clar",
+   "type": "doc",
+   "name": "Clarify",
+   "kind": "Fase",
+   "tech": "0 ambigüedades"
+  },
+  {
+   "id": "p-design",
+   "type": "doc",
+   "name": "Design",
+   "kind": "Fase · si hay UI",
+   "tech": "flujos · 6 estados · a11y"
+  },
+  {
+   "id": "p-plan",
+   "type": "doc",
+   "name": "Plan",
+   "kind": "Fase",
+   "tech": "plan · data-model · contratos"
+  },
+  {
+   "id": "p-tasks",
+   "type": "doc",
+   "name": "Tasks",
+   "kind": "Fase",
+   "tech": "tareas atómicas con test"
+  },
+  {
+   "id": "p-impl",
+   "type": "agent",
+   "name": "Implement",
+   "kind": "Fase",
+   "tech": "TDD por tarea"
+  },
+  {
+   "id": "p-verify",
+   "type": "shield",
+   "name": "Verify",
+   "kind": "Fase",
+   "tech": "calidad · UX · OWASP"
+  },
+  {
+   "id": "p-ship",
+   "type": "cicd",
+   "name": "Ship",
+   "kind": "Fase",
+   "tech": "PR · CHANGELOG · reversión"
+  },
+  {
+   "id": "g1",
+   "type": "gate",
+   "name": "Producto",
+   "kind": "Gate 1"
+  },
+  {
+   "id": "g2",
+   "type": "gate",
+   "name": "Arquitectura",
+   "kind": "Gate 2 · greenfield"
+  },
+  {
+   "id": "g3",
+   "type": "gate",
+   "name": "Spec",
+   "kind": "Gate 3"
+  },
+  {
+   "id": "g4",
+   "type": "gate",
+   "name": "Diseño",
+   "kind": "Gate 4"
+  },
+  {
+   "id": "g5",
+   "type": "gate",
+   "name": "Plan",
+   "kind": "Gate 5"
+  },
+  {
+   "id": "g6",
+   "type": "gate",
+   "name": "Entrega",
+   "kind": "Gate 6"
+  },
+  {
+   "id": "tdd",
+   "type": "loop",
+   "name": "RED → GREEN → REFACTOR",
+   "kind": "TDD",
+   "tech": "el test falla primero y se enseña"
+  },
+  {
+   "id": "gates",
+   "type": "cli",
+   "name": "Gates deterministas",
+   "tech": "run --fast / --slow · trace-audit · secretos · a11y · cobertura"
+  },
+  {
+   "id": "levels",
+   "type": "doc",
+   "name": "Circuito proporcional",
+   "kind": "light · compact · full",
+   "tech": "el nivel lo decide la ruta del cambio, nunca el agente; ninguno salta gates"
+  },
+  {
+   "id": "a-orch",
+   "type": "agent",
+   "name": "orchestrator",
+   "kind": "Nivel 0 · solo lectura"
+  },
+  {
+   "id": "a-spec",
+   "type": "agent",
+   "name": "spec-analyst",
+   "kind": "Fase"
+  },
+  {
+   "id": "a-ux",
+   "type": "agent",
+   "name": "ux-designer",
+   "kind": "Fase"
+  },
+  {
+   "id": "a-arch",
+   "type": "agent",
+   "name": "architect",
+   "kind": "Fase"
+  },
+  {
+   "id": "a-plan",
+   "type": "agent",
+   "name": "planner",
+   "kind": "Fase · delega"
+  },
+  {
+   "id": "a-impl",
+   "type": "agent",
+   "name": "implementer",
+   "kind": "Fase · delega"
+  },
+  {
+   "id": "a-rev",
+   "type": "agent",
+   "name": "code-reviewer",
+   "kind": "Fase · solo lectura"
+  },
+  {
+   "id": "a-rel",
+   "type": "agent",
+   "name": "release-manager",
+   "kind": "Fase"
+  },
+  {
+   "id": "a-res",
+   "type": "agent",
+   "name": "research-analyst",
+   "kind": "Fase · solo lectura"
+  },
+  {
+   "id": "a-back",
+   "type": "agent",
+   "name": "backend-expert",
+   "kind": "Especialista"
+  },
+  {
+   "id": "a-front",
+   "type": "agent",
+   "name": "frontend-expert",
+   "kind": "Especialista"
+  },
+  {
+   "id": "a-db",
+   "type": "agent",
+   "name": "database-expert",
+   "kind": "Especialista"
+  },
+  {
+   "id": "a-test",
+   "type": "agent",
+   "name": "test-engineer",
+   "kind": "Especialista"
+  },
+  {
+   "id": "a-ref",
+   "type": "agent",
+   "name": "refactor-specialist",
+   "kind": "Especialista"
+  },
+  {
+   "id": "a-api",
+   "type": "agent",
+   "name": "api-designer",
+   "kind": "Especialista"
+  },
+  {
+   "id": "a-sec",
+   "type": "agent",
+   "name": "security-auditor",
+   "kind": "Especialista · solo lectura"
+  },
+  {
+   "id": "a-perf",
+   "type": "agent",
+   "name": "performance-optimizer",
+   "kind": "Especialista"
+  },
+  {
+   "id": "a-ops",
+   "type": "agent",
+   "name": "devops-expert",
+   "kind": "Especialista"
+  },
+  {
+   "id": "a-docs",
+   "type": "agent",
+   "name": "docs-writer",
+   "kind": "Especialista"
+  },
+  {
+   "id": "a-bit",
+   "type": "agent",
+   "name": "bitacora-keeper",
+   "kind": "Especialista"
+  }
+ ],
+ "relations": [
+  {
+   "id": "r-dev",
+   "from": "dev",
+   "to": "host",
+   "label": "Pide y aprueba",
+   "kind": "user",
+   "protocol": "chat · comandos /skill",
+   "evidence": [
+    "AGENTS.md (Entrada por situación)"
+   ]
+  },
+  {
+   "id": "r-llm",
+   "from": "host",
+   "to": "llm",
+   "label": "inferencia",
+   "kind": "ai",
+   "protocol": "API del proveedor del host",
+   "evidence": [
+    "docs/agents/CATALOG.md"
+   ]
+  },
+  {
+   "id": "r-router",
+   "from": "host",
+   "to": "router",
+   "label": "lee el contrato",
+   "kind": "call",
+   "evidence": [
+    "AGENTS.md",
+    "CLAUDE.md / GEMINI.md remiten a AGENTS.md"
+   ]
+  },
+  {
+   "id": "r-agents",
+   "from": "host",
+   "to": "agents",
+   "label": "delega (≤ 2 saltos)",
+   "kind": "call",
+   "evidence": [
+    "docs/agents/CATALOG.md (reglas duras)"
+   ]
+  },
+  {
+   "id": "r-hooks",
+   "from": "host",
+   "to": "hooks",
+   "label": "eventos del ciclo de vida",
+   "kind": "async",
+   "evidence": [
+    ".claude/settings.json (hooks)"
+   ]
+  },
+  {
+   "id": "r-skills",
+   "from": "agents",
+   "to": "skills",
+   "label": "sigue",
+   "kind": "call",
+   "evidence": [
+    ".agents/skills/*/SKILL.md"
+   ]
+  },
+  {
+   "id": "r-cli",
+   "from": "skills",
+   "to": "cli",
+   "label": "ejecuta",
+   "kind": "local",
+   "evidence": [
+    "skills que llaman a scripts/*.mjs"
+   ]
+  },
+  {
+   "id": "r-gh",
+   "from": "githooks",
+   "to": "cli",
+   "label": "run --fast / --slow",
+   "kind": "local",
+   "evidence": [
+    ".sdd/githooks/pre-commit",
+    ".github/workflows/sdd-gates.yml"
+   ]
+  },
+  {
+   "id": "r-art",
+   "from": "cli",
+   "to": "artefacts",
+   "label": "scaffold · trazas · evidencia",
+   "kind": "data",
+   "evidence": [
+    "scripts/sdd-project.mjs (new-spec, scaffold, trace-status)"
+   ]
+  },
+  {
+   "id": "r-cfg",
+   "from": "hooks",
+   "to": "config",
+   "label": "territorios",
+   "kind": "auth",
+   "evidence": [
+    ".sdd/hooks/guard-write.mjs",
+    ".sdd/territories.json"
+   ]
+  },
+  {
+   "id": "r-log",
+   "from": "hooks",
+   "to": "artefacts",
+   "label": "execution-log.jsonl (append-only)",
+   "kind": "data",
+   "evidence": [
+    ".sdd/hooks/subagent-log.mjs"
+   ]
+  },
+  {
+   "id": "r-cli-cfg",
+   "from": "cli",
+   "to": "config",
+   "label": "checks · circuito",
+   "kind": "data",
+   "evidence": [
+    ".sdd/checks.json",
+    ".sdd/circuit.json"
+   ]
+  }
+ ],
+ "views": [
+  {
+   "id": "context",
+   "title": "Sistema SDD/TDD · contexto",
+   "subtitle": "Un kit que vive dentro del repositorio y gobierna a los agentes del entorno que ya usa el desarrollador",
+   "tag": "C4 · nivel 1 · AS-IS",
+   "width": 1580,
+   "height": 900,
+   "nodes": [
+    {
+     "ref": "dev",
+     "at": [
+      60,
+      380
+     ],
+     "w": 250,
+     "h": 120
+    },
+    {
+     "ref": "host",
+     "at": [
+      400,
+      370
+     ],
+     "w": 280,
+     "h": 140
+    },
+    {
+     "ref": "llm",
+     "at": [
+      400,
+      150
+     ],
+     "w": 280,
+     "h": 100
+    },
+    {
+     "ref": "system",
+     "at": [
+      840,
+      190
+     ],
+     "w": 380,
+     "h": 520,
+     "desc": "Se instala con un comando en cualquier repositorio, nuevo o existente",
+     "items": [
+      "20 agentes con territorio y permisos",
+      "27 skills (procedimientos por fase)",
+      "Hooks deterministas en 5 de 6 hosts",
+      "CLI sin dependencias (Node ≥ 18)",
+      "6 gates humanos · 3 niveles de circuito",
+      "17 specs propias · 114 tareas cerradas"
+     ],
+     "itemsTop": 150,
+     "itemGap": 26
+    },
+    {
+     "ref": "gh",
+     "at": [
+      1320,
+      200
+     ],
+     "w": 230,
+     "h": 110
+    },
+    {
+     "ref": "mcp",
+     "at": [
+      1320,
+      390
+     ],
+     "w": 230,
+     "h": 110
+    },
+    {
+     "ref": "products",
+     "at": [
+      1320,
+      580
+     ],
+     "w": 230,
+     "h": 110
+    }
+   ],
+   "zones": [
+    {
+     "label": "Entorno del desarrollador",
+     "members": [
+      "host",
+      "llm"
+     ],
+     "style": "trust"
+    }
+   ],
+   "edges": [
+    {
+     "from": "dev",
+     "to": "host",
+     "label": "Pide y aprueba",
+     "kind": "user"
+    },
+    {
+     "from": "host",
+     "to": "llm",
+     "label": "inferencia",
+     "kind": "ai"
+    },
+    {
+     "from": "host",
+     "to": "system",
+     "label": "lee reglas · delega\nejecuta hooks",
+     "kind": "call"
+    },
+    {
+     "from": "system",
+     "to": "gh",
+     "label": "gates en CI",
+     "kind": "deploy"
+    },
+    {
+     "from": "system",
+     "to": "mcp",
+     "label": "opt-in",
+     "kind": "async"
+    },
+    {
+     "from": "system",
+     "to": "products",
+     "label": "se instala en",
+     "kind": "deploy"
+    }
+   ],
+   "legendAt": [
+    40,
+    830
+   ]
+  },
+  {
+   "id": "container",
+   "title": "Sistema SDD/TDD · componentes",
+   "subtitle": "La verificación no depende del modelo: la ejecutan hooks y una CLI determinista que dejan evidencia en el repositorio",
+   "tag": "C4 · nivel 2 · AS-IS",
+   "width": 1520,
+   "height": 1000,
+   "nodes": [
+    {
+     "ref": "dev",
+     "at": [
+      40,
+      430
+     ],
+     "w": 200,
+     "h": 120
+    },
+    {
+     "ref": "llm",
+     "at": [
+      300,
+      190
+     ],
+     "w": 240,
+     "h": 96
+    },
+    {
+     "ref": "host",
+     "at": [
+      300,
+      420
+     ],
+     "w": 240,
+     "h": 140
+    },
+    {
+     "ref": "installer",
+     "at": [
+      40,
+      700
+     ],
+     "w": 200,
+     "h": 110
+    },
+    {
+     "ref": "router",
+     "at": [
+      640,
+      190
+     ],
+     "w": 250,
+     "h": 100
+    },
+    {
+     "ref": "githooks",
+     "at": [
+      1230,
+      190
+     ],
+     "w": 250,
+     "h": 100
+    },
+    {
+     "ref": "agents",
+     "at": [
+      640,
+      430
+     ],
+     "w": 250,
+     "h": 110
+    },
+    {
+     "ref": "skills",
+     "at": [
+      935,
+      430
+     ],
+     "w": 250,
+     "h": 110
+    },
+    {
+     "ref": "cli",
+     "at": [
+      1230,
+      430
+     ],
+     "w": 250,
+     "h": 110
+    },
+    {
+     "ref": "hooks",
+     "at": [
+      640,
+      670
+     ],
+     "w": 250,
+     "h": 110
+    },
+    {
+     "ref": "config",
+     "at": [
+      935,
+      670
+     ],
+     "w": 250,
+     "h": 110
+    },
+    {
+     "ref": "artefacts",
+     "at": [
+      1230,
+      670
+     ],
+     "w": 250,
+     "h": 110
+    }
+   ],
+   "zones": [
+    {
+     "ref": "repo",
+     "pad": 24
+    },
+    {
+     "ref": "devenv",
+     "members": [
+      "llm",
+      "host"
+     ]
+    }
+   ],
+   "edges": [
+    {
+     "ref": "r-dev"
+    },
+    "r-llm",
+    {
+     "ref": "r-router",
+     "sides": [
+      "right",
+      "left"
+     ],
+     "midX": 590
+    },
+    {
+     "ref": "r-agents",
+     "label": "delega\n≤ 2 saltos"
+    },
+    {
+     "ref": "r-hooks",
+     "sides": [
+      "bottom",
+      "left"
+     ]
+    },
+    "r-skills",
+    "r-cli",
+    "r-gh",
+    "r-art",
+    "r-cfg",
+    {
+     "ref": "r-log",
+     "sides": [
+      "bottom",
+      "bottom"
+     ],
+     "midY": 830,
+     "labelAt": [
+      1060,
+      830
+     ]
+    },
+    {
+     "ref": "r-cli-cfg",
+     "sides": [
+      "left",
+      "right"
+     ],
+     "midX": 1208,
+     "fromAt": 92,
+     "label": "checks\ncircuito",
+     "labelAt": [
+      1208,
+      600
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "at": [
+      40,
+      850
+     ],
+     "w": 520,
+     "text": "El instalador no hace commits ni escribe secretos, conserva el contexto brownfield y deja MCP desactivado salvo --with-mcp."
+    }
+   ],
+   "legendAt": [
+    40,
+    940
+   ]
+  },
+  {
+   "id": "circuit",
+   "title": "El circuito SDD: diez fases y seis gates humanos",
+   "subtitle": "Cada fase produce lo que necesita la siguiente; la máquina propone y la persona decide",
+   "tag": "Workflow · AS-IS",
+   "width": 1920,
+   "height": 900,
+   "legend": false,
+   "nodes": [
+    {
+     "ref": "g1",
+     "at": [
+      40,
+      170
+     ],
+     "w": 160,
+     "h": 70,
+     "tech": ""
+    },
+    {
+     "ref": "g2",
+     "at": [
+      225,
+      170
+     ],
+     "w": 160,
+     "h": 70,
+     "tech": "",
+     "kind": "Gate 2"
+    },
+    {
+     "ref": "g3",
+     "at": [
+      595,
+      170
+     ],
+     "w": 160,
+     "h": 70,
+     "tech": ""
+    },
+    {
+     "ref": "g4",
+     "at": [
+      780,
+      170
+     ],
+     "w": 160,
+     "h": 70,
+     "tech": ""
+    },
+    {
+     "ref": "g5",
+     "at": [
+      965,
+      170
+     ],
+     "w": 160,
+     "h": 70,
+     "tech": ""
+    },
+    {
+     "ref": "g6",
+     "at": [
+      1705,
+      170
+     ],
+     "w": 160,
+     "h": 70,
+     "tech": ""
+    },
+    {
+     "ref": "p-intake",
+     "at": [
+      40,
+      330
+     ],
+     "w": 160,
+     "h": 130
+    },
+    {
+     "ref": "p-arch",
+     "at": [
+      225,
+      330
+     ],
+     "w": 160,
+     "h": 130
+    },
+    {
+     "ref": "p-spec",
+     "at": [
+      410,
+      330
+     ],
+     "w": 160,
+     "h": 130
+    },
+    {
+     "ref": "p-clar",
+     "at": [
+      595,
+      330
+     ],
+     "w": 160,
+     "h": 130
+    },
+    {
+     "ref": "p-design",
+     "at": [
+      780,
+      330
+     ],
+     "w": 160,
+     "h": 130,
+     "kind": "Fase"
+    },
+    {
+     "ref": "p-plan",
+     "at": [
+      965,
+      330
+     ],
+     "w": 160,
+     "h": 130
+    },
+    {
+     "ref": "p-tasks",
+     "at": [
+      1150,
+      330
+     ],
+     "w": 160,
+     "h": 130
+    },
+    {
+     "ref": "p-impl",
+     "at": [
+      1335,
+      330
+     ],
+     "w": 160,
+     "h": 130
+    },
+    {
+     "ref": "p-verify",
+     "at": [
+      1520,
+      330
+     ],
+     "w": 160,
+     "h": 130
+    },
+    {
+     "ref": "p-ship",
+     "at": [
+      1705,
+      330
+     ],
+     "w": 160,
+     "h": 130
+    },
+    {
+     "ref": "levels",
+     "at": [
+      410,
+      590
+     ],
+     "w": 715,
+     "h": 110
+    },
+    {
+     "ref": "tdd",
+     "at": [
+      1250,
+      590
+     ],
+     "w": 245,
+     "h": 110
+    },
+    {
+     "ref": "gates",
+     "at": [
+      1520,
+      590
+     ],
+     "w": 345,
+     "h": 110
+    }
+   ],
+   "edges": [
+    {
+     "from": "p-intake",
+     "to": "p-arch",
+     "kind": "call"
+    },
+    {
+     "from": "p-arch",
+     "to": "p-spec",
+     "kind": "call"
+    },
+    {
+     "from": "p-spec",
+     "to": "p-clar",
+     "kind": "call"
+    },
+    {
+     "from": "p-clar",
+     "to": "p-design",
+     "kind": "call"
+    },
+    {
+     "from": "p-design",
+     "to": "p-plan",
+     "kind": "call"
+    },
+    {
+     "from": "p-plan",
+     "to": "p-tasks",
+     "kind": "call"
+    },
+    {
+     "from": "p-tasks",
+     "to": "p-impl",
+     "kind": "call"
+    },
+    {
+     "from": "p-impl",
+     "to": "p-verify",
+     "kind": "call"
+    },
+    {
+     "from": "p-verify",
+     "to": "p-ship",
+     "kind": "call"
+    },
+    {
+     "from": "g1",
+     "to": "p-intake",
+     "label": "aprueba",
+     "kind": "human"
+    },
+    {
+     "from": "g2",
+     "to": "p-arch",
+     "label": "aprueba",
+     "kind": "human"
+    },
+    {
+     "from": "g3",
+     "to": "p-clar",
+     "label": "aprueba",
+     "kind": "human"
+    },
+    {
+     "from": "g4",
+     "to": "p-design",
+     "label": "aprueba",
+     "kind": "human"
+    },
+    {
+     "from": "g5",
+     "to": "p-plan",
+     "label": "aprueba",
+     "kind": "human"
+    },
+    {
+     "from": "g6",
+     "to": "p-ship",
+     "label": "aprueba",
+     "kind": "human"
+    },
+    {
+     "from": "p-impl",
+     "to": "tdd",
+     "sides": [
+      "bottom",
+      "top"
+     ],
+     "fromAt": 40,
+     "kind": "local"
+    },
+    {
+     "from": "p-verify",
+     "to": "gates",
+     "kind": "local"
+    }
+   ],
+   "notes": [
+    {
+     "at": [
+      40,
+      780
+     ],
+     "w": 1760,
+     "text": "Reglas duras: ningún código sin spec aprobada · TDD con RED demostrado · «pasa» sin ejecución no es un resultado · antes de commit run --fast y antes de push run --slow · toda tarea enlaza spec, criterio, tarea, test y evidencia · nunca se leen ni escriben secretos."
+    }
+   ]
+  },
+  {
+   "id": "agents",
+   "title": "20 agentes: quién delega y quién solo audita",
+   "subtitle": "Solo orchestrator, planner e implementer delegan; ninguna cadena pasa de dos saltos; quien juzga no escribe",
+   "tag": "Orquestación · AS-IS",
+   "width": 1900,
+   "height": 1000,
+   "nodes": [
+    {
+     "ref": "dev",
+     "at": [
+      845,
+      150
+     ],
+     "w": 210,
+     "h": 80,
+     "tech": ""
+    },
+    {
+     "ref": "a-orch",
+     "at": [
+      845,
+      280
+     ],
+     "w": 210,
+     "h": 74
+    },
+    {
+     "ref": "a-spec",
+     "at": [
+      40,
+      460
+     ],
+     "w": 200,
+     "h": 74
+    },
+    {
+     "ref": "a-ux",
+     "at": [
+      270,
+      460
+     ],
+     "w": 200,
+     "h": 74
+    },
+    {
+     "ref": "a-arch",
+     "at": [
+      500,
+      460
+     ],
+     "w": 200,
+     "h": 74
+    },
+    {
+     "ref": "a-plan",
+     "at": [
+      730,
+      460
+     ],
+     "w": 200,
+     "h": 74
+    },
+    {
+     "ref": "a-impl",
+     "at": [
+      960,
+      460
+     ],
+     "w": 200,
+     "h": 74
+    },
+    {
+     "ref": "a-rev",
+     "at": [
+      1190,
+      460
+     ],
+     "w": 200,
+     "h": 74
+    },
+    {
+     "ref": "a-rel",
+     "at": [
+      1420,
+      460
+     ],
+     "w": 200,
+     "h": 74
+    },
+    {
+     "ref": "a-res",
+     "at": [
+      1650,
+      460
+     ],
+     "w": 210,
+     "h": 74
+    },
+    {
+     "ref": "a-back",
+     "at": [
+      370,
+      690
+     ],
+     "w": 200,
+     "h": 70
+    },
+    {
+     "ref": "a-front",
+     "at": [
+      600,
+      690
+     ],
+     "w": 200,
+     "h": 70
+    },
+    {
+     "ref": "a-db",
+     "at": [
+      830,
+      690
+     ],
+     "w": 200,
+     "h": 70
+    },
+    {
+     "ref": "a-test",
+     "at": [
+      1060,
+      690
+     ],
+     "w": 200,
+     "h": 70
+    },
+    {
+     "ref": "a-ref",
+     "at": [
+      1290,
+      690
+     ],
+     "w": 210,
+     "h": 70
+    },
+    {
+     "ref": "a-api",
+     "at": [
+      1530,
+      690
+     ],
+     "w": 200,
+     "h": 70
+    },
+    {
+     "ref": "a-sec",
+     "at": [
+      370,
+      850
+     ],
+     "w": 210,
+     "h": 70
+    },
+    {
+     "ref": "a-perf",
+     "at": [
+      610,
+      850
+     ],
+     "w": 230,
+     "h": 70
+    },
+    {
+     "ref": "a-ops",
+     "at": [
+      870,
+      850
+     ],
+     "w": 200,
+     "h": 70
+    },
+    {
+     "ref": "a-docs",
+     "at": [
+      1100,
+      850
+     ],
+     "w": 200,
+     "h": 70
+    },
+    {
+     "ref": "a-bit",
+     "at": [
+      1330,
+      850
+     ],
+     "w": 200,
+     "h": 70
+    }
+   ],
+   "zones": [
+    {
+     "label": "Nivel 1 · fases del circuito",
+     "members": [
+      "a-spec",
+      "a-ux",
+      "a-arch",
+      "a-plan",
+      "a-impl",
+      "a-rev",
+      "a-rel",
+      "a-res"
+     ],
+     "style": "platform",
+     "pad": 18
+    },
+    {
+     "label": "Nivel 2 · especialistas · devuelven el control",
+     "members": [
+      "a-back",
+      "a-front",
+      "a-db",
+      "a-test",
+      "a-ref",
+      "a-api",
+      "a-sec",
+      "a-perf",
+      "a-ops",
+      "a-docs",
+      "a-bit"
+     ],
+     "style": "neutral",
+     "pad": 18
+    }
+   ],
+   "edges": [
+    {
+     "from": "dev",
+     "to": "a-orch",
+     "kind": "user"
+    },
+    {
+     "from": "a-orch",
+     "to": "a-spec",
+     "sides": [
+      "bottom",
+      "top"
+     ],
+     "fromAt": 105,
+     "midY": 400,
+     "kind": "call"
+    },
+    {
+     "from": "a-orch",
+     "to": "a-ux",
+     "sides": [
+      "bottom",
+      "top"
+     ],
+     "fromAt": 105,
+     "midY": 400,
+     "kind": "call"
+    },
+    {
+     "from": "a-orch",
+     "to": "a-arch",
+     "sides": [
+      "bottom",
+      "top"
+     ],
+     "fromAt": 105,
+     "midY": 400,
+     "kind": "call"
+    },
+    {
+     "from": "a-orch",
+     "to": "a-plan",
+     "sides": [
+      "bottom",
+      "top"
+     ],
+     "fromAt": 105,
+     "midY": 400,
+     "kind": "call"
+    },
+    {
+     "from": "a-orch",
+     "to": "a-impl",
+     "sides": [
+      "bottom",
+      "top"
+     ],
+     "fromAt": 105,
+     "midY": 400,
+     "kind": "call"
+    },
+    {
+     "from": "a-orch",
+     "to": "a-rev",
+     "sides": [
+      "bottom",
+      "top"
+     ],
+     "fromAt": 105,
+     "midY": 400,
+     "kind": "call"
+    },
+    {
+     "from": "a-orch",
+     "to": "a-rel",
+     "sides": [
+      "bottom",
+      "top"
+     ],
+     "fromAt": 105,
+     "midY": 400,
+     "kind": "call"
+    },
+    {
+     "from": "a-orch",
+     "to": "a-res",
+     "sides": [
+      "bottom",
+      "top"
+     ],
+     "fromAt": 105,
+     "midY": 400,
+     "kind": "call",
+     "label": "enruta a la fase (máx. 2 saltos)",
+     "labelAt": [
+      1400,
+      400
+     ]
+    },
+    {
+     "from": "a-impl",
+     "to": "a-back",
+     "sides": [
+      "bottom",
+      "top"
+     ],
+     "fromAt": 100,
+     "midY": 630,
+     "kind": "call"
+    },
+    {
+     "from": "a-impl",
+     "to": "a-front",
+     "sides": [
+      "bottom",
+      "top"
+     ],
+     "fromAt": 100,
+     "midY": 630,
+     "kind": "call"
+    },
+    {
+     "from": "a-impl",
+     "to": "a-db",
+     "sides": [
+      "bottom",
+      "top"
+     ],
+     "fromAt": 100,
+     "midY": 630,
+     "kind": "call"
+    },
+    {
+     "from": "a-impl",
+     "to": "a-test",
+     "sides": [
+      "bottom",
+      "top"
+     ],
+     "fromAt": 100,
+     "midY": 630,
+     "kind": "call"
+    },
+    {
+     "from": "a-impl",
+     "to": "a-ref",
+     "sides": [
+      "bottom",
+      "top"
+     ],
+     "fromAt": 100,
+     "midY": 630,
+     "kind": "call"
+    },
+    {
+     "from": "a-impl",
+     "to": "a-api",
+     "sides": [
+      "bottom",
+      "top"
+     ],
+     "fromAt": 100,
+     "midY": 630,
+     "kind": "call",
+     "label": "implementer delega por capa",
+     "labelAt": [
+      1650,
+      630
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "at": [
+      1580,
+      830
+     ],
+     "w": 280,
+     "text": "planner consulta a api-designer, database-expert, ux-designer, research-analyst y architect. Sin escritura: orchestrator, code-reviewer, security-auditor, research-analyst."
+    }
+   ],
+   "legend": false
+  },
+  {
+   "id": "seq-feature",
+   "type": "sequence",
+   "title": "Una funcionalidad por el circuito",
+   "subtitle": "Agentes que proponen, hooks y CLI que verifican, y una persona que aprueba",
+   "tag": "Secuencia · AS-IS",
+   "width": 1900,
+   "stepH": 46,
+   "participants": [
+    "dev",
+    {
+     "ref": "host",
+     "name": "Host",
+     "tech": "Claude Code u otro"
+    },
+    {
+     "ref": "a-orch",
+     "name": "orchestrator"
+    },
+    {
+     "ref": "a-spec",
+     "name": "spec-analyst"
+    },
+    {
+     "ref": "a-plan",
+     "name": "planner"
+    },
+    {
+     "ref": "a-impl",
+     "name": "implementer"
+    },
+    {
+     "ref": "hooks",
+     "name": "Hooks + CLI",
+     "tech": "guardas · run · trazas"
+    },
+    {
+     "ref": "a-rev",
+     "name": "code-reviewer",
+     "tech": "+ security-auditor"
+    },
+    {
+     "ref": "a-rel",
+     "name": "release-manager"
+    }
+   ],
+   "steps": [
+    {
+     "from": "dev",
+     "to": "host",
+     "label": "/sdd-specify «nueva funcionalidad»",
+     "kind": "user"
+    },
+    {
+     "from": "host",
+     "to": "hooks",
+     "label": "UserPromptSubmit → sdd-router sugiere la fase",
+     "kind": "async"
+    },
+    {
+     "from": "host",
+     "to": "a-orch",
+     "label": "clasifica y enruta"
+    },
+    {
+     "from": "a-orch",
+     "to": "a-spec",
+     "label": "spec.md: requisitos EARS + criterios Gherkin"
+    },
+    {
+     "from": "a-spec",
+     "to": "dev",
+     "label": "clarify: sin ambigüedades",
+     "ret": true
+    },
+    {
+     "from": "dev",
+     "to": "a-plan",
+     "label": "Gate 3: aprueba la spec",
+     "kind": "human"
+    },
+    {
+     "from": "a-plan",
+     "to": "dev",
+     "label": "plan.md · data-model · contratos · tasks.md",
+     "ret": true
+    },
+    {
+     "from": "dev",
+     "to": "a-impl",
+     "label": "Gate 5: aprueba el plan",
+     "kind": "human"
+    },
+    {
+     "from": "a-impl",
+     "to": "hooks",
+     "label": "guard-write / guard-bash: territorio y comandos",
+     "kind": "auth"
+    },
+    {
+     "from": "a-impl",
+     "to": "hooks",
+     "label": "run --fast: test en ROJO demostrado → GREEN → REFACTOR",
+     "kind": "local"
+    },
+    {
+     "from": "hooks",
+     "to": "hooks",
+     "label": "execution-log.jsonl (observed) · bitácora"
+    },
+    {
+     "from": "a-impl",
+     "to": "a-rev",
+     "label": "verify: calidad, usabilidad y OWASP (solo lectura)"
+    },
+    {
+     "from": "a-rev",
+     "to": "a-rel",
+     "label": "GO con informe sin CRÍTICO/ALTO"
+    },
+    {
+     "from": "a-rel",
+     "to": "dev",
+     "label": "PR + CHANGELOG + plan de reversión",
+     "ret": true
+    },
+    {
+     "from": "dev",
+     "to": "a-rel",
+     "label": "Gate 6: aprueba la entrega",
+     "kind": "human"
+    },
+    {
+     "note": "CI (sdd-gates.yml) repite los gates y audita la traza de commits contra la base exacta",
+     "over": "hooks"
+    }
+   ],
+   "footer": "Evidencia: AGENTS.md · docs/sdd/OPERATING-MODEL.md · .sdd/hooks/README.md · .github/workflows/sdd-gates.yml"
+  }
+ ]
+}

@@ -1,0 +1,111 @@
+{
+ "schema_version": 1,
+ "diagram_type": "sequence",
+ "meta": {
+  "title": "ICG Vault · ficha de catálogo con caché",
+  "viewBox": [
+   1280,
+   490
+  ],
+  "column_fit": "spread",
+  "quality_profile": "standard"
+ },
+ "participants": [
+  {
+   "id": "spa",
+   "type": "frontend",
+   "label": "ContentDetail",
+   "sublabel": "cliente web/móvil"
+  },
+  {
+   "id": "edge",
+   "type": "backend",
+   "label": "tmdb",
+   "sublabel": "Edge Function (proxy)"
+  },
+  {
+   "id": "db",
+   "type": "database",
+   "label": "PostgreSQL",
+   "sublabel": "cached_content · content_ca…"
+  },
+  {
+   "id": "storage",
+   "type": "database",
+   "label": "Storage",
+   "sublabel": "bucket covers"
+  },
+  {
+   "id": "tmdb",
+   "type": "external",
+   "label": "TMDB",
+   "sublabel": "API v3"
+  }
+ ],
+ "messages": [
+  {
+   "id": "m1",
+   "from": "spa",
+   "to": "edge",
+   "y": 170,
+   "label": "functions.invoke('tmdb', { tipo, id })",
+   "variant": "default"
+  },
+  {
+   "id": "m2",
+   "from": "edge",
+   "to": "db",
+   "y": 200,
+   "label": "¿Existe en cached_content? (incluida caducada)",
+   "variant": "default"
+  },
+  {
+   "id": "m3",
+   "from": "db",
+   "to": "edge",
+   "y": 230,
+   "label": "entrada vigente → responde sin salir",
+   "variant": "return"
+  },
+  {
+   "id": "m4",
+   "from": "edge",
+   "to": "tmdb",
+   "y": 260,
+   "label": "Si falta o caducó: petición REST con clave en secretos",
+   "variant": "default"
+  },
+  {
+   "id": "m5",
+   "from": "tmdb",
+   "to": "edge",
+   "y": 290,
+   "label": "ficha, temporadas, plataformas, póster",
+   "variant": "return"
+  },
+  {
+   "id": "m6",
+   "from": "edge",
+   "to": "storage",
+   "y": 320,
+   "label": "Guarda la portada en covers/tmdb",
+   "variant": "default"
+  },
+  {
+   "id": "m7",
+   "from": "edge",
+   "to": "db",
+   "y": 350,
+   "label": "UPSERT cached_content (fecha de caché)",
+   "variant": "default"
+  },
+  {
+   "id": "m9",
+   "from": "edge",
+   "to": "spa",
+   "y": 380,
+   "label": "ficha normalizada",
+   "variant": "return"
+  }
+ ]
+}

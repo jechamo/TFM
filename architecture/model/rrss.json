@@ -1,0 +1,1862 @@
+{
+ "id": "rrss",
+ "name": "RRSS Studio (LeadView)",
+ "summary": "Aplicación web local (Next.js en 127.0.0.1) que analiza una app web y produce inteligencia de producto y contenido de vídeo para redes. Monolito modular en un único proceso Node, SQLite y herramientas locales; IA por Claude Code CLI y proveedores multimedia.",
+ "source": {
+  "repo": "jechamo/rrss-automation-app",
+  "commit": "f6510e0",
+  "visibility": "público",
+  "inspected": "26/09/2026"
+ },
+ "zones": [
+  {
+   "id": "machine",
+   "label": "Equipo del operador · Windows 11",
+   "style": "trust",
+   "note": "127.0.0.1:3000"
+  },
+  {
+   "id": "ai",
+   "label": "Proveedores de IA · desde el servidor local",
+   "style": "ai"
+  },
+  {
+   "id": "ext",
+   "label": "Servicios y webs externas",
+   "style": "external"
+  },
+  {
+   "id": "ai-cli",
+   "label": "IA vía sesión de Claude Code",
+   "style": "ai"
+  }
+ ],
+ "elements": [
+  {
+   "id": "op",
+   "type": "person",
+   "name": "Operador",
+   "tech": "creador de contenido o equipo de producto",
+   "desc": "Analiza su app y produce piezas para redes",
+   "evidence": [
+    "README.md (zonas de la aplicación)"
+   ],
+   "resp": "Crea proyectos, revisa análisis, aprueba gastos y publica"
+  },
+  {
+   "id": "system",
+   "type": "product",
+   "name": "RRSS Studio · LeadView",
+   "kind": "Sistema local",
+   "tech": "Next.js · SQLite · herramientas locales · IA",
+   "evidence": [
+    "package.json",
+    "README.md"
+   ]
+  },
+  {
+   "id": "browser",
+   "type": "webapp",
+   "name": "Interfaz web",
+   "kind": "Contenedor · UI",
+   "tech": "React 19 · App Router · Tailwind 4 · React Flow · Zustand · React Query",
+   "brand": "react",
+   "zone": "machine",
+   "evidence": [
+    "src/app/page.tsx",
+    "src/components/PipelineGraph.tsx"
+   ],
+   "resp": "Panel, proyectos, grafo de pipeline, editores, estudio, laboratorio de clips y ajustes"
+  },
+  {
+   "id": "server",
+   "type": "server",
+   "name": "Servidor Next.js",
+   "kind": "Contenedor · proceso Node",
+   "tech": "Next.js 15 · 52 route.ts · REST + SSE · monolito modular",
+   "brand": "next-js",
+   "zone": "machine",
+   "evidence": [
+    "package.json (next 15.5.23)",
+    "src/app/api/ (52 route.ts)",
+    "docs/architecture/adr/ (monolito modular local)"
+   ],
+   "resp": "Route Handlers y todo el dominio en un proceso: pipelines, IA, medios, clips, Vault y conectores"
+  },
+  {
+   "id": "db",
+   "type": "database",
+   "name": "SQLite",
+   "tech": "Prisma 6 · 11 modelos",
+   "brand": "sqlite",
+   "zone": "machine",
+   "evidence": [
+    "prisma/schema.prisma"
+   ],
+   "resp": "Proyectos, runs, dossier, competencia, leads, virales, piezas, medios, MIX y estado de conectores"
+  },
+  {
+   "id": "vault",
+   "type": "vault",
+   "name": "Vault cifrado",
+   "tech": "AES-256-GCM · clave local · lock",
+   "zone": "machine",
+   "evidence": [
+    "src/core/secrets/vault.ts"
+   ],
+   "resp": "Claves de proveedores y credenciales de la app objetivo cifradas en reposo"
+  },
+  {
+   "id": "files",
+   "type": "files",
+   "name": "Almacén de medios",
+   "tech": "data/ · vídeos, logos, MIX, jobs de clips",
+   "zone": "machine",
+   "evidence": [
+    "src/core/media/storage.ts",
+    "src/core/clips/storage.ts"
+   ],
+   "resp": "Vídeos, audios, logos, composiciones MIX y trabajos del laboratorio de clips"
+  },
+  {
+   "id": "claudecli",
+   "type": "tool",
+   "name": "Claude Code CLI",
+   "tech": "claude -p · JSON · --allowedTools",
+   "brand": "claude",
+   "zone": "machine",
+   "evidence": [
+    "src/core/ai/claude-cli.ts:135"
+   ],
+   "resp": "Ejecuta las tareas de texto de IA con la sesión local de Claude Code"
+  },
+  {
+   "id": "playwright",
+   "type": "tool",
+   "name": "Playwright + Chromium",
+   "tech": "login, rutas y grabación",
+   "zone": "machine",
+   "evidence": [
+    "src/core/media/recorder.ts",
+    "src/core/media/auth-session.ts"
+   ],
+   "resp": "Login, verificación de rutas y grabación automática de la app objetivo"
+  },
+  {
+   "id": "ffmpeg",
+   "type": "tool",
+   "name": "FFmpeg · ffprobe",
+   "tech": "montaje, subtítulos, MIX",
+   "zone": "machine",
+   "evidence": [
+    "src/core/media/ffmpeg.ts",
+    "src/core/media/assemble.ts"
+   ],
+   "resp": "Montaje, recortes, subtítulos, MIX y validación de medios"
+  },
+  {
+   "id": "ytdlp",
+   "type": "tool",
+   "name": "yt-dlp",
+   "tech": "vídeo y subtítulos públicos",
+   "zone": "machine",
+   "evidence": [
+    "src/core/media/ytdlp.ts"
+   ],
+   "resp": "Descarga de vídeo y subtítulos públicos"
+  },
+  {
+   "id": "whisper",
+   "type": "tool",
+   "name": "whisper.cpp",
+   "tech": "transcripción local (small)",
+   "zone": "machine",
+   "evidence": [
+    "src/core/clips/local-transcription.ts:12"
+   ],
+   "resp": "Transcripción local sin coste de API"
+  },
+  {
+   "id": "anthropic",
+   "type": "ai",
+   "name": "Anthropic · Claude",
+   "tech": "sesión del operador · WebSearch/WebFetch",
+   "brand": "anthropic",
+   "zone": "ai-cli",
+   "evidence": [
+    "src/core/ai/claude-cli.ts",
+    "src/core/leads/discover.ts:69"
+   ],
+   "resp": "Modelos Claude detrás de la CLI; búsqueda web para leads y virales"
+  },
+  {
+   "id": "gemini",
+   "type": "ai",
+   "name": "Google Gemini",
+   "tech": "generateContent · comprensión de vídeo",
+   "brand": "google-gemini",
+   "zone": "ai",
+   "evidence": [
+    "src/core/media/gemini.ts:17"
+   ],
+   "resp": "Comprensión de vídeo para virales y laboratorio de clips"
+  },
+  {
+   "id": "fal",
+   "type": "ai",
+   "name": "fal.ai",
+   "tech": "cola de vídeo · 9 modelos",
+   "zone": "ai",
+   "evidence": [
+    "src/core/media/fal.ts",
+    "src/core/media/contracts.ts"
+   ],
+   "resp": "Generación de cortes de vídeo con modelos del catálogo"
+  },
+  {
+   "id": "heygen",
+   "type": "ai",
+   "name": "HeyGen",
+   "tech": "API v3 · avatar y voz",
+   "zone": "ai",
+   "evidence": [
+    "src/core/media/heygen.ts"
+   ],
+   "resp": "Vídeo de presentador con avatar y voz"
+  },
+  {
+   "id": "eleven",
+   "type": "ai",
+   "name": "ElevenLabs",
+   "tech": "TTS · eleven_multilingual_v2",
+   "zone": "ai",
+   "evidence": [
+    "src/core/media/elevenlabs.ts:45"
+   ],
+   "resp": "Locución a partir de texto"
+  },
+  {
+   "id": "scrape",
+   "type": "external",
+   "name": "Scrape Creators",
+   "tech": "búsqueda y métricas de virales",
+   "zone": "ext",
+   "evidence": [
+    "src/core/virales/scrape-creators.ts"
+   ],
+   "resp": "Búsqueda estructurada de virales y métricas de autores"
+  },
+  {
+   "id": "github",
+   "type": "repo",
+   "name": "GitHub",
+   "tech": "git clone · API de usuario",
+   "brand": "github",
+   "zone": "ext",
+   "evidence": [
+    "src/core/repo/index.ts:216",
+    "src/core/connectors/index.ts:143"
+   ],
+   "resp": "Clonado de repositorios para analizar código"
+  },
+  {
+   "id": "target",
+   "type": "external",
+   "name": "App web objetivo",
+   "tech": "la web que se analiza y graba",
+   "zone": "ext",
+   "evidence": [
+    "src/core/crawler/index.ts",
+    "src/core/media/recorder.ts"
+   ],
+   "resp": "La web que se analiza, recorre y graba"
+  },
+  {
+   "id": "social",
+   "type": "social",
+   "name": "YouTube · TikTok · Instagram",
+   "tech": "fuentes de vídeo · subida asistida",
+   "zone": "ext",
+   "evidence": [
+    "src/core/media/ytdlp.ts",
+    "src/core/content/publish.ts:18"
+   ],
+   "resp": "Fuente de vídeos de referencia y destino de la publicación asistida"
+  },
+  {
+   "id": "ghactions",
+   "type": "cicd",
+   "name": "GitHub Actions",
+   "tech": "gates SDD · instalación limpia y E2E en Windows 11",
+   "brand": "github-actions",
+   "evidence": [
+    ".github/workflows/sdd-gates.yml"
+   ],
+   "resp": "Gates SDD, instalación limpia y E2E simulado en Windows 11"
+  },
+  {
+   "id": "author",
+   "type": "host",
+   "name": "Autor + agentes SDD",
+   "kind": "Entorno de desarrollo",
+   "tech": "Claude Code / Codex · kit SDD 0.9.1",
+   "evidence": [
+    ".sdd/installed.json",
+    "docs/01-requisitos.md"
+   ],
+   "resp": "Desarrollo guiado por requisitos con agentes y el kit SDD"
+  },
+  {
+   "id": "installer",
+   "type": "cli",
+   "name": "Instalador guiado",
+   "tech": "preparar.bat · check → prepare → start",
+   "zone": "machine",
+   "evidence": [
+    "scripts/install-local.mjs",
+    "scripts/prepare-guide.mjs"
+   ],
+   "resp": "Diagnóstico, preparación con consentimiento, build y arranque verificado"
+  },
+  {
+   "id": "rrss-hub",
+   "type": "product",
+   "name": "RRSS Studio · LeadView",
+   "kind": "Producto local",
+   "tech": "servidor Next.js en 127.0.0.1",
+   "evidence": [
+    "ver vista de contenedores"
+   ]
+  },
+  {
+   "id": "data",
+   "type": "database",
+   "name": "SQLite · Vault · ficheros",
+   "kind": "Persistencia local",
+   "tech": "Prisma · AES-256-GCM · data/",
+   "evidence": [
+    "prisma/schema.prisma",
+    "src/core/secrets/vault.ts"
+   ]
+  },
+  {
+   "id": "tools",
+   "type": "tool",
+   "name": "FFmpeg · yt-dlp · Playwright · Whisper",
+   "kind": "Herramientas locales",
+   "tech": "montaje · descargas · grabación · transcripción",
+   "evidence": [
+    "src/core/media/",
+    "src/core/clips/"
+   ]
+  }
+ ],
+ "relations": [
+  {
+   "id": "r-use",
+   "from": "op",
+   "to": "browser",
+   "label": "Analiza y produce",
+   "kind": "user",
+   "protocol": "navegador local",
+   "evidence": [
+    "src/app/page.tsx"
+   ]
+  },
+  {
+   "id": "r-api",
+   "from": "browser",
+   "to": "server",
+   "label": "REST + SSE\n127.0.0.1",
+   "kind": "call",
+   "protocol": "HTTP loopback · Server-Sent Events",
+   "auth": "solo loopback (sin cuentas)",
+   "data": "proyectos, runs, piezas, progreso de nodos",
+   "evidence": [
+    "src/app/api/runs/[id]/stream/route.ts"
+   ]
+  },
+  {
+   "id": "r-db",
+   "from": "server",
+   "to": "db",
+   "label": "Prisma",
+   "kind": "data",
+   "protocol": "SQLite (fichero)",
+   "evidence": [
+    "prisma/schema.prisma"
+   ]
+  },
+  {
+   "id": "r-vault",
+   "from": "server",
+   "to": "vault",
+   "label": "descifra claves",
+   "kind": "auth",
+   "protocol": "fichero cifrado",
+   "auth": "clave local .vaultkey",
+   "data": "API keys y logins de la app objetivo",
+   "evidence": [
+    "src/core/secrets/vault.ts"
+   ]
+  },
+  {
+   "id": "r-files",
+   "from": "server",
+   "to": "files",
+   "label": "artefactos",
+   "kind": "data",
+   "protocol": "sistema de ficheros",
+   "evidence": [
+    "src/core/media/storage.ts"
+   ]
+  },
+  {
+   "id": "r-cli",
+   "from": "server",
+   "to": "claudecli",
+   "label": "spawn",
+   "kind": "local",
+   "protocol": "subproceso (stdin/stdout JSON)",
+   "auth": "sesión local de Claude Code",
+   "data": "prompt de dominio → JSON",
+   "evidence": [
+    "src/core/ai/claude-cli.ts:135"
+   ]
+  },
+  {
+   "id": "r-pw",
+   "from": "server",
+   "to": "playwright",
+   "label": "",
+   "kind": "local",
+   "protocol": "Playwright API",
+   "data": "rutas, login, grabación",
+   "evidence": [
+    "src/core/media/recorder.ts"
+   ]
+  },
+  {
+   "id": "r-ff",
+   "from": "server",
+   "to": "ffmpeg",
+   "label": "",
+   "kind": "local",
+   "protocol": "subproceso",
+   "data": "vídeos y subtítulos",
+   "evidence": [
+    "src/core/media/ffmpeg.ts"
+   ]
+  },
+  {
+   "id": "r-yt",
+   "from": "server",
+   "to": "ytdlp",
+   "label": "",
+   "kind": "local",
+   "protocol": "subproceso",
+   "data": "URL → vídeo o CC",
+   "evidence": [
+    "src/core/media/ytdlp.ts"
+   ]
+  },
+  {
+   "id": "r-wh",
+   "from": "server",
+   "to": "whisper",
+   "label": "",
+   "kind": "local",
+   "protocol": "subproceso",
+   "data": "audio → texto con tiempos",
+   "evidence": [
+    "src/core/clips/local-transcription.ts"
+   ]
+  },
+  {
+   "id": "r-anthropic",
+   "from": "claudecli",
+   "to": "anthropic",
+   "label": "HTTPS · sesión\ndel operador",
+   "kind": "ai",
+   "protocol": "HTTPS (gestionado por la CLI)",
+   "auth": "login de Claude Code (sin API key en la app)",
+   "data": "prompts de dossier, mapa, competencia, leads, virales y guiones",
+   "evidence": [
+    "src/core/ai/claude-cli.ts"
+   ]
+  },
+  {
+   "id": "r-social",
+   "from": "ytdlp",
+   "to": "social",
+   "label": "descarga",
+   "kind": "api",
+   "protocol": "HTTPS (yt-dlp)",
+   "auth": "sin credencial",
+   "data": "vídeo público y subtítulos",
+   "evidence": [
+    "src/core/clips/youtube-captions.ts"
+   ]
+  },
+  {
+   "id": "r-gemini",
+   "from": "server",
+   "to": "gemini",
+   "label": "",
+   "kind": "ai",
+   "protocol": "HTTPS REST",
+   "auth": "API key del Vault",
+   "data": "vídeo o URL de YouTube + prompt → descripción o JSON de momentos",
+   "evidence": [
+    "src/core/media/gemini.ts:17"
+   ]
+  },
+  {
+   "id": "r-fal",
+   "from": "server",
+   "to": "fal",
+   "label": "",
+   "kind": "ai",
+   "protocol": "HTTPS · cola + polling",
+   "auth": "Authorization: Key (Vault)",
+   "data": "prompt visual → corte de vídeo",
+   "evidence": [
+    "src/core/media/fal.ts"
+   ]
+  },
+  {
+   "id": "r-heygen",
+   "from": "server",
+   "to": "heygen",
+   "label": "",
+   "kind": "ai",
+   "protocol": "HTTPS REST v3 + polling",
+   "auth": "API key del Vault",
+   "data": "guion, voz, foto → vídeo de presentador",
+   "evidence": [
+    "src/core/media/heygen.ts"
+   ]
+  },
+  {
+   "id": "r-eleven",
+   "from": "server",
+   "to": "eleven",
+   "label": "",
+   "kind": "ai",
+   "protocol": "HTTPS REST",
+   "auth": "xi-api-key (Vault)",
+   "data": "texto + voz → MP3",
+   "evidence": [
+    "src/core/media/elevenlabs.ts:45"
+   ]
+  },
+  {
+   "id": "r-scrape",
+   "from": "server",
+   "to": "scrape",
+   "label": "",
+   "kind": "api",
+   "protocol": "HTTPS REST",
+   "auth": "API key del Vault",
+   "data": "consultas → vídeos y métricas públicas",
+   "evidence": [
+    "src/core/virales/scrape-creators.ts:30"
+   ]
+  },
+  {
+   "id": "r-github",
+   "from": "server",
+   "to": "github",
+   "label": "",
+   "kind": "api",
+   "protocol": "git clone --depth 1 · REST",
+   "auth": "token opcional (Vault) para privados",
+   "data": "código fuente para resumir",
+   "evidence": [
+    "src/core/repo/index.ts:216"
+   ]
+  },
+  {
+   "id": "r-target",
+   "from": "server",
+   "to": "target",
+   "label": "",
+   "kind": "api",
+   "protocol": "HTTP fetch (crawl) · Playwright",
+   "auth": "login cifrado por proyecto",
+   "data": "HTML, rutas, grabación de pantalla",
+   "evidence": [
+    "src/core/crawler/index.ts"
+   ]
+  }
+ ],
+ "views": [
+  {
+   "id": "context",
+   "title": "RRSS Studio (LeadView) · contexto del sistema",
+   "subtitle": "Una app local que habla con proveedores de IA, fuentes de vídeo y la web que analiza",
+   "tag": "C4 · nivel 1 · AS-IS",
+   "width": 1440,
+   "height": 1040,
+   "nodes": [
+    {
+     "ref": "op",
+     "at": [
+      60,
+      380
+     ],
+     "w": 270,
+     "h": 120
+    },
+    {
+     "ref": "system",
+     "at": [
+      440,
+      190
+     ],
+     "w": 600,
+     "h": 560,
+     "desc": "38 funcionalidades en 11 módulos · 17 con IA · se ejecuta en 127.0.0.1",
+     "items": [
+      "Análisis de la app: mapa funcional y dossier",
+      "Competencia, leads y virales del nicho",
+      "Guiones, plan audiovisual y coste",
+      "Vídeo con IA, avatar y voz · montaje FFmpeg",
+      "Laboratorio de clips verticales",
+      "Estudio multimedia y publicación asistida"
+     ],
+     "itemsTop": 170,
+     "itemGap": 26
+    },
+    {
+     "ref": "anthropic",
+     "at": [
+      1130,
+      190
+     ],
+     "w": 270,
+     "h": 96
+    },
+    {
+     "ref": "gemini",
+     "at": [
+      1130,
+      305
+     ],
+     "w": 270,
+     "h": 92
+    },
+    {
+     "ref": "fal",
+     "at": [
+      1130,
+      416
+     ],
+     "w": 270,
+     "h": 92
+    },
+    {
+     "ref": "heygen",
+     "at": [
+      1130,
+      527
+     ],
+     "w": 270,
+     "h": 92
+    },
+    {
+     "ref": "eleven",
+     "at": [
+      1130,
+      638
+     ],
+     "w": 270,
+     "h": 92
+    },
+    {
+     "ref": "scrape",
+     "at": [
+      440,
+      830
+     ],
+     "w": 140,
+     "h": 96,
+     "tech": "virales",
+     "kind": "Externo"
+    },
+    {
+     "ref": "github",
+     "at": [
+      593,
+      830
+     ],
+     "w": 140,
+     "h": 96,
+     "tech": "código",
+     "kind": "Externo"
+    },
+    {
+     "ref": "target",
+     "at": [
+      746,
+      830
+     ],
+     "w": 140,
+     "h": 96,
+     "tech": "web analizada",
+     "kind": "Externo"
+    },
+    {
+     "ref": "social",
+     "at": [
+      899,
+      830
+     ],
+     "w": 141,
+     "h": 96,
+     "name": "Redes sociales",
+     "tech": "YT · TikTok · IG",
+     "kind": "Externo"
+    }
+   ],
+   "edges": [
+    {
+     "from": "op",
+     "to": "system",
+     "label": "Analiza su app y produce piezas",
+     "kind": "user"
+    },
+    {
+     "from": "system",
+     "to": "anthropic",
+     "label": "Claude Code CLI",
+     "kind": "ai"
+    },
+    {
+     "from": "system",
+     "to": "gemini",
+     "label": "Vídeo",
+     "kind": "ai"
+    },
+    {
+     "from": "system",
+     "to": "fal",
+     "label": "Cortes IA",
+     "kind": "ai"
+    },
+    {
+     "from": "system",
+     "to": "heygen",
+     "label": "Avatar",
+     "kind": "ai"
+    },
+    {
+     "from": "system",
+     "to": "eleven",
+     "label": "Voz",
+     "kind": "ai"
+    },
+    {
+     "from": "system",
+     "to": "scrape",
+     "label": "",
+     "kind": "api"
+    },
+    {
+     "from": "system",
+     "to": "github",
+     "label": "",
+     "kind": "api"
+    },
+    {
+     "from": "system",
+     "to": "target",
+     "label": "",
+     "kind": "api"
+    },
+    {
+     "from": "system",
+     "to": "social",
+     "label": "",
+     "kind": "api"
+    }
+   ],
+   "legendAt": [
+    40,
+    975
+   ]
+  },
+  {
+   "id": "container",
+   "title": "RRSS Studio (LeadView) · arquitectura de contenedores",
+   "subtitle": "Monolito modular en un único proceso Node local: datos en SQLite y ficheros, secretos en un Vault cifrado, IA y medios por adaptadores",
+   "tag": "C4 · nivel 2 · AS-IS",
+   "width": 1900,
+   "height": 1230,
+   "nodes": [
+    {
+     "ref": "op",
+     "at": [
+      40,
+      480
+     ],
+     "w": 220,
+     "h": 110
+    },
+    {
+     "ref": "browser",
+     "at": [
+      320,
+      470
+     ],
+     "w": 240,
+     "h": 130
+    },
+    {
+     "ref": "db",
+     "at": [
+      660,
+      190
+     ],
+     "w": 220,
+     "h": 92
+    },
+    {
+     "ref": "vault",
+     "at": [
+      910,
+      190
+     ],
+     "w": 220,
+     "h": 92
+    },
+    {
+     "ref": "files",
+     "at": [
+      1160,
+      190
+     ],
+     "w": 240,
+     "h": 92
+    },
+    {
+     "ref": "server",
+     "at": [
+      640,
+      380
+     ],
+     "w": 760,
+     "h": 300,
+     "items": [
+      "Route Handlers (52) · SSE de progreso",
+      "Pipelines REQ-001…006 con bus de eventos",
+      "Dossier, mapa, competencia, leads, virales",
+      "AiEngine: Claude CLI · Mock E2E · Agent SDK (marcador)",
+      "Adaptadores de medios y Laboratorio de clips",
+      "Vault, conectores y guarda de salida en E2E"
+     ],
+     "itemsTop": 104,
+     "itemGap": 25
+    },
+    {
+     "ref": "claudecli",
+     "at": [
+      640,
+      790
+     ],
+     "w": 145,
+     "h": 104,
+     "tech": "claude -p · JSON",
+     "nameFs": 15,
+     "kind": "Local"
+    },
+    {
+     "ref": "playwright",
+     "at": [
+      794,
+      790
+     ],
+     "w": 145,
+     "h": 104,
+     "name": "Playwright",
+     "tech": "Chromium",
+     "nameFs": 15,
+     "kind": "Local"
+    },
+    {
+     "ref": "ffmpeg",
+     "at": [
+      948,
+      790
+     ],
+     "w": 145,
+     "h": 104,
+     "tech": "montaje",
+     "nameFs": 15,
+     "kind": "Local"
+    },
+    {
+     "ref": "ytdlp",
+     "at": [
+      1102,
+      790
+     ],
+     "w": 145,
+     "h": 104,
+     "tech": "descargas",
+     "nameFs": 15,
+     "kind": "Local"
+    },
+    {
+     "ref": "whisper",
+     "at": [
+      1256,
+      790
+     ],
+     "w": 144,
+     "h": 104,
+     "tech": "transcripción",
+     "nameFs": 15,
+     "kind": "Local"
+    },
+    {
+     "ref": "anthropic",
+     "at": [
+      580,
+      1010
+     ],
+     "w": 260,
+     "h": 100
+    },
+    {
+     "ref": "social",
+     "at": [
+      1060,
+      1010
+     ],
+     "w": 260,
+     "h": 100
+    },
+    {
+     "ref": "gemini",
+     "at": [
+      1580,
+      190
+     ],
+     "w": 280,
+     "h": 92
+    },
+    {
+     "ref": "fal",
+     "at": [
+      1580,
+      302
+     ],
+     "w": 280,
+     "h": 92
+    },
+    {
+     "ref": "heygen",
+     "at": [
+      1580,
+      414
+     ],
+     "w": 280,
+     "h": 92
+    },
+    {
+     "ref": "eleven",
+     "at": [
+      1580,
+      526
+     ],
+     "w": 280,
+     "h": 92
+    },
+    {
+     "ref": "scrape",
+     "at": [
+      1580,
+      700
+     ],
+     "w": 280,
+     "h": 92
+    },
+    {
+     "ref": "github",
+     "at": [
+      1580,
+      812
+     ],
+     "w": 280,
+     "h": 92
+    },
+    {
+     "ref": "target",
+     "at": [
+      1580,
+      924
+     ],
+     "w": 280,
+     "h": 92
+    }
+   ],
+   "zones": [
+    {
+     "ref": "machine",
+     "members": [
+      "browser",
+      "db",
+      "vault",
+      "files",
+      "server",
+      "claudecli",
+      "playwright",
+      "ffmpeg",
+      "ytdlp",
+      "whisper"
+     ],
+     "pad": 24
+    },
+    {
+     "ref": "ai"
+    },
+    {
+     "ref": "ext",
+     "members": [
+      "scrape",
+      "github",
+      "target"
+     ]
+    },
+    {
+     "ref": "ai-cli",
+     "members": [
+      "anthropic"
+     ],
+     "labelPos": "bottom"
+    },
+    {
+     "label": "Redes sociales",
+     "members": [
+      "social"
+     ],
+     "style": "external",
+     "labelPos": "bottom"
+    }
+   ],
+   "edges": [
+    {
+     "ref": "r-use",
+     "label": "Usa"
+    },
+    "r-api",
+    "r-db",
+    "r-vault",
+    "r-files",
+    {
+     "ref": "r-cli",
+     "label": "spawn"
+    },
+    "r-pw",
+    "r-ff",
+    "r-yt",
+    "r-wh",
+    "r-anthropic",
+    "r-social",
+    {
+     "ref": "r-gemini",
+     "sides": [
+      "right",
+      "left"
+     ],
+     "fromAt": 60,
+     "midX": 1490
+    },
+    {
+     "ref": "r-fal",
+     "sides": [
+      "right",
+      "left"
+     ],
+     "fromAt": 60,
+     "midX": 1490
+    },
+    {
+     "ref": "r-heygen",
+     "sides": [
+      "right",
+      "left"
+     ],
+     "fromAt": 60,
+     "midX": 1490
+    },
+    {
+     "ref": "r-eleven",
+     "sides": [
+      "right",
+      "left"
+     ],
+     "fromAt": 60,
+     "midX": 1490,
+     "label": "HTTPS\nclaves del Vault",
+     "labelAt": [
+      1490,
+      172
+     ]
+    },
+    {
+     "ref": "r-scrape",
+     "sides": [
+      "right",
+      "left"
+     ],
+     "fromAt": 240,
+     "midX": 1510
+    },
+    {
+     "ref": "r-github",
+     "sides": [
+      "right",
+      "left"
+     ],
+     "fromAt": 240,
+     "midX": 1510
+    },
+    {
+     "ref": "r-target",
+     "sides": [
+      "right",
+      "left"
+     ],
+     "fromAt": 240,
+     "midX": 1510,
+     "label": "crawl HTTP · git\nPlaywright",
+     "labelAt": [
+      1510,
+      1050
+     ]
+    }
+   ],
+   "legendAt": [
+    40,
+    1160
+   ]
+  },
+  {
+   "id": "integrations",
+   "title": "RRSS Studio · integraciones externas",
+   "subtitle": "Toda llamada sale del servidor local; las claves viven en el Vault y la IA de texto usa la sesión de Claude Code",
+   "tag": "Integraciones · AS-IS",
+   "width": 1700,
+   "height": 1050,
+   "nodes": [
+    {
+     "ref": "rrss-hub",
+     "at": [
+      640,
+      170
+     ],
+     "w": 400,
+     "h": 700,
+     "items": [
+      "Claude Code CLI (subproceso)|dossier, mapa, competencia, leads, virales, guiones",
+      "Adaptadores HTTPS|vídeo, avatar, voz y comprensión de vídeo",
+      "Herramientas locales|FFmpeg, yt-dlp, Playwright, whisper.cpp",
+      "Guarda de salida en E2E|bloquea todo host que no sea loopback"
+     ],
+     "itemsTop": 150,
+     "itemGap": 62
+    },
+    {
+     "ref": "scrape",
+     "at": [
+      60,
+      190
+     ],
+     "w": 300,
+     "h": 100
+    },
+    {
+     "ref": "github",
+     "at": [
+      60,
+      340
+     ],
+     "w": 300,
+     "h": 100
+    },
+    {
+     "ref": "target",
+     "at": [
+      60,
+      490
+     ],
+     "w": 300,
+     "h": 100
+    },
+    {
+     "ref": "social",
+     "at": [
+      60,
+      640
+     ],
+     "w": 300,
+     "h": 110
+    },
+    {
+     "ref": "anthropic",
+     "at": [
+      1320,
+      190
+     ],
+     "w": 320,
+     "h": 110
+    },
+    {
+     "ref": "gemini",
+     "at": [
+      1320,
+      340
+     ],
+     "w": 320,
+     "h": 100
+    },
+    {
+     "ref": "fal",
+     "at": [
+      1320,
+      470
+     ],
+     "w": 320,
+     "h": 100
+    },
+    {
+     "ref": "heygen",
+     "at": [
+      1320,
+      600
+     ],
+     "w": 320,
+     "h": 100
+    },
+    {
+     "ref": "eleven",
+     "at": [
+      1320,
+      730
+     ],
+     "w": 320,
+     "h": 100
+    }
+   ],
+   "zones": [
+    {
+     "label": "Datos, código y redes",
+     "members": [
+      "scrape",
+      "github",
+      "target",
+      "social"
+     ],
+     "style": "external"
+    },
+    {
+     "label": "Proveedores de IA",
+     "members": [
+      "anthropic",
+      "gemini",
+      "fal",
+      "heygen",
+      "eleven"
+     ],
+     "style": "ai"
+    }
+   ],
+   "edges": [
+    {
+     "from": "rrss-hub",
+     "to": "scrape",
+     "label": "REST\nAPI key (Vault)",
+     "kind": "api"
+    },
+    {
+     "from": "rrss-hub",
+     "to": "github",
+     "label": "git clone · REST\ntoken opcional",
+     "kind": "api"
+    },
+    {
+     "from": "rrss-hub",
+     "to": "target",
+     "label": "crawl HTTP + Playwright\nlogin cifrado",
+     "kind": "api"
+    },
+    {
+     "from": "rrss-hub",
+     "to": "social",
+     "label": "yt-dlp (descarga)\n+ subida asistida",
+     "kind": "api"
+    },
+    {
+     "from": "rrss-hub",
+     "to": "anthropic",
+     "label": "Claude Code CLI\nsesión del operador",
+     "kind": "ai"
+    },
+    {
+     "from": "rrss-hub",
+     "to": "gemini",
+     "label": "REST\nAPI key (Vault)",
+     "kind": "ai"
+    },
+    {
+     "from": "rrss-hub",
+     "to": "fal",
+     "label": "cola + polling\nKey (Vault)",
+     "kind": "ai"
+    },
+    {
+     "from": "rrss-hub",
+     "to": "heygen",
+     "label": "REST v3\nAPI key (Vault)",
+     "kind": "ai"
+    },
+    {
+     "from": "rrss-hub",
+     "to": "eleven",
+     "label": "REST\nxi-api-key (Vault)",
+     "kind": "ai"
+    }
+   ],
+   "legendAt": [
+    40,
+    980
+   ]
+  },
+  {
+   "id": "deployment",
+   "title": "RRSS Studio · despliegue",
+   "subtitle": "Producto local: se clona, se prepara con consentimientos y se arranca en 127.0.0.1; la CI reproduce la instalación en Windows 11",
+   "tag": "C4 · despliegue · AS-IS",
+   "width": 1700,
+   "height": 880,
+   "nodes": [
+    {
+     "ref": "author",
+     "at": [
+      60,
+      150
+     ],
+     "w": 320,
+     "h": 110
+    },
+    {
+     "ref": "github",
+     "at": [
+      500,
+      150
+     ],
+     "w": 300,
+     "h": 100,
+     "tech": "público · 79 commits"
+    },
+    {
+     "ref": "ghactions",
+     "at": [
+      940,
+      150
+     ],
+     "w": 340,
+     "h": 110
+    },
+    {
+     "ref": "op",
+     "at": [
+      60,
+      440
+     ],
+     "w": 260,
+     "h": 110
+    },
+    {
+     "ref": "installer",
+     "at": [
+      500,
+      440
+     ],
+     "w": 300,
+     "h": 110
+    },
+    {
+     "ref": "server",
+     "at": [
+      940,
+      440
+     ],
+     "w": 340,
+     "h": 110,
+     "tech": "next start · 127.0.0.1:3000 · /api/health/ready"
+    },
+    {
+     "ref": "data",
+     "at": [
+      1380,
+      440
+     ],
+     "w": 280,
+     "h": 110
+    }
+   ],
+   "zones": [
+    {
+     "label": "Equipo del operador · Windows 11",
+     "members": [
+      "installer",
+      "server",
+      "data"
+     ],
+     "style": "trust"
+    }
+   ],
+   "edges": [
+    {
+     "from": "author",
+     "to": "github",
+     "label": "commits por requisito",
+     "kind": "deploy"
+    },
+    {
+     "from": "github",
+     "to": "ghactions",
+     "label": "push / PR",
+     "kind": "deploy"
+    },
+    {
+     "from": "github",
+     "to": "installer",
+     "label": "git clone",
+     "kind": "deploy"
+    },
+    {
+     "from": "op",
+     "to": "installer",
+     "label": "preparar.bat",
+     "kind": "user"
+    },
+    {
+     "from": "installer",
+     "to": "server",
+     "label": "check → prepare\n→ build → start",
+     "kind": "local"
+    },
+    {
+     "from": "server",
+     "to": "data",
+     "label": "SQLite · Vault",
+     "kind": "data"
+    }
+   ],
+   "notes": [
+    {
+     "at": [
+      60,
+      640
+     ],
+     "w": 900,
+     "text": "No hay despliegue en la nube: la app es mono-usuario y escucha solo en loopback. La CI (sdd-gates.yml) ejecuta gates rápidos y lentos, una instalación limpia real con el instalador en una ruta con espacios y el E2E con proveedores simulados, todo en runners Windows 11."
+    }
+   ],
+   "legendAt": [
+    40,
+    810
+   ]
+  },
+  {
+   "id": "seq-analysis",
+   "type": "sequence",
+   "title": "RRSS Studio · análisis de una app (REQ-001)",
+   "subtitle": "Pipeline de nodos con progreso en vivo por SSE; la IA fusiona web y código en mapa funcional y dossier",
+   "tag": "Secuencia · AS-IS",
+   "width": 1560,
+   "stepH": 48,
+   "participants": [
+    "op",
+    {
+     "ref": "browser",
+     "name": "Interfaz web",
+     "tech": "PipelineGraph"
+    },
+    {
+     "ref": "server",
+     "name": "Pipeline REQ-001",
+     "tech": "engine + bus"
+    },
+    {
+     "ref": "target",
+     "name": "App objetivo",
+     "tech": "HTML público"
+    },
+    {
+     "ref": "github",
+     "name": "Código fuente",
+     "tech": "carpeta local o GitHub"
+    },
+    {
+     "ref": "claudecli",
+     "name": "Claude Code CLI",
+     "tech": "subproceso"
+    },
+    {
+     "ref": "db",
+     "name": "SQLite",
+     "tech": "Prisma"
+    }
+   ],
+   "steps": [
+    {
+     "from": "op",
+     "to": "browser",
+     "label": "URL, contexto y fuente de código",
+     "kind": "user"
+    },
+    {
+     "from": "browser",
+     "to": "server",
+     "label": "POST /api/projects → crea Run"
+    },
+    {
+     "from": "server",
+     "to": "browser",
+     "label": "EventSource /api/runs/:id/stream (SSE)",
+     "ret": true
+    },
+    {
+     "from": "server",
+     "to": "target",
+     "label": "Nodo «Crawl web»: fetch del HTML",
+     "kind": "api"
+    },
+    {
+     "from": "server",
+     "to": "github",
+     "label": "Nodo «Análisis código»: clone --depth 1 o lectura local",
+     "kind": "api"
+    },
+    {
+     "from": "server",
+     "to": "claudecli",
+     "label": "Nodo «Mapa funcional»: crawl + pistas de navegación",
+     "kind": "local"
+    },
+    {
+     "from": "claudecli",
+     "to": "server",
+     "label": "árbol de 3 niveles con evidencias (JSON)",
+     "ret": true
+    },
+    {
+     "note": "Si la IA falla, el mapa se degrada al resultado del crawl",
+     "over": "server"
+    },
+    {
+     "from": "server",
+     "to": "claudecli",
+     "label": "Nodo «Fusión IA → Dossier»",
+     "kind": "local"
+    },
+    {
+     "from": "claudecli",
+     "to": "server",
+     "label": "propuesta de valor, público, funciones, CTA",
+     "ret": true
+    },
+    {
+     "from": "server",
+     "to": "db",
+     "label": "Guarda NavigationMap y Dossier (versionados)",
+     "kind": "data"
+    },
+    {
+     "from": "server",
+     "to": "browser",
+     "label": "fin de nodo → el grafo se ilumina",
+     "ret": true
+    },
+    {
+     "from": "browser",
+     "to": "op",
+     "label": "Mapa y dossier editables y aprobables",
+     "ret": true,
+     "kind": "user"
+    }
+   ],
+   "footer": "Evidencia: src/core/pipeline/req001.ts · engine.ts · bus.ts · src/app/api/runs/[id]/stream/route.ts · src/core/navigation/generate.ts"
+  },
+  {
+   "id": "seq-content",
+   "type": "sequence",
+   "title": "RRSS Studio · de un guion a un vídeo vertical",
+   "subtitle": "Plan y coste antes de gastar, aprobación humana y generación con proveedores; montaje local con FFmpeg",
+   "tag": "Flujo de IA · AS-IS",
+   "width": 1560,
+   "stepH": 48,
+   "participants": [
+    "op",
+    {
+     "ref": "browser",
+     "name": "Interfaz web",
+     "tech": "GenerateContentModal"
+    },
+    {
+     "ref": "server",
+     "name": "Servidor local",
+     "tech": "planning · pricing · req005/006"
+    },
+    {
+     "ref": "claudecli",
+     "name": "Claude Code CLI",
+     "tech": "guion y plan"
+    },
+    {
+     "ref": "fal",
+     "name": "fal.ai / HeyGen",
+     "tech": "vídeo o avatar"
+    },
+    {
+     "ref": "eleven",
+     "name": "ElevenLabs",
+     "tech": "locución"
+    },
+    {
+     "ref": "ffmpeg",
+     "name": "FFmpeg",
+     "tech": "montaje local"
+    }
+   ],
+   "steps": [
+    {
+     "from": "op",
+     "to": "browser",
+     "label": "Elige un viral a reinterpretar o una función de su app",
+     "kind": "user"
+    },
+    {
+     "from": "browser",
+     "to": "server",
+     "label": "POST …/content/plan"
+    },
+    {
+     "from": "server",
+     "to": "claudecli",
+     "label": "Guion, escaleta y prompts visuales",
+     "kind": "local"
+    },
+    {
+     "from": "claudecli",
+     "to": "server",
+     "label": "plan (JSON)",
+     "ret": true
+    },
+    {
+     "from": "server",
+     "to": "browser",
+     "label": "Plan audiovisual + coste estimado",
+     "ret": true
+    },
+    {
+     "from": "op",
+     "to": "browser",
+     "label": "Revisa prompts y aprueba el gasto",
+     "kind": "human"
+    },
+    {
+     "from": "browser",
+     "to": "server",
+     "label": "POST …/content/run"
+    },
+    {
+     "from": "server",
+     "to": "fal",
+     "label": "Cortes (cola + polling) o vídeo de avatar",
+     "kind": "ai"
+    },
+    {
+     "from": "server",
+     "to": "eleven",
+     "label": "Texto → locucion.mp3",
+     "kind": "ai"
+    },
+    {
+     "from": "server",
+     "to": "ffmpeg",
+     "label": "Montaje 9:16 + subtítulos; ffprobe valida",
+     "kind": "local"
+    },
+    {
+     "from": "server",
+     "to": "browser",
+     "label": "Pieza lista en la bandeja",
+     "ret": true
+    },
+    {
+     "note": "Rama «demo propia»: Playwright graba la app objetivo en lugar de generar cortes",
+     "over": "server"
+    }
+   ],
+   "footer": "Evidencia: src/core/media/planning.ts · pricing.ts · fal.ts · heygen.ts · elevenlabs.ts · assemble.ts · src/core/pipeline/req005.ts · req006.ts"
+  },
+  {
+   "id": "slides",
+   "title": "RRSS Studio · LeadView",
+   "subtitle": "App local: analiza tu producto y produce contenido para redes con IA",
+   "tag": "Vista para slides",
+   "width": 1600,
+   "height": 1000,
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "legend": false,
+   "nodes": [
+    {
+     "ref": "op",
+     "at": [
+      60,
+      330
+     ],
+     "w": 260,
+     "h": 120,
+     "nameFs": 20
+    },
+    {
+     "ref": "browser",
+     "at": [
+      400,
+      320
+     ],
+     "w": 300,
+     "h": 140,
+     "nameFs": 20
+    },
+    {
+     "ref": "server",
+     "at": [
+      800,
+      320
+     ],
+     "w": 300,
+     "h": 140,
+     "nameFs": 20,
+     "tech": "Next.js 15 · REST + SSE · 127.0.0.1"
+    },
+    {
+     "ref": "data",
+     "at": [
+      800,
+      110
+     ],
+     "w": 300,
+     "h": 110,
+     "nameFs": 18
+    },
+    {
+     "ref": "anthropic",
+     "at": [
+      1200,
+      110
+     ],
+     "w": 330,
+     "h": 110,
+     "nameFs": 19,
+     "name": "Claude Code → Anthropic",
+     "tech": "sesión local del operador"
+    },
+    {
+     "ref": "gemini",
+     "at": [
+      1200,
+      320
+     ],
+     "w": 330,
+     "h": 140,
+     "name": "Gemini · fal.ai · HeyGen · ElevenLabs",
+     "tech": "vídeo · avatar · voz",
+     "nameFs": 19,
+     "noBrand": true
+    },
+    {
+     "ref": "tools",
+     "at": [
+      800,
+      570
+     ],
+     "w": 300,
+     "h": 130,
+     "nameFs": 18
+    },
+    {
+     "ref": "scrape",
+     "at": [
+      1200,
+      570
+     ],
+     "w": 330,
+     "h": 130,
+     "name": "Scrape Creators · GitHub",
+     "tech": "virales · código · web objetivo",
+     "nameFs": 19
+    }
+   ],
+   "edges": [
+    {
+     "from": "op",
+     "to": "browser",
+     "kind": "user"
+    },
+    {
+     "from": "browser",
+     "to": "server",
+     "label": "SSE",
+     "kind": "call"
+    },
+    {
+     "from": "server",
+     "to": "data",
+     "kind": "data"
+    },
+    {
+     "from": "server",
+     "to": "anthropic",
+     "sides": [
+      "right",
+      "left"
+     ],
+     "fromAt": 20,
+     "kind": "ai"
+    },
+    {
+     "from": "server",
+     "to": "gemini",
+     "label": "17 funcionalidades con IA",
+     "kind": "ai"
+    },
+    {
+     "from": "server",
+     "to": "tools",
+     "kind": "local"
+    },
+    {
+     "from": "server",
+     "to": "scrape",
+     "sides": [
+      "right",
+      "left"
+     ],
+     "fromAt": 120,
+     "kind": "api"
+    }
+   ]
+  }
+ ]
+}

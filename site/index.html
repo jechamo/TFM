@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Del máster a producción · TFM de Jorge Chamorro</title>
+<meta name="description" content="Sistema de ingeniería de software dirigido por especificaciones (SDD + TDD) con agentes de IA, aplicado a RRSS Studio, ChaFit e ICG Vault. Trabajo de Fin de Máster de Jorge Chamorro.">
+<meta property="og:title" content="Del máster a producción · TFM de Jorge Chamorro">
+<meta property="og:description" content="SDD + TDD con 20 agentes, aplicado a tres productos reales.">
+<meta property="og:image" content="diagrams/svg/tfm-overview.svg">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<nav class="nav" aria-label="Principal">
+  <div class="wrap">
+    <a class="brand" href="#top"><b>Del máster a producción</b><span>TFM · Jorge Chamorro</span></a>
+    <ul>
+      <li><a href="#problema">Problema</a></li>
+      <li><a href="#sdd">SDD/TDD</a></li>
+      <li><a href="#agentes">Agentes</a></li>
+      <li><a href="#productos">Productos</a></li>
+      <li><a href="#integraciones">Integraciones</a></li>
+      <li><a href="#auditorias">Auditorías</a></li>
+      <li><a href="#master">Máster</a></li>
+      <li><a href="#videos">Vídeos</a></li>
+      <li><a href="slides/">Slides</a></li>
+    </ul>
+    <button class="theme-btn" type="button" id="themeBtn" aria-label="Cambiar tema claro u oscuro">◐ Tema</button>
+  </div>
+</nav>
+
+<main id="main">
+<header class="hero wrap" id="top">
+  <span class="kicker">Trabajo de Fin de Máster · Desarrollo de Software con IA · 2026 · Jorge Chamorro</span>
+  <h1>Del máster a <em>producción</em></h1>
+  <p class="lead">Un sistema de ingeniería de software dirigido por especificaciones, con <strong>20 agentes de IA</strong>, TDD y verificación fuera del modelo, construido con lo aprendido en el máster y <strong>usado de verdad</strong> para crear, evolucionar y auditar tres productos: RRSS Studio, ChaFit e ICG Vault.</p>
+  <div class="cta">
+    <a class="btn primary" href="video.html?v=tfm-completo"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>Ver el vídeo (16:30)</a>
+    <a class="btn" href="slides/">Presentación</a>
+    <a class="btn" href="https://github.com/jechamo/TFM">Repositorio del TFM</a>
+    <a class="btn" href="https://github.com/jechamo/Estructura_inicial_claude">Sistema SDD en GitHub</a>
+  </div>
+  <div class="stats" role="list">
+    <div class="stat" role="listitem"><b>20</b><span>agentes con territorio y permisos</span></div>
+    <div class="stat" role="listitem"><b>27</b><span>skills · 7 hooks · CLI sin dependencias</span></div>
+    <div class="stat" role="listitem"><b>375</b><span>comprobaciones del sistema en verde</span></div>
+    <div class="stat" role="listitem"><b>3</b><span>productos reales, 2 en App Store y Google Play</span></div>
+    <div class="stat" role="listitem"><b>163</b><span>funcionalidades inventariadas con evidencia</span></div>
+    <div class="stat" role="listitem"><b>56</b><span>vistas de arquitectura generadas desde el código</span></div>
+  </div>
+</header>
+
+<div class="wrap" style="margin-bottom:40px">
+  <figure class="fig">
+    <div class="scroll"><img class="themed" data-light="diagrams/svg/tfm-overview.svg" data-dark="diagrams/svg/tfm-overview-dark.svg" src="diagrams/svg/tfm-overview.svg" alt="Diagrama: del máster al sistema SDD/TDD y de ahí a RRSS Studio (crea), ChaFit (especifica y evoluciona) e ICG Vault (audita y evoluciona), con evidencia verificable." width="1700" height="980"></div>
+    <figcaption><span>Visión global: el máster se convierte en método y herramienta; la herramienta se aplica a tres productos.</span><span class="links"><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/01-overview.md">Leer la visión general →</a></span></figcaption>
+  </figure>
+</div>
+
+<section id="problema">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">§01</span><div><span class="kicker">El problema</span><h2>Los agentes escriben deprisa. <em>Sin método</em>, esa velocidad se paga.</h2><p class="lead">Lo he sufrido en mis propios productos, nacidos con IA en un generador low-code y crecidos a base de chat.</p></div></div>
+    <div class="grid g2">
+      <div class="card fail"><span class="tag">Autocertificación</span><h4>El mismo agente planifica, implementa y se da por bueno</h4><p>Un «funciona» que nadie ha ejecutado.</p></div>
+      <div class="card fail"><span class="tag">Contratos implícitos</span><h4>La IA devolvía 7 u 8 columnas; la app esperaba 9</h4><p>317 filas de rutinas desplazadas en producción en ChaFit.</p></div>
+      <div class="card fail"><span class="tag">Sin rastro</span><h4>Nadie sabe por qué se decidió algo</h4><p>Migraciones aplicadas desde el panel que ya no coinciden con el repositorio.</p></div>
+      <div class="card fail"><span class="tag">Seguridad al final</span><h4>Permisos demasiado amplios en la capa de datos</h4><p>Las auditorías de ChaFit e ICG Vault encontraron 15 y 16 hallazgos críticos.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="solucion">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">§02</span><div><span class="kicker">La solución</span><h2>La spec manda, el test demuestra y <em>la persona decide</em>.</h2><p class="lead">Un kit que se instala con un comando en cualquier repositorio y gobierna a los agentes de Claude Code, Copilot, Cursor, Codex, Gemini CLI y Antigravity.</p></div></div>
+    <div class="grid g4">
+      <div class="card pillar"><span class="tag">01</span><h4>Especificación primero</h4><p>Ningún código sin spec aprobada: requisitos EARS, criterios Gherkin, impactos de seguridad y usabilidad.</p></div>
+      <div class="card pillar"><span class="tag">02</span><h4>TDD con el rojo a la vista</h4><p>RED demostrado → GREEN mínimo → REFACTOR. «Pasa» sin ejecución no es un resultado.</p></div>
+      <div class="card pillar"><span class="tag">03</span><h4>Verificación fuera del modelo</h4><p>Hooks y una CLI determinista comprueban territorio, trazas, secretos, cobertura y gates.</p></div>
+      <div class="card pillar"><span class="tag">04</span><h4>Seis gates humanos</h4><p>Producto, arquitectura, spec, diseño, plan y entrega. La máquina propone; la persona decide.</p></div>
+    </div>
+    <div class="grid g2" style="margin-top:26px">
+      <figure class="fig compact"><div class="scroll"><img class="themed" data-light="diagrams/svg/sdd-context.svg" data-dark="diagrams/svg/sdd-context-dark.svg" src="diagrams/svg/sdd-context.svg" alt="Contexto del sistema SDD: desarrollador, entorno de agentes, modelos de lenguaje, el kit, GitHub, MCP y los productos." loading="lazy"></div><figcaption><span>Contexto del sistema</span><span class="links"><a href="diagrams/svg/sdd-context.svg">SVG</a></span></figcaption></figure>
+      <figure class="fig compact"><div class="scroll"><img class="themed" data-light="diagrams/svg/sdd-container.svg" data-dark="diagrams/svg/sdd-container-dark.svg" src="diagrams/svg/sdd-container.svg" alt="Componentes del sistema SDD: router, 20 agentes, 27 skills, CLI determinista, hooks, contratos .sdd, expediente durable, git hooks y CI." loading="lazy"></div><figcaption><span>Componentes</span><span class="links"><a href="diagrams/interactive/sdd-container.html">Explorar (interactivo)</a><a href="diagrams/svg/sdd-container.svg">SVG</a></span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="sdd">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">§03</span><div><span class="kicker">SDD + TDD</span><h2>Diez fases, seis puertas y <em>tres niveles</em> de circuito.</h2><p class="lead">Cada fase deja en el repositorio el artefacto que necesita la siguiente. El nivel —light, compact o full— lo decide la ruta del cambio, nunca el agente, y ninguno se salta los controles.</p></div></div>
+    <figure class="fig"><div class="scroll"><img class="themed" data-light="diagrams/svg/sdd-circuit.svg" data-dark="diagrams/svg/sdd-circuit-dark.svg" src="diagrams/svg/sdd-circuit.svg" alt="Circuito SDD: intake, arquitectura, specify, clarify, design, plan, tasks, implement, verify y ship, con los gates humanos 1 a 6." loading="lazy"></div><figcaption><span>El circuito con sus gates humanos</span><span class="links"><a href="video.html?v=tfm-completo&amp;t=82">▶ En el vídeo (1:22)</a><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/04-sdd-methodology.md">Metodología</a></span></figcaption></figure>
+    <div style="margin-top:34px;display:grid;gap:18px">
+      <div>
+        <h3 style="margin-bottom:14px">TDD sobre producción</h3>
+        <p class="muted">Evidencia literal de la spec 001 de ChaFit (09/08/2026): contrato de tablas de entrenamiento con migración de reparación, respaldo y <em>rollback</em>, aplicada por MCP.</p>
+        <p><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/evidence/implementation-evidence.md">Ver las cadenas de evidencia →</a></p>
+      </div>
+      <pre class="term" aria-label="Registro de evidencia de la spec 001 de ChaFit"><span class="c"># chafit360 · docs/specs/001-workout-table-contract/evidence.md</span>
+18:25  T-001-01  deno test workout-plan.test.ts   <span class="r">RED</span>    0 passed · 4 failed
+18:27  T-001-01  deno test workout-plan.test.ts   <span class="g">GREEN</span>  4 passed
+18:34  T-001-03  aserción de filas (MCP)          <span class="r">RED</span>    317 filas ≠ 9 celdas
+18:41  T-001-03  migración + 2.ª pasada + rollback <span class="g">GREEN</span>  0 inválidas · idempotente
+18:50  T-001-04  deno test/check + despliegue MCP  <span class="g">GREEN</span>  7 tests · v22 / v6 activas
+<span class="c"># post-migración</span>
+437/437 filas con 9 celdas · 0 discrepancias frente al respaldo
+<span class="y">Entrega: NO-GO</span> <span class="c">← gates de seguridad heredados, declarados, no ocultos</span></pre>
+    </div>
+  </div>
+</section>
+
+<section id="agentes">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">§04</span><div><span class="kicker">Sistema de agentes</span><h2>Veinte agentes. Solo tres delegan. <em>Quien juzga no escribe.</em></h2><p class="lead">Orquestación, fases y especialistas con profundidad máxima de dos saltos. Los auditores son de solo lectura y los hooks —no el modelo— registran qué ocurrió realmente.</p></div></div>
+    <figure class="fig"><div class="scroll"><img class="themed" data-light="diagrams/svg/sdd-agents.svg" data-dark="diagrams/svg/sdd-agents-dark.svg" src="diagrams/svg/sdd-agents.svg" alt="Jerarquía de 20 agentes: orchestrator delega en 8 agentes de fase; implementer delega en 6 especialistas; hay 5 especialistas más." loading="lazy"></div><figcaption><span>Delegación y auditoría</span><span class="links"><a href="video.html?v=tfm-completo&amp;t=160">▶ En el vídeo (2:40)</a><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/06-agentic-system.md">Sistema de agentes</a></span></figcaption></figure>
+    <div class="grid g3" style="margin-top:26px">
+      <div class="card"><span class="tag">Guardas</span><h4>guard-write · guard-bash</h4><p>Bloquean secretos y comandos destructivos; piden permiso para push, commits e infraestructura.</p></div>
+      <div class="card"><span class="tag">Trazas</span><h4>observed ≠ declared</h4><p><code>execution-log.jsonl</code> append-only escrito por el host; la CI contrasta los <em>trailers</em> de commit con la base exacta.</p></div>
+      <div class="card"><span class="tag">Portabilidad</span><h4>Seis entornos, un contrato</h4><p>Perfiles escritos una vez en <code>.claude/agents</code> y adaptados a Copilot, Cursor, Codex, Gemini CLI y Antigravity.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="productos">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">§05</span><div><span class="kicker">Aplicación real</span><h2>Tres productos, <em>tres formas</em> de usar el sistema.</h2><p class="lead">Un producto nuevo que nace con el método, uno en producción evolucionado con specs y TDD, y uno grande evolucionado por agentes y auditado con el sistema.</p></div></div>
+
+    <!-- RRSS -->
+    <article class="product" id="rrss" aria-labelledby="rrss-t">
+      <div class="p-head">
+        <div><span class="kicker"><span class="dot" style="background:var(--rrss)"></span>Greenfield · app local</span><h3 id="rrss-t">RRSS Studio <span class="muted" style="font-style:italic">· LeadView</span></h3>
+          <p class="lead" style="margin-top:14px">Analiza tu app desde su URL y su código, estudia a tu competencia, encuentra clientes y produce vídeos verticales con IA, con el coste a la vista antes de gastar.</p></div>
+        <div class="p-meta"><div><b>11</b><span>módulos</span></div><div><b>38</b><span>funcionalidades</span></div><div><b>17</b><span>con IA</span></div><div><b>11</b><span>integraciones</span></div></div>
+      </div>
+      <div class="ps">
+        <div><h4>Problema</h4><p>Publicar una app es la mitad del trabajo: entender el producto, el mercado y producir contenido requiere un equipo de marketing.</p>
+          <h4>Relación con SDD</h4><p>El primer commit es la especificación: 18 requisitos, diseño y arquitectura aprobados antes del código. Kit SDD 0.9.1 instalado; spec 002 con E2E sin red ni créditos. Hoy: <strong>71 + 138 tests en verde</strong>.</p></div>
+        <div><h4>Stack e integraciones</h4><div class="chips"><span class="chip">Next.js 15 · React 19</span><span class="chip">SQLite · Prisma</span><span class="chip">Vault AES-256-GCM</span><span class="chip ai">Claude Code CLI</span><span class="chip ai">Gemini</span><span class="chip ai">fal.ai · 9 modelos</span><span class="chip ai">HeyGen</span><span class="chip ai">ElevenLabs</span><span class="chip ai">whisper.cpp local</span><span class="chip">Scrape Creators</span><span class="chip">Playwright</span><span class="chip">FFmpeg</span><span class="chip">yt-dlp</span></div>
+          <p class="note">Sin app móvil: produce vídeo vertical. El motor Agent SDK aparece en Ajustes pero en el código es un marcador sin implementar.</p></div>
+      </div>
+      <div class="band"><span class="kicker">Capturas reales · vídeo del autor</span>
+        <div class="shots">
+          <figure class="shot"><div class="desk"><img src="assets/img/frames/rrss/pipeline.webp" alt="Pipeline de análisis con nodos iluminados" loading="lazy"></div><figcaption>Pipeline en vivo: crawl, código, mapa y dossier</figcaption></figure>
+          <figure class="shot"><div class="desk"><img src="assets/img/frames/rrss/appmap.webp" alt="Mapa de la aplicación con rutas y evidencias" loading="lazy"></div><figcaption>Mapa funcional con la evidencia de cada ruta en el código</figcaption></figure>
+          <figure class="shot"><div class="desk"><img src="assets/img/frames/rrss/competencia.webp" alt="Análisis de competencia" loading="lazy"></div><figcaption>Competencia comparada (analizando ICG Vault)</figcaption></figure>
+          <figure class="shot"><div class="desk"><img src="assets/img/frames/rrss/leads.webp" alt="Clientes potenciales y estrategia" loading="lazy"></div><figcaption>Clientes potenciales reales y estrategia</figcaption></figure>
+          <figure class="shot"><div class="desk"><img src="assets/img/frames/rrss/montage-plan.webp" alt="Plan de montaje con coste estimado" loading="lazy"></div><figcaption>Plan audiovisual con coste antes de generar</figcaption></figure>
+          <figure class="shot"><div class="desk"><img src="assets/img/frames/rrss/clips.webp" alt="Clips verticales subtitulados" loading="lazy"></div><figcaption>Laboratorio de clips verticales</figcaption></figure>
+        </div>
+      </div>
+      <figure class="fig" style="margin-top:26px"><div class="scroll"><img class="themed" data-light="diagrams/svg/rrss-container.svg" data-dark="diagrams/svg/rrss-container-dark.svg" src="diagrams/svg/rrss-container.svg" alt="Arquitectura de contenedores de RRSS Studio: interfaz, servidor Next.js, SQLite, Vault, medios, herramientas locales y proveedores de IA." loading="lazy"></div>
+        <figcaption><span>Monolito modular local en un único proceso Node</span><span class="links"><a href="video.html?v=tfm-completo&amp;t=279">▶ Vídeo (4:39)</a><a href="diagrams/interactive/rrss-container.html">Explorar</a><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/case-studies/rrss.md">Caso de estudio</a><a href="https://github.com/jechamo/rrss-automation-app">Repositorio</a></span></figcaption></figure>
+    </article>
+
+    <!-- ChaFit -->
+    <article class="product" id="chafit" aria-labelledby="chafit-t">
+      <div class="p-head">
+        <div><span class="kicker"><span class="dot" style="background:var(--chafit)"></span>Brownfield · web + iOS + Android</span><h3 id="chafit-t">ChaFit</h3>
+          <p class="lead" style="margin-top:14px">Clientes, entrenadores y gimnasios en una sola plataforma: rutinas y dietas generadas con IA, ejecución guiada, la ilustración de tu propia máquina, foto al plato y paneles por rol.</p></div>
+        <div class="p-meta"><div><b>13</b><span>módulos</span></div><div><b>62</b><span>funcionalidades</span></div><div><b>12</b><span>con IA</span></div><div><b>9</b><span>integraciones</span></div></div>
+      </div>
+      <div class="ps">
+        <div><h4>Problema</h4><p>El entrenamiento personal está fragmentado entre PDF, hojas de cálculo y chats; el entrenador no ve lo que pasa entre sesiones y el gimnasio no ve a su equipo.</p>
+          <h4>Relación con SDD</h4><p><strong>7 specs</strong> con TDD sobre producción (contrato de tablas, miniaturas, observabilidad, variantes, entrada multimodal, cambio de ejercicio, navegación), migraciones con respaldo y <em>rollback</em>, despliegue por Supabase MCP. Hoy: <strong>109 + 100 tests en verde</strong>.</p></div>
+        <div><h4>Stack e integraciones</h4><div class="chips"><span class="chip">React 18 · Vite</span><span class="chip">Capacitor 8</span><span class="chip">Supabase · Postgres 17</span><span class="chip">28 Edge Functions</span><span class="chip">pgmq + pg_cron</span><span class="chip ai">OpenAI texto · visión · imagen · Whisper · Assistants</span><span class="chip">Stripe</span><span class="chip">Mapbox</span><span class="chip">Sentry</span><span class="chip">Resend</span><span class="chip">n8n</span><span class="chip">HealthKit · Health Connect</span></div>
+          <p style="margin-top:16px"><a href="https://chafit.es">chafit.es</a> · <a href="https://apps.apple.com/app/chafit/id6759172876">App Store</a> · <a href="https://play.google.com/store/apps/details?id=com.chafit.app">Google Play</a></p></div>
+      </div>
+      <div class="band"><span class="kicker">Capturas reales · app en producción</span>
+        <div class="shots">
+          <figure class="shot"><div class="phone"><img src="assets/img/frames/chafit/ai-routine.webp" alt="Generar rutina con IA por texto, voz o foto" loading="lazy"></div><figcaption>Rutina con IA: escribe, dicta o sube una foto de tu tabla</figcaption></figure>
+          <figure class="shot"><div class="phone"><img src="assets/img/frames/chafit/warmup.webp" alt="Zona de calentamiento con cuenta atrás" loading="lazy"></div><figcaption>Calentamiento guiado, una sola vez por sesión (spec 001)</figcaption></figure>
+          <figure class="shot"><div class="phone"><img src="assets/img/frames/chafit/machine-photo.webp" alt="Ilustración generada desde la foto de la máquina" loading="lazy"></div><figcaption>«Tu máquina»: foto real → ilustración con IA</figcaption></figure>
+          <figure class="shot"><div class="phone"><img src="assets/img/frames/chafit/meal-photo.webp" alt="Análisis de comida por foto" loading="lazy"></div><figcaption>Foto al plato: ingredientes, calorías y macros</figcaption></figure>
+          <figure class="shot"><div class="phone"><img src="assets/img/frames/chafit/trainer-clients.webp" alt="Ficha de cliente en el panel del entrenador" loading="lazy"></div><figcaption>Entrenador: objetivos, lesiones y planes del cliente</figcaption></figure>
+          <figure class="shot"><div class="phone"><img src="assets/img/frames/chafit/gym-dashboard.webp" alt="Panel del gimnasio" loading="lazy"></div><figcaption>Gimnasio: equipo, alumnos, rutinas y calorías</figcaption></figure>
+        </div>
+      </div>
+      <figure class="fig" style="margin-top:26px"><div class="scroll"><img class="themed" data-light="diagrams/svg/chafit-container.svg" data-dark="diagrams/svg/chafit-container-dark.svg" src="diagrams/svg/chafit-container.svg" alt="Arquitectura de contenedores de ChaFit: cliente web y móvil, pasarela Supabase, Auth, API de datos, Storage, Edge Functions, PostgreSQL y servicios externos." loading="lazy"></div>
+        <figcaption><span>SPA única para web y móvil sobre Supabase; claves solo en Edge Functions</span><span class="links"><a href="video.html?v=tfm-completo&amp;t=518">▶ Vídeo (8:38)</a><a href="diagrams/interactive/chafit-container.html">Explorar</a><a href="diagrams/svg/chafit-seq-routine.svg">Secuencia de IA</a><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/case-studies/chafit.md">Caso de estudio</a></span></figcaption></figure>
+    </article>
+
+    <!-- ICG Vault -->
+    <article class="product" id="icg" aria-labelledby="icg-t">
+      <div class="p-head">
+        <div><span class="kicker"><span class="dot" style="background:var(--icg)"></span>Brownfield · web + iOS + Android</span><h3 id="icg-t">ICG Vault</h3>
+          <p class="lead" style="margin-top:14px">Vota películas, series y videojuegos con un voto que pesa más cuanto más nivel tienes; colecciona, personaliza tu perfil con IA y juega cada día.</p></div>
+        <div class="p-meta"><div><b>13</b><span>módulos</span></div><div><b>63</b><span>funcionalidades</span></div><div><b>4</b><span>con IA</span></div><div><b>12</b><span>integraciones</span></div></div>
+      </div>
+      <div class="ps">
+        <div><h4>Problema</h4><p>Las notas están repartidas en plataformas distintas, todos los votos valen lo mismo y no hay motivos para volver cada día.</p>
+          <h4>Relación con SDD</h4><p><strong>81 de 97 PR</strong> desde ramas de agentes, revisadas y fusionadas por el autor; <strong>auditoría integral</strong> obtenida con el modelo SDD (48 hallazgos, plan por fases pendiente de aprobación). Sin specs todavía: la auditoría es su puerta de entrada.</p></div>
+        <div><h4>Stack e integraciones</h4><div class="chips"><span class="chip">React 18 · Vite · framer-motion</span><span class="chip">Capacitor 8</span><span class="chip">Supabase · 175 RPC</span><span class="chip">35 Edge Functions</span><span class="chip">pg_cron + pg_net</span><span class="chip">TMDB</span><span class="chip">IGDB · Twitch OAuth</span><span class="chip">HowLongToBeat</span><span class="chip">Metacritic</span><span class="chip">11 RSS · podcasts</span><span class="chip ai">OpenAI imágenes · editorial</span><span class="chip">Google · Apple</span></div>
+          <p style="margin-top:16px"><a href="https://icgvault.es">icgvault.es</a> · <a href="https://apps.apple.com/app/id6759173751">App Store</a> · <a href="https://play.google.com/store/apps/details?id=com.icgvault.app">Google Play</a></p></div>
+      </div>
+      <div class="band"><span class="kicker">Capturas reales · app en producción</span>
+        <div class="shots">
+          <figure class="shot"><div class="phone"><img src="assets/img/frames/icg/detail.webp" alt="Ficha de Uncharted 4" loading="lazy"></div><figcaption>Ficha con datos de TMDB, IGDB y HowLongToBeat</figcaption></figure>
+          <figure class="shot"><div class="phone"><img src="assets/img/frames/icg/leaderboard.webp" alt="Leaderboard" loading="lazy"></div><figcaption>Lo mejor valorado, con poder de voto</figcaption></figure>
+          <figure class="shot"><div class="phone"><img src="assets/img/frames/icg/rupias.webp" alt="Economía de rupias" loading="lazy"></div><figcaption>Economía de rupias: avatares y guardianes con IA</figcaption></figure>
+          <figure class="shot"><div class="phone"><img src="assets/img/frames/icg/equipment.webp" alt="Equipamiento del perfil" loading="lazy"></div><figcaption>Cofres y equipamiento por rareza</figcaption></figure>
+          <figure class="shot"><div class="phone"><img src="assets/img/frames/icg/zoomout.webp" alt="Juego Zoom Out" loading="lazy"></div><figcaption>Zoom Out: adivina el título a partir de la imagen</figcaption></figure>
+          <figure class="shot"><div class="phone"><img src="assets/img/frames/icg/inmortales.webp" alt="Inmortales" loading="lazy"></div><figcaption>Inmortales: temporadas por eliminación</figcaption></figure>
+        </div>
+      </div>
+      <figure class="fig" style="margin-top:26px"><div class="scroll"><img class="themed" data-light="diagrams/svg/icgvault-container.svg" data-dark="diagrams/svg/icgvault-container-dark.svg" src="diagrams/svg/icgvault-container.svg" alt="Arquitectura de contenedores de ICG Vault: cliente, pasarela Supabase, servicios, PostgreSQL con 175 RPC, Edge Functions y bus hacia TMDB, IGDB, HowLongToBeat, Metacritic, RSS y OpenAI." loading="lazy"></div>
+        <figcaption><span>Lógica de juego en SQL; catálogo externo e IA siempre detrás de Edge Functions</span><span class="links"><a href="video.html?v=tfm-completo&amp;t=743">▶ Vídeo (12:23)</a><a href="diagrams/interactive/icgvault-container.html">Explorar</a><a href="diagrams/svg/icgvault-seq-catalog.svg">Flujo de catálogo</a><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/case-studies/icgvault.md">Caso de estudio</a></span></figcaption></figure>
+    </article>
+  </div>
+</section>
+
+<section id="integraciones">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">§06</span><div><span class="kicker">Integraciones e IA</span><h2>Quién llama a quién, <em>para qué</em> y con qué credencial.</h2><p class="lead">32 integraciones externas en ejecución entre los tres productos. Ninguna clave de pago llega al cliente: viven en Edge Functions o en un Vault cifrado.</p></div></div>
+    <div class="grid g3">
+      <figure class="fig compact"><a href="diagrams/svg/rrss-integrations.svg" aria-label="Abrir el diagrama a tamaño completo"><img class="themed" data-light="diagrams/svg/rrss-integrations.svg" data-dark="diagrams/svg/rrss-integrations-dark.svg" src="diagrams/svg/rrss-integrations.svg" alt="Integraciones de RRSS Studio" loading="lazy"></a><figcaption><span>RRSS · 11</span><span class="links"><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/discovery/RRSS_INTEGRATIONS.md">Matriz</a></span></figcaption></figure>
+      <figure class="fig compact"><a href="diagrams/svg/chafit-integrations.svg" aria-label="Abrir el diagrama a tamaño completo"><img class="themed" data-light="diagrams/svg/chafit-integrations.svg" data-dark="diagrams/svg/chafit-integrations-dark.svg" src="diagrams/svg/chafit-integrations.svg" alt="Integraciones de ChaFit" loading="lazy"></a><figcaption><span>ChaFit · 9</span><span class="links"><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/discovery/CHAFIT_INTEGRATIONS.md">Matriz</a></span></figcaption></figure>
+      <figure class="fig compact"><a href="diagrams/svg/icgvault-integrations.svg" aria-label="Abrir el diagrama a tamaño completo"><img class="themed" data-light="diagrams/svg/icgvault-integrations.svg" data-dark="diagrams/svg/icgvault-integrations-dark.svg" src="diagrams/svg/icgvault-integrations.svg" alt="Integraciones de ICG Vault" loading="lazy"></a><figcaption><span>ICG Vault · 12</span><span class="links"><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/discovery/ICGVAULT_INTEGRATIONS.md">Matriz</a></span></figcaption></figure>
+    </div>
+    <div class="tbl-wrap" style="margin-top:26px">
+      <table class="table">
+        <thead><tr><th></th><th>RRSS Studio</th><th>ChaFit</th><th>ICG Vault</th></tr></thead>
+        <tbody>
+          <tr><td><b>IA</b></td><td>Claude Code CLI · Gemini · fal.ai · HeyGen · ElevenLabs · Whisper local</td><td>OpenAI: texto, visión, imagen, edición, Whisper, Assistants</td><td>OpenAI: imagen, edición, borradores editoriales</td></tr>
+          <tr><td><b>Funcionalidades con IA</b></td><td class="num">17 / 38</td><td class="num">12 / 62</td><td class="num">4 / 63</td></tr>
+          <tr><td><b>Dónde se invoca</b></td><td>proceso local (subproceso o HTTPS)</td><td>Edge Functions</td><td>Edge Functions</td></tr>
+          <tr><td><b>Salida validada</b></td><td>JSON por dominio</td><td>JSON Schema estricto; rechazo de truncado</td><td>JSON normalizado</td></tr>
+          <tr><td><b>Control de coste</b></td><td>plan y coste antes de generar + aprobación</td><td>cupos, cupo diario del asistente, simulador</td><td>cobro en rupias; acciones de administración</td></tr>
+          <tr><td><b>Datos y contenido</b></td><td>Scrape Creators · GitHub · web objetivo · redes</td><td>Mapbox · Stripe · Resend · n8n · Sentry · salud</td><td>TMDB · IGDB · HowLongToBeat · Metacritic · RSS · YouTube · Google/Apple</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="funcionalidades">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">§07</span><div><span class="kicker">Funcionalidades</span><h2><em>163</em> funcionalidades, una a una, con su fichero de origen.</h2><p class="lead">Criterio único: capacidad que un actor puede usar, con entrada, resultado y punto de entrada en el código. Nada de botones ni variantes visuales.</p></div></div>
+    <div class="bars" role="img" aria-label="RRSS 38 funcionalidades (17 con IA); ChaFit 62 (12 con IA); ICG Vault 63 (4 con IA)">
+      <div class="bar"><span>RRSS Studio</span><span class="track"><i style="width:26.98%;background:var(--ai)"></i><i style="width:33.33%;background:var(--rrss)"></i></span><span class="n">38</span></div>
+      <div class="bar"><span>ChaFit</span><span class="track"><i style="width:19.05%;background:var(--ai)"></i><i style="width:79.37%;background:var(--chafit)"></i></span><span class="n">62</span></div>
+      <div class="bar"><span>ICG Vault</span><span class="track"><i style="width:6.35%;background:var(--ai)"></i><i style="width:93.65%;background:var(--icg)"></i></span><span class="n">63</span></div>
+    </div>
+    <p class="note">En naranja, las funcionalidades que invocan un modelo de IA. Inventarios: <a href="https://github.com/jechamo/TFM/blob/HEAD/docs/discovery/RRSS_FUNCTIONAL_INVENTORY.md">RRSS</a> · <a href="https://github.com/jechamo/TFM/blob/HEAD/docs/discovery/CHAFIT_FUNCTIONAL_INVENTORY.md">ChaFit</a> · <a href="https://github.com/jechamo/TFM/blob/HEAD/docs/discovery/ICGVAULT_FUNCTIONAL_INVENTORY.md">ICG Vault</a> · <a href="https://github.com/jechamo/TFM/blob/HEAD/docs/case-studies/project-comparison.md">comparativa</a>.</p>
+  </div>
+</section>
+
+<section id="auditorias">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">§08</span><div><span class="kicker">Auditorías</span><h2>El sistema también <em>audita</em> lo ya construido.</h2><p class="lead">Orquestador y especialistas de solo lectura —con consultas de solo lectura a la base real por MCP— produjeron dos auditorías integrales. <span class="badge-pend">Correcciones pendientes</span></p></div></div>
+    <div class="grid g2">
+      <div class="card"><span class="tag">ChaFit · 23/09/2026</span><h4>53 hallazgos · 15 críticos</h4><p>Seguridad 15 · base de datos y Edge Functions 13 · calidad 9 · UI y accesibilidad 16. Plan en seis specs (008–013) pendiente del gate humano.</p></div>
+      <div class="card"><span class="tag">ICG Vault · 23/09/2026</span><h4>48 hallazgos · 16 críticos</h4><p>Seguridad 25 · calidad y rendimiento 16 · UI y accesibilidad 7. Plan por fases con <em>rollback</em> escrito antes de cada cambio.</p></div>
+    </div>
+    <p class="note">Solo se publican recuentos y categorías OWASP; los informes completos son privados porque describen sistemas con usuarios reales. <a href="https://github.com/jechamo/TFM/blob/HEAD/docs/audits/audit-methodology.md">Metodología</a></p>
+  </div>
+</section>
+
+<section id="master">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">§09</span><div><span class="kicker">Relación con el máster</span><h2>Del temario a la <em>evidencia</em>.</h2><p class="lead">54 competencias del programa revisadas: 46 aplicadas, 5 parciales y 3 no aplicadas, cada una con su evidencia o con el motivo.</p></div></div>
+    <div class="grid g3">
+      <div class="card"><span class="tag">Ingeniería</span><div class="chips"><span class="chip ok">SDD</span><span class="chip ok">Requisitos EARS</span><span class="chip ok">Ciclo de vida</span><span class="chip ok">ADR</span><span class="chip">Clean Architecture (parcial)</span></div></div>
+      <div class="card"><span class="tag">Calidad</span><div class="chips"><span class="chip ok">TDD</span><span class="chip ok">Playwright</span><span class="chip ok">Sentry</span><span class="chip ok">OWASP · JWT</span><span class="chip ok">Docs as Code</span><span class="chip">Cobertura (trinquete)</span></div></div>
+      <div class="card"><span class="tag">Agentes e IA</span><div class="chips"><span class="chip ok">AGENTS.md</span><span class="chip ok">Skills</span><span class="chip ok">MCP</span><span class="chip ok">Orquestación</span><span class="chip ok">APIs de IA</span><span class="chip ok">Multimodalidad</span></div></div>
+      <div class="card"><span class="tag">Herramientas</span><div class="chips"><span class="chip ok">Claude</span><span class="chip ok">Codex</span><span class="chip ok">Copilot</span><span class="chip ok">Cursor</span><span class="chip ok">Lovable</span><span class="chip ok">n8n</span></div></div>
+      <div class="card"><span class="tag">Infra y seguridad</span><div class="chips"><span class="chip ok">CI/CD</span><span class="chip ok">Cloud (Vercel, Supabase)</span><span class="chip ok">Bases de datos</span><span class="chip ok">OWASP Web · API · LLM</span></div></div>
+      <div class="card"><span class="tag">Proyectos</span><div class="chips"><span class="chip ok">Front</span><span class="chip ok">Back</span><span class="chip ok">Mobile publicada</span><span class="chip ok">IA</span></div></div>
+    </div>
+    <p class="note"><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/evidence/master-evidence-matrix.md">Matriz completa de evidencias →</a></p>
+  </div>
+</section>
+
+<section id="videos">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">§10</span><div><span class="kicker">Vídeos</span><h2>El sistema como vídeo principal, <em>y los tres productos</em>.</h2><p class="lead">Grabaciones del autor sobre el software real con narración sintética, capítulos y subtítulos.</p></div></div>
+    <div class="vgrid" id="vgrid"></div>
+  </div>
+</section>
+
+<section id="docs">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">§11</span><div><span class="kicker">Documentación y enlaces</span><h2>Todo, <em>enlazado</em> a su fuente.</h2></div></div>
+    <ul class="doclist">
+      <li><a href="https://github.com/jechamo/TFM">Repositorio del TFM</a><small>README, docs, arquitectura como código</small></li>
+      <li><a href="slides/">Presentación</a><small>HTML · <a href="slides/TFM-Jorge-Chamorro.pdf">PDF</a></small></li>
+      <li><a href="https://github.com/jechamo/Estructura_inicial_claude">Sistema SDD/TDD</a><small>código · <a href="https://jechamo.github.io/Estructura_inicial_claude/">web</a></small></li>
+      <li><a href="https://github.com/jechamo/rrss-automation-app">RRSS Studio</a><small>repositorio público</small></li>
+      <li><a href="https://chafit.es">ChaFit</a><small>producción · repositorio privado (acceso bajo petición)</small></li>
+      <li><a href="https://icgvault.es">ICG Vault</a><small>producción · repositorio privado (acceso bajo petición)</small></li>
+      <li><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/discovery/TFM_DISCOVERY_REPORT.md">Informe de descubrimiento</a><small>fuentes, hallazgos y criterio de recuento</small></li>
+      <li><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/03-global-architecture.md">Arquitectura global</a><small>y documentos por producto</small></li>
+      <li><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/evidence/implementation-evidence.md">Evidencia de implementación</a><small>necesidad → spec → validación</small></li>
+      <li><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/security/security.md">Seguridad</a><small>controles y criterio de publicación</small></li>
+      <li><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/discovery/DIAGRAM_TOOLING_DECISION.md">Decisión de diagramación</a><small>C4 + renderizador propio + Archify + Structurizr</small></li>
+      <li><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/delivery/installation.md">Instalación</a><small>y guía de demostración</small></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><strong style="color:var(--ink)">Jorge Chamorro</strong> · Trabajo de Fin de Máster · Desarrollo de Software con IA · 2026</div>
+    <div><a href="https://github.com/jechamo">github.com/jechamo</a></div>
+  </div>
+</footer>
+
+<script src="data/videos.js"></script>
+<script>
+(function () {
+  // Tema: respeta el sistema salvo que el usuario elija; los diagramas cambian a su variante oscura.
+  var root = document.documentElement, KEY = 'tfm-theme';
+  function stored() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function isDark() { var t = root.getAttribute('data-theme'); return t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches; }
+  function syncImages() { var d = isDark(); document.querySelectorAll('img.themed').forEach(function (img) { var s = d ? img.dataset.dark : img.dataset.light; if (img.getAttribute('src') !== s) img.setAttribute('src', s); }); }
+  var s = stored(); if (s) root.setAttribute('data-theme', s);
+  syncImages();
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncImages);
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    var next = isDark() ? 'light' : 'dark'; root.setAttribute('data-theme', next);
+    try { localStorage.setItem(KEY, next); } catch (e) {} syncImages();
+  });
+  // Tarjetas de vídeo desde el catálogo.
+  function mmss(t) { t = Math.round(t); return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0'); }
+  // El catálogo llega como script (data/videos.js) para que la página funcione también abierta como fichero.
+  (function (cat) {
+    if (!cat) return;
+    var g = document.getElementById('vgrid');
+    cat.videos.forEach(function (v, i) {
+      var a = document.createElement('a'); a.className = 'vcard' + (i === 0 ? ' big' : ''); a.href = 'video.html?v=' + v.id;
+      a.innerHTML = '<div class="th"><img alt="" loading="lazy" src="' + v.thumb + '"><i></i><span>' + mmss(v.duration) + '</span></div><div class="tx"><b></b><small></small></div>';
+      a.querySelector('b').textContent = v.title; a.querySelector('small').textContent = v.subtitle;
+      a.setAttribute('aria-label', v.title + ', ' + mmss(v.duration));
+      g.appendChild(a);
+    });
+  })(window.TFM_VIDEOS);
+})();
+</script>
+</body>
+</html>

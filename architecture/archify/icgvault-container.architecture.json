@@ -1,0 +1,524 @@
+{
+ "schema_version": 1,
+ "diagram_type": "architecture",
+ "meta": {
+  "title": "ICG Vault · arquitectura de contenedores",
+  "quality_profile": "standard",
+  "viewBox": [
+   1800,
+   1240
+  ]
+ },
+ "components": [
+  {
+   "id": "idp",
+   "type": "security",
+   "label": "Google · Apple",
+   "sublabel": "OAuth web · Sign-In nativo",
+   "pos": [
+    40,
+    190
+   ],
+   "size": [
+    220,
+    92
+   ]
+  },
+  {
+   "id": "cdn",
+   "type": "external",
+   "label": "Imágenes y tráileres",
+   "sublabel": "image.tmdb.org · YouTube nocookie",
+   "pos": [
+    460,
+    190
+   ],
+   "size": [
+    200,
+    92
+   ]
+  },
+  {
+   "id": "users",
+   "type": "external",
+   "label": "Votantes y jugadores",
+   "sublabel": "usuarios e influencers",
+   "pos": [
+    40,
+    450
+   ],
+   "size": [
+    250,
+    108
+   ]
+  },
+  {
+   "id": "admin",
+   "type": "external",
+   "label": "Administración",
+   "sublabel": "rol admin · 24 pestañas",
+   "pos": [
+    40,
+    650
+   ],
+   "size": [
+    250,
+    96
+   ]
+  },
+  {
+   "id": "spa",
+   "type": "frontend",
+   "label": "Cliente web y móvil",
+   "sublabel": "React 18 · Vite · TypeScript · Tailwi…",
+   "pos": [
+    380,
+    450
+   ],
+   "size": [
+    280,
+    120
+   ],
+   "brand": "react"
+  },
+  {
+   "id": "native",
+   "type": "frontend",
+   "label": "APIs del dispositivo",
+   "sublabel": "Sign-In Google/Apple · compartir · ar…",
+   "pos": [
+    380,
+    730
+   ],
+   "size": [
+    280,
+    104
+   ]
+  },
+  {
+   "id": "gw",
+   "type": "backend",
+   "label": "Endpoint del proyecto",
+   "sublabel": "HTTPS + WebSocket · supabase-js · JWT",
+   "pos": [
+    770,
+    190
+   ],
+   "size": [
+    220,
+    660
+   ],
+   "brand": "supabase"
+  },
+  {
+   "id": "auth",
+   "type": "security",
+   "label": "Supabase Auth",
+   "sublabel": "email · Google · Apple (ID token)",
+   "pos": [
+    1100,
+    190
+   ],
+   "size": [
+    250,
+    100
+   ]
+  },
+  {
+   "id": "dataapi",
+   "type": "backend",
+   "label": "API de datos",
+   "sublabel": "PostgREST · 175 funciones RPC · Realt…",
+   "pos": [
+    1100,
+    375
+   ],
+   "size": [
+    250,
+    100
+   ]
+  },
+  {
+   "id": "storage",
+   "type": "database",
+   "label": "Storage",
+   "sublabel": "avatars · covers · guardians · Tiers",
+   "pos": [
+    1100,
+    560
+   ],
+   "size": [
+    250,
+    100
+   ]
+  },
+  {
+   "id": "edge",
+   "type": "backend",
+   "label": "Edge Functions",
+   "sublabel": "Deno · catálogo, IA, juegos, editorial",
+   "pos": [
+    1100,
+    750
+   ],
+   "size": [
+    250,
+    100
+   ]
+  },
+  {
+   "id": "db",
+   "type": "database",
+   "label": "PostgreSQL 17",
+   "sublabel": "88 tablas (tipos) · RLS · 136 migraci…",
+   "pos": [
+    1490,
+    190
+   ],
+   "size": [
+    280,
+    660
+   ],
+   "brand": "postgresql"
+  },
+  {
+   "id": "tmdb",
+   "type": "external",
+   "label": "TMDB",
+   "sublabel": "API v3",
+   "pos": [
+    40,
+    1000
+   ],
+   "size": [
+    180,
+    84
+   ]
+  },
+  {
+   "id": "igdb",
+   "type": "external",
+   "label": "IGDB",
+   "sublabel": "Twitch OAuth · v4",
+   "pos": [
+    235,
+    1000
+   ],
+   "size": [
+    180,
+    84
+   ]
+  },
+  {
+   "id": "hltb",
+   "type": "external",
+   "label": "HowLongToBeat",
+   "sublabel": "duración de juegos",
+   "pos": [
+    430,
+    1000
+   ],
+   "size": [
+    190,
+    84
+   ]
+  },
+  {
+   "id": "metacritic",
+   "type": "external",
+   "label": "Metacritic",
+   "sublabel": "crítica (HTML)",
+   "pos": [
+    635,
+    1000
+   ],
+   "size": [
+    180,
+    84
+   ]
+  },
+  {
+   "id": "rss",
+   "type": "external",
+   "label": "Medios y podcasts",
+   "sublabel": "11 feeds · podcasts",
+   "pos": [
+    830,
+    1000
+   ],
+   "size": [
+    210,
+    84
+   ]
+  },
+  {
+   "id": "openai",
+   "type": "external",
+   "label": "OpenAI API",
+   "sublabel": "images · edits · chat",
+   "pos": [
+    1100,
+    1000
+   ],
+   "size": [
+    250,
+    92
+   ],
+   "brand": "openai"
+  }
+ ],
+ "connections": [
+  {
+   "id": "c1",
+   "from": "users",
+   "to": "spa",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left",
+   "label": "Usa"
+  },
+  {
+   "id": "c2",
+   "from": "admin",
+   "to": "spa",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left",
+   "label": "Opera"
+  },
+  {
+   "id": "c3",
+   "from": "spa",
+   "to": "native",
+   "variant": "default",
+   "fromSide": "bottom",
+   "toSide": "top",
+   "label": "Plugins Capacitor",
+   "labelAt": [
+    520,
+    584
+   ]
+  },
+  {
+   "id": "c4",
+   "from": "spa",
+   "to": "gw",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left",
+   "label": "supabase-js · HTTPS + WS · JWT",
+   "labelAt": [
+    684,
+    584
+   ]
+  },
+  {
+   "id": "c5",
+   "from": "spa",
+   "to": "idp",
+   "variant": "security",
+   "fromSide": "top",
+   "toSide": "right",
+   "label": "OAuth · ID token"
+  },
+  {
+   "id": "c6",
+   "from": "spa",
+   "to": "cdn",
+   "variant": "default",
+   "fromSide": "top",
+   "toSide": "bottom",
+   "label": "Portadas y tráileres"
+  },
+  {
+   "id": "c7",
+   "from": "gw",
+   "to": "auth",
+   "variant": "security",
+   "fromSide": "right",
+   "toSide": "left"
+  },
+  {
+   "id": "c8",
+   "from": "gw",
+   "to": "dataapi",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left"
+  },
+  {
+   "id": "c9",
+   "from": "gw",
+   "to": "storage",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left"
+  },
+  {
+   "id": "c10",
+   "from": "gw",
+   "to": "edge",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left"
+  },
+  {
+   "id": "c11",
+   "from": "auth",
+   "to": "db",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left",
+   "label": "esquema auth"
+  },
+  {
+   "id": "c12",
+   "from": "dataapi",
+   "to": "db",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left",
+   "label": "SQL · RPC · RLS"
+  },
+  {
+   "id": "c13",
+   "from": "edge",
+   "to": "db",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left",
+   "label": "SQL"
+  },
+  {
+   "id": "c14",
+   "from": "db",
+   "to": "edge",
+   "variant": "dashed",
+   "fromSide": "left",
+   "toSide": "right",
+   "label": "pg_cron + pg_net"
+  },
+  {
+   "id": "c15",
+   "from": "edge",
+   "to": "storage",
+   "variant": "default",
+   "fromSide": "top",
+   "toSide": "bottom",
+   "label": "Sube avatares, · guardianes y arte"
+  },
+  {
+   "id": "c16",
+   "from": "edge",
+   "to": "tmdb",
+   "variant": "default",
+   "fromSide": "bottom",
+   "toSide": "top"
+  },
+  {
+   "id": "c17",
+   "from": "edge",
+   "to": "igdb",
+   "variant": "default",
+   "fromSide": "bottom",
+   "toSide": "top"
+  },
+  {
+   "id": "c18",
+   "from": "edge",
+   "to": "hltb",
+   "variant": "default",
+   "fromSide": "bottom",
+   "toSide": "top"
+  },
+  {
+   "id": "c19",
+   "from": "edge",
+   "to": "metacritic",
+   "variant": "default",
+   "fromSide": "bottom",
+   "toSide": "top"
+  },
+  {
+   "id": "c20",
+   "from": "edge",
+   "to": "rss",
+   "variant": "default",
+   "fromSide": "bottom",
+   "toSide": "top",
+   "label": "REST · OAuth de Twitch · RSS · HTML · cla…"
+  },
+  {
+   "id": "c21",
+   "from": "edge",
+   "to": "openai",
+   "variant": "emphasis",
+   "fromSide": "bottom",
+   "toSide": "top",
+   "label": "Avatares, guardianes, arte, · quiz y encu…"
+  }
+ ],
+ "boundaries": [
+  {
+   "kind": "security-group",
+   "label": "Dispositivo del usuario",
+   "wraps": [
+    "spa",
+    "native"
+   ],
+   "pad": 22
+  },
+  {
+   "kind": "region",
+   "label": "Supabase · proyecto gestionado",
+   "wraps": [
+    "gw",
+    "auth",
+    "dataapi",
+    "storage",
+    "edge",
+    "db"
+   ],
+   "pad": 22
+  },
+  {
+   "kind": "region",
+   "label": "Directo desde la app",
+   "wraps": [
+    "idp",
+    "cdn"
+   ],
+   "pad": 22
+  },
+  {
+   "kind": "region",
+   "label": "Datos de terceros · desde Edge Functions",
+   "wraps": [
+    "tmdb",
+    "igdb",
+    "hltb",
+    "metacritic",
+    "rss"
+   ],
+   "pad": 22
+  },
+  {
+   "kind": "region",
+   "label": "IA externa",
+   "wraps": [
+    "openai"
+   ],
+   "pad": 22
+  }
+ ],
+ "cards": [
+  {
+   "dot": "cyan",
+   "title": "Fuente",
+   "items": [
+    "jechamo/icgbolt@610d99d",
+    "Modelo: architecture/model/icgvault.json"
+   ]
+  }
+ ]
+}

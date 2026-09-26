@@ -1,0 +1,1977 @@
+{
+ "id": "icgvault",
+ "name": "ICG Vault",
+ "summary": "Red social gamificada para votar películas, series y videojuegos, con progresión RPG, juegos diarios y competitivos. SPA React para web/PWA, iOS y Android sobre Supabase con 35 Edge Functions.",
+ "source": {
+  "repo": "jechamo/icgbolt",
+  "commit": "610d99d",
+  "visibility": "privado",
+  "inspected": "26/09/2026",
+  "release": "71 (main: 72)"
+ },
+ "zones": [
+  {
+   "id": "device",
+   "label": "Dispositivo del usuario",
+   "style": "trust"
+  },
+  {
+   "id": "supabase",
+   "label": "Supabase · proyecto gestionado",
+   "style": "platform",
+   "note": "eu-west-1 · Postgres 17"
+  },
+  {
+   "id": "ext-client",
+   "label": "Directo desde la app",
+   "style": "external"
+  },
+  {
+   "id": "ext-data",
+   "label": "Datos de terceros · desde Edge Functions",
+   "style": "external"
+  },
+  {
+   "id": "ext-ai",
+   "label": "IA externa",
+   "style": "ai"
+  }
+ ],
+ "elements": [
+  {
+   "id": "users",
+   "type": "person",
+   "name": "Votantes y jugadores",
+   "tech": "usuarios e influencers",
+   "desc": "Votan, coleccionan, juegan y debaten",
+   "evidence": [
+    "src/App.tsx (RequireAuth)",
+    "src/hooks/useRoleMultipliers.tsx"
+   ],
+   "resp": "Votan, gestionan su biblioteca, progresan en el RPG, juegan y participan en la comunidad"
+  },
+  {
+   "id": "admin",
+   "type": "person",
+   "name": "Administración",
+   "tech": "rol admin · 24 pestañas",
+   "evidence": [
+    "src/pages/Admin.tsx",
+    "src/components/routing/RequireAdmin.tsx"
+   ],
+   "resp": "Opera catálogo RPG, juegos, contenido editorial, configuración remota y soporte"
+  },
+  {
+   "id": "system",
+   "type": "product",
+   "name": "ICG Vault",
+   "kind": "Sistema",
+   "tech": "web · PWA · iOS · Android · backend Supabase",
+   "evidence": [
+    "capacitor.config.ts (com.icgvault.app)"
+   ]
+  },
+  {
+   "id": "spa",
+   "type": "webapp",
+   "name": "Cliente web y móvil",
+   "kind": "Contenedor · SPA",
+   "tech": "React 18 · Vite · TypeScript · Tailwind · framer-motion · PWA · Capacitor 8",
+   "brand": "react",
+   "zone": "device",
+   "evidence": [
+    "src/App.tsx",
+    "vite.config.ts",
+    "capacitor.config.ts"
+   ],
+   "resp": "Interfaz única para web, PWA e iOS/Android; catálogo, voto, perfil, juegos y comunidad"
+  },
+  {
+   "id": "native",
+   "type": "device",
+   "name": "APIs del dispositivo",
+   "kind": "Plugins nativos",
+   "tech": "Sign-In Google/Apple · compartir · archivos · detector de capturas",
+   "zone": "device",
+   "evidence": [
+    "src/hooks/useAuth.tsx:201",
+    "src/plugins/screenshotDetector.ts",
+    "src/lib/nativeDownload.ts"
+   ],
+   "resp": "Inicio de sesión nativo, compartir imágenes, descargas y detección de capturas"
+  },
+  {
+   "id": "gw",
+   "type": "gateway",
+   "name": "Endpoint del proyecto",
+   "kind": "Pasarela Supabase",
+   "tech": "HTTPS + WebSocket · supabase-js · JWT",
+   "brand": "supabase",
+   "zone": "supabase",
+   "evidence": [
+    "src/integrations/supabase/client.ts"
+   ],
+   "resp": "Punto de entrada HTTPS/WebSocket del proyecto Supabase"
+  },
+  {
+   "id": "auth",
+   "type": "auth",
+   "name": "Supabase Auth",
+   "tech": "email · Google · Apple (ID token)",
+   "zone": "supabase",
+   "evidence": [
+    "src/hooks/useAuth.tsx:221",
+    "src/hooks/useAuth.tsx:233"
+   ],
+   "resp": "Cuentas con email, Google y Apple; sesiones JWT"
+  },
+  {
+   "id": "dataapi",
+   "type": "api",
+   "name": "API de datos",
+   "tech": "PostgREST · 175 funciones RPC · Realtime",
+   "zone": "supabase",
+   "evidence": [
+    "src/integrations/supabase/types.ts (Functions)",
+    "src/hooks/useRealtimeNotifications.tsx"
+   ],
+   "resp": "Consultas, 175 funciones RPC (voto, economía, juegos) y tiempo real"
+  },
+  {
+   "id": "storage",
+   "type": "storage",
+   "name": "Storage",
+   "tech": "avatars · covers · guardians · Tiers",
+   "zone": "supabase",
+   "evidence": [
+    "storage.from(avatars, covers, guardians) en src y funciones"
+   ],
+   "resp": "Avatares, portadas, guardianes y arte de tiers"
+  },
+  {
+   "id": "edge",
+   "type": "function",
+   "name": "Edge Functions",
+   "kind": "Serverless · 35",
+   "tech": "Deno · catálogo, IA, juegos, editorial",
+   "zone": "supabase",
+   "evidence": [
+    "supabase/functions/* (35 directorios)"
+   ],
+   "resp": "Proxies de catálogo, generación con IA, partidas PvP y Duelo, quiz, noticias y mantenimiento"
+  },
+  {
+   "id": "db",
+   "type": "database",
+   "name": "PostgreSQL 17",
+   "tech": "88 tablas (tipos) · RLS · 136 migraciones · pg_cron · pg_net",
+   "brand": "postgresql",
+   "zone": "supabase",
+   "evidence": [
+    "src/integrations/supabase/types.ts",
+    "supabase/migrations/ (136)",
+    "auditoría 23/09: 92 tablas y 5 tareas cron en producción"
+   ],
+   "resp": "Datos de dominio, reglas de economía y juegos en SQL, RLS y tareas programadas"
+  },
+  {
+   "id": "cdn",
+   "type": "external",
+   "name": "Imágenes y tráileres",
+   "kind": "CDN externo",
+   "tech": "image.tmdb.org · YouTube nocookie",
+   "zone": "ext-client",
+   "evidence": [
+    "src/components/content/TrailerSection.tsx:125",
+    "image.tmdb.org en src"
+   ],
+   "resp": "Portadas de TMDB y tráileres de YouTube servidos directamente a la app"
+  },
+  {
+   "id": "idp",
+   "type": "auth",
+   "name": "Google · Apple",
+   "kind": "Identidad",
+   "tech": "OAuth web · Sign-In nativo",
+   "zone": "ext-client",
+   "evidence": [
+    "src/hooks/useAuth.tsx:201",
+    "src/hooks/useAuth.tsx:233",
+    "@capgo/capacitor-social-login"
+   ],
+   "resp": "Identidad federada para inicio de sesión"
+  },
+  {
+   "id": "tmdb",
+   "type": "external",
+   "name": "TMDB",
+   "kind": "API de catálogo",
+   "tech": "API v3 · cine y series",
+   "zone": "ext-data",
+   "evidence": [
+    "supabase/functions/tmdb/index.ts:10"
+   ],
+   "resp": "Catálogo de películas y series"
+  },
+  {
+   "id": "igdb",
+   "type": "external",
+   "name": "IGDB",
+   "kind": "API de catálogo",
+   "tech": "Twitch OAuth · API v4",
+   "zone": "ext-data",
+   "evidence": [
+    "supabase/functions/igdb/index.ts:117",
+    "supabase/functions/igdb/index.ts:139"
+   ],
+   "resp": "Catálogo de videojuegos"
+  },
+  {
+   "id": "hltb",
+   "type": "external",
+   "name": "HowLongToBeat",
+   "kind": "Fuente web",
+   "tech": "duración de juegos",
+   "zone": "ext-data",
+   "evidence": [
+    "supabase/functions/how-long-to-beat/index.ts:46"
+   ],
+   "resp": "Duración estimada de videojuegos"
+  },
+  {
+   "id": "metacritic",
+   "type": "external",
+   "name": "Metacritic",
+   "kind": "Fuente web",
+   "tech": "crítica (HTML)",
+   "zone": "ext-data",
+   "evidence": [
+    "supabase/functions/metacritic/index.ts:342"
+   ],
+   "resp": "Referencias de crítica"
+  },
+  {
+   "id": "rss",
+   "type": "feed",
+   "name": "Medios y podcasts",
+   "tech": "11 feeds RSS · feeds de podcast",
+   "zone": "ext-data",
+   "evidence": [
+    "supabase/functions/fetch-news/ (11 fuentes)",
+    "supabase/functions/fetch-podcast-feed/"
+   ],
+   "resp": "Noticias de 11 medios y episodios de podcast"
+  },
+  {
+   "id": "openai",
+   "type": "ai",
+   "name": "OpenAI API",
+   "tech": "images · edits · chat/completions",
+   "brand": "openai",
+   "zone": "ext-ai",
+   "evidence": [
+    "supabase/functions/_shared/openai-image.ts",
+    "supabase/functions/generate-weekly-quiz/"
+   ],
+   "resp": "Imágenes de avatar, guardián, objetos y mascotas; borradores de quiz y encuestas"
+  },
+  {
+   "id": "vercel",
+   "type": "hosting",
+   "name": "Vercel",
+   "tech": "hosting estático · CDN · rewrite SPA",
+   "brand": "vercel",
+   "evidence": [
+    "vercel.json",
+    "cabecera Server: Vercel en icgvault.es"
+   ],
+   "resp": "Hosting estático del bundle web y CDN"
+  },
+  {
+   "id": "stores",
+   "type": "store",
+   "name": "App Store y Google Play",
+   "tech": "com.icgvault.app · versión 72",
+   "evidence": [
+    "src/components/NativeVersionGate.tsx",
+    "commit 0231ad5"
+   ],
+   "resp": "Distribución de las apps nativas"
+  },
+  {
+   "id": "github",
+   "type": "repo",
+   "name": "GitHub · icgbolt",
+   "tech": "privado · 1 518 commits · 97 PR (81 de agentes)",
+   "brand": "github",
+   "evidence": [
+    "git log origin/main"
+   ],
+   "resp": "Código fuente y pull requests (la mayoría de agentes)"
+  },
+  {
+   "id": "author",
+   "type": "host",
+   "name": "Autor + agentes de IA",
+   "kind": "Entorno de desarrollo",
+   "tech": "ramas claude/* · Supabase · Xcode · Android Studio",
+   "evidence": [
+    "97 PR, 81 desde ramas claude/*"
+   ],
+   "resp": "Evolución por pull requests con agentes; builds nativos"
+  }
+ ],
+ "relations": [
+  {
+   "id": "r-use",
+   "from": "users",
+   "to": "spa",
+   "label": "Vota, colecciona y juega",
+   "kind": "user",
+   "protocol": "HTTPS / app nativa",
+   "evidence": [
+    "src/App.tsx"
+   ]
+  },
+  {
+   "id": "r-admin",
+   "from": "admin",
+   "to": "spa",
+   "label": "Opera el producto",
+   "kind": "user",
+   "protocol": "HTTPS",
+   "evidence": [
+    "src/pages/Admin.tsx"
+   ]
+  },
+  {
+   "id": "r-native",
+   "from": "spa",
+   "to": "native",
+   "label": "Plugins Capacitor",
+   "kind": "local",
+   "protocol": "puente nativo",
+   "auth": "permisos del SO",
+   "data": "ID token, imagen para compartir, aviso de captura",
+   "evidence": [
+    "src/plugins/screenshotDetector.ts"
+   ]
+  },
+  {
+   "id": "r-idp",
+   "from": "spa",
+   "to": "idp",
+   "label": "OAuth web · ID token nativo",
+   "kind": "auth",
+   "protocol": "OAuth 2.0 / OIDC",
+   "auth": "IDs de cliente públicos",
+   "data": "identidad del proveedor",
+   "evidence": [
+    "src/hooks/useAuth.tsx:201",
+    "src/hooks/useAuth.tsx:233"
+   ]
+  },
+  {
+   "id": "r-cdn",
+   "from": "spa",
+   "to": "cdn",
+   "label": "Portadas y tráileres",
+   "kind": "api",
+   "protocol": "HTTPS (img / iframe)",
+   "auth": "sin credencial",
+   "data": "imágenes y vídeo",
+   "evidence": [
+    "src/components/content/TrailerSection.tsx:125"
+   ]
+  },
+  {
+   "id": "r-gw",
+   "from": "spa",
+   "to": "gw",
+   "label": "supabase-js\nHTTPS + WS · JWT",
+   "kind": "call",
+   "protocol": "HTTPS + WebSocket",
+   "auth": "clave publicable + JWT",
+   "data": "votos, listas, economía, partidas",
+   "evidence": [
+    "src/integrations/supabase/client.ts"
+   ]
+  },
+  {
+   "id": "r-auth",
+   "from": "gw",
+   "to": "auth",
+   "label": "",
+   "kind": "auth",
+   "protocol": "HTTPS",
+   "evidence": [
+    "src/hooks/useAuth.tsx"
+   ]
+  },
+  {
+   "id": "r-data",
+   "from": "gw",
+   "to": "dataapi",
+   "label": "",
+   "kind": "call",
+   "protocol": "HTTPS · WebSocket",
+   "evidence": [
+    "src/hooks/*"
+   ]
+  },
+  {
+   "id": "r-st",
+   "from": "gw",
+   "to": "storage",
+   "label": "",
+   "kind": "call",
+   "protocol": "HTTPS",
+   "evidence": [
+    "src/components/profile/AvatarChanger.tsx"
+   ]
+  },
+  {
+   "id": "r-fn",
+   "from": "gw",
+   "to": "edge",
+   "label": "",
+   "kind": "call",
+   "protocol": "HTTPS",
+   "auth": "JWT",
+   "evidence": [
+    "supabase.functions.invoke en src/hooks/useTMDB.tsx"
+   ]
+  },
+  {
+   "id": "r-authdb",
+   "from": "auth",
+   "to": "db",
+   "label": "esquema auth",
+   "kind": "data",
+   "protocol": "SQL interno",
+   "evidence": [
+    "Supabase Auth"
+   ]
+  },
+  {
+   "id": "r-db1",
+   "from": "dataapi",
+   "to": "db",
+   "label": "SQL · RPC · RLS",
+   "kind": "data",
+   "protocol": "SQL",
+   "auth": "rol del JWT + políticas",
+   "evidence": [
+    "supabase/migrations/"
+   ]
+  },
+  {
+   "id": "r-db2",
+   "from": "edge",
+   "to": "db",
+   "label": "SQL",
+   "kind": "data",
+   "protocol": "supabase-js en servidor",
+   "auth": "JWT o clave de servicio",
+   "evidence": [
+    "supabase/functions/_duelo_shared/index.ts"
+   ]
+  },
+  {
+   "id": "r-cron",
+   "from": "db",
+   "to": "edge",
+   "label": "pg_cron + pg_net",
+   "kind": "async",
+   "protocol": "HTTP POST programado",
+   "auth": "secreto de servidor",
+   "data": "reto diario de Zoom Out",
+   "evidence": [
+    "supabase/migrations/20260820110100_zoom_out_autopilot.sql"
+   ]
+  },
+  {
+   "id": "r-st2",
+   "from": "edge",
+   "to": "storage",
+   "label": "Sube avatares,\nguardianes y arte",
+   "kind": "data",
+   "protocol": "Storage API",
+   "evidence": [
+    "supabase/functions/generate-guardian/"
+   ]
+  },
+  {
+   "id": "r-tmdb",
+   "from": "edge",
+   "to": "tmdb",
+   "label": "",
+   "kind": "api",
+   "protocol": "HTTPS REST (proxy)",
+   "auth": "clave de TMDB en secretos",
+   "data": "búsqueda, fichas, temporadas, plataformas",
+   "evidence": [
+    "supabase/functions/tmdb/index.ts:10"
+   ]
+  },
+  {
+   "id": "r-igdb",
+   "from": "edge",
+   "to": "igdb",
+   "label": "",
+   "kind": "api",
+   "protocol": "OAuth client credentials + REST",
+   "auth": "client_id/secret de Twitch en secretos",
+   "data": "juegos, plataformas, fechas",
+   "evidence": [
+    "supabase/functions/igdb/index.ts:117"
+   ]
+  },
+  {
+   "id": "r-hltb",
+   "from": "edge",
+   "to": "hltb",
+   "label": "",
+   "kind": "api",
+   "protocol": "HTTPS (endpoints web)",
+   "auth": "sin credencial",
+   "data": "título → duraciones",
+   "evidence": [
+    "supabase/functions/how-long-to-beat/index.ts:46"
+   ]
+  },
+  {
+   "id": "r-mc",
+   "from": "edge",
+   "to": "metacritic",
+   "label": "",
+   "kind": "api",
+   "protocol": "HTTPS (HTML)",
+   "auth": "sin credencial",
+   "data": "título → puntuaciones",
+   "evidence": [
+    "supabase/functions/metacritic/index.ts:342"
+   ]
+  },
+  {
+   "id": "r-rss",
+   "from": "edge",
+   "to": "rss",
+   "label": "",
+   "kind": "api",
+   "protocol": "RSS / HTML",
+   "auth": "sin credencial",
+   "data": "titulares, artículos, episodios",
+   "evidence": [
+    "supabase/functions/fetch-news/",
+    "supabase/functions/article-reader/",
+    "supabase/functions/fetch-podcast-feed/"
+   ]
+  },
+  {
+   "id": "r-oai",
+   "from": "edge",
+   "to": "openai",
+   "label": "Avatares, guardianes, arte,\nquiz y encuestas",
+   "kind": "ai",
+   "protocol": "HTTPS REST",
+   "auth": "OPENAI_API_KEY (secreto)",
+   "data": "prompt, foto opcional → imagen · contexto editorial → JSON",
+   "evidence": [
+    "supabase/functions/_shared/openai-image.ts",
+    "supabase/functions/generate-weekly-quiz/"
+   ]
+  }
+ ],
+ "views": [
+  {
+   "id": "context",
+   "title": "ICG Vault · contexto del sistema",
+   "subtitle": "Quién lo usa y de qué sistemas externos depende",
+   "tag": "C4 · nivel 1 · AS-IS",
+   "width": 1440,
+   "height": 1090,
+   "nodes": [
+    {
+     "ref": "users",
+     "at": [
+      60,
+      330
+     ],
+     "w": 270,
+     "h": 110
+    },
+    {
+     "ref": "admin",
+     "at": [
+      60,
+      560
+     ],
+     "w": 270,
+     "h": 100
+    },
+    {
+     "ref": "system",
+     "at": [
+      470,
+      190
+     ],
+     "w": 520,
+     "h": 650,
+     "desc": "63 funcionalidades en 13 módulos · 35 Edge Functions · 88 tablas · producción en icgvault.es, App Store y Google Play",
+     "items": [
+      "Catálogo de cine, series y videojuegos",
+      "Voto con poder por nivel y rankings",
+      "Progresión RPG: cofres, mascotas, avatares",
+      "Juegos diarios: Zoom Out, Timeline, FlashOut",
+      "Competitivo: Arena, ICG Duelo, Inmortales",
+      "Comunidad: feed, debates, encuestas",
+      "Noticias, podcasts y calendario",
+      "Administración y tareas programadas"
+     ],
+     "itemsTop": 190,
+     "itemGap": 26
+    },
+    {
+     "ref": "tmdb",
+     "at": [
+      1110,
+      190
+     ],
+     "w": 280,
+     "h": 90
+    },
+    {
+     "ref": "igdb",
+     "at": [
+      1110,
+      300
+     ],
+     "w": 280,
+     "h": 90
+    },
+    {
+     "ref": "hltb",
+     "at": [
+      1110,
+      410
+     ],
+     "w": 280,
+     "h": 90
+    },
+    {
+     "ref": "metacritic",
+     "at": [
+      1110,
+      520
+     ],
+     "w": 280,
+     "h": 90
+    },
+    {
+     "ref": "rss",
+     "at": [
+      1110,
+      630
+     ],
+     "w": 280,
+     "h": 90
+    },
+    {
+     "ref": "openai",
+     "at": [
+      1110,
+      740
+     ],
+     "w": 280,
+     "h": 96
+    },
+    {
+     "ref": "idp",
+     "at": [
+      470,
+      920
+     ],
+     "w": 250,
+     "h": 92
+    },
+    {
+     "ref": "stores",
+     "at": [
+      740,
+      920
+     ],
+     "w": 250,
+     "h": 92
+    }
+   ],
+   "edges": [
+    {
+     "from": "users",
+     "to": "system",
+     "label": "Usa en web, iOS y Android",
+     "kind": "user"
+    },
+    {
+     "from": "admin",
+     "to": "system",
+     "label": "Administra",
+     "kind": "user"
+    },
+    {
+     "from": "system",
+     "to": "tmdb",
+     "label": "Cine y series",
+     "kind": "api"
+    },
+    {
+     "from": "system",
+     "to": "igdb",
+     "label": "Videojuegos",
+     "kind": "api"
+    },
+    {
+     "from": "system",
+     "to": "hltb",
+     "label": "Duración",
+     "kind": "api"
+    },
+    {
+     "from": "system",
+     "to": "metacritic",
+     "label": "Crítica",
+     "kind": "api"
+    },
+    {
+     "from": "system",
+     "to": "rss",
+     "label": "Noticias y podcasts",
+     "kind": "api"
+    },
+    {
+     "from": "system",
+     "to": "openai",
+     "label": "IA generativa",
+     "kind": "ai"
+    },
+    {
+     "from": "system",
+     "to": "idp",
+     "label": "Identidad",
+     "kind": "auth"
+    },
+    {
+     "from": "stores",
+     "to": "system",
+     "label": "Distribuye",
+     "kind": "deploy"
+    }
+   ],
+   "legendAt": [
+    40,
+    1030
+   ]
+  },
+  {
+   "id": "container",
+   "title": "ICG Vault · arquitectura de contenedores",
+   "subtitle": "Cliente único para web y móvil; catálogo externo e IA siempre detrás de Edge Functions",
+   "tag": "C4 · nivel 2 · AS-IS",
+   "width": 1800,
+   "height": 1240,
+   "nodes": [
+    {
+     "ref": "idp",
+     "at": [
+      40,
+      190
+     ],
+     "w": 220,
+     "h": 92
+    },
+    {
+     "ref": "cdn",
+     "at": [
+      460,
+      190
+     ],
+     "w": 200,
+     "h": 92
+    },
+    {
+     "ref": "users",
+     "at": [
+      40,
+      450
+     ],
+     "w": 250,
+     "h": 108
+    },
+    {
+     "ref": "admin",
+     "at": [
+      40,
+      650
+     ],
+     "w": 250,
+     "h": 96
+    },
+    {
+     "ref": "spa",
+     "at": [
+      380,
+      450
+     ],
+     "w": 280,
+     "h": 120
+    },
+    {
+     "ref": "native",
+     "at": [
+      380,
+      730
+     ],
+     "w": 280,
+     "h": 104
+    },
+    {
+     "ref": "gw",
+     "at": [
+      770,
+      190
+     ],
+     "w": 220,
+     "h": 660,
+     "items": [
+      "/auth/v1|email · Google · Apple",
+      "/rest/v1|tablas y 175 RPC",
+      "/realtime/v1|partidas, avisos, mensajes",
+      "/storage/v1|avatares, portadas",
+      "/functions/v1|35 Edge Functions"
+     ],
+     "itemsTop": 150,
+     "itemGap": 44
+    },
+    {
+     "ref": "auth",
+     "at": [
+      1100,
+      190
+     ],
+     "w": 250,
+     "h": 100
+    },
+    {
+     "ref": "dataapi",
+     "at": [
+      1100,
+      375
+     ],
+     "w": 250,
+     "h": 100
+    },
+    {
+     "ref": "storage",
+     "at": [
+      1100,
+      560
+     ],
+     "w": 250,
+     "h": 100
+    },
+    {
+     "ref": "edge",
+     "at": [
+      1100,
+      750
+     ],
+     "w": 250,
+     "h": 100
+    },
+    {
+     "ref": "db",
+     "at": [
+      1490,
+      190
+     ],
+     "w": 280,
+     "h": 660,
+     "items": [
+      "Identidad, roles y perfiles",
+      "Catálogo, caché y estadísticas",
+      "Votos, reseñas y temporadas",
+      "Biblioteca y listas",
+      "Economía RPG e inventario",
+      "Juegos diarios y quiz",
+      "Arena, Duelo e Inmortales",
+      "Comunidad, noticias, avisos",
+      "Configuración remota y analítica"
+     ],
+     "itemsTop": 170,
+     "itemGap": 34
+    },
+    {
+     "ref": "tmdb",
+     "at": [
+      40,
+      1000
+     ],
+     "w": 180,
+     "h": 84,
+     "tech": "API v3"
+    },
+    {
+     "ref": "igdb",
+     "at": [
+      235,
+      1000
+     ],
+     "w": 180,
+     "h": 84,
+     "tech": "Twitch OAuth · v4"
+    },
+    {
+     "ref": "hltb",
+     "at": [
+      430,
+      1000
+     ],
+     "w": 190,
+     "h": 84,
+     "tech": "duración de juegos"
+    },
+    {
+     "ref": "metacritic",
+     "at": [
+      635,
+      1000
+     ],
+     "w": 180,
+     "h": 84,
+     "tech": "crítica (HTML)"
+    },
+    {
+     "ref": "rss",
+     "at": [
+      830,
+      1000
+     ],
+     "w": 210,
+     "h": 84,
+     "tech": "11 feeds · podcasts"
+    },
+    {
+     "ref": "openai",
+     "at": [
+      1100,
+      1000
+     ],
+     "w": 250,
+     "h": 92,
+     "tech": "images · edits · chat"
+    }
+   ],
+   "zones": [
+    {
+     "ref": "device",
+     "labelPos": "bottom"
+    },
+    {
+     "ref": "supabase",
+     "pad": 26
+    },
+    {
+     "ref": "ext-client"
+    },
+    {
+     "ref": "ext-data",
+     "labelPos": "bottom"
+    },
+    {
+     "ref": "ext-ai",
+     "labelPos": "bottom"
+    }
+   ],
+   "edges": [
+    {
+     "ref": "r-use",
+     "label": "Usa"
+    },
+    {
+     "ref": "r-admin",
+     "sides": [
+      "right",
+      "left"
+     ],
+     "midX": 335,
+     "label": "Opera",
+     "labelAt": [
+      335,
+      620
+     ]
+    },
+    {
+     "ref": "r-native",
+     "label": "Plugins Capacitor"
+    },
+    "r-gw",
+    {
+     "ref": "r-idp",
+     "sides": [
+      "top",
+      "right"
+     ],
+     "fromAt": 20,
+     "label": "OAuth · ID token",
+     "labelAt": [
+      330,
+      236
+     ]
+    },
+    {
+     "ref": "r-cdn",
+     "label": "Portadas y tráileres",
+     "labelAt": [
+      560,
+      380
+     ]
+    },
+    "r-auth",
+    "r-data",
+    "r-st",
+    "r-fn",
+    "r-authdb",
+    "r-db1",
+    {
+     "ref": "r-db2",
+     "fromAt": 28,
+     "toAt": 588,
+     "labelAt": [
+      1420,
+      778
+     ]
+    },
+    {
+     "ref": "r-cron",
+     "fromAt": 632,
+     "toAt": 72,
+     "labelAt": [
+      1420,
+      822
+     ]
+    },
+    "r-st2",
+    {
+     "ref": "r-tmdb",
+     "sides": [
+      "bottom",
+      "top"
+     ],
+     "fromAt": 22,
+     "midY": 930
+    },
+    {
+     "ref": "r-igdb",
+     "sides": [
+      "bottom",
+      "top"
+     ],
+     "fromAt": 22,
+     "midY": 930
+    },
+    {
+     "ref": "r-hltb",
+     "sides": [
+      "bottom",
+      "top"
+     ],
+     "fromAt": 22,
+     "midY": 930
+    },
+    {
+     "ref": "r-mc",
+     "sides": [
+      "bottom",
+      "top"
+     ],
+     "fromAt": 22,
+     "midY": 930
+    },
+    {
+     "ref": "r-rss",
+     "sides": [
+      "bottom",
+      "top"
+     ],
+     "fromAt": 22,
+     "midY": 930,
+     "label": "REST · OAuth de Twitch · RSS · HTML · claves en secretos de Supabase",
+     "labelAt": [
+      590,
+      930
+     ]
+    },
+    {
+     "ref": "r-oai",
+     "labelAt": [
+      1225,
+      925
+     ]
+    }
+   ],
+   "legendAt": [
+    40,
+    1170
+   ]
+  },
+  {
+   "id": "integrations",
+   "title": "ICG Vault · integraciones externas",
+   "subtitle": "Catálogo, crítica, noticias e IA pasan por Edge Functions; identidad y medios llegan al cliente",
+   "tag": "Integraciones · AS-IS",
+   "width": 1700,
+   "height": 1100,
+   "nodes": [
+    {
+     "ref": "system",
+     "at": [
+      640,
+      170
+     ],
+     "w": 400,
+     "h": 760,
+     "name": "ICG Vault",
+     "tech": "cliente web/móvil + Edge Functions",
+     "items": [
+      "Cliente (navegador · WebView)|Supabase, identidad y medios",
+      "Edge Functions (servidor)|catálogo, crítica, noticias e IA",
+      "Postgres (pg_cron + pg_net)|genera retos y avanza temporadas"
+     ],
+     "itemsTop": 150,
+     "itemGap": 62
+    },
+    {
+     "ref": "gw",
+     "at": [
+      60,
+      190
+     ],
+     "w": 300,
+     "h": 110,
+     "name": "Supabase",
+     "kind": "Plataforma (BaaS)",
+     "tech": "Auth · Postgres · Storage · Realtime · Edge"
+    },
+    {
+     "ref": "vercel",
+     "at": [
+      60,
+      340
+     ],
+     "w": 300,
+     "h": 100
+    },
+    {
+     "ref": "stores",
+     "at": [
+      60,
+      480
+     ],
+     "w": 300,
+     "h": 100
+    },
+    {
+     "ref": "idp",
+     "at": [
+      60,
+      620
+     ],
+     "w": 300,
+     "h": 100
+    },
+    {
+     "ref": "cdn",
+     "at": [
+      60,
+      760
+     ],
+     "w": 300,
+     "h": 100
+    },
+    {
+     "ref": "openai",
+     "at": [
+      1320,
+      190
+     ],
+     "w": 320,
+     "h": 110
+    },
+    {
+     "ref": "tmdb",
+     "at": [
+      1320,
+      380
+     ],
+     "w": 320,
+     "h": 92
+    },
+    {
+     "ref": "igdb",
+     "at": [
+      1320,
+      490
+     ],
+     "w": 320,
+     "h": 92
+    },
+    {
+     "ref": "hltb",
+     "at": [
+      1320,
+      600
+     ],
+     "w": 320,
+     "h": 92
+    },
+    {
+     "ref": "metacritic",
+     "at": [
+      1320,
+      710
+     ],
+     "w": 320,
+     "h": 92
+    },
+    {
+     "ref": "rss",
+     "at": [
+      1320,
+      820
+     ],
+     "w": 320,
+     "h": 92
+    }
+   ],
+   "zones": [
+    {
+     "label": "Infraestructura, identidad y medios",
+     "members": [
+      "gw",
+      "vercel",
+      "stores",
+      "idp",
+      "cdn"
+     ],
+     "style": "platform"
+    },
+    {
+     "label": "IA externa",
+     "members": [
+      "openai"
+     ],
+     "style": "ai"
+    },
+    {
+     "label": "APIs y fuentes de datos",
+     "members": [
+      "tmdb",
+      "igdb",
+      "hltb",
+      "metacritic",
+      "rss"
+     ],
+     "style": "external"
+    }
+   ],
+   "edges": [
+    {
+     "from": "system",
+     "to": "gw",
+     "label": "HTTPS + WebSocket\nsupabase-js · JWT",
+     "kind": "call"
+    },
+    {
+     "from": "vercel",
+     "to": "system",
+     "label": "sirve el bundle\nHTTPS · CDN",
+     "kind": "deploy"
+    },
+    {
+     "from": "stores",
+     "to": "system",
+     "label": "distribuye\niOS · Android",
+     "kind": "deploy"
+    },
+    {
+     "from": "system",
+     "to": "idp",
+     "label": "OAuth web\nID token nativo",
+     "kind": "auth"
+    },
+    {
+     "from": "system",
+     "to": "cdn",
+     "label": "img / iframe\nsin credencial",
+     "kind": "api"
+    },
+    {
+     "from": "system",
+     "to": "openai",
+     "label": "REST desde Edge\nOPENAI_API_KEY",
+     "kind": "ai"
+    },
+    {
+     "from": "system",
+     "to": "tmdb",
+     "label": "proxy REST\nclave en secretos",
+     "kind": "api"
+    },
+    {
+     "from": "system",
+     "to": "igdb",
+     "label": "OAuth Twitch\n+ REST v4",
+     "kind": "api"
+    },
+    {
+     "from": "system",
+     "to": "hltb",
+     "label": "HTTPS\nsin credencial",
+     "kind": "api"
+    },
+    {
+     "from": "system",
+     "to": "metacritic",
+     "label": "HTML\nsin credencial",
+     "kind": "api"
+    },
+    {
+     "from": "system",
+     "to": "rss",
+     "label": "RSS · HTML\n11 feeds + podcasts",
+     "kind": "api"
+    }
+   ],
+   "legendAt": [
+    40,
+    1030
+   ]
+  },
+  {
+   "id": "deployment",
+   "title": "ICG Vault · despliegue",
+   "subtitle": "Dónde se ejecuta cada pieza y cómo llega a producción",
+   "tag": "C4 · despliegue · AS-IS",
+   "width": 2000,
+   "height": 920,
+   "nodes": [
+    {
+     "ref": "author",
+     "at": [
+      60,
+      150
+     ],
+     "w": 330,
+     "h": 110
+    },
+    {
+     "ref": "github",
+     "at": [
+      60,
+      400
+     ],
+     "w": 330,
+     "h": 96
+    },
+    {
+     "ref": "vercel",
+     "at": [
+      500,
+      400
+     ],
+     "w": 290,
+     "h": 96
+    },
+    {
+     "ref": "stores",
+     "at": [
+      500,
+      640
+     ],
+     "w": 290,
+     "h": 96
+    },
+    {
+     "ref": "spa",
+     "at": [
+      900,
+      400
+     ],
+     "w": 270,
+     "h": 96,
+     "name": "Navegador / PWA",
+     "tech": "bundle Vite servido por Vercel"
+    },
+    {
+     "ref": "native",
+     "at": [
+      900,
+      640
+     ],
+     "w": 270,
+     "h": 96,
+     "name": "App iOS / Android",
+     "kind": "Capacitor 8",
+     "tech": "mismo bundle (webDir dist)"
+    },
+    {
+     "ref": "gw",
+     "at": [
+      1290,
+      360
+     ],
+     "w": 300,
+     "h": 420,
+     "name": "Supabase · eu-west-1",
+     "kind": "Plataforma gestionada",
+     "tech": "proyecto de producción",
+     "items": [
+      "Auth · email, Google, Apple",
+      "PostgREST · 175 RPC · Realtime",
+      "Storage · 4 buckets",
+      "Edge Functions · 35 · Deno",
+      "PostgreSQL 17 · pg_cron (5) · pg_net"
+     ],
+     "itemsTop": 100,
+     "itemGap": 40
+    },
+    {
+     "ref": "openai",
+     "at": [
+      1690,
+      500
+     ],
+     "w": 270,
+     "h": 140,
+     "name": "OpenAI · TMDB · IGDB · HLTB · Metacritic · RSS",
+     "kind": "Servicios externos",
+     "tech": "solo desde Edge Functions",
+     "noBrand": true
+    }
+   ],
+   "edges": [
+    {
+     "from": "author",
+     "to": "github",
+     "label": "PR de agentes\n(81 de 97)",
+     "kind": "deploy"
+    },
+    {
+     "from": "github",
+     "to": "vercel",
+     "label": "Build Vite",
+     "kind": "deploy"
+    },
+    {
+     "from": "author",
+     "to": "gw",
+     "label": "Migraciones y funciones (panel de Supabase o MCP)",
+     "kind": "deploy",
+     "sides": [
+      "right",
+      "top"
+     ],
+     "labelAt": [
+      860,
+      196
+     ]
+    },
+    {
+     "from": "author",
+     "to": "stores",
+     "label": "Build nativo (Xcode · Android Studio)",
+     "kind": "deploy",
+     "sides": [
+      "left",
+      "left"
+     ],
+     "via": [
+      [
+       30,
+       205
+      ],
+      [
+       30,
+       688
+      ]
+     ],
+     "toAt": 48,
+     "labelAt": [
+      250,
+      688
+     ]
+    },
+    {
+     "from": "vercel",
+     "to": "spa",
+     "label": "HTTPS · CDN",
+     "kind": "deploy"
+    },
+    {
+     "from": "stores",
+     "to": "native",
+     "label": "Instalación",
+     "kind": "deploy"
+    },
+    {
+     "from": "spa",
+     "to": "gw",
+     "label": "supabase-js",
+     "kind": "call"
+    },
+    {
+     "from": "native",
+     "to": "gw",
+     "label": "supabase-js",
+     "kind": "call"
+    },
+    {
+     "from": "gw",
+     "to": "openai",
+     "label": "HTTPS + secretos",
+     "kind": "api"
+    }
+   ],
+   "notes": [
+    {
+     "at": [
+      60,
+      790
+     ],
+     "w": 700,
+     "text": "La auditoría del 23/09/2026 detectó 135 migraciones en producción frente a 136 ficheros en el repositorio: parte se aplicó desde el panel o por MCP con otra numeración. Se documenta tal cual (AS-IS)."
+    }
+   ],
+   "legendAt": [
+    1100,
+    850
+   ]
+  },
+  {
+   "id": "seq-vote",
+   "type": "sequence",
+   "title": "ICG Vault · votar con poder de voto",
+   "subtitle": "Una sola llamada RPC calcula el peso del voto, guarda la reseña y suma experiencia",
+   "tag": "Secuencia · AS-IS",
+   "width": 1440,
+   "stepH": 50,
+   "participants": [
+    "users",
+    {
+     "ref": "spa",
+     "name": "VoteModal",
+     "tech": "cliente web/móvil"
+    },
+    {
+     "ref": "dataapi",
+     "name": "RPC",
+     "tech": "submit_review_once"
+    },
+    {
+     "ref": "db",
+     "name": "PostgreSQL",
+     "tech": "reviews · content_stats · profiles"
+    }
+   ],
+   "steps": [
+    {
+     "from": "users",
+     "to": "spa",
+     "label": "Elige veredicto (Infame → Full) y escribe reseña",
+     "kind": "user"
+    },
+    {
+     "from": "spa",
+     "to": "dataapi",
+     "label": "rpc('submit_review_once') + JWT"
+    },
+    {
+     "from": "dataapi",
+     "to": "db",
+     "label": "calculate_vote_power(auth.uid())",
+     "kind": "data"
+    },
+    {
+     "from": "dataapi",
+     "to": "db",
+     "label": "INSERT/UPDATE reviews con vote_power",
+     "kind": "data"
+    },
+    {
+     "from": "dataapi",
+     "to": "db",
+     "label": "activity_log + add_xp_and_check_level()",
+     "kind": "data"
+    },
+    {
+     "from": "db",
+     "to": "dataapi",
+     "label": "xp_gained · vote_power · was_updated",
+     "ret": true
+    },
+    {
+     "from": "dataapi",
+     "to": "spa",
+     "label": "resultado del voto",
+     "ret": true
+    },
+    {
+     "note": "Si sube de nivel: cofre, celebración de tier y nuevo poder de voto",
+     "over": "spa"
+    },
+    {
+     "from": "spa",
+     "to": "users",
+     "label": "Nota de la comunidad actualizada y XP ganada",
+     "ret": true,
+     "kind": "user"
+    }
+   ],
+   "footer": "Evidencia: supabase/migrations/20260224073154_*.sql (submit_review_once, add_xp_and_check_level) · src/components/content/VoteModal.tsx"
+  },
+  {
+   "id": "seq-catalog",
+   "type": "sequence",
+   "title": "ICG Vault · ficha de catálogo con caché",
+   "subtitle": "La app nunca llama a TMDB directamente: un proxy en Edge Functions cachea fichas y portadas",
+   "tag": "Flujo de datos · AS-IS",
+   "width": 1440,
+   "stepH": 48,
+   "participants": [
+    {
+     "ref": "spa",
+     "name": "ContentDetail",
+     "tech": "cliente web/móvil"
+    },
+    {
+     "ref": "edge",
+     "name": "tmdb",
+     "tech": "Edge Function (proxy)"
+    },
+    {
+     "ref": "db",
+     "name": "PostgreSQL",
+     "tech": "cached_content · content_catalog"
+    },
+    {
+     "ref": "storage",
+     "name": "Storage",
+     "tech": "bucket covers"
+    },
+    {
+     "ref": "tmdb",
+     "name": "TMDB",
+     "tech": "API v3"
+    }
+   ],
+   "steps": [
+    {
+     "from": "spa",
+     "to": "edge",
+     "label": "functions.invoke('tmdb', { tipo, id })"
+    },
+    {
+     "from": "edge",
+     "to": "db",
+     "label": "¿Existe en cached_content? (incluida caducada)",
+     "kind": "data"
+    },
+    {
+     "from": "db",
+     "to": "edge",
+     "label": "entrada vigente → responde sin salir",
+     "ret": true
+    },
+    {
+     "from": "edge",
+     "to": "tmdb",
+     "label": "Si falta o caducó: petición REST con clave en secretos",
+     "kind": "api"
+    },
+    {
+     "from": "tmdb",
+     "to": "edge",
+     "label": "ficha, temporadas, plataformas, póster",
+     "ret": true
+    },
+    {
+     "from": "edge",
+     "to": "storage",
+     "label": "Guarda la portada en covers/tmdb",
+     "kind": "data"
+    },
+    {
+     "from": "edge",
+     "to": "db",
+     "label": "UPSERT cached_content (fecha de caché)",
+     "kind": "data"
+    },
+    {
+     "note": "Si TMDB falla, se sirve la copia caducada como respaldo",
+     "over": "edge"
+    },
+    {
+     "from": "edge",
+     "to": "spa",
+     "label": "ficha normalizada",
+     "ret": true
+    }
+   ],
+   "footer": "Evidencia: supabase/functions/tmdb/index.ts (cached_content, verificación en covers/tmdb, respaldo con contenido caducado)"
+  },
+  {
+   "id": "seq-guardian",
+   "type": "sequence",
+   "title": "ICG Vault · crear un guardián con IA",
+   "subtitle": "Autenticación, cobro en rupias, generación o edición de imagen y persistencia",
+   "tag": "Flujo de IA · AS-IS",
+   "width": 1480,
+   "stepH": 48,
+   "participants": [
+    "users",
+    {
+     "ref": "spa",
+     "name": "GuardianCreator",
+     "tech": "cliente web/móvil"
+    },
+    {
+     "ref": "edge",
+     "name": "generate-guardian",
+     "tech": "Edge Function"
+    },
+    {
+     "ref": "db",
+     "name": "PostgreSQL",
+     "tech": "rupias · user_custom_guardians"
+    },
+    {
+     "ref": "openai",
+     "name": "OpenAI",
+     "tech": "images/generations · edits"
+    },
+    {
+     "ref": "storage",
+     "name": "Storage",
+     "tech": "bucket guardians"
+    }
+   ],
+   "steps": [
+    {
+     "from": "users",
+     "to": "spa",
+     "label": "Estilo, descripción y foto de referencia opcional",
+     "kind": "user"
+    },
+    {
+     "from": "spa",
+     "to": "edge",
+     "label": "POST + JWT"
+    },
+    {
+     "from": "edge",
+     "to": "edge",
+     "label": "auth.getUser(token)"
+    },
+    {
+     "from": "edge",
+     "to": "db",
+     "label": "rpc can_generate_guardian → spend_rupias (200)",
+     "kind": "data"
+    },
+    {
+     "from": "edge",
+     "to": "openai",
+     "label": "con foto: /images/edits · sin foto: /images/generations",
+     "kind": "ai"
+    },
+    {
+     "from": "openai",
+     "to": "edge",
+     "label": "imagen (modelo configurado, con respaldo)",
+     "ret": true,
+     "kind": "ai"
+    },
+    {
+     "from": "edge",
+     "to": "storage",
+     "label": "upload PNG → URL pública",
+     "kind": "data"
+    },
+    {
+     "from": "edge",
+     "to": "db",
+     "label": "INSERT user_custom_guardians",
+     "kind": "data"
+    },
+    {
+     "from": "edge",
+     "to": "spa",
+     "label": "guardián listo para equipar",
+     "ret": true
+    },
+    {
+     "from": "spa",
+     "to": "users",
+     "label": "Galería actualizada",
+     "ret": true,
+     "kind": "user"
+    }
+   ],
+   "footer": "Evidencia: supabase/functions/generate-guardian/index.ts (getUser, can_generate_guardian, images/edits|generations, upload, insert) · _shared/openai-image.ts"
+  },
+  {
+   "id": "slides",
+   "title": "ICG Vault",
+   "subtitle": "Catálogo externo, economía RPG y juegos sobre Supabase",
+   "tag": "Vista para slides",
+   "width": 1600,
+   "height": 1000,
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "legend": false,
+   "nodes": [
+    {
+     "ref": "users",
+     "at": [
+      60,
+      330
+     ],
+     "w": 260,
+     "h": 120,
+     "name": "Usuarios",
+     "tech": "votantes · jugadores · influencers",
+     "nameFs": 20
+    },
+    {
+     "ref": "idp",
+     "at": [
+      400,
+      130
+     ],
+     "w": 300,
+     "h": 100,
+     "name": "Google · Apple",
+     "tech": "OAuth web · Sign-In nativo",
+     "nameFs": 19,
+     "noBrand": true
+    },
+    {
+     "ref": "spa",
+     "at": [
+      400,
+      320
+     ],
+     "w": 300,
+     "h": 140,
+     "nameFs": 20
+    },
+    {
+     "ref": "gw",
+     "at": [
+      800,
+      320
+     ],
+     "w": 300,
+     "h": 140,
+     "name": "Supabase",
+     "tech": "Auth · Postgres 17 + RLS · Realtime · pg_cron",
+     "nameFs": 20
+    },
+    {
+     "ref": "native",
+     "at": [
+      400,
+      570
+     ],
+     "w": 300,
+     "h": 120,
+     "nameFs": 19
+    },
+    {
+     "ref": "edge",
+     "at": [
+      800,
+      570
+     ],
+     "w": 300,
+     "h": 120,
+     "nameFs": 20
+    },
+    {
+     "ref": "openai",
+     "at": [
+      1200,
+      570
+     ],
+     "w": 330,
+     "h": 120,
+     "nameFs": 20
+    },
+    {
+     "ref": "tmdb",
+     "at": [
+      800,
+      800
+     ],
+     "w": 300,
+     "h": 120,
+     "name": "TMDB · IGDB · HLTB",
+     "tech": "Metacritic · 11 feeds RSS · podcasts",
+     "nameFs": 20,
+     "noBrand": true
+    }
+   ],
+   "edges": [
+    {
+     "from": "users",
+     "to": "spa",
+     "kind": "user"
+    },
+    {
+     "from": "spa",
+     "to": "idp",
+     "kind": "auth"
+    },
+    {
+     "from": "spa",
+     "to": "gw",
+     "label": "JWT",
+     "kind": "call"
+    },
+    {
+     "from": "spa",
+     "to": "native",
+     "kind": "local"
+    },
+    {
+     "from": "gw",
+     "to": "edge",
+     "kind": "call"
+    },
+    {
+     "from": "edge",
+     "to": "openai",
+     "label": "imágenes y editorial",
+     "kind": "ai"
+    },
+    {
+     "from": "edge",
+     "to": "tmdb",
+     "kind": "api"
+    }
+   ]
+  }
+ ]
+}

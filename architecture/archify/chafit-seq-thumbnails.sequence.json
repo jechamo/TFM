@@ -1,0 +1,89 @@
+{
+ "schema_version": 1,
+ "diagram_type": "sequence",
+ "meta": {
+  "title": "ChaFit · pipeline durable de miniaturas",
+  "viewBox": [
+   1280,
+   480
+  ],
+  "column_fit": "spread",
+  "quality_profile": "standard"
+ },
+ "participants": [
+  {
+   "id": "cron",
+   "type": "database",
+   "label": "pg_cron + pg_net",
+   "sublabel": "planificador en Postgres"
+  },
+  {
+   "id": "worker",
+   "type": "backend",
+   "label": "thumbnail-worker",
+   "sublabel": "Edge Function · ImageMagick…"
+  },
+  {
+   "id": "queue",
+   "type": "database",
+   "label": "pgmq + tareas",
+   "sublabel": "exercise_thumbnail_tasks ·…"
+  },
+  {
+   "id": "st",
+   "type": "database",
+   "label": "Storage",
+   "sublabel": "bucket exercise-images"
+  }
+ ],
+ "messages": [
+  {
+   "id": "m1",
+   "from": "cron",
+   "to": "worker",
+   "y": 170,
+   "label": "POST programado (secreto leído de Vault)",
+   "variant": "dashed"
+  },
+  {
+   "id": "m2",
+   "from": "worker",
+   "to": "queue",
+   "y": 200,
+   "label": "rpc claim_exercise_thumbnail_jobs (lote de pgmq)",
+   "variant": "default"
+  },
+  {
+   "id": "m3",
+   "from": "queue",
+   "to": "worker",
+   "y": 230,
+   "label": "mensajes con read_ct",
+   "variant": "return"
+  },
+  {
+   "id": "m4",
+   "from": "worker",
+   "to": "st",
+   "y": 260,
+   "label": "Descarga la imagen original",
+   "variant": "default"
+  },
+  {
+   "id": "m6",
+   "from": "worker",
+   "to": "st",
+   "y": 290,
+   "label": "Sube la miniatura versionada",
+   "variant": "default"
+  },
+  {
+   "id": "m7",
+   "from": "worker",
+   "to": "queue",
+   "y": 320,
+   "label": "Completa la tarea y archiva el mensaje",
+   "variant": "default"
+  }
+ ]
+}

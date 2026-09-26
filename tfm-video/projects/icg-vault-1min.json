@@ -1,0 +1,73 @@
+{
+  "name": "icg-vault-1min",
+  "final_dir": "../../media/final/icg-vault-1min",
+  "raw": "../../media/Originales/video/icgvault.mp4",
+  "phone_crop": [0, 54],
+  "voice": "../../media/Originales/voz/icgvault 1min 9.mp3",
+  "voice_offset": 0.0,
+  "script": "../voz/icg-vault.md#0",
+  "music": {
+    "file": "../../media/Originales/Musica/Drop Arcade.mp3",
+    "_comentario": "128,3 BPM, compás 1,871 s. Arranca en el compás 5 para que el drop (15,09 s) caiga con la cartela (5,6 s); en el compás 36 salta al 100 y el golpe final (198,4 s) cae al acabar la voz.",
+    "parts": [
+      [9.48, 67.47],
+      [187.18, 200.6]
+    ],
+    "db": -7,
+    "fade_out": 1.2
+  },
+  "sfx": "../../media/assets/whoosh.ogg",
+  "duration": 71.4,
+  "cards": [
+    {"kind": "intro", "t": 5.6, "dur": 3.8, "title": "ICG *Vault*", "sub": "Vota cine, series y juegos como en un RPG"},
+    {"kind": "outro", "t": 61.4, "dur": 10.0, "title": "Tu opinión, a *otro nivel*", "sub": "icgvault.es · Web, iPhone y Android"}
+  ],
+  "shots": [
+    [0.0, 48.0, 53.6],
+    [9.4, 0.0, 3.6],
+    [13.3, 356.6, 358.0],
+    [14.3, 358.0, 362.0],
+    [15.3, 362.0, 363.2],
+    [17.3, 363.6],
+    [21.4, 346.4, 349.0],
+    [26.3, 350.1],
+    [30.0, 327.6, 330.2],
+    [33.4, 351.7],
+    [36.1, 330.4, 332.3],
+    [38.7, 350.6],
+    [41.6, 338.0, 340.8],
+    [44.4, 288.0, 289.4],
+    [46.0, 289.9, 293.3],
+    [50.4, 13.5, 15.7],
+    [52.6, 294.4, 296.9],
+    [55.2, 298.6, 301.2],
+    [57.8, 302.4, 304.2],
+    [59.6, 97.8, 99.6],
+    [61.4, 99.6, 100.0]
+  ],
+  "zooms": [
+    {"t0": 17.4, "t1": 21.3, "cx": 0.5, "cy": 0.55, "factor": 1.3, "ramp": 1.0},
+    {"t0": 26.4, "t1": 29.9, "cx": 0.35, "cy": 0.72, "factor": 1.3, "ramp": 1.0},
+    {"t0": 33.5, "t1": 36.0, "cx": 0.4, "cy": 0.4, "factor": 1.3, "ramp": 0.8},
+    {"t0": 38.8, "t1": 41.5, "cx": 0.35, "cy": 0.4, "factor": 1.3, "ramp": 0.8}
+  ],
+  "callouts": [
+    {"t0": 9.6, "t1": 13.2, "kicker": "Bienvenida", "title": "ICG *Vault*", "sub": "Películas, series y videojuegos"},
+    {"t0": 13.5, "t1": 21.2, "kicker": "Ficha", "title": "Toda la *información*", "sub": "Sinopsis, año y nota en un mismo sitio"},
+    {"t0": 21.6, "t1": 29.8, "kicker": "Poder de voto", "title": "No todos los votos *valen* lo mismo", "sub": "Base 1.0 y +10 % por cada nivel"},
+    {"t0": 30.2, "t1": 33.2, "kicker": "Nivel", "title": "Tu voto *pesa* más", "sub": "Nivel 35 · poder de voto 21.33"},
+    {"t0": 33.6, "t1": 44.2, "kicker": "Recompensas", "title": "Cofres y *acompañantes*", "sub": "Un cofre por nivel · avatares y guardianes IA"},
+    {"t0": 44.6, "t1": 50.2, "kicker": "Juegos", "title": "ICG *Duelo*", "sub": "Reta a otros jugadores"},
+    {"t0": 50.6, "t1": 55.0, "kicker": "Temporadas", "title": "*Inmortales*", "sub": "Solo puede quedar uno"},
+    {"t0": 55.4, "t1": 61.2, "kicker": "Comunidad", "title": "Listas, gente y *rankings*", "sub": "Tu biblioteca, a quién sigues y quién manda"}
+  ],
+  "chapters": [
+    {"t": 0, "title": "Introducción"},
+    {"t": 13.3, "title": "Fichas"},
+    {"t": 21.4, "title": "Tu voto pesa más"},
+    {"t": 33.4, "title": "Recompensas"},
+    {"t": 44.4, "title": "Juegos"},
+    {"t": 55.2, "title": "Comunidad"},
+    {"t": 61.4, "title": "Cierre"}
+  ]
+}

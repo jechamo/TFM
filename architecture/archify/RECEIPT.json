@@ -1,0 +1,77 @@
+{
+ "generated": "2026-09-26T17:36:45.566Z",
+ "results": [
+  {
+   "name": "chafit-container",
+   "type": "architecture",
+   "ok": true,
+   "detail": "entregado"
+  },
+  {
+   "name": "chafit-seq-routine",
+   "type": "sequence",
+   "ok": true,
+   "detail": "entregado"
+  },
+  {
+   "name": "chafit-seq-thumbnails",
+   "type": "sequence",
+   "ok": true,
+   "detail": "entregado"
+  },
+  {
+   "name": "icgvault-container",
+   "type": "architecture",
+   "ok": true,
+   "detail": "entregado"
+  },
+  {
+   "name": "icgvault-seq-vote",
+   "type": "sequence",
+   "ok": true,
+   "detail": "entregado"
+  },
+  {
+   "name": "icgvault-seq-catalog",
+   "type": "sequence",
+   "ok": true,
+   "detail": "entregado"
+  },
+  {
+   "name": "icgvault-seq-guardian",
+   "type": "sequence",
+   "ok": true,
+   "detail": "entregado"
+  },
+  {
+   "name": "rrss-container",
+   "type": "architecture",
+   "ok": true,
+   "detail": "entregado"
+  },
+  {
+   "name": "rrss-seq-analysis",
+   "type": "sequence",
+   "ok": true,
+   "detail": "entregado"
+  },
+  {
+   "name": "rrss-seq-content",
+   "type": "sequence",
+   "ok": true,
+   "detail": "entregado"
+  },
+  {
+   "name": "sdd-container",
+   "type": "architecture",
+   "ok": true,
+   "detail": "entregado"
+  },
+  {
+   "name": "sdd-seq-feature",
+   "type": "sequence",
+   "ok": true,
+   "detail": "entregado"
+  }
+ ]
+}

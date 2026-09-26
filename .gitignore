@@ -3,3 +3,10 @@ media/
 *.mp4
 *.mov
 *.mkv
+
+# Construcción local y herramientas descargadas
+_site/
+.cache/
+__pycache__/
+# Datos privados de la entrega (credenciales demo, email)
+docs/delivery/author-private.md

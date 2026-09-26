@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vídeos · TFM de Jorge Chamorro</title>
+<meta name="description" content="Vídeo del TFM: sistema SDD/TDD con agentes y los productos RRSS Studio, ChaFit e ICG Vault, con capítulos y subtítulos.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<style>
+  body { background: var(--band); color: var(--band-ink); }
+  .nav { background: rgba(8,10,14,.85); border-color: #1d232c; }
+  .brand, .brand b { color: #E7EBF0; } .brand span { color: #9AA4B2; }
+  .player-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 24px; padding: 28px 0 60px; }
+  @media (max-width: 1000px) { .player-wrap { grid-template-columns: 1fr; } }
+  video { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 14px; }
+  h1 { font-size: clamp(28px, 3vw, 40px); margin: 22px 0 6px; }
+  .meta { color: #9AA4B2; font-size: 14.5px; }
+  .panel { background: #111620; border: 1px solid #222a35; border-radius: 14px; overflow: hidden; }
+  .panel h2 { font: 600 12px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: #9AA4B2; padding: 14px 16px; margin: 0; border-bottom: 1px solid #222a35; }
+  .chapters { list-style: none; margin: 0; padding: 6px 0; max-height: 470px; overflow: auto; }
+  .chapters button { all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-columns: 58px 1fr; gap: 8px; width: 100%; padding: 8px 16px; font-size: 14px; color: #C3CAD4; }
+  .chapters button:hover, .chapters button:focus-visible { background: #18202b; color: #fff; }
+  .chapters button.on { color: #34D0B7; }
+  .chapters .t { font-family: var(--mono); color: #6B7584; }
+  .chapters .top { font-weight: 600; color: #E7EBF0; }
+  .list { display: grid; gap: 10px; padding: 12px; }
+  .list a { display: grid; grid-template-columns: 112px 1fr; gap: 12px; align-items: center; text-decoration: none; color: #C3CAD4; padding: 6px; border-radius: 10px; }
+  .list a:hover, .list a.on { background: #18202b; color: #fff; }
+  .list img { border-radius: 6px; aspect-ratio: 16/9; object-fit: cover; }
+  .list small { display: block; color: #6B7584; font-family: var(--mono); }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .actions a { color: #7BE3D2; font-size: 14px; }
+  .warn { display: none; margin-top: 14px; padding: 12px 14px; border-radius: 10px; background: #2a1d10; color: #F2B84B; font-size: 14px; }
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Principal"><div class="wrap"><a class="brand" href="./"><b>Del máster a producción</b><span>TFM · Jorge Chamorro</span></a><ul><li><a href="./" style="color:#C3CAD4">Web del TFM</a></li><li><a href="slides/" style="color:#C3CAD4">Slides</a></li><li><a href="https://github.com/jechamo/TFM" style="color:#C3CAD4">GitHub</a></li></ul></div></nav>
+<main class="wrap player-wrap">
+  <div>
+    <video id="v" controls playsinline preload="metadata"></video>
+    <div class="warn" id="warn" role="status"></div>
+    <h1 id="title">Cargando…</h1>
+    <p class="meta" id="meta"></p>
+    <div class="actions" id="actions"></div>
+  </div>
+  <aside>
+    <div class="panel"><h2>Capítulos</h2><ul class="chapters" id="ch"></ul></div>
+    <div class="panel" style="margin-top:18px"><h2>Todos los vídeos</h2><div class="list" id="list"></div></div>
+  </aside>
+</main>
+<script src="data/videos.js"></script>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search), video = document.getElementById('v');
+  function mmss(t) { t = Math.round(t); var h = Math.floor(t / 3600), m = Math.floor(t % 3600 / 60), s = t % 60; return (h ? h + ':' + String(m).padStart(2, '0') : m) + ':' + String(s).padStart(2, '0'); }
+  (function (cat) {
+    var cur = cat.videos.find(function (v) { return v.id === q.get('v'); }) || cat.videos[0];
+    var release = 'https://github.com/' + cat.repo + '/releases/download/' + cat.release + '/' + cur.file;
+    document.title = cur.title + ' · TFM de Jorge Chamorro';
+    document.getElementById('title').textContent = cur.title;
+    document.getElementById('meta').textContent = cur.subtitle + ' · ' + mmss(cur.duration) + ' · ' + cur.voice + ' · 1920×1080';
+    // Fuente: primero el MP4 publicado junto a la web; si no existe, el asset del GitHub Release.
+    video.src = 'videos/' + cur.file; video.poster = cur.thumb;
+    var triedRelease = false;
+    video.addEventListener('error', function () {
+      if (triedRelease) { var w = document.getElementById('warn'); w.style.display = 'block'; w.textContent = 'El vídeo todavía no está publicado. Descárgalo desde el GitHub Release del repositorio cuando esté disponible.'; return; }
+      triedRelease = true; video.src = release; video.load();
+    });
+    if (cur.vtt) { var tr = document.createElement('track'); tr.kind = 'subtitles'; tr.srclang = 'es'; tr.label = 'Español'; tr.src = cur.vtt; tr.default = true; video.appendChild(tr); }
+    var t = parseFloat(q.get('t') || '0');
+    if (t > 0) video.addEventListener('loadedmetadata', function () { video.currentTime = t; }, { once: true });
+    var act = document.getElementById('actions');
+    act.innerHTML = '<a href="' + release + '">Descargar MP4 (' + Math.round(cur.bytes / 1048576) + ' MB)</a>' + (cur.vtt ? '<a href="' + cur.vtt + '">Subtítulos (VTT)</a>' : '') + '<a href="./">Volver a la web del TFM</a>';
+    var ul = document.getElementById('ch');
+    cur.chapters.forEach(function (c) {
+      var li = document.createElement('li'), b = document.createElement('button');
+      var parts = c.title.split(' · '), top = cur.id.indexOf('tfm-') === 0 && parts.length === 1;
+      b.innerHTML = '<span class="t">' + mmss(c.t) + '</span><span' + (top ? ' class="top"' : '') + '></span>';
+      b.lastChild.textContent = cur.id.indexOf('tfm-') === 0 && parts.length > 1 ? parts.slice(1).join(' · ') : c.title;
+      b.addEventListener('click', function () { video.currentTime = c.t; video.play(); history.replaceState(null, '', '?v=' + cur.id + '&t=' + c.t); });
+      b.dataset.t = c.t; li.appendChild(b); ul.appendChild(li);
+    });
+    video.addEventListener('timeupdate', function () {
+      var bs = ul.querySelectorAll('button'), on = null;
+      bs.forEach(function (b) { if (+b.dataset.t <= video.currentTime + .3) on = b; b.classList.remove('on'); });
+      if (on) on.classList.add('on');
+    });
+    var list = document.getElementById('list');
+    cat.videos.forEach(function (v) {
+      var a = document.createElement('a'); a.href = '?v=' + v.id; if (v.id === cur.id) a.className = 'on';
+      a.innerHTML = '<img alt="" src="' + v.thumb + '"><span><b></b><small>' + mmss(v.duration) + '</small></span>';
+      a.querySelector('b').textContent = v.title; list.appendChild(a);
+    });
+  })(window.TFM_VIDEOS);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+{
+ "schema_version": 1,
+ "diagram_type": "sequence",
+ "meta": {
+  "title": "RRSS Studio · análisis de una app (REQ-001)",
+  "viewBox": [
+   1280,
+   610
+  ],
+  "column_fit": "spread",
+  "quality_profile": "standard"
+ },
+ "participants": [
+  {
+   "id": "op",
+   "type": "external",
+   "label": "Operador",
+   "sublabel": "creador de contenido o equi…"
+  },
+  {
+   "id": "browser",
+   "type": "frontend",
+   "label": "Interfaz web",
+   "sublabel": "PipelineGraph"
+  },
+  {
+   "id": "server",
+   "type": "backend",
+   "label": "Pipeline REQ-001",
+   "sublabel": "engine + bus"
+  },
+  {
+   "id": "target",
+   "type": "external",
+   "label": "App objetivo",
+   "sublabel": "HTML público"
+  },
+  {
+   "id": "github",
+   "type": "cloud",
+   "label": "Código fuente",
+   "sublabel": "carpeta local o GitHub"
+  },
+  {
+   "id": "claudecli",
+   "type": "backend",
+   "label": "Claude Code CLI",
+   "sublabel": "subproceso"
+  },
+  {
+   "id": "db",
+   "type": "database",
+   "label": "SQLite",
+   "sublabel": "Prisma"
+  }
+ ],
+ "messages": [
+  {
+   "id": "m1",
+   "from": "op",
+   "to": "browser",
+   "y": 170,
+   "label": "URL, contexto y fuente de código",
+   "variant": "default"
+  },
+  {
+   "id": "m2",
+   "from": "browser",
+   "to": "server",
+   "y": 200,
+   "label": "POST /api/projects → crea Run",
+   "variant": "default"
+  },
+  {
+   "id": "m3",
+   "from": "server",
+   "to": "browser",
+   "y": 230,
+   "label": "EventSource /api/runs/:id/stream (SSE)",
+   "variant": "return"
+  },
+  {
+   "id": "m4",
+   "from": "server",
+   "to": "target",
+   "y": 260,
+   "label": "Nodo «Crawl web»: fetch del HTML",
+   "variant": "default"
+  },
+  {
+   "id": "m5",
+   "from": "server",
+   "to": "github",
+   "y": 290,
+   "label": "Nodo «Análisis código»: clone --depth 1 o lectura local",
+   "variant": "default"
+  },
+  {
+   "id": "m6",
+   "from": "server",
+   "to": "claudecli",
+   "y": 320,
+   "label": "Nodo «Mapa funcional»: crawl + pistas de navegación",
+   "variant": "default"
+  },
+  {
+   "id": "m7",
+   "from": "claudecli",
+   "to": "server",
+   "y": 350,
+   "label": "árbol de 3 niveles con evidencias (JSON)",
+   "variant": "return"
+  },
+  {
+   "id": "m9",
+   "from": "server",
+   "to": "claudecli",
+   "y": 380,
+   "label": "Nodo «Fusión IA → Dossier»",
+   "variant": "default"
+  },
+  {
+   "id": "m10",
+   "from": "claudecli",
+   "to": "server",
+   "y": 410,
+   "label": "propuesta de valor, público, funciones, CTA",
+   "variant": "return"
+  },
+  {
+   "id": "m11",
+   "from": "server",
+   "to": "db",
+   "y": 440,
+   "label": "Guarda NavigationMap y Dossier (versionados)",
+   "variant": "default"
+  },
+  {
+   "id": "m12",
+   "from": "server",
+   "to": "browser",
+   "y": 470,
+   "label": "fin de nodo → el grafo se ilumina",
+   "variant": "return"
+  },
+  {
+   "id": "m13",
+   "from": "browser",
+   "to": "op",
+   "y": 500,
+   "label": "Mapa y dossier editables y aprobables",
+   "variant": "return"
+  }
+ ]
+}

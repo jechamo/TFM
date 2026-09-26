@@ -1,0 +1,8 @@
+| Servicio | Tipo | Función | Desde | Hacia | Protocolo | Auth | Datos intercambiados | Evidencia |
+|---|---|---|---|---|---|---|---|---|
+| **OpenAI API** | IA | Texto, visión, imagen, edición de imagen, transcripción y asistente conversacional | Edge Functions | OpenAI API | HTTPS REST · síncrono | OPENAI_API_KEY (secreto de servidor) | perfil, encargo, fotos, audio → JSON, texto, imágenes | `supabase/functions/_shared/openai-models.ts` |
+| **Stripe** | Pagos | Checkout, portal de cliente y estado de suscripciones | Edge Functions | Stripe | SDK stripe@14 sobre HTTPS · síncrono | clave secreta de Stripe | cliente, precio, suscripción | `supabase/functions/create-checkout/` |
+| **Resend** | Email | Envío del formulario de contacto por email | Edge Functions | Resend | HTTPS REST · síncrono | RESEND_API_KEY | remitente, asunto, mensaje | `supabase/functions/send-contact-email/` |
+| **Mapbox** | Mapas | Mapas y geocodificación para gimnasios, zonas de entrenador y búsqueda | Cliente web y móvil | Mapbox | HTTPS · Mapbox GL · síncrono | token público restringido | coordenadas, búsqueda de lugar | `src/components/maps/GymLocationPicker.tsx:129` |
+| **Sentry** | Observabilidad | Captura de errores saneados y diagnóstico opcional con consentimiento | Cliente web y móvil | Sentry | SDK Sentry · asíncrono | DSN público | evento sin PII; Replay solo con consentimiento | `src/sentry.ts` |
+| **n8n (Elestio)** | Automatización | Automatización externa que recibe las nuevas altas | Cliente web y móvil | n8n (Elestio) | HTTPS POST · asíncrono | URL no autenticada | datos del registro | `src/hooks/useAuth.tsx:264` |

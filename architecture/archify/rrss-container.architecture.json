@@ -1,0 +1,535 @@
+{
+ "schema_version": 1,
+ "diagram_type": "architecture",
+ "meta": {
+  "title": "RRSS Studio (LeadView) · arquitectura de contenedores",
+  "quality_profile": "standard",
+  "viewBox": [
+   1900,
+   1230
+  ]
+ },
+ "components": [
+  {
+   "id": "op",
+   "type": "external",
+   "label": "Operador",
+   "sublabel": "creador de contenido o equipo de prod…",
+   "pos": [
+    40,
+    480
+   ],
+   "size": [
+    220,
+    110
+   ]
+  },
+  {
+   "id": "browser",
+   "type": "frontend",
+   "label": "Interfaz web",
+   "sublabel": "React 19 · App Router · Tailwind 4 ·…",
+   "pos": [
+    320,
+    470
+   ],
+   "size": [
+    240,
+    130
+   ],
+   "brand": "react"
+  },
+  {
+   "id": "db",
+   "type": "database",
+   "label": "SQLite",
+   "sublabel": "Prisma 6 · 11 modelos",
+   "pos": [
+    660,
+    190
+   ],
+   "size": [
+    220,
+    92
+   ],
+   "brand": "sqlite"
+  },
+  {
+   "id": "vault",
+   "type": "security",
+   "label": "Vault cifrado",
+   "sublabel": "AES-256-GCM · clave local · lock",
+   "pos": [
+    910,
+    190
+   ],
+   "size": [
+    220,
+    92
+   ]
+  },
+  {
+   "id": "files",
+   "type": "database",
+   "label": "Almacén de medios",
+   "sublabel": "data/ · vídeos, logos, MIX, jobs de c…",
+   "pos": [
+    1160,
+    190
+   ],
+   "size": [
+    240,
+    92
+   ]
+  },
+  {
+   "id": "server",
+   "type": "backend",
+   "label": "Servidor Next.js",
+   "sublabel": "Next.js 15 · 52 route.ts · REST + SSE…",
+   "pos": [
+    640,
+    380
+   ],
+   "size": [
+    760,
+    300
+   ],
+   "brand": "next-js"
+  },
+  {
+   "id": "claudecli",
+   "type": "backend",
+   "label": "Claude Code CLI",
+   "sublabel": "claude -p · JSON",
+   "pos": [
+    640,
+    790
+   ],
+   "size": [
+    145,
+    104
+   ],
+   "brand": "claude"
+  },
+  {
+   "id": "playwright",
+   "type": "backend",
+   "label": "Playwright",
+   "sublabel": "Chromium",
+   "pos": [
+    794,
+    790
+   ],
+   "size": [
+    145,
+    104
+   ]
+  },
+  {
+   "id": "ffmpeg",
+   "type": "backend",
+   "label": "FFmpeg · ffprobe",
+   "sublabel": "montaje",
+   "pos": [
+    948,
+    790
+   ],
+   "size": [
+    145,
+    104
+   ]
+  },
+  {
+   "id": "ytdlp",
+   "type": "backend",
+   "label": "yt-dlp",
+   "sublabel": "descargas",
+   "pos": [
+    1102,
+    790
+   ],
+   "size": [
+    145,
+    104
+   ]
+  },
+  {
+   "id": "whisper",
+   "type": "backend",
+   "label": "whisper.cpp",
+   "sublabel": "transcripción",
+   "pos": [
+    1256,
+    790
+   ],
+   "size": [
+    144,
+    104
+   ]
+  },
+  {
+   "id": "anthropic",
+   "type": "external",
+   "label": "Anthropic · Claude",
+   "sublabel": "sesión del operador · WebSearch/WebFe…",
+   "pos": [
+    580,
+    1010
+   ],
+   "size": [
+    260,
+    100
+   ],
+   "brand": "anthropic"
+  },
+  {
+   "id": "social",
+   "type": "external",
+   "label": "YouTube · TikTok · Instagram",
+   "sublabel": "fuentes de vídeo · subida asistida",
+   "pos": [
+    1060,
+    1010
+   ],
+   "size": [
+    260,
+    100
+   ]
+  },
+  {
+   "id": "gemini",
+   "type": "external",
+   "label": "Google Gemini",
+   "sublabel": "generateContent · comprensión de vídeo",
+   "pos": [
+    1580,
+    190
+   ],
+   "size": [
+    280,
+    92
+   ],
+   "brand": "google-gemini"
+  },
+  {
+   "id": "fal",
+   "type": "external",
+   "label": "fal.ai",
+   "sublabel": "cola de vídeo · 9 modelos",
+   "pos": [
+    1580,
+    302
+   ],
+   "size": [
+    280,
+    92
+   ]
+  },
+  {
+   "id": "heygen",
+   "type": "external",
+   "label": "HeyGen",
+   "sublabel": "API v3 · avatar y voz",
+   "pos": [
+    1580,
+    414
+   ],
+   "size": [
+    280,
+    92
+   ]
+  },
+  {
+   "id": "eleven",
+   "type": "external",
+   "label": "ElevenLabs",
+   "sublabel": "TTS · eleven_multilingual_v2",
+   "pos": [
+    1580,
+    526
+   ],
+   "size": [
+    280,
+    92
+   ]
+  },
+  {
+   "id": "scrape",
+   "type": "external",
+   "label": "Scrape Creators",
+   "sublabel": "búsqueda y métricas de virales",
+   "pos": [
+    1580,
+    700
+   ],
+   "size": [
+    280,
+    92
+   ]
+  },
+  {
+   "id": "github",
+   "type": "cloud",
+   "label": "GitHub",
+   "sublabel": "git clone · API de usuario",
+   "pos": [
+    1580,
+    812
+   ],
+   "size": [
+    280,
+    92
+   ],
+   "brand": "github"
+  },
+  {
+   "id": "target",
+   "type": "external",
+   "label": "App web objetivo",
+   "sublabel": "la web que se analiza y graba",
+   "pos": [
+    1580,
+    924
+   ],
+   "size": [
+    280,
+    92
+   ]
+  }
+ ],
+ "connections": [
+  {
+   "id": "c1",
+   "from": "op",
+   "to": "browser",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left",
+   "label": "Usa"
+  },
+  {
+   "id": "c2",
+   "from": "browser",
+   "to": "server",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left",
+   "label": "REST + SSE · 127.0.0.1",
+   "labelAt": [
+    584,
+    614
+   ]
+  },
+  {
+   "id": "c3",
+   "from": "server",
+   "to": "db",
+   "variant": "default",
+   "fromSide": "top",
+   "toSide": "bottom",
+   "label": "Prisma"
+  },
+  {
+   "id": "c4",
+   "from": "server",
+   "to": "vault",
+   "variant": "security",
+   "fromSide": "top",
+   "toSide": "bottom",
+   "label": "descifra claves"
+  },
+  {
+   "id": "c5",
+   "from": "server",
+   "to": "files",
+   "variant": "default",
+   "fromSide": "top",
+   "toSide": "bottom",
+   "label": "artefactos"
+  },
+  {
+   "id": "c6",
+   "from": "server",
+   "to": "claudecli",
+   "variant": "default",
+   "fromSide": "bottom",
+   "toSide": "top",
+   "label": "spawn"
+  },
+  {
+   "id": "c7",
+   "from": "server",
+   "to": "playwright",
+   "variant": "default",
+   "fromSide": "bottom",
+   "toSide": "top"
+  },
+  {
+   "id": "c8",
+   "from": "server",
+   "to": "ffmpeg",
+   "variant": "default",
+   "fromSide": "bottom",
+   "toSide": "top"
+  },
+  {
+   "id": "c9",
+   "from": "server",
+   "to": "ytdlp",
+   "variant": "default",
+   "fromSide": "bottom",
+   "toSide": "top"
+  },
+  {
+   "id": "c10",
+   "from": "server",
+   "to": "whisper",
+   "variant": "default",
+   "fromSide": "bottom",
+   "toSide": "top"
+  },
+  {
+   "id": "c11",
+   "from": "claudecli",
+   "to": "anthropic",
+   "variant": "emphasis",
+   "fromSide": "bottom",
+   "toSide": "top",
+   "label": "HTTPS · sesión · del operador"
+  },
+  {
+   "id": "c12",
+   "from": "ytdlp",
+   "to": "social",
+   "variant": "default",
+   "fromSide": "bottom",
+   "toSide": "top",
+   "label": "descarga"
+  },
+  {
+   "id": "c13",
+   "from": "server",
+   "to": "gemini",
+   "variant": "emphasis",
+   "fromSide": "right",
+   "toSide": "left"
+  },
+  {
+   "id": "c14",
+   "from": "server",
+   "to": "fal",
+   "variant": "emphasis",
+   "fromSide": "right",
+   "toSide": "left"
+  },
+  {
+   "id": "c15",
+   "from": "server",
+   "to": "heygen",
+   "variant": "emphasis",
+   "fromSide": "right",
+   "toSide": "left"
+  },
+  {
+   "id": "c16",
+   "from": "server",
+   "to": "eleven",
+   "variant": "emphasis",
+   "fromSide": "right",
+   "toSide": "left",
+   "label": "HTTPS · claves del Vault"
+  },
+  {
+   "id": "c17",
+   "from": "server",
+   "to": "scrape",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left"
+  },
+  {
+   "id": "c18",
+   "from": "server",
+   "to": "github",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left"
+  },
+  {
+   "id": "c19",
+   "from": "server",
+   "to": "target",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left",
+   "label": "crawl HTTP · git · Playwright"
+  }
+ ],
+ "boundaries": [
+  {
+   "kind": "security-group",
+   "label": "Equipo del operador · Windows 11",
+   "wraps": [
+    "browser",
+    "db",
+    "vault",
+    "files",
+    "server",
+    "claudecli",
+    "playwright",
+    "ffmpeg",
+    "ytdlp",
+    "whisper"
+   ],
+   "pad": 22
+  },
+  {
+   "kind": "region",
+   "label": "Proveedores de IA · desde el servidor local",
+   "wraps": [
+    "gemini",
+    "fal",
+    "heygen",
+    "eleven"
+   ],
+   "pad": 22
+  },
+  {
+   "kind": "region",
+   "label": "Servicios y webs externas",
+   "wraps": [
+    "scrape",
+    "github",
+    "target"
+   ],
+   "pad": 22
+  },
+  {
+   "kind": "region",
+   "label": "IA vía sesión de Claude Code",
+   "wraps": [
+    "anthropic"
+   ],
+   "pad": 22
+  },
+  {
+   "kind": "region",
+   "label": "Redes sociales",
+   "wraps": [
+    "social"
+   ],
+   "pad": 22
+  }
+ ],
+ "cards": [
+  {
+   "dot": "cyan",
+   "title": "Fuente",
+   "items": [
+    "jechamo/rrss-automation-app@f6510e0",
+    "Modelo: architecture/model/rrss.json"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,345 @@
+{
+ "schema_version": 1,
+ "diagram_type": "architecture",
+ "meta": {
+  "title": "Sistema SDD/TDD · componentes",
+  "quality_profile": "standard",
+  "viewBox": [
+   1520,
+   1000
+  ]
+ },
+ "components": [
+  {
+   "id": "dev",
+   "type": "external",
+   "label": "Desarrollador",
+   "sublabel": "pide, revisa y aprueba",
+   "pos": [
+    40,
+    430
+   ],
+   "size": [
+    200,
+    120
+   ]
+  },
+  {
+   "id": "llm",
+   "type": "external",
+   "label": "Modelos de lenguaje",
+   "sublabel": "Anthropic · OpenAI · Google (según ho…",
+   "pos": [
+    300,
+    190
+   ],
+   "size": [
+    240,
+    96
+   ]
+  },
+  {
+   "id": "host",
+   "type": "cloud",
+   "label": "Entorno de agentes",
+   "sublabel": "Claude Code · Copilot/VS Code · Curso…",
+   "pos": [
+    300,
+    420
+   ],
+   "size": [
+    240,
+    140
+   ]
+  },
+  {
+   "id": "installer",
+   "type": "backend",
+   "label": "Instalador",
+   "sublabel": "init · check · update · greenfield /…",
+   "pos": [
+    40,
+    700
+   ],
+   "size": [
+    200,
+    110
+   ]
+  },
+  {
+   "id": "router",
+   "type": "external",
+   "label": "Router operativo",
+   "sublabel": "AGENTS.md · OPERATING-MODEL.md · cont…",
+   "pos": [
+    640,
+    190
+   ],
+   "size": [
+    250,
+    100
+   ]
+  },
+  {
+   "id": "githooks",
+   "type": "cloud",
+   "label": "Git hooks y CI",
+   "sublabel": "pre-commit · pre-push · sdd-gates.yml…",
+   "pos": [
+    1230,
+    190
+   ],
+   "size": [
+    250,
+    100
+   ],
+   "brand": "github-actions"
+  },
+  {
+   "id": "agents",
+   "type": "frontend",
+   "label": "20 agentes",
+   "sublabel": ".claude/agents canónicos + adaptadore…",
+   "pos": [
+    640,
+    430
+   ],
+   "size": [
+    250,
+    110
+   ]
+  },
+  {
+   "id": "skills",
+   "type": "database",
+   "label": "27 skills",
+   "sublabel": ".agents/skills · estándar Agent Skills",
+   "pos": [
+    935,
+    430
+   ],
+   "size": [
+    250,
+    110
+   ]
+  },
+  {
+   "id": "cli",
+   "type": "backend",
+   "label": "CLI determinista",
+   "sublabel": "sdd-project.mjs · check-sdd.mjs · sca…",
+   "pos": [
+    1230,
+    430
+   ],
+   "size": [
+    250,
+    110
+   ]
+  },
+  {
+   "id": "hooks",
+   "type": "security",
+   "label": "Hooks del host",
+   "sublabel": "session-context · sdd-router · guard-…",
+   "pos": [
+    640,
+    670
+   ],
+   "size": [
+    250,
+    110
+   ]
+  },
+  {
+   "id": "config",
+   "type": "security",
+   "label": "Contratos .sdd/",
+   "sublabel": "territories · checks · circuit · docs…",
+   "pos": [
+    935,
+    670
+   ],
+   "size": [
+    250,
+    110
+   ]
+  },
+  {
+   "id": "artefacts",
+   "type": "external",
+   "label": "Expediente durable",
+   "sublabel": "docs/specs/NNN · ADR · bitácora · exe…",
+   "pos": [
+    1230,
+    670
+   ],
+   "size": [
+    250,
+    110
+   ]
+  }
+ ],
+ "connections": [
+  {
+   "id": "c1",
+   "from": "dev",
+   "to": "host",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left",
+   "label": "Pide y aprueba",
+   "labelAt": [
+    270,
+    574
+   ]
+  },
+  {
+   "id": "c2",
+   "from": "host",
+   "to": "llm",
+   "variant": "emphasis",
+   "fromSide": "top",
+   "toSide": "bottom",
+   "label": "inferencia"
+  },
+  {
+   "id": "c3",
+   "from": "host",
+   "to": "router",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left",
+   "label": "lee el contrato"
+  },
+  {
+   "id": "c4",
+   "from": "host",
+   "to": "agents",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left",
+   "label": "delega · ≤ 2 saltos"
+  },
+  {
+   "id": "c5",
+   "from": "host",
+   "to": "hooks",
+   "variant": "dashed",
+   "fromSide": "bottom",
+   "toSide": "left",
+   "label": "eventos del ciclo de vida"
+  },
+  {
+   "id": "c6",
+   "from": "agents",
+   "to": "skills",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left",
+   "label": "sigue"
+  },
+  {
+   "id": "c7",
+   "from": "skills",
+   "to": "cli",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left",
+   "label": "ejecuta"
+  },
+  {
+   "id": "c8",
+   "from": "githooks",
+   "to": "cli",
+   "variant": "default",
+   "fromSide": "bottom",
+   "toSide": "top",
+   "label": "run --fast / --slow",
+   "labelAt": [
+    1355,
+    304
+   ]
+  },
+  {
+   "id": "c9",
+   "from": "cli",
+   "to": "artefacts",
+   "variant": "default",
+   "fromSide": "bottom",
+   "toSide": "top",
+   "label": "scaffold · trazas · evidencia",
+   "labelAt": [
+    1355,
+    554
+   ]
+  },
+  {
+   "id": "c10",
+   "from": "hooks",
+   "to": "config",
+   "variant": "security",
+   "fromSide": "right",
+   "toSide": "left",
+   "label": "territorios",
+   "labelAt": [
+    913,
+    794
+   ]
+  },
+  {
+   "id": "c11",
+   "from": "hooks",
+   "to": "artefacts",
+   "variant": "default",
+   "fromSide": "bottom",
+   "toSide": "bottom",
+   "label": "execution-log.jsonl (append-only)"
+  },
+  {
+   "id": "c12",
+   "from": "cli",
+   "to": "config",
+   "variant": "default",
+   "fromSide": "left",
+   "toSide": "right",
+   "label": "checks · circuito"
+  }
+ ],
+ "boundaries": [
+  {
+   "kind": "region",
+   "label": "Repositorio del proyecto · kit instalado",
+   "wraps": [
+    "router",
+    "githooks",
+    "agents",
+    "skills",
+    "cli",
+    "hooks",
+    "config",
+    "artefacts"
+   ],
+   "pad": 22
+  },
+  {
+   "kind": "security-group",
+   "label": "Entorno del desarrollador",
+   "wraps": [
+    "llm",
+    "host"
+   ],
+   "pad": 22
+  }
+ ],
+ "cards": [
+  {
+   "dot": "cyan",
+   "title": "Fuente",
+   "items": [
+    "jechamo/Estructura_inicial_claude@d4a16d3",
+    "Modelo: architecture/model/sdd.json"
+   ]
+  }
+ ]
+}

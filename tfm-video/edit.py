@@ -145,8 +145,11 @@ def render_graphics(cfg: dict, gfx: Path) -> None:
     outro = cfg.get("outro", {})
     jobs.append({"name": "card_outro", "kind": "outro", "dur": outro.get("dur", 5),
                  "params": {"title": outro.get("title", "¡Gracias!"), "sub": outro.get("sub", "")}})
+    render_jobs(jobs, gfx)
 
-    # Caché: solo se vuelve a renderizar lo que no existe o cuyos parámetros han cambiado.
+
+def render_jobs(jobs: list[dict], gfx: Path) -> None:
+    """Renderiza con render.cjs los trabajos que falten o cuyos parámetros hayan cambiado (caché por firma)."""
     todo = []
     for j in jobs:
         j["params"] = {k: str(v) for k, v in j.get("params", {}).items()}   # van en la query string

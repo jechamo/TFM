@@ -1,0 +1,63 @@
+{
+  "name": "rrss-1min",
+  "final_dir": "../../media/final/rrss-1min",
+  "raw": "../../media/Originales/video/RRSS.mp4",
+  "layout": "screen",
+  "sfx": "../../media/assets/whoosh.ogg",
+  "callouts": [],
+  "voice": "../../media/Originales/voz/RRSS_Corto.mp3",
+  "script": "../voz/rrss-studio.md#0",
+  "music": {
+    "file": "../../media/Originales/Musica/RRSS_song.mp3",
+    "_comentario": "El drop (15,65 s) cae con la cartela (6,74 s). En el compás 32 salta al 104 (clímax final).",
+    "parts": [
+      [8.91, 61.67],
+      [199.71, 219.5]
+    ],
+    "db": -9,
+    "fade_out": 1.0
+  },
+  "duration": 70.2,
+  "cards": [
+    {"kind": "intro", "t": 6.7, "dur": 4.6, "title": "*LeadView*", "sub": "Del código a las redes sociales"},
+    {"kind": "outro", "t": 63.5, "dur": 6.7, "title": "Del código… a las *redes*", "sub": "LeadView · RRSS Studio"}
+  ],
+  "shots": [
+    [0.0, 88.5, 94.0],
+    [4.7, 94.0, 96.5],
+    [6.7, 0.0],
+    [11.3, 0.0, 1.0],
+    [11.9, 8.5, 12.5],
+    [14.8, 13.0, 18.0],
+    [17.2, 486.0, 490.0],
+    [20.3, 490.0, 495.0],
+    [23.8, 47.0, 53.0],
+    [29.0, 72.0, 75.0],
+    [31.0, 78.0, 81.0],
+    [32.5, 92.0, 96.5],
+    [36.0, 104.5, 108.0],
+    [38.3, 270.0, 274.0],
+    [40.0, 282.0, 287.0],
+    [47.2, 178.0, 181.5],
+    [49.5, 190.0, 194.0],
+    [51.3, 216.0, 220.0],
+    [53.2, 231.0, 235.0],
+    [58.6, 486.0, 488.0],
+    [60.3, 618.0, 620.5],
+    [61.9, 138.0, 140.0],
+    [63.5, 140.0]
+  ],
+  "zooms": [
+    {"t0": 12.0, "t1": 14.7, "cx": 0.5, "cy": 0.25, "factor": 1.4, "ramp": 0.8},
+    {"t0": 40.1, "t1": 47.1, "cx": 0.5, "cy": 0.35, "factor": 1.5, "ramp": 1.0},
+    {"t0": 53.3, "t1": 58.5, "cx": 0.4, "cy": 0.4, "factor": 1.35, "ramp": 1.0}
+  ],
+  "chapters": [
+    {"t": 0, "title": "Introducción"},
+    {"t": 11.9, "title": "Analiza tu app"},
+    {"t": 23.8, "title": "Competencia, clientes y virales"},
+    {"t": 36.0, "title": "Crea contenido"},
+    {"t": 47.2, "title": "Laboratorio de clips"},
+    {"t": 63.5, "title": "Cierre"}
+  ]
+}

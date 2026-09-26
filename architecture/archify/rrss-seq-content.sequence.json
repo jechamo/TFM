@@ -1,0 +1,147 @@
+{
+ "schema_version": 1,
+ "diagram_type": "sequence",
+ "meta": {
+  "title": "RRSS Studio · de un guion a un vídeo vertical",
+  "viewBox": [
+   1280,
+   580
+  ],
+  "column_fit": "spread",
+  "quality_profile": "standard"
+ },
+ "participants": [
+  {
+   "id": "op",
+   "type": "external",
+   "label": "Operador",
+   "sublabel": "creador de contenido o equi…"
+  },
+  {
+   "id": "browser",
+   "type": "frontend",
+   "label": "Interfaz web",
+   "sublabel": "GenerateContentModal"
+  },
+  {
+   "id": "server",
+   "type": "backend",
+   "label": "Servidor local",
+   "sublabel": "planning · pricing · req005…"
+  },
+  {
+   "id": "claudecli",
+   "type": "backend",
+   "label": "Claude Code CLI",
+   "sublabel": "guion y plan"
+  },
+  {
+   "id": "fal",
+   "type": "external",
+   "label": "fal.ai / HeyGen",
+   "sublabel": "vídeo o avatar"
+  },
+  {
+   "id": "eleven",
+   "type": "external",
+   "label": "ElevenLabs",
+   "sublabel": "locución"
+  },
+  {
+   "id": "ffmpeg",
+   "type": "backend",
+   "label": "FFmpeg",
+   "sublabel": "montaje local"
+  }
+ ],
+ "messages": [
+  {
+   "id": "m1",
+   "from": "op",
+   "to": "browser",
+   "y": 170,
+   "label": "Elige un viral a reinterpretar o una función de su app",
+   "variant": "default"
+  },
+  {
+   "id": "m2",
+   "from": "browser",
+   "to": "server",
+   "y": 200,
+   "label": "POST …/content/plan",
+   "variant": "default"
+  },
+  {
+   "id": "m3",
+   "from": "server",
+   "to": "claudecli",
+   "y": 230,
+   "label": "Guion, escaleta y prompts visuales",
+   "variant": "default"
+  },
+  {
+   "id": "m4",
+   "from": "claudecli",
+   "to": "server",
+   "y": 260,
+   "label": "plan (JSON)",
+   "variant": "return"
+  },
+  {
+   "id": "m5",
+   "from": "server",
+   "to": "browser",
+   "y": 290,
+   "label": "Plan audiovisual + coste estimado",
+   "variant": "return"
+  },
+  {
+   "id": "m6",
+   "from": "op",
+   "to": "browser",
+   "y": 320,
+   "label": "Revisa prompts y aprueba el gasto",
+   "variant": "security"
+  },
+  {
+   "id": "m7",
+   "from": "browser",
+   "to": "server",
+   "y": 350,
+   "label": "POST …/content/run",
+   "variant": "default"
+  },
+  {
+   "id": "m8",
+   "from": "server",
+   "to": "fal",
+   "y": 380,
+   "label": "Cortes (cola + polling) o vídeo de avatar",
+   "variant": "emphasis"
+  },
+  {
+   "id": "m9",
+   "from": "server",
+   "to": "eleven",
+   "y": 410,
+   "label": "Texto → locucion.mp3",
+   "variant": "emphasis"
+  },
+  {
+   "id": "m10",
+   "from": "server",
+   "to": "ffmpeg",
+   "y": 440,
+   "label": "Montaje 9:16 + subtítulos; ffprobe valida",
+   "variant": "default"
+  },
+  {
+   "id": "m11",
+   "from": "server",
+   "to": "browser",
+   "y": 470,
+   "label": "Pieza lista en la bandeja",
+   "variant": "return"
+  }
+ ]
+}

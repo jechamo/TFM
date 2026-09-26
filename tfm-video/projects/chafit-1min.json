@@ -1,0 +1,74 @@
+{
+  "name": "chafit-1min",
+  "final_dir": "../../media/final/chafit-1min",
+  "raw": "../../media/Originales/video/Chafit.mp4",
+  "layout": "phone",
+  "phone_crop": [0, 0],
+  "sfx": "../../media/assets/whoosh.ogg",
+  "voice": "../../media/Originales/voz/chafit_corto.mp3",
+  "script": "../voz/chafit.md#0",
+  "music": {
+    "file": "../../media/Originales/Musica/chafit song.mp3",
+    "_comentario": "El drop (18,82 s) cae con la cartela (4,2 s). En el compás 24 salta al 61 (drop final), que llega con la foto del plato; el golpe final cae tras la voz.",
+    "parts": [
+      [14.62, 44.6],
+      [112.75, 150.0]
+    ],
+    "db": -8,
+    "fade_out": 1.0
+  },
+  "duration": 67.2,
+  "cards": [
+    {"kind": "intro", "t": 4.2, "dur": 4.4, "title": "*Chafit*", "sub": "Tu rutina, tu dieta y tu entrenador"},
+    {"kind": "outro", "t": 58.2, "dur": 9.0, "title": "Tu entrenamiento, al *siguiente nivel*", "sub": "chafit.es · Web, iPhone y Android"}
+  ],
+  "shots": [
+    [0.0, 30.0, 34.2],
+    [4.2, 12.0],
+    [8.6, 10.0, 11.0],
+    [9.5, 23.6, 25.0],
+    [10.7, 26.0, 28.2],
+    [12.9, 32.0, 34.0],
+    [14.8, 37.6, 39.6],
+    [16.8, 42.0, 43.9],
+    [18.7, 54.6, 58.0],
+    [22.2, 116.0, 121.4],
+    [27.6, 136.0, 139.0],
+    [29.3, 157.0, 160.0],
+    [31.2, 162.0, 170.0],
+    [34.0, 174.4, 181.0],
+    [36.9, 60.0, 62.0],
+    [37.7, 14.0, 16.0],
+    [38.6, 186.0, 188.4],
+    [41.2, 194.0, 199.0],
+    [44.3, 278.0, 280.2],
+    [46.4, 286.0, 289.0],
+    [49.1, 352.0, 354.0],
+    [51.2, 399.0, 404.0],
+    [53.5, 442.0, 445.6],
+    [56.0, 459.6, 461.8],
+    [58.2, 485.3]
+  ],
+  "zooms": [
+    {"t0": 22.3, "t1": 27.5, "cx": 0.35, "cy": 0.72, "factor": 1.35, "ramp": 1.0},
+    {"t0": 53.6, "t1": 55.9, "cx": 0.5, "cy": 0.25, "factor": 1.35, "ramp": 0.8}
+  ],
+  "callouts": [
+    {"t0": 8.8, "t1": 12.7, "kicker": "Entrenar", "title": "Elige el *día*", "sub": "Calentamiento con cuenta atrás"},
+    {"t0": 12.9, "t1": 22.0, "kicker": "Ejecución", "title": "Serie a *serie*", "sub": "Peso, descanso y progreso guardado"},
+    {"t0": 22.4, "t1": 27.4, "kicker": "Cambio IA", "title": "¿Máquina *ocupada*?", "sub": "Cambia el ejercicio con IA"},
+    {"t0": 27.8, "t1": 36.7, "kicker": "Nutrición", "title": "Foto al *plato*", "sub": "Calorías y macros calculados por IA"},
+    {"t0": 37.1, "t1": 44.1, "kicker": "Progreso", "title": "Logros y *rankings*", "sub": "Peso, sesiones y retos"},
+    {"t0": 44.5, "t1": 48.9, "kicker": "Ayuda", "title": "Entrenador y *asistente*", "sub": "Chat directo y asistente IA"},
+    {"t0": 49.3, "t1": 53.3, "kicker": "Entrenadores", "title": "Clientes y *mapa*", "sub": "Tus clientes y tus zonas de trabajo"},
+    {"t0": 53.7, "t1": 58.0, "kicker": "Gimnasios", "title": "Todo tu *centro*", "sub": "Entrenadores, alumnos y rendimiento"}
+  ],
+  "chapters": [
+    {"t": 0, "title": "Introducción"},
+    {"t": 8.6, "title": "Entrenar"},
+    {"t": 27.6, "title": "Nutrición"},
+    {"t": 36.9, "title": "Progreso y ayuda"},
+    {"t": 49.1, "title": "Entrenadores y gimnasios"},
+    {"t": 58.2, "title": "Cierre"}
+  ]
+}

@@ -1,0 +1,36 @@
+# Checklist de entrega
+
+> La fecha del requisito original (20/07/2026) se conserva solo como referencia histórica.
+
+## Requisitos oficiales
+
+| Requisito | Estado | Dónde |
+|---|---|---|
+| README completo (descripción, stack, instalación, ejecución, estructura, funcionalidades, arquitectura, integraciones, demo, URLs) | ✅ | [`README.md`](../../README.md) |
+| Código fuente en GitHub | ✅ sistema y RRSS públicos · ⚠️ ChaFit e ICG Vault privados | [enlaces](../../README.md#repositorios) |
+| Versión desplegada | ✅ chafit.es · icgvault.es · web del sistema · web del TFM (tras publicar) | README |
+| Slides | ✅ generadas · ⏳ URL pública tras publicar | `site/slides/` |
+| Vídeo | ✅ montado (16:30 y 8:08) · ⏳ URL pública tras subir | `site/video.html`, `media/final/tfm-*` |
+| Usuario y contraseña DEMO | ⏳ en el formulario privado | [criterio](../security/security.md#credenciales-demo-criterio) |
+
+## Formulario final
+
+| Campo | Valor |
+|---|---|
+| Nombre completo | Jorge Chamorro *(completar segundo apellido si el formulario lo pide)* |
+| Email | *(el del autor)* |
+| URL GitHub | https://github.com/jechamo/TFM |
+| URL despliegue | https://jechamo.github.io/TFM/ (web del TFM) · https://chafit.es · https://icgvault.es |
+| URL slides | https://jechamo.github.io/TFM/slides/ |
+| URL vídeo | https://jechamo.github.io/TFM/video.html?v=tfm-completo *(o la URL de YouTube si se sube allí)* |
+| Usuario DEMO | *(ver `docs/delivery/author-private.md`, no versionado)* |
+| Contraseña DEMO | *(ídem)* |
+
+## Antes de enviar
+
+- [ ] Publicar vídeos (GitHub Release `media-v1`) y web/slides (push de la rama con Pages activo).
+- [ ] Comprobar que `https://jechamo.github.io/TFM/`, `/slides/` y `/video.html` cargan y reproducen.
+- [ ] Dar acceso de lectura al tribunal a `chafit360` e `icgbolt`, o decidir hacerlos públicos tras corregir las críticas.
+- [ ] Probar el login de las cuentas demo en web y móvil.
+- [ ] Confirmar con el tutor que la narración sintética es aceptable (o grabar la introducción con voz propia).
+- [ ] Revisar [`TFM_DELIVERY_STATUS.md`](../../TFM_DELIVERY_STATUS.md).

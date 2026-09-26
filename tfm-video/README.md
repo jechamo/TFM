@@ -60,6 +60,18 @@ python edit.py project.json --only-finish      # rehace solo audio y subtítulos
 ```
 
 Ejemplo comentado de proyecto: [`project.example.json`](project.example.json).
+
+### Vídeos con locución
+
+`narrated.py` monta un vídeo a partir de una locución ya grabada: los tiempos son del vídeo final y el metraje se
+cuadra con la voz (cada plano acelera, ralentiza o congela la grabación para durar lo que dura su frase).
+La música se encadena en trozos cortados en compás y baja sola bajo la voz; los subtítulos salen del guion
+(`voz/icg-vault.md`) con los tiempos que da Whisper, así que los nombres propios quedan bien escritos.
+
+```bash
+python narrated.py projects/icg-vault-1min.json --draft
+python narrated.py projects/icg-vault-4min.json
+```
 Proyecto listo para el clip de ICG Vault: [`projects/icg-vault.json`](projects/icg-vault.json) (pasos en [`EN-CASA.md`](EN-CASA.md)).
 
 ## Música y efectos

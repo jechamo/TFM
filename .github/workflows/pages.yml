@@ -1,11 +1,13 @@
-name: Publicar slides
+name: Publicar web del TFM
 
-# Publica la carpeta slides/ en GitHub Pages. Requiere activar una vez
-# Settings → Pages → Source: GitHub Actions.
+# Publica en GitHub Pages la web del TFM (site/), las slides, los diagramas y los vídeos.
+# Los MP4 no están en git (superan el límite de 100 MB): se descargan del GitHub Release
+# indicado en site/data/videos.json. Requiere Settings → Pages → Source: GitHub Actions.
 on:
   push:
     branches: [main, claude/wonderful-mayer-8d0vkf]
-    paths: ["slides/**", ".github/workflows/pages.yml"]
+    paths: ["site/**", "architecture/exported/**", "tools/build-site.mjs", ".github/workflows/pages.yml"]
+  # Tras crear o actualizar el release de vídeos, relanzar a mano (Actions → Run workflow).
   workflow_dispatch:
 
 permissions:
@@ -25,9 +27,24 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
       - uses: actions/configure-pages@v5
+      - name: Ensamblar el sitio
+        run: node tools/build-site.mjs
+      - name: Descargar los vídeos del release
+        # Si el release todavía no existe, la web se publica igual y el reproductor lo indica.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG=$(node -p "require('./site/data/videos.json').release")
+          mkdir -p _site/videos
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir _site/videos --pattern '*.mp4' --clobber
+          ls -la _site/videos
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: slides
+          path: _site
       - id: deployment
         uses: actions/deploy-pages@v4

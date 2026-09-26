@@ -1,0 +1,1881 @@
+{
+ "id": "chafit",
+ "name": "ChaFit",
+ "summary": "Plataforma de fitness para clientes, entrenadores y gimnasios con IA generativa. SPA React empaquetada para web/PWA, iOS y Android, sobre Supabase (BaaS) con 28 Edge Functions.",
+ "source": {
+  "repo": "jechamo/chafit360",
+  "commit": "d18493d",
+  "visibility": "privado",
+  "inspected": "26/09/2026",
+  "release": "35"
+ },
+ "zones": [
+  {
+   "id": "device",
+   "label": "Dispositivo del usuario",
+   "style": "trust",
+   "note": "navegador · iOS · Android"
+  },
+  {
+   "id": "supabase",
+   "label": "Supabase · proyecto gestionado",
+   "style": "platform",
+   "note": "eu-north-1 · Postgres 17"
+  },
+  {
+   "id": "ext-client",
+   "label": "Servicios llamados desde el cliente",
+   "style": "external"
+  },
+  {
+   "id": "ext-server",
+   "label": "Servicios llamados desde el servidor",
+   "style": "external"
+  },
+  {
+   "id": "hosting",
+   "label": "Distribución",
+   "style": "neutral"
+  }
+ ],
+ "elements": [
+  {
+   "id": "users",
+   "type": "person",
+   "name": "Clientes, entrenadores y gimnasios",
+   "tech": "3 roles de negocio",
+   "desc": "Entrenan, planifican, gestionan equipos y alumnos",
+   "evidence": [
+    "src/App.tsx (rutas por rol)",
+    "src/pages/ClientDashboard.tsx",
+    "src/pages/TrainerDashboard.tsx",
+    "src/pages/GymDashboard.tsx"
+   ],
+   "resp": "Usan la app según su rol: entrenar, planificar, gestionar clientes o el centro"
+  },
+  {
+   "id": "admin",
+   "type": "person",
+   "name": "Superusuario",
+   "tech": "rol superuser",
+   "desc": "Configura modelos de IA, límites, costes y catálogo",
+   "evidence": [
+    "src/pages/SuperuserDashboard.tsx"
+   ],
+   "resp": "Gobierna modelos de IA, cupos, costes, retos, códigos y catálogo"
+  },
+  {
+   "id": "system",
+   "type": "product",
+   "name": "ChaFit",
+   "kind": "Sistema",
+   "tech": "web · PWA · iOS · Android · backend Supabase",
+   "brand": null,
+   "evidence": [
+    "README.md",
+    "capacitor.config.ts"
+   ]
+  },
+  {
+   "id": "spa",
+   "type": "webapp",
+   "name": "Cliente web y móvil",
+   "kind": "Contenedor · SPA",
+   "tech": "React 18 · Vite · TypeScript · shadcn/ui · PWA · Capacitor 8",
+   "brand": "react",
+   "zone": "device",
+   "evidence": [
+    "src/App.tsx",
+    "vite.config.ts",
+    "capacitor.config.ts (appId com.chafit.app)"
+   ],
+   "resp": "Interfaz única para web, PWA e iOS/Android; rutas por rol, ejecución de entrenamientos y llamadas a Supabase"
+  },
+  {
+   "id": "native",
+   "type": "device",
+   "name": "APIs del dispositivo",
+   "kind": "Plugins nativos",
+   "tech": "HealthKit / Health Connect · biometría · notificaciones · archivos",
+   "zone": "device",
+   "evidence": [
+    "src/services/healthService.ts",
+    "src/pages/Auth.tsx (NativeBiometric)",
+    "src/hooks/useExcelDownload.tsx"
+   ],
+   "resp": "Acceso a salud, biometría, notificaciones locales y ficheros desde la app nativa"
+  },
+  {
+   "id": "gw",
+   "type": "gateway",
+   "name": "Endpoint del proyecto",
+   "kind": "Pasarela Supabase",
+   "tech": "HTTPS + WebSocket · supabase-js · JWT",
+   "brand": "supabase",
+   "zone": "supabase",
+   "evidence": [
+    "src/integrations/supabase/client.ts"
+   ],
+   "resp": "Punto de entrada HTTPS/WebSocket del proyecto Supabase; enruta a Auth, datos, Storage y funciones"
+  },
+  {
+   "id": "auth",
+   "type": "auth",
+   "name": "Supabase Auth",
+   "tech": "email + contraseña · JWT · 4 roles",
+   "zone": "supabase",
+   "evidence": [
+    "src/hooks/useAuth.tsx",
+    "src/utils/capacitorStorage.ts"
+   ],
+   "resp": "Registro, inicio de sesión, recuperación y emisión de JWT"
+  },
+  {
+   "id": "dataapi",
+   "type": "api",
+   "name": "API de datos",
+   "tech": "PostgREST · RPC · Realtime",
+   "zone": "supabase",
+   "evidence": [
+    "src/pages/Messages.tsx (Realtime)",
+    "src/hooks/useSubscriptionCheck.tsx (RPC)"
+   ],
+   "resp": "Consultas y RPC sobre Postgres bajo RLS; suscripciones en tiempo real"
+  },
+  {
+   "id": "storage",
+   "type": "storage",
+   "name": "Storage",
+   "tech": "bucket exercise-images · miniaturas WebP",
+   "zone": "supabase",
+   "evidence": [
+    "src/components/StorageManager.tsx",
+    "supabase/functions/_shared/thumbnail-service.ts"
+   ],
+   "resp": "Imágenes de ejercicios y miniaturas WebP"
+  },
+  {
+   "id": "edge",
+   "type": "function",
+   "name": "Edge Functions",
+   "kind": "Serverless · 28",
+   "tech": "Deno · TypeScript · IA, pagos, email, miniaturas",
+   "zone": "supabase",
+   "evidence": [
+    "supabase/functions/* (28 directorios)"
+   ],
+   "resp": "Lógica de servidor con secretos: generación con IA, pagos, email, miniaturas y administración"
+  },
+  {
+   "id": "db",
+   "type": "database",
+   "name": "PostgreSQL 17",
+   "tech": "47 tablas · RLS · 52 migraciones · pg_cron · pgmq · pg_net · Vault",
+   "brand": "postgresql",
+   "zone": "supabase",
+   "evidence": [
+    "src/integrations/supabase/types.ts (47 tablas)",
+    "supabase/migrations/ (52)",
+    "supabase/migrations/20260810120000_exercise_thumbnail_pipeline_foundation.sql"
+   ],
+   "resp": "Datos de dominio, políticas RLS, funciones SQL, colas y tareas programadas"
+  },
+  {
+   "id": "openai",
+   "type": "ai",
+   "name": "OpenAI API",
+   "tech": "chat · visión · images · edits · Whisper · Assistants",
+   "brand": "openai",
+   "zone": "ext-server",
+   "evidence": [
+    "supabase/functions/_shared/openai-models.ts:8",
+    "supabase/functions/transcribe-audio/",
+    "supabase/functions/chat-assistant/"
+   ],
+   "resp": "Texto, visión, imagen, edición de imagen, transcripción y asistente conversacional"
+  },
+  {
+   "id": "stripe",
+   "type": "payments",
+   "name": "Stripe",
+   "tech": "Checkout · Customer Portal · suscripciones",
+   "brand": "stripe",
+   "zone": "ext-server",
+   "evidence": [
+    "supabase/functions/create-checkout/ (stripe@14.21.0)",
+    "supabase/functions/customer-portal/",
+    "supabase/functions/check-subscription/"
+   ],
+   "resp": "Checkout, portal de cliente y estado de suscripciones"
+  },
+  {
+   "id": "resend",
+   "type": "email",
+   "name": "Resend",
+   "tech": "API de email transaccional",
+   "zone": "ext-server",
+   "evidence": [
+    "supabase/functions/send-contact-email/ (api.resend.com/emails)"
+   ],
+   "resp": "Envío del formulario de contacto por email"
+  },
+  {
+   "id": "mapbox",
+   "type": "maps",
+   "name": "Mapbox",
+   "tech": "Mapbox GL · Geocoding v5",
+   "zone": "ext-client",
+   "evidence": [
+    "src/components/maps/GymLocationPicker.tsx:129",
+    "src/components/maps/TrainerZoneSelector.tsx:168"
+   ],
+   "resp": "Mapas y geocodificación para gimnasios, zonas de entrenador y búsqueda"
+  },
+  {
+   "id": "sentry",
+   "type": "monitoring",
+   "name": "Sentry",
+   "tech": "errores saneados · Replay con consentimiento",
+   "brand": "sentry",
+   "zone": "ext-client",
+   "evidence": [
+    "src/sentry.ts",
+    "src/observability/sanitize.ts"
+   ],
+   "resp": "Captura de errores saneados y diagnóstico opcional con consentimiento"
+  },
+  {
+   "id": "n8n",
+   "type": "automation",
+   "name": "n8n (Elestio)",
+   "tech": "webhook de nuevas altas",
+   "zone": "ext-client",
+   "evidence": [
+    "src/hooks/useAuth.tsx:264"
+   ],
+   "resp": "Automatización externa que recibe las nuevas altas"
+  },
+  {
+   "id": "vercel",
+   "type": "hosting",
+   "name": "Vercel",
+   "tech": "hosting estático · CDN · Preview → Producción",
+   "brand": "vercel",
+   "evidence": [
+    "vercel.json (rewrite SPA)",
+    "docs/ops/VERCEL-DEPLOYMENT.md",
+    "cabecera Server: Vercel en chafit.es"
+   ],
+   "resp": "Hosting estático del bundle web y CDN"
+  },
+  {
+   "id": "stores",
+   "type": "store",
+   "name": "App Store y Google Play",
+   "tech": "com.chafit.app · versión 35",
+   "evidence": [
+    "src/components/AppStoreBadges.tsx",
+    "package.json (35.0.0)"
+   ],
+   "resp": "Distribución de las apps nativas"
+  },
+  {
+   "id": "github",
+   "type": "repo",
+   "name": "GitHub · chafit360",
+   "tech": "privado · 1 380 commits · 34 PR",
+   "brand": "github",
+   "evidence": [
+    "git rev-list --count HEAD",
+    "git log --grep 'Merge pull request'"
+   ],
+   "resp": "Código fuente y pull requests"
+  },
+  {
+   "id": "author",
+   "type": "host",
+   "name": "Autor + agentes SDD",
+   "kind": "Entorno de desarrollo",
+   "tech": "Claude Code / Codex · Supabase MCP · Xcode · Android Studio",
+   "evidence": [
+    "docs/specs/001-workout-table-contract/evidence.md (despliegue por Supabase MCP)"
+   ],
+   "resp": "Desarrollo con agentes; despliegue de migraciones y funciones por Supabase MCP; builds nativos"
+  },
+  {
+   "id": "chafit-hub",
+   "type": "product",
+   "name": "ChaFit",
+   "kind": "Producto",
+   "tech": "cliente web/móvil + Edge Functions",
+   "evidence": [
+    "ver vista de contenedores"
+   ]
+  },
+  {
+   "id": "health",
+   "type": "device",
+   "name": "HealthKit · Health Connect",
+   "kind": "Sistema operativo",
+   "tech": "cordova-plugin-health",
+   "evidence": [
+    "src/services/healthService.ts"
+   ]
+  }
+ ],
+ "relations": [
+  {
+   "id": "r-use",
+   "from": "users",
+   "to": "spa",
+   "label": "Entrena, planifica y gestiona",
+   "kind": "user",
+   "protocol": "HTTPS / app nativa",
+   "evidence": [
+    "src/App.tsx"
+   ]
+  },
+  {
+   "id": "r-admin",
+   "from": "admin",
+   "to": "spa",
+   "label": "Configura IA, límites y costes",
+   "kind": "user",
+   "protocol": "HTTPS",
+   "evidence": [
+    "src/pages/SuperuserDashboard.tsx"
+   ]
+  },
+  {
+   "id": "r-native",
+   "from": "spa",
+   "to": "native",
+   "label": "Plugins Capacitor",
+   "kind": "local",
+   "protocol": "puente nativo Capacitor",
+   "auth": "permisos del SO",
+   "data": "actividad diaria, credencial biométrica, ficheros Excel",
+   "evidence": [
+    "src/services/healthService.ts"
+   ]
+  },
+  {
+   "id": "r-gw",
+   "from": "spa",
+   "to": "gw",
+   "label": "Consultas, RPC, funciones\ny suscripciones",
+   "kind": "call",
+   "protocol": "HTTPS + WebSocket (supabase-js)",
+   "auth": "clave publicable + JWT de sesión",
+   "data": "entidades de dominio bajo RLS",
+   "evidence": [
+    "src/integrations/supabase/client.ts"
+   ]
+  },
+  {
+   "id": "r-auth",
+   "from": "gw",
+   "to": "auth",
+   "label": "/auth/v1",
+   "kind": "auth",
+   "protocol": "HTTPS",
+   "auth": "credenciales → JWT",
+   "data": "email, contraseña, sesión",
+   "evidence": [
+    "src/hooks/useAuth.tsx"
+   ]
+  },
+  {
+   "id": "r-data",
+   "from": "gw",
+   "to": "dataapi",
+   "label": "/rest/v1 · /realtime/v1",
+   "kind": "call",
+   "protocol": "HTTPS · WebSocket",
+   "auth": "JWT",
+   "data": "rutinas, sesiones, dietas, mensajes",
+   "evidence": [
+    "src/pages/Messages.tsx"
+   ]
+  },
+  {
+   "id": "r-st",
+   "from": "gw",
+   "to": "storage",
+   "label": "/storage/v1",
+   "kind": "call",
+   "protocol": "HTTPS",
+   "auth": "lectura pública del bucket",
+   "data": "ilustraciones y miniaturas",
+   "evidence": [
+    "src/utils/thumbnailResolver.ts"
+   ]
+  },
+  {
+   "id": "r-fn",
+   "from": "gw",
+   "to": "edge",
+   "label": "/functions/v1",
+   "kind": "call",
+   "protocol": "HTTPS",
+   "auth": "JWT del usuario",
+   "data": "perfil, encargo, adjuntos",
+   "evidence": [
+    "src/pages/ClientDashboard.tsx (functions.invoke)"
+   ]
+  },
+  {
+   "id": "r-authdb",
+   "from": "auth",
+   "to": "db",
+   "label": "esquema auth",
+   "kind": "data",
+   "protocol": "SQL interno",
+   "evidence": [
+    "trigger on_auth_user_created (auditoría 23/09)"
+   ]
+  },
+  {
+   "id": "r-db1",
+   "from": "dataapi",
+   "to": "db",
+   "label": "SQL bajo RLS",
+   "kind": "data",
+   "protocol": "SQL",
+   "auth": "rol del JWT + políticas RLS",
+   "evidence": [
+    "supabase/migrations/"
+   ]
+  },
+  {
+   "id": "r-db2",
+   "from": "edge",
+   "to": "db",
+   "label": "SQL (JWT o service role)",
+   "kind": "data",
+   "protocol": "supabase-js en servidor",
+   "auth": "JWT del usuario o clave de servicio",
+   "evidence": [
+    "supabase/functions/_shared/function-utils.ts"
+   ]
+  },
+  {
+   "id": "r-cron",
+   "from": "db",
+   "to": "edge",
+   "label": "pg_cron + pg_net\ninvocan el worker",
+   "kind": "async",
+   "protocol": "HTTP POST desde Postgres",
+   "auth": "secreto guardado en Vault",
+   "data": "lote de tareas de miniatura",
+   "evidence": [
+    "supabase/migrations/20260810130000_activate_exercise_thumbnail_pipeline.sql:70"
+   ]
+  },
+  {
+   "id": "r-st2",
+   "from": "edge",
+   "to": "storage",
+   "label": "Sube imágenes y miniaturas",
+   "kind": "data",
+   "protocol": "Storage API",
+   "auth": "clave de servicio",
+   "data": "PNG/WebP",
+   "evidence": [
+    "supabase/functions/_shared/thumbnail-service.ts:51"
+   ]
+  },
+  {
+   "id": "r-oai",
+   "from": "edge",
+   "to": "openai",
+   "label": "Rutinas, dietas, visión,\nimágenes, voz y asistente",
+   "kind": "ai",
+   "protocol": "HTTPS REST",
+   "auth": "OPENAI_API_KEY (secreto de servidor)",
+   "data": "perfil, encargo, fotos, audio → JSON, texto, imágenes",
+   "evidence": [
+    "supabase/functions/_shared/openai-models.ts"
+   ]
+  },
+  {
+   "id": "r-stripe",
+   "from": "edge",
+   "to": "stripe",
+   "label": "Checkout, portal\ny estado",
+   "kind": "api",
+   "protocol": "SDK stripe@14 sobre HTTPS",
+   "auth": "clave secreta de Stripe",
+   "data": "cliente, precio, suscripción",
+   "evidence": [
+    "supabase/functions/create-checkout/"
+   ]
+  },
+  {
+   "id": "r-resend",
+   "from": "edge",
+   "to": "resend",
+   "label": "Email de contacto",
+   "kind": "api",
+   "protocol": "HTTPS REST",
+   "auth": "RESEND_API_KEY",
+   "data": "remitente, asunto, mensaje",
+   "evidence": [
+    "supabase/functions/send-contact-email/"
+   ]
+  },
+  {
+   "id": "r-mapbox",
+   "from": "spa",
+   "to": "mapbox",
+   "label": "Mapas y geocodificación",
+   "kind": "api",
+   "protocol": "HTTPS · Mapbox GL",
+   "auth": "token público restringido",
+   "data": "coordenadas, búsqueda de lugar",
+   "evidence": [
+    "src/components/maps/GymLocationPicker.tsx:129"
+   ]
+  },
+  {
+   "id": "r-sentry",
+   "from": "spa",
+   "to": "sentry",
+   "label": "Errores saneados",
+   "kind": "async",
+   "protocol": "SDK Sentry",
+   "auth": "DSN público",
+   "data": "evento sin PII; Replay solo con consentimiento",
+   "evidence": [
+    "src/sentry.ts"
+   ]
+  },
+  {
+   "id": "r-n8n",
+   "from": "spa",
+   "to": "n8n",
+   "label": "Webhook de alta",
+   "kind": "async",
+   "protocol": "HTTPS POST",
+   "auth": "URL no autenticada",
+   "data": "datos del registro",
+   "evidence": [
+    "src/hooks/useAuth.tsx:264"
+   ]
+  },
+  {
+   "id": "d-vercel",
+   "from": "vercel",
+   "to": "spa",
+   "label": "Sirve el bundle web (CDN)",
+   "kind": "deploy",
+   "evidence": [
+    "vercel.json"
+   ]
+  },
+  {
+   "id": "d-stores",
+   "from": "stores",
+   "to": "native",
+   "label": "Distribuye la app nativa",
+   "kind": "deploy",
+   "evidence": [
+    "src/components/AppStoreBadges.tsx"
+   ]
+  }
+ ],
+ "views": [
+  {
+   "id": "context",
+   "title": "ChaFit · contexto del sistema",
+   "subtitle": "Quién lo usa y con qué sistemas externos habla",
+   "tag": "C4 · nivel 1 · AS-IS",
+   "width": 1440,
+   "height": 900,
+   "nodes": [
+    {
+     "ref": "users",
+     "at": [
+      60,
+      310
+     ],
+     "w": 270,
+     "h": 110
+    },
+    {
+     "ref": "admin",
+     "at": [
+      60,
+      470
+     ],
+     "w": 270,
+     "h": 100
+    },
+    {
+     "ref": "system",
+     "at": [
+      470,
+      300
+     ],
+     "w": 520,
+     "h": 280,
+     "desc": "62 funcionalidades en 13 módulos · 12 con IA · 28 Edge Functions · 47 tablas · producción en chafit.es, App Store y Google Play",
+     "items": [
+      "Rutinas con IA · 5 modalidades",
+      "Ejecución guiada del entrenamiento",
+      "Nutrición y foto al plato",
+      "Entrenadores, gimnasios y alumnos",
+      "Retos, rankings y mensajería",
+      "Suscripciones y administración"
+     ],
+     "itemsTop": 150,
+     "itemGap": 20
+    },
+    {
+     "ref": "mapbox",
+     "at": [
+      470,
+      120
+     ],
+     "w": 160,
+     "h": 84,
+     "tech": "mapas"
+    },
+    {
+     "ref": "sentry",
+     "at": [
+      650,
+      120
+     ],
+     "w": 160,
+     "h": 84,
+     "tech": "errores",
+     "noBrand": true
+    },
+    {
+     "ref": "n8n",
+     "at": [
+      830,
+      120
+     ],
+     "w": 160,
+     "h": 84,
+     "tech": "altas"
+    },
+    {
+     "ref": "openai",
+     "at": [
+      1110,
+      290
+     ],
+     "w": 280,
+     "h": 92
+    },
+    {
+     "ref": "stripe",
+     "at": [
+      1110,
+      400
+     ],
+     "w": 280,
+     "h": 92
+    },
+    {
+     "ref": "resend",
+     "at": [
+      1110,
+      510
+     ],
+     "w": 280,
+     "h": 92
+    },
+    {
+     "ref": "native",
+     "at": [
+      470,
+      680
+     ],
+     "w": 250,
+     "h": 92,
+     "name": "HealthKit · Health Connect",
+     "kind": "Sistema operativo",
+     "tech": "actividad diaria"
+    },
+    {
+     "ref": "stores",
+     "at": [
+      740,
+      680
+     ],
+     "w": 250,
+     "h": 92
+    }
+   ],
+   "edges": [
+    {
+     "from": "users",
+     "to": "system",
+     "label": "Usa en web, iOS y Android",
+     "kind": "user"
+    },
+    {
+     "from": "admin",
+     "to": "system",
+     "label": "Administra",
+     "kind": "user"
+    },
+    {
+     "from": "system",
+     "to": "mapbox",
+     "label": "",
+     "kind": "api"
+    },
+    {
+     "from": "system",
+     "to": "sentry",
+     "label": "",
+     "kind": "async"
+    },
+    {
+     "from": "system",
+     "to": "n8n",
+     "label": "",
+     "kind": "async"
+    },
+    {
+     "from": "system",
+     "to": "openai",
+     "label": "IA generativa",
+     "kind": "ai"
+    },
+    {
+     "from": "system",
+     "to": "stripe",
+     "label": "Suscripciones",
+     "kind": "api"
+    },
+    {
+     "from": "system",
+     "to": "resend",
+     "label": "Email",
+     "kind": "api"
+    },
+    {
+     "from": "system",
+     "to": "native",
+     "label": "Salud",
+     "kind": "local"
+    },
+    {
+     "from": "stores",
+     "to": "system",
+     "label": "Distribuye",
+     "kind": "deploy"
+    }
+   ],
+   "legendAt": [
+    40,
+    830
+   ]
+  },
+  {
+   "id": "container",
+   "title": "ChaFit · arquitectura de contenedores",
+   "subtitle": "SPA única para web y móvil sobre Supabase: la lógica sensible y las claves viven en Edge Functions",
+   "tag": "C4 · nivel 2 · AS-IS",
+   "width": 1800,
+   "height": 1200,
+   "nodes": [
+    {
+     "ref": "mapbox",
+     "at": [
+      40,
+      190
+     ],
+     "w": 190,
+     "h": 84
+    },
+    {
+     "ref": "sentry",
+     "at": [
+      250,
+      190
+     ],
+     "w": 190,
+     "h": 84
+    },
+    {
+     "ref": "n8n",
+     "at": [
+      460,
+      190
+     ],
+     "w": 190,
+     "h": 84
+    },
+    {
+     "ref": "users",
+     "at": [
+      40,
+      450
+     ],
+     "w": 250,
+     "h": 108
+    },
+    {
+     "ref": "admin",
+     "at": [
+      40,
+      650
+     ],
+     "w": 250,
+     "h": 96
+    },
+    {
+     "ref": "spa",
+     "at": [
+      380,
+      450
+     ],
+     "w": 270,
+     "h": 118
+    },
+    {
+     "ref": "native",
+     "at": [
+      380,
+      730
+     ],
+     "w": 270,
+     "h": 104
+    },
+    {
+     "ref": "gw",
+     "at": [
+      770,
+      190
+     ],
+     "w": 220,
+     "h": 660,
+     "items": [
+      "/auth/v1|Auth",
+      "/rest/v1|PostgREST y RPC",
+      "/realtime/v1|suscripciones",
+      "/storage/v1|imágenes",
+      "/functions/v1|Edge Functions"
+     ],
+     "itemsTop": 150,
+     "itemGap": 44
+    },
+    {
+     "ref": "auth",
+     "at": [
+      1100,
+      190
+     ],
+     "w": 250,
+     "h": 100
+    },
+    {
+     "ref": "dataapi",
+     "at": [
+      1100,
+      375
+     ],
+     "w": 250,
+     "h": 100
+    },
+    {
+     "ref": "storage",
+     "at": [
+      1100,
+      560
+     ],
+     "w": 250,
+     "h": 100
+    },
+    {
+     "ref": "edge",
+     "at": [
+      1100,
+      750
+     ],
+     "w": 250,
+     "h": 100
+    },
+    {
+     "ref": "db",
+     "at": [
+      1490,
+      190
+     ],
+     "w": 280,
+     "h": 660,
+     "items": [
+      "Identidad y roles",
+      "Gimnasios, entrenadores, clientes",
+      "Rutinas, sesiones y registros",
+      "Catálogo de ejercicios e imágenes",
+      "Dietas y comidas",
+      "Mensajes, retos y rankings",
+      "Suscripciones y códigos",
+      "Configuración de IA y cupos",
+      "Cola de miniaturas (pgmq)"
+     ],
+     "itemsTop": 170,
+     "itemGap": 34
+    },
+    {
+     "ref": "openai",
+     "at": [
+      1100,
+      1000
+     ],
+     "w": 250,
+     "h": 96
+    },
+    {
+     "ref": "stripe",
+     "at": [
+      1380,
+      1000
+     ],
+     "w": 190,
+     "h": 96
+    },
+    {
+     "ref": "resend",
+     "at": [
+      1590,
+      1000
+     ],
+     "w": 180,
+     "h": 96
+    }
+   ],
+   "zones": [
+    {
+     "ref": "device",
+     "labelPos": "bottom",
+     "note": ""
+    },
+    {
+     "ref": "supabase",
+     "pad": 26
+    },
+    {
+     "ref": "ext-client"
+    },
+    {
+     "ref": "ext-server",
+     "label": "Llamados desde Edge Functions",
+     "labelPos": "bottom"
+    }
+   ],
+   "edges": [
+    {
+     "ref": "r-use",
+     "label": "Usa"
+    },
+    {
+     "ref": "r-admin",
+     "sides": [
+      "right",
+      "left"
+     ],
+     "midX": 335,
+     "label": "Administra",
+     "labelAt": [
+      335,
+      620
+     ]
+    },
+    {
+     "ref": "r-native",
+     "label": "Plugins Capacitor"
+    },
+    {
+     "ref": "r-gw",
+     "label": "supabase-js\nHTTPS + WS · JWT"
+    },
+    {
+     "ref": "r-mapbox",
+     "sides": [
+      "top",
+      "bottom"
+     ],
+     "fromAt": 14,
+     "midY": 360,
+     "label": "Mapas y geocodificación",
+     "labelAt": [
+      240,
+      360
+     ]
+    },
+    {
+     "ref": "r-sentry",
+     "label": "Errores saneados",
+     "labelAt": [
+      410,
+      395
+     ]
+    },
+    {
+     "ref": "r-n8n",
+     "label": "Webhook de alta",
+     "labelAt": [
+      555,
+      395
+     ]
+    },
+    {
+     "ref": "r-auth",
+     "label": ""
+    },
+    {
+     "ref": "r-data",
+     "label": ""
+    },
+    {
+     "ref": "r-st",
+     "label": ""
+    },
+    {
+     "ref": "r-fn",
+     "label": ""
+    },
+    {
+     "ref": "r-authdb",
+     "label": "esquema auth"
+    },
+    {
+     "ref": "r-db1",
+     "label": "SQL bajo RLS"
+    },
+    {
+     "ref": "r-db2",
+     "fromAt": 28,
+     "toAt": 588,
+     "label": "SQL",
+     "labelAt": [
+      1420,
+      778
+     ]
+    },
+    {
+     "ref": "r-cron",
+     "fromAt": 632,
+     "toAt": 72,
+     "label": "pg_cron + pg_net",
+     "labelAt": [
+      1420,
+      822
+     ]
+    },
+    {
+     "ref": "r-st2",
+     "label": "Sube imágenes\ny miniaturas"
+    },
+    {
+     "ref": "r-oai",
+     "label": "Rutinas, dietas, visión,\nimágenes, voz, asistente",
+     "labelAt": [
+      1225,
+      925
+     ]
+    },
+    {
+     "ref": "r-stripe",
+     "sides": [
+      "bottom",
+      "top"
+     ],
+     "midY": 925,
+     "label": "Checkout y portal",
+     "labelAt": [
+      1475,
+      960
+     ]
+    },
+    {
+     "ref": "r-resend",
+     "sides": [
+      "bottom",
+      "top"
+     ],
+     "midY": 895,
+     "label": "Email",
+     "labelAt": [
+      1680,
+      965
+     ]
+    }
+   ],
+   "legendAt": [
+    40,
+    1130
+   ]
+  },
+  {
+   "id": "integrations",
+   "title": "ChaFit · integraciones externas",
+   "subtitle": "Qué servicio de terceros interviene, desde dónde se llama y con qué credencial",
+   "tag": "Integraciones · AS-IS",
+   "width": 1700,
+   "height": 1080,
+   "nodes": [
+    {
+     "ref": "chafit-hub",
+     "at": [
+      640,
+      170
+     ],
+     "w": 400,
+     "h": 700,
+     "items": [
+      "Cliente (navegador · WebView)|llama a Supabase, Mapbox, Sentry y n8n",
+      "Edge Functions (servidor)|guardan las claves de OpenAI, Stripe y Resend",
+      "Plugins nativos|leen actividad de salud y biometría"
+     ],
+     "itemsTop": 150,
+     "itemGap": 62
+    },
+    {
+     "ref": "gw",
+     "at": [
+      60,
+      190
+     ],
+     "w": 300,
+     "h": 110,
+     "name": "Supabase",
+     "kind": "Plataforma (BaaS)",
+     "tech": "Auth · Postgres · Storage · Realtime · Edge"
+    },
+    {
+     "ref": "vercel",
+     "at": [
+      60,
+      350
+     ],
+     "w": 300,
+     "h": 100
+    },
+    {
+     "ref": "sentry",
+     "at": [
+      60,
+      500
+     ],
+     "w": 300,
+     "h": 100
+    },
+    {
+     "ref": "stores",
+     "at": [
+      60,
+      650
+     ],
+     "w": 300,
+     "h": 100
+    },
+    {
+     "ref": "openai",
+     "at": [
+      1320,
+      190
+     ],
+     "w": 320,
+     "h": 110
+    },
+    {
+     "ref": "stripe",
+     "at": [
+      1320,
+      390
+     ],
+     "w": 320,
+     "h": 100
+    },
+    {
+     "ref": "resend",
+     "at": [
+      1320,
+      510
+     ],
+     "w": 320,
+     "h": 100
+    },
+    {
+     "ref": "mapbox",
+     "at": [
+      1320,
+      630
+     ],
+     "w": 320,
+     "h": 100
+    },
+    {
+     "ref": "n8n",
+     "at": [
+      1320,
+      750
+     ],
+     "w": 320,
+     "h": 100
+    },
+    {
+     "ref": "health",
+     "at": [
+      640,
+      905
+     ],
+     "w": 400,
+     "h": 72,
+     "tech": ""
+    }
+   ],
+   "zones": [
+    {
+     "label": "Infraestructura y operación",
+     "members": [
+      "gw",
+      "vercel",
+      "sentry",
+      "stores"
+     ],
+     "style": "platform"
+    },
+    {
+     "label": "IA externa",
+     "members": [
+      "openai"
+     ],
+     "style": "ai"
+    },
+    {
+     "label": "APIs externas",
+     "members": [
+      "stripe",
+      "resend",
+      "mapbox",
+      "n8n"
+     ],
+     "style": "external"
+    }
+   ],
+   "edges": [
+    {
+     "from": "chafit-hub",
+     "to": "gw",
+     "label": "HTTPS + WebSocket\nsupabase-js · JWT",
+     "kind": "call"
+    },
+    {
+     "from": "vercel",
+     "to": "chafit-hub",
+     "label": "sirve el bundle\nHTTPS · CDN",
+     "kind": "deploy"
+    },
+    {
+     "from": "chafit-hub",
+     "to": "sentry",
+     "label": "SDK · DSN público\nsin PII",
+     "kind": "async"
+    },
+    {
+     "from": "stores",
+     "to": "chafit-hub",
+     "label": "distribuye\niOS · Android",
+     "kind": "deploy"
+    },
+    {
+     "from": "chafit-hub",
+     "to": "openai",
+     "label": "REST desde Edge\nOPENAI_API_KEY",
+     "kind": "ai"
+    },
+    {
+     "from": "chafit-hub",
+     "to": "stripe",
+     "label": "SDK desde Edge\nclave secreta",
+     "kind": "api"
+    },
+    {
+     "from": "chafit-hub",
+     "to": "resend",
+     "label": "REST desde Edge\nRESEND_API_KEY",
+     "kind": "api"
+    },
+    {
+     "from": "chafit-hub",
+     "to": "mapbox",
+     "label": "GL + Geocoding\ntoken público",
+     "kind": "api"
+    },
+    {
+     "from": "chafit-hub",
+     "to": "n8n",
+     "label": "webhook POST\nen el alta",
+     "kind": "async"
+    },
+    {
+     "from": "chafit-hub",
+     "to": "health",
+     "label": "",
+     "kind": "local"
+    }
+   ],
+   "legendAt": [
+    40,
+    1010
+   ]
+  },
+  {
+   "id": "deployment",
+   "title": "ChaFit · despliegue",
+   "subtitle": "Dónde se ejecuta cada pieza y cómo llega a producción",
+   "tag": "C4 · despliegue · AS-IS",
+   "width": 2000,
+   "height": 920,
+   "nodes": [
+    {
+     "ref": "author",
+     "at": [
+      60,
+      150
+     ],
+     "w": 330,
+     "h": 110
+    },
+    {
+     "ref": "github",
+     "at": [
+      60,
+      400
+     ],
+     "w": 330,
+     "h": 96
+    },
+    {
+     "ref": "vercel",
+     "at": [
+      500,
+      400
+     ],
+     "w": 290,
+     "h": 96
+    },
+    {
+     "ref": "stores",
+     "at": [
+      500,
+      640
+     ],
+     "w": 290,
+     "h": 96
+    },
+    {
+     "ref": "spa",
+     "at": [
+      900,
+      400
+     ],
+     "w": 270,
+     "h": 96,
+     "name": "Navegador / PWA",
+     "tech": "bundle Vite servido por Vercel"
+    },
+    {
+     "ref": "native",
+     "at": [
+      900,
+      640
+     ],
+     "w": 270,
+     "h": 96,
+     "name": "App iOS / Android",
+     "kind": "Capacitor 8",
+     "tech": "mismo bundle (webDir dist)"
+    },
+    {
+     "ref": "gw",
+     "at": [
+      1290,
+      360
+     ],
+     "w": 300,
+     "h": 420,
+     "name": "Supabase · eu-north-1",
+     "kind": "Plataforma gestionada",
+     "tech": "proyecto de producción",
+     "items": [
+      "Auth",
+      "PostgREST · RPC · Realtime",
+      "Storage",
+      "Edge Functions · 28 · Deno",
+      "PostgreSQL 17 · pg_cron · pgmq"
+     ],
+     "itemsTop": 100,
+     "itemGap": 40
+    },
+    {
+     "ref": "openai",
+     "at": [
+      1690,
+      520
+     ],
+     "w": 270,
+     "h": 100,
+     "name": "OpenAI · Stripe · Resend",
+     "kind": "SaaS",
+     "tech": "solo desde Edge Functions",
+     "noBrand": true
+    }
+   ],
+   "edges": [
+    {
+     "from": "author",
+     "to": "github",
+     "label": "Commits y PR",
+     "kind": "deploy"
+    },
+    {
+     "from": "github",
+     "to": "vercel",
+     "label": "Build Vite",
+     "kind": "deploy"
+    },
+    {
+     "from": "author",
+     "to": "gw",
+     "label": "Migraciones y Edge Functions vía Supabase MCP",
+     "kind": "deploy",
+     "sides": [
+      "right",
+      "top"
+     ],
+     "labelAt": [
+      860,
+      196
+     ]
+    },
+    {
+     "from": "author",
+     "to": "stores",
+     "label": "Build nativo (Xcode · Android Studio)",
+     "kind": "deploy",
+     "labelAt": [
+      250,
+      688
+     ],
+     "sides": [
+      "left",
+      "left"
+     ],
+     "via": [
+      [
+       30,
+       205
+      ],
+      [
+       30,
+       688
+      ]
+     ],
+     "toAt": 48
+    },
+    {
+     "from": "vercel",
+     "to": "spa",
+     "label": "HTTPS · CDN",
+     "kind": "deploy"
+    },
+    {
+     "from": "stores",
+     "to": "native",
+     "label": "Instalación",
+     "kind": "deploy"
+    },
+    {
+     "from": "spa",
+     "to": "gw",
+     "label": "supabase-js",
+     "kind": "call"
+    },
+    {
+     "from": "native",
+     "to": "gw",
+     "label": "supabase-js",
+     "kind": "call"
+    },
+    {
+     "from": "gw",
+     "to": "openai",
+     "label": "HTTPS + secretos",
+     "kind": "api"
+    }
+   ],
+   "notes": [
+    {
+     "at": [
+      60,
+      790
+     ],
+     "w": 620,
+     "text": "GitHub → Vercel: flujo Preview → Producción documentado en docs/ops/VERCEL-DEPLOYMENT.md. Los binarios nativos (versión 35) se generan en local y se publican en las tiendas."
+    }
+   ],
+   "legendAt": [
+    1100,
+    830
+   ]
+  },
+  {
+   "id": "seq-routine",
+   "type": "sequence",
+   "title": "ChaFit · generar una rutina con IA",
+   "subtitle": "Trabajo asíncrono con job_id, salida validada por JSON Schema y consulta periódica desde el cliente",
+   "tag": "Secuencia · AS-IS",
+   "width": 1480,
+   "stepH": 48,
+   "participants": [
+    "users",
+    {
+     "ref": "spa",
+     "name": "Cliente web/móvil",
+     "tech": "ClientDashboard"
+    },
+    {
+     "ref": "edge",
+     "name": "generate-workout",
+     "tech": "Edge Function (Deno)"
+    },
+    {
+     "ref": "db",
+     "name": "PostgreSQL",
+     "tech": "workout_generation_jobs · workout_plans"
+    },
+    {
+     "ref": "openai",
+     "name": "OpenAI",
+     "tech": "chat/completions"
+    }
+   ],
+   "steps": [
+    {
+     "from": "users",
+     "to": "spa",
+     "label": "Describe el encargo (texto, voz o foto de una tabla)",
+     "kind": "user"
+    },
+    {
+     "from": "spa",
+     "to": "edge",
+     "label": "functions.invoke('generate-workout') + JWT"
+    },
+    {
+     "from": "edge",
+     "to": "db",
+     "label": "INSERT job (status = pending)",
+     "kind": "data"
+    },
+    {
+     "from": "edge",
+     "to": "spa",
+     "label": "200 { job_id } inmediato",
+     "ret": true
+    },
+    {
+     "note": "EdgeRuntime.waitUntil: el procesamiento sigue en segundo plano",
+     "over": "edge"
+    },
+    {
+     "from": "edge",
+     "to": "db",
+     "label": "UPDATE job → processing · lee perfil y restricciones",
+     "kind": "data"
+    },
+    {
+     "from": "edge",
+     "to": "openai",
+     "label": "Prompt profesional + response_format (JSON Schema estricto)",
+     "kind": "ai"
+    },
+    {
+     "from": "openai",
+     "to": "edge",
+     "label": "Rutina estructurada (JSON)",
+     "ret": true,
+     "kind": "ai"
+    },
+    {
+     "from": "edge",
+     "to": "edge",
+     "label": "Valida contrato de 9 valores; rechaza truncado o refusal"
+    },
+    {
+     "from": "edge",
+     "to": "db",
+     "label": "INSERT plan (plan_json + HTML compatible) · job → completed",
+     "kind": "data"
+    },
+    {
+     "from": "spa",
+     "to": "db",
+     "label": "Consulta periódica del job por id (polling)",
+     "kind": "data"
+    },
+    {
+     "from": "db",
+     "to": "spa",
+     "label": "completed → muestra la rutina",
+     "ret": true
+    },
+    {
+     "from": "spa",
+     "to": "users",
+     "label": "Tabla de rutina lista para entrenar",
+     "ret": true,
+     "kind": "user"
+    }
+   ],
+   "groups": [
+    {
+     "label": "Proceso en segundo plano",
+     "from": 5,
+     "to": 9,
+     "style": "ai"
+    }
+   ],
+   "footer": "Evidencia: supabase/functions/generate-workout/index.ts · _shared/workout-generation.ts · src/pages/ClientDashboard.tsx (pollJobStatus) · spec 001"
+  },
+  {
+   "id": "seq-thumbnails",
+   "type": "sequence",
+   "title": "ChaFit · pipeline durable de miniaturas",
+   "subtitle": "Postgres programa y encola; el worker procesa con reintentos y archiva el mensaje",
+   "tag": "Secuencia · AS-IS",
+   "width": 1480,
+   "stepH": 46,
+   "participants": [
+    {
+     "id": "cron",
+     "ref": "db",
+     "name": "pg_cron + pg_net",
+     "tech": "planificador en Postgres"
+    },
+    {
+     "id": "worker",
+     "ref": "edge",
+     "name": "thumbnail-worker",
+     "tech": "Edge Function · ImageMagick WASM"
+    },
+    {
+     "id": "queue",
+     "ref": "db",
+     "name": "pgmq + tareas",
+     "tech": "exercise_thumbnail_tasks · runs"
+    },
+    {
+     "id": "st",
+     "ref": "storage",
+     "name": "Storage",
+     "tech": "bucket exercise-images"
+    }
+   ],
+   "steps": [
+    {
+     "from": "cron",
+     "to": "worker",
+     "label": "POST programado (secreto leído de Vault)",
+     "kind": "async"
+    },
+    {
+     "from": "worker",
+     "to": "queue",
+     "label": "rpc claim_exercise_thumbnail_jobs (lote de pgmq)",
+     "kind": "data"
+    },
+    {
+     "from": "queue",
+     "to": "worker",
+     "label": "mensajes con read_ct",
+     "ret": true
+    },
+    {
+     "from": "worker",
+     "to": "st",
+     "label": "Descarga la imagen original",
+     "kind": "data"
+    },
+    {
+     "from": "worker",
+     "to": "worker",
+     "label": "Redimensiona a WebP 256×256"
+    },
+    {
+     "from": "worker",
+     "to": "st",
+     "label": "Sube la miniatura versionada",
+     "kind": "data"
+    },
+    {
+     "from": "worker",
+     "to": "queue",
+     "label": "Completa la tarea y archiva el mensaje",
+     "kind": "data"
+    },
+    {
+     "note": "Si falla: registra el error y reencola con espera creciente según read_ct (o marca la tarea como superada)",
+     "over": "worker"
+    }
+   ],
+   "footer": "Evidencia: supabase/migrations/20260810130000_activate_exercise_thumbnail_pipeline.sql · supabase/functions/thumbnail-worker/index.ts · spec 002"
+  },
+  {
+   "id": "slides",
+   "title": "ChaFit",
+   "subtitle": "SPA única para web, iOS y Android · Supabase · IA en el servidor",
+   "tag": "Vista para slides",
+   "width": 1600,
+   "height": 1000,
+   "nodes": [
+    {
+     "ref": "users",
+     "at": [
+      60,
+      330
+     ],
+     "w": 260,
+     "h": 120,
+     "name": "Usuarios",
+     "tech": "clientes · entrenadores · gimnasios",
+     "nameFs": 20
+    },
+    {
+     "ref": "mapbox",
+     "at": [
+      400,
+      130
+     ],
+     "w": 300,
+     "h": 100,
+     "name": "Mapbox · Sentry · n8n",
+     "tech": "mapas · errores · altas",
+     "nameFs": 19,
+     "noBrand": true
+    },
+    {
+     "ref": "spa",
+     "at": [
+      400,
+      320
+     ],
+     "w": 300,
+     "h": 140,
+     "nameFs": 20
+    },
+    {
+     "ref": "gw",
+     "at": [
+      800,
+      320
+     ],
+     "w": 300,
+     "h": 140,
+     "name": "Supabase",
+     "tech": "Auth · Postgres 17 + RLS · Storage · Realtime",
+     "nameFs": 20
+    },
+    {
+     "ref": "native",
+     "at": [
+      400,
+      570
+     ],
+     "w": 300,
+     "h": 120,
+     "nameFs": 19
+    },
+    {
+     "ref": "edge",
+     "at": [
+      800,
+      570
+     ],
+     "w": 300,
+     "h": 120,
+     "nameFs": 20
+    },
+    {
+     "ref": "openai",
+     "at": [
+      1200,
+      570
+     ],
+     "w": 330,
+     "h": 120,
+     "nameFs": 20
+    },
+    {
+     "ref": "stripe",
+     "at": [
+      800,
+      800
+     ],
+     "w": 300,
+     "h": 120,
+     "name": "Stripe · Resend",
+     "tech": "suscripciones · email",
+     "nameFs": 20,
+     "noBrand": true
+    }
+   ],
+   "edges": [
+    {
+     "from": "users",
+     "to": "spa",
+     "kind": "user"
+    },
+    {
+     "from": "spa",
+     "to": "mapbox",
+     "kind": "api"
+    },
+    {
+     "from": "spa",
+     "to": "gw",
+     "label": "JWT",
+     "kind": "call"
+    },
+    {
+     "from": "spa",
+     "to": "native",
+     "kind": "local"
+    },
+    {
+     "from": "gw",
+     "to": "edge",
+     "kind": "call"
+    },
+    {
+     "from": "edge",
+     "to": "openai",
+     "label": "12 funcionalidades",
+     "kind": "ai"
+    },
+    {
+     "from": "edge",
+     "to": "stripe",
+     "kind": "api"
+    }
+   ],
+   "legend": false,
+   "themes": [
+    "dark",
+    "light"
+   ]
+  }
+ ]
+}

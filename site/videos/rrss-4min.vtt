@@ -1,0 +1,220 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:01.510
+Has construido una app.
+
+00:00:01.620 --> 00:00:02.420
+Funciona.
+
+00:00:02.640 --> 00:00:07.110
+Está publicada en la web y en las tiendas… ¿Y ahora quién se entera?
+
+00:00:08.300 --> 00:00:10.690
+Porque programar es la mitad del trabajo.
+
+00:00:11.060 --> 00:00:12.790
+La otra mitad es contarlo.
+
+00:00:13.080 --> 00:00:17.010
+Y para eso hace falta entender tu producto, saber contra quién compites,
+
+00:00:17.080 --> 00:00:20.990
+encontrar a tus clientes… y crear contenido que la gente quiera ver.
+
+00:00:21.420 --> 00:00:23.030
+Por eso nace LeadView.
+
+00:00:23.260 --> 00:00:25.600
+Un estudio que va del código a las redes sociales.
+
+00:00:25.640 --> 00:00:30.060
+En el panel ves tus proyectos, aquí ICG Vault y Chafit,
+
+00:00:30.100 --> 00:00:32.630
+y las piezas de contenido que ya has creado.
+
+00:00:32.820 --> 00:00:34.550
+Empezamos con un proyecto nuevo.
+
+00:00:34.920 --> 00:00:37.830
+Le das un nombre, la dirección de tu app y su código:
+
+00:00:38.140 --> 00:00:41.170
+una carpeta de tu ordenador o un repositorio de GitHub.
+
+00:00:41.240 --> 00:00:43.190
+Y si quieres, un poco de contexto.
+
+00:00:43.400 --> 00:00:45.130
+Y se pone en marcha el análisis.
+
+00:00:45.420 --> 00:00:48.560
+Recorre la web, lee el código, dibuja el mapa funcional…
+
+00:00:48.600 --> 00:00:51.080
+y lo fusiona todo con inteligencia artificial.
+
+00:00:51.120 --> 00:00:54.740
+El resultado es el mapa de la aplicación: cada sección,
+
+00:00:54.780 --> 00:00:58.010
+con su ruta y con las evidencias de dónde sale en el código.
+
+00:00:58.300 --> 00:01:02.070
+Inicio, Descubrir, Rankings, Zoom Out, Timeline…
+
+00:01:02.400 --> 00:01:05.770
+Y si quieres comprobarlo, se verifica navegando con Playwright.
+
+00:01:05.980 --> 00:01:09.130
+Con eso escribe el dossier de negocio: qué es tu producto,
+
+00:01:09.180 --> 00:01:11.570
+su propuesta de valor, el tono de la marca,
+
+00:01:11.660 --> 00:01:14.270
+a quién se dirige, qué problemas le resuelve…
+
+00:01:14.360 --> 00:01:16.680
+y hasta las llamadas a la acción que ya tiene tu web.
+
+00:01:16.720 --> 00:01:18.490
+Luego mira alrededor.
+
+00:01:18.840 --> 00:01:20.430
+Primero, la competencia.
+
+00:01:20.560 --> 00:01:24.510
+Para ICG Vault encontró FilmAffinity, Backloggd y SensaCine.
+
+00:01:24.720 --> 00:01:29.950
+De cada uno, su puntuación, sus pros, sus contras… y en qué te diferencias tú.
+
+00:01:30.120 --> 00:01:32.520
+Después, los clientes potenciales.
+
+00:01:32.560 --> 00:01:35.930
+Y no son inventados: son negocios reales, en el mapa.
+
+00:01:36.320 --> 00:01:40.940
+Tiendas de juegos, de cómics, ludotecas… Con el motivo por el que encajan,
+
+00:01:40.980 --> 00:01:45.260
+una estrategia para captarlos, un guion para la visita… y el correo ya escrito.
+
+00:01:45.300 --> 00:01:48.190
+Y por último, los virales del nicho.
+
+00:01:48.340 --> 00:01:51.770
+Busca en internet los vídeos que más han funcionado en el último mes…
+
+00:01:51.880 --> 00:01:53.830
+y saca los patrones que se repiten:
+
+00:01:54.000 --> 00:01:56.670
+el gancho de los primeros segundos, los rankings,
+
+00:01:56.760 --> 00:02:00.050
+la polémica… Y cada viral, con su enlace para verlo.
+
+00:02:00.240 --> 00:02:02.550
+Con todo eso, llega la parte creativa.
+
+00:02:02.780 --> 00:02:06.310
+Puedes clonar el formato de un viral… o enseñar tu propia app.
+
+00:02:06.440 --> 00:02:11.010
+Le dices qué funcionalidad mostrar y qué pasos seguir, y la graba navegando sola.
+
+00:02:11.180 --> 00:02:13.960
+Pero antes de generar nada, ves el plan de montaje:
+
+00:02:14.000 --> 00:02:16.550
+cuántos segundos son de grabación real,
+
+00:02:16.640 --> 00:02:20.710
+cuántos generados con IA, cuántos cortes… y lo que va a costar.
+
+00:02:20.860 --> 00:02:26.000
+En este ejemplo, treinta segundos: catorce de grabación real y dieciséis de IA,
+
+00:02:26.040 --> 00:02:28.670
+en cuatro cortes… por poco más de un dólar.
+
+00:02:28.840 --> 00:02:30.790
+Revisas el guion y cada prompt.
+
+00:02:31.060 --> 00:02:35.230
+Y solo cuando lo apruebas, se genera el vídeo, con su voz y su montaje final.
+
+00:02:35.520 --> 00:02:40.810
+Aquí, un cofre que se abre… y la biblioteca de ICG Vault, grabada navegando sola.
+
+00:02:41.040 --> 00:02:43.200
+Después lo retocas en el estudio multimedia,
+
+00:02:43.240 --> 00:02:46.950
+con su línea de tiempo, su locución y sus subtítulos.
+
+00:02:47.180 --> 00:02:50.650
+¿Tienes un vídeo largo, una entrevista o un directo de YouTube?
+
+00:02:50.920 --> 00:02:52.940
+El laboratorio de clips lo trocea en los diez
+
+00:02:52.980 --> 00:02:55.790
+momentos más virales y los diez más polémicos.
+
+00:02:56.020 --> 00:03:00.310
+En vertical, con subtítulos y con su gancho… listos para publicar.
+
+00:03:00.500 --> 00:03:03.770
+Tú subes el vídeo o pegas el enlace, y él se encarga:
+
+00:03:03.880 --> 00:03:07.890
+transcribe, elige los cortes, los recorta y les pone subtítulos.
+
+00:03:08.080 --> 00:03:10.540
+Y todo esto lo mueve un motor de IA que tú eliges.
+
+00:03:10.580 --> 00:03:15.010
+Claude Code o el Agent SDK, con el modelo que quieras.
+
+00:03:15.160 --> 00:03:17.650
+Las claves de cada servicio se guardan cifradas,
+
+00:03:17.820 --> 00:03:20.610
+y cada una tiene su botón para probar la conexión.
+
+00:03:20.760 --> 00:03:27.290
+Y detecta solo las herramientas que tienes instaladas: FFmpeg, yt-dlp o Whisper.
+
+00:03:27.540 --> 00:03:29.290
+¿Y funciona con cualquier proyecto?
+
+00:03:29.600 --> 00:03:31.450
+Vamos a comprobarlo con uno nuevo.
+
+00:03:31.780 --> 00:03:35.770
+Le damos la plantilla de este mismo trabajo de fin de máster… y a esperar.
+
+00:03:36.120 --> 00:03:40.590
+En unos minutos tenemos su mapa, su dossier… y sus clientes potenciales:
+
+00:03:40.720 --> 00:03:42.910
+consultoras y estudios de software en Madrid.
+
+00:03:43.160 --> 00:03:47.110
+Cada uno, con un correo que explica por qué nuestra plantilla les sirve a ellos.
+
+00:03:47.420 --> 00:03:49.430
+Tu app, tu mercado y tu contenido.
+
+00:03:49.820 --> 00:03:50.970
+En un solo sitio.
+
+00:03:51.320 --> 00:03:52.120
+LeadView.
+
+00:03:52.220 --> 00:03:53.870
+Del código… a las redes.

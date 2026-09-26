@@ -1,0 +1,479 @@
+{
+ "schema_version": 1,
+ "diagram_type": "architecture",
+ "meta": {
+  "title": "ChaFit · arquitectura de contenedores",
+  "quality_profile": "standard",
+  "viewBox": [
+   1800,
+   1200
+  ]
+ },
+ "components": [
+  {
+   "id": "mapbox",
+   "type": "external",
+   "label": "Mapbox",
+   "sublabel": "Mapbox GL · Geocoding v5",
+   "pos": [
+    40,
+    190
+   ],
+   "size": [
+    190,
+    84
+   ]
+  },
+  {
+   "id": "sentry",
+   "type": "external",
+   "label": "Sentry",
+   "sublabel": "errores saneados · Replay con consent…",
+   "pos": [
+    250,
+    190
+   ],
+   "size": [
+    190,
+    84
+   ],
+   "brand": "sentry"
+  },
+  {
+   "id": "n8n",
+   "type": "external",
+   "label": "n8n (Elestio)",
+   "sublabel": "webhook de nuevas altas",
+   "pos": [
+    460,
+    190
+   ],
+   "size": [
+    190,
+    84
+   ]
+  },
+  {
+   "id": "users",
+   "type": "external",
+   "label": "Clientes, entrenadores y gimnasios",
+   "sublabel": "3 roles de negocio",
+   "pos": [
+    40,
+    450
+   ],
+   "size": [
+    250,
+    108
+   ]
+  },
+  {
+   "id": "admin",
+   "type": "external",
+   "label": "Superusuario",
+   "sublabel": "rol superuser",
+   "pos": [
+    40,
+    650
+   ],
+   "size": [
+    250,
+    96
+   ]
+  },
+  {
+   "id": "spa",
+   "type": "frontend",
+   "label": "Cliente web y móvil",
+   "sublabel": "React 18 · Vite · TypeScript · shadcn…",
+   "pos": [
+    380,
+    450
+   ],
+   "size": [
+    270,
+    118
+   ],
+   "brand": "react"
+  },
+  {
+   "id": "native",
+   "type": "frontend",
+   "label": "APIs del dispositivo",
+   "sublabel": "HealthKit / Health Connect · biometrí…",
+   "pos": [
+    380,
+    730
+   ],
+   "size": [
+    270,
+    104
+   ]
+  },
+  {
+   "id": "gw",
+   "type": "backend",
+   "label": "Endpoint del proyecto",
+   "sublabel": "HTTPS + WebSocket · supabase-js · JWT",
+   "pos": [
+    770,
+    190
+   ],
+   "size": [
+    220,
+    660
+   ],
+   "brand": "supabase"
+  },
+  {
+   "id": "auth",
+   "type": "security",
+   "label": "Supabase Auth",
+   "sublabel": "email + contraseña · JWT · 4 roles",
+   "pos": [
+    1100,
+    190
+   ],
+   "size": [
+    250,
+    100
+   ]
+  },
+  {
+   "id": "dataapi",
+   "type": "backend",
+   "label": "API de datos",
+   "sublabel": "PostgREST · RPC · Realtime",
+   "pos": [
+    1100,
+    375
+   ],
+   "size": [
+    250,
+    100
+   ]
+  },
+  {
+   "id": "storage",
+   "type": "database",
+   "label": "Storage",
+   "sublabel": "bucket exercise-images · miniaturas W…",
+   "pos": [
+    1100,
+    560
+   ],
+   "size": [
+    250,
+    100
+   ]
+  },
+  {
+   "id": "edge",
+   "type": "backend",
+   "label": "Edge Functions",
+   "sublabel": "Deno · TypeScript · IA, pagos, email,…",
+   "pos": [
+    1100,
+    750
+   ],
+   "size": [
+    250,
+    100
+   ]
+  },
+  {
+   "id": "db",
+   "type": "database",
+   "label": "PostgreSQL 17",
+   "sublabel": "47 tablas · RLS · 52 migraciones · pg…",
+   "pos": [
+    1490,
+    190
+   ],
+   "size": [
+    280,
+    660
+   ],
+   "brand": "postgresql"
+  },
+  {
+   "id": "openai",
+   "type": "external",
+   "label": "OpenAI API",
+   "sublabel": "chat · visión · images · edits · Whis…",
+   "pos": [
+    1100,
+    1000
+   ],
+   "size": [
+    250,
+    96
+   ],
+   "brand": "openai"
+  },
+  {
+   "id": "stripe",
+   "type": "external",
+   "label": "Stripe",
+   "sublabel": "Checkout · Customer Portal · suscripc…",
+   "pos": [
+    1380,
+    1000
+   ],
+   "size": [
+    190,
+    96
+   ],
+   "brand": "stripe"
+  },
+  {
+   "id": "resend",
+   "type": "external",
+   "label": "Resend",
+   "sublabel": "API de email transaccional",
+   "pos": [
+    1590,
+    1000
+   ],
+   "size": [
+    180,
+    96
+   ]
+  }
+ ],
+ "connections": [
+  {
+   "id": "c1",
+   "from": "users",
+   "to": "spa",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left",
+   "label": "Usa"
+  },
+  {
+   "id": "c2",
+   "from": "admin",
+   "to": "spa",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left",
+   "label": "Administra"
+  },
+  {
+   "id": "c3",
+   "from": "spa",
+   "to": "native",
+   "variant": "default",
+   "fromSide": "bottom",
+   "toSide": "top",
+   "label": "Plugins Capacitor",
+   "labelAt": [
+    515,
+    582
+   ]
+  },
+  {
+   "id": "c4",
+   "from": "spa",
+   "to": "gw",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left",
+   "label": "supabase-js · HTTPS + WS · JWT",
+   "labelAt": [
+    674,
+    582
+   ]
+  },
+  {
+   "id": "c5",
+   "from": "spa",
+   "to": "mapbox",
+   "variant": "default",
+   "fromSide": "top",
+   "toSide": "bottom",
+   "label": "Mapas y geocodificación"
+  },
+  {
+   "id": "c6",
+   "from": "spa",
+   "to": "sentry",
+   "variant": "dashed",
+   "fromSide": "top",
+   "toSide": "bottom",
+   "label": "Errores saneados"
+  },
+  {
+   "id": "c7",
+   "from": "spa",
+   "to": "n8n",
+   "variant": "dashed",
+   "fromSide": "top",
+   "toSide": "bottom",
+   "label": "Webhook de alta"
+  },
+  {
+   "id": "c8",
+   "from": "gw",
+   "to": "auth",
+   "variant": "security",
+   "fromSide": "right",
+   "toSide": "left"
+  },
+  {
+   "id": "c9",
+   "from": "gw",
+   "to": "dataapi",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left"
+  },
+  {
+   "id": "c10",
+   "from": "gw",
+   "to": "storage",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left"
+  },
+  {
+   "id": "c11",
+   "from": "gw",
+   "to": "edge",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left"
+  },
+  {
+   "id": "c12",
+   "from": "auth",
+   "to": "db",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left",
+   "label": "esquema auth"
+  },
+  {
+   "id": "c13",
+   "from": "dataapi",
+   "to": "db",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left",
+   "label": "SQL bajo RLS"
+  },
+  {
+   "id": "c14",
+   "from": "edge",
+   "to": "db",
+   "variant": "default",
+   "fromSide": "right",
+   "toSide": "left",
+   "label": "SQL"
+  },
+  {
+   "id": "c15",
+   "from": "db",
+   "to": "edge",
+   "variant": "dashed",
+   "fromSide": "left",
+   "toSide": "right",
+   "label": "pg_cron + pg_net"
+  },
+  {
+   "id": "c16",
+   "from": "edge",
+   "to": "storage",
+   "variant": "default",
+   "fromSide": "top",
+   "toSide": "bottom",
+   "label": "Sube imágenes · y miniaturas"
+  },
+  {
+   "id": "c17",
+   "from": "edge",
+   "to": "openai",
+   "variant": "emphasis",
+   "fromSide": "bottom",
+   "toSide": "top",
+   "label": "Rutinas, dietas, visión, · imágenes, voz,…",
+   "labelAt": [
+    1211,
+    864
+   ]
+  },
+  {
+   "id": "c18",
+   "from": "edge",
+   "to": "stripe",
+   "variant": "default",
+   "fromSide": "bottom",
+   "toSide": "top",
+   "label": "Checkout y portal"
+  },
+  {
+   "id": "c19",
+   "from": "edge",
+   "to": "resend",
+   "variant": "default",
+   "fromSide": "bottom",
+   "toSide": "top",
+   "label": "Email"
+  }
+ ],
+ "boundaries": [
+  {
+   "kind": "security-group",
+   "label": "Dispositivo del usuario",
+   "wraps": [
+    "spa",
+    "native"
+   ],
+   "pad": 22
+  },
+  {
+   "kind": "region",
+   "label": "Supabase · proyecto gestionado",
+   "wraps": [
+    "gw",
+    "auth",
+    "dataapi",
+    "storage",
+    "edge",
+    "db"
+   ],
+   "pad": 22
+  },
+  {
+   "kind": "region",
+   "label": "Servicios llamados desde el cliente",
+   "wraps": [
+    "mapbox",
+    "sentry",
+    "n8n"
+   ],
+   "pad": 22
+  },
+  {
+   "kind": "region",
+   "label": "Llamados desde Edge Functions",
+   "wraps": [
+    "openai",
+    "stripe",
+    "resend"
+   ],
+   "pad": 22
+  }
+ ],
+ "cards": [
+  {
+   "dot": "cyan",
+   "title": "Fuente",
+   "items": [
+    "jechamo/chafit360@d18493d",
+    "Modelo: architecture/model/chafit.json"
+   ]
+  }
+ ]
+}

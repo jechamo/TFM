@@ -1,0 +1,199 @@
+{
+ "id": "tfm",
+ "name": "TFM · Jorge Chamorro",
+ "summary": "Vista global del trabajo: del máster al sistema SDD/TDD y de ahí a tres productos reales.",
+ "elements": [
+  {
+   "id": "master",
+   "type": "program",
+   "name": "Máster en Desarrollo de Software con IA",
+   "kind": "Formación",
+   "tech": "conocimientos aplicados"
+  },
+  {
+   "id": "sdd",
+   "type": "system",
+   "name": "Sistema SDD/TDD con agentes",
+   "kind": "Aportación central",
+   "tech": "Estructura_inicial_claude · v0.9.1 · público"
+  },
+  {
+   "id": "rrss",
+   "type": "product",
+   "name": "RRSS Studio · LeadView",
+   "kind": "Producto · greenfield",
+   "tech": "app local · Next.js · SQLite · IA multimedia"
+  },
+  {
+   "id": "chafit",
+   "type": "product",
+   "name": "ChaFit",
+   "kind": "Producto · brownfield",
+   "tech": "web + iOS + Android · Supabase · OpenAI"
+  },
+  {
+   "id": "icg",
+   "type": "product",
+   "name": "ICG Vault",
+   "kind": "Producto · brownfield",
+   "tech": "web + iOS + Android · Supabase · catálogo externo"
+  },
+  {
+   "id": "evidence",
+   "type": "doc",
+   "name": "Evidencia verificable",
+   "kind": "Resultado",
+   "tech": "specs · tests · commits · auditorías · vídeos"
+  }
+ ],
+ "relations": [],
+ "views": [
+  {
+   "id": "overview",
+   "title": "Del máster a producción",
+   "subtitle": "Un sistema de ingeniería asistida por agentes, construido con lo aprendido y aplicado a tres productos reales",
+   "tag": "Visión global del TFM",
+   "width": 1700,
+   "height": 980,
+   "themes": [
+    "light",
+    "dark"
+   ],
+   "nodes": [
+    {
+     "ref": "master",
+     "at": [
+      50,
+      210
+     ],
+     "w": 330,
+     "h": 560,
+     "nameFs": 18,
+     "items": [
+      "SDD y análisis de requisitos",
+      "TDD, testing y Playwright",
+      "Agentes, AGENTS.md, Skills y MCP",
+      "Patrones de orquestación",
+      "Clean Architecture y ADR",
+      "OWASP Web, API y LLM",
+      "CI/CD, cloud y bases de datos",
+      "APIs de IA y multimodalidad",
+      "Mobile, frontend y backend"
+     ],
+     "itemsTop": 150,
+     "itemGap": 40
+    },
+    {
+     "ref": "sdd",
+     "at": [
+      520,
+      210
+     ],
+     "w": 420,
+     "h": 560,
+     "nameFs": 20,
+     "items": [
+      "20 agentes con territorio y permisos",
+      "27 skills · 7 hooks deterministas",
+      "CLI sin dependencias · gates en CI",
+      "Circuito: spec → plan → TDD → verify → ship",
+      "6 gates humanos · light / compact / full",
+      "17 specs propias · 375 comprobaciones en verde"
+     ],
+     "itemsTop": 150,
+     "itemGap": 40
+    },
+    {
+     "ref": "rrss",
+     "at": [
+      1100,
+      210
+     ],
+     "w": 540,
+     "h": 160,
+     "nameFs": 19,
+     "desc": "Nace con el método: 18 requisitos, 2 specs, E2E sin red. 11 módulos · 38 funcionalidades · 17 con IA."
+    },
+    {
+     "ref": "chafit",
+     "at": [
+      1100,
+      410
+     ],
+     "w": 540,
+     "h": 160,
+     "nameFs": 19,
+     "desc": "Evoluciona con 7 specs y TDD sobre producción (con MCP). 13 módulos · 62 funcionalidades · auditoría de 53 hallazgos."
+    },
+    {
+     "ref": "icg",
+     "at": [
+      1100,
+      610
+     ],
+     "w": 540,
+     "h": 160,
+     "nameFs": 19,
+     "desc": "Evoluciona por PR con agentes (81 de 97) y se audita con el sistema. 13 módulos · 63 funcionalidades · auditoría de 48 hallazgos."
+    },
+    {
+     "ref": "evidence",
+     "at": [
+      520,
+      840
+     ],
+     "w": 1120,
+     "h": 90,
+     "tech": "Todo enlazado al repositorio o al fichero de origen: sin cifras sin fuente"
+    }
+   ],
+   "edges": [
+    {
+     "from": "master",
+     "to": "sdd",
+     "label": "se convierte en\nmétodo y herramienta",
+     "kind": "call"
+    },
+    {
+     "from": "sdd",
+     "to": "rrss",
+     "label": "crea",
+     "kind": "deploy",
+     "sides": [
+      "right",
+      "left"
+     ],
+     "midX": 1020
+    },
+    {
+     "from": "sdd",
+     "to": "chafit",
+     "label": "especifica y evoluciona",
+     "kind": "deploy",
+     "sides": [
+      "right",
+      "left"
+     ],
+     "midX": 1020
+    },
+    {
+     "from": "sdd",
+     "to": "icg",
+     "label": "audita y evoluciona",
+     "kind": "deploy",
+     "sides": [
+      "right",
+      "left"
+     ],
+     "midX": 1020
+    },
+    {
+     "from": "sdd",
+     "to": "evidence",
+     "kind": "data"
+    }
+   ],
+   "legend": false
+  }
+ ]
+}
