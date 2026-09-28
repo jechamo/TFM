@@ -73,6 +73,8 @@ def main() -> None:
         if has_vtt:
             (SITE / "videos" / f"{vid}.vtt").write_text(srt_to_vtt(srt.read_text(encoding="utf8")), encoding="utf8")
         th = FINAL / thumb
+        if with_intro and vid.startswith("tfm-") and (FINAL / "intro" / "thumbnail.jpg").exists():
+            th = FINAL / "intro" / "thumbnail.jpg"      # portada «Del máster a producción» de la intro
         if th.exists():
             Image.open(th).convert("RGB").resize((640, 360)).save(SITE / "assets" / "img" / "thumbs" / f"{vid}.webp", "WEBP", quality=80)
         if with_intro and vid.startswith("tfm-"):

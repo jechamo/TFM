@@ -10,7 +10,7 @@
 | Código fuente en GitHub | ✅ los cinco repositorios enlazados · ⚠️ ChaFit e ICG Vault siguen privados hasta que se publiquen | [repositorios](../../README.md#20-repositorios) |
 | Versión desplegada | ✅ chafit.es · icgvault.es · web del sistema · web del TFM | README |
 | Slides | ✅ publicadas | https://jechamo.github.io/TFM/slides/ |
-| Vídeo | ✅ publicado (16:30 y 8:08) | https://jechamo.github.io/TFM/video.html?v=tfm-completo |
+| Vídeo | ✅ publicado (17:09 y 8:47) | https://jechamo.github.io/TFM/video.html?v=tfm-completo |
 | Usuario y contraseña DEMO | ✅ en la slide 2, el README y el formulario | [criterio](../security/security.md#credenciales-demo-criterio) |
 
 ## Formulario final

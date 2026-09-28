@@ -4,8 +4,8 @@ Genera, para cada variante, el MP4, los capítulos (YouTube y metadatos del cont
 con los tiempos desplazados. Los vídeos de origen están en media/final (fuera de git).
 
 Uso:
-    python tfm-video/combine.py completo   # SDD + RRSS/ChaFit/ICG Vault de ~4 min  → ~16:30
-    python tfm-video/combine.py resumen    # SDD + RRSS/ChaFit/ICG Vault de ~1 min  → ~8:08
+    python tfm-video/combine.py completo   # SDD + RRSS/ChaFit/ICG Vault de ~4 min  → ~17:09
+    python tfm-video/combine.py resumen    # SDD + RRSS/ChaFit/ICG Vault de ~1 min  → ~8:47
 
 Si existe media/final/intro/intro.mp4 (intro de los cuatro repositorios, montada con narrated.py), va delante en
 las dos variantes y los capítulos y subtítulos se desplazan solos. Sin ese fichero se genera lo de siempre.
@@ -26,7 +26,7 @@ VARIANTS = {
 }
 
 
-INTRO = ("Introducción · cuatro repositorios", "intro/intro")
+INTRO = ("Introducción: cuatro repositorios", "intro/intro")   # sin « · »: el reproductor lo muestra como capítulo principal
 
 
 def duration(p: Path) -> float:

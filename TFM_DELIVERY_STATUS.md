@@ -12,7 +12,7 @@ Diagramas:       COMPLETADO   (56 SVG + PNG, 12 Archify interactivos, workspace 
 Código:          COMPLETADO   (sin cambios en los productos; tests re-ejecutados el 26/09/2026)
 Deploy:          COMPLETADO   (GitHub Pages desde la rama claude/wonderful-mayer-8d0vkf, 26/09/2026)
 Slides:          COMPLETADO   (22 diapositivas HTML + PDF con enlaces activos), publicadas
-Vídeo:           COMPLETADO   (16:30 y 8:08 + 7 vídeos por producto), publicados en Pages y en el release media-v1
+Vídeo:           COMPLETADO   (17:09 y 8:47 + 7 vídeos por producto), publicados en Pages y en el release media-v1
 Credenciales:    PUBLICADAS   en la slide 2 y el README por decisión del autor; falta probarlas (acción 3)
 Capturas:        COMPLETADO   (fotogramas reales y capturas públicas); opcionales en SCREENSHOTS_REQUIRED.md
 ```
@@ -85,21 +85,20 @@ Los vídeos usan narración sintética. Confirmar con el tutor que es aceptable 
 
 ### 5 · Mención al Agent SDK en el vídeo de RRSS (opcional)
 
-En 7:47 la locución dice «Claude Code o el Agent SDK»; en el código el Agent SDK es un marcador sin implementar. Está declarado como PARCIAL. Opcional: volver a narrar esa frase.
+En 8:26 del vídeo completo (3:12 del vídeo de RRSS) la locución dice «Claude Code o el Agent SDK»; en el código el Agent SDK es un marcador sin implementar. Está declarado como PARCIAL. Opcional: volver a narrar esa frase.
 
 ### 6 · Rellenar el formulario
 
 Valores en [`docs/delivery/submission-checklist.md`](docs/delivery/submission-checklist.md) y, con las credenciales, en `docs/delivery/author-private.md` (local, fuera de git).
 
-### 7 · Intro del vídeo (cuatro repositorios) · pendiente de voz y música
-
-La slide 2 y el montaje ya están preparados; faltan los dos audios:
+### 7 · Intro del vídeo (cuatro repositorios) · ✅ montada (28/09/2026)
 
 | | |
 |---|---|
-| Voz | texto en [`tfm-video/voz/intro.md`](tfm-video/voz/intro.md) → ElevenLabs, misma voz → `media/Originales/voz/Intro_voz.mp3` |
-| Música | prompt en [`tfm-video/voz/musica-suno.md`](tfm-video/voz/musica-suno.md#intro-del-tfm-cuatro-repositorios) → Suno → `media/Originales/Musica/Intro_Music.mp3` |
-| Después (Claude) | `intro_timeline.py` → `tours/intro-repos.cjs` → `narrated.py projects/intro.json` → `combine.py completo/resumen` → `prepare-videos.py --release media-v2` → release `media-v2` → enlaces `t=` desplazados |
+| Voz | `media/Originales/voz/Main_intro.mp3` (ElevenLabs, 34 s) · texto en [`tfm-video/voz/intro.md`](tfm-video/voz/intro.md) |
+| Música | `media/Originales/Musica/main_intro.mp3` (Suno, 107,7 BPM) · prompt en [`musica-suno.md`](tfm-video/voz/musica-suno.md#intro-del-tfm-cuatro-repositorios), cortada por compases en `projects/intro.json` |
+| Resultado | `media/final/intro/intro.mp4` (0:39) delante de `tfm-completo` (17:09) y `tfm-resumen` (8:47); vídeos en el release `media-v2` |
+| Regenerar | `python intro_timeline.py projects/intro.json` → `node tours/intro-repos.cjs …/Intro.mp4 …/Intro.timeline.json` → `python narrated.py projects/intro.json` → `python combine.py completo` y `resumen` → `python ../tools/prepare-videos.py --release media-vN` |
 
 ## Cómo volver a la versión entregada
 

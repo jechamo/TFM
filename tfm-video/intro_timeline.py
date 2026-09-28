@@ -7,7 +7,7 @@ Uso:
 Transcribe la voz con la misma función que narrated.py (faster-whisper, con caché) y busca las palabras que
 disparan cada paso de la slide 2 en modo grabación:
 
-    1 · sistema (el primero)   2 · RRSS Studio   3 · ChaFit   4 · ICG Vault   5 · pie (github.com/jechamo/TFM)
+    1 · núcleo («cuatro repositorios»)   2 · RRSS Studio   3 · ChaFit   4 · ICG Vault   5 · pie (github.com/jechamo/TFM)
 
 Los tiempos ya incluyen el voice_offset del proyecto, así que la grabación queda sincronizada 1:1 con el montaje.
 """
@@ -40,14 +40,15 @@ def main() -> None:
                 return s
         raise SystemExit(f"No se oye ninguna de {keys} después de {after:.1f} s: revisa la toma o el texto")
 
-    t_sys = first(("sistema",))
+    t_four = first(("cuatro",))                # el núcleo aparece con «cuatro repositorios»: sin pantalla vacía
+    t_sys = first(("sistema",), t_four)
     t_rrss = first(("rrss", "erre", "redes"), t_sys)
     t_chafit = first(("chafit", "chaf"), t_rrss)
-    t_icg = first(("icg", "vault", "ice", "icege"), t_chafit)
+    t_icg = first(("icg", "aicg", "eicg", "vault", "bold", "ice"), t_chafit)   # Whisper oye a veces «AICG Bold»
     end = heard[-1][1]
-    steps = [[round(t_sys - LEAD, 2), 1], [round(t_rrss - LEAD, 2), 2], [round(t_chafit - LEAD, 2), 3],
+    steps = [[round(t_four - LEAD, 2), 1], [round(t_rrss - LEAD, 2), 2], [round(t_chafit - LEAD, 2), 3],
              [round(t_icg - LEAD, 2), 4], [round(max(end - 2.5, t_icg + 2.0), 2), 5]]
-    timeline = {"duration": round(end + TAIL, 2), "steps": steps}
+    timeline = {"duration": round(max(end + TAIL, cfg.get("duration", 0)), 2), "steps": steps}
     out = (base / cfg["raw"]).resolve().with_suffix(".timeline.json")
     out.write_text(json.dumps(timeline, indent=2), encoding="utf-8")
     print(f"{out}\n{json.dumps(timeline)}")

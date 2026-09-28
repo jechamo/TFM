@@ -1,147 +1,151 @@
 {
- "release": "media-v1",
+ "release": "media-v2",
  "repo": "jechamo/TFM",
  "videos": [
   {
    "id": "tfm-completo",
    "title": "TFM completo",
-   "subtitle": "Sistema SDD + RRSS Studio + ChaFit + ICG Vault",
+   "subtitle": "Intro de los cuatro repositorios + sistema SDD + RRSS Studio + ChaFit + ICG Vault",
    "file": "tfm-completo.mp4",
-   "bytes": 117393958,
-   "duration": 990.3,
+   "bytes": 119583835,
+   "duration": 1029.1,
    "vtt": "videos/tfm-completo.vtt",
    "thumb": "assets/img/thumbs/tfm-completo.webp",
    "chapters": [
     {
      "t": 0,
+     "title": "Introducción: cuatro repositorios"
+    },
+    {
+     "t": 39,
      "title": "Sistema SDD/TDD con agentes"
     },
     {
-     "t": 30,
+     "t": 69,
      "title": "Sistema SDD/TDD con agentes · Instalar en tres pasos"
     },
     {
-     "t": 62,
+     "t": 101,
      "title": "Sistema SDD/TDD con agentes · Actualizar un proyecto"
     },
     {
-     "t": 82,
+     "t": 121,
      "title": "Sistema SDD/TDD con agentes · El circuito: cinco fases"
     },
     {
-     "t": 127,
+     "t": 166,
      "title": "Sistema SDD/TDD con agentes · Tres niveles y seis puertas"
     },
     {
-     "t": 160,
+     "t": 199,
      "title": "Sistema SDD/TDD con agentes · Veinte agentes"
     },
     {
-     "t": 180,
+     "t": 219,
      "title": "Sistema SDD/TDD con agentes · Veintisiete skills"
     },
     {
-     "t": 198,
+     "t": 237,
      "title": "Sistema SDD/TDD con agentes · Garantías"
     },
     {
-     "t": 218,
+     "t": 257,
      "title": "Sistema SDD/TDD con agentes · Entornos compatibles"
     },
     {
-     "t": 232,
+     "t": 271,
      "title": "Sistema SDD/TDD con agentes · Preguntas"
     },
     {
-     "t": 264,
+     "t": 303,
      "title": "Sistema SDD/TDD con agentes · Cierre"
     },
     {
-     "t": 279,
+     "t": 318,
      "title": "RRSS Studio · LeadView"
     },
     {
-     "t": 312,
+     "t": 351,
      "title": "RRSS Studio · LeadView · Analiza tu app"
     },
     {
-     "t": 356,
+     "t": 395,
      "title": "RRSS Studio · LeadView · Competencia, clientes y virales"
     },
     {
-     "t": 399,
+     "t": 438,
      "title": "RRSS Studio · LeadView · Crea contenido"
     },
     {
-     "t": 446,
+     "t": 485,
      "title": "RRSS Studio · LeadView · Laboratorio de clips"
     },
     {
-     "t": 467,
+     "t": 506,
      "title": "RRSS Studio · LeadView · Motor de IA y ajustes"
     },
     {
-     "t": 487,
+     "t": 526,
      "title": "RRSS Studio · LeadView · Prueba en directo"
     },
     {
-     "t": 510,
+     "t": 549,
      "title": "RRSS Studio · LeadView · Cierre"
     },
     {
-     "t": 518,
+     "t": 557,
      "title": "ChaFit"
     },
     {
-     "t": 538,
+     "t": 577,
      "title": "ChaFit · El cliente"
     },
     {
-     "t": 620,
+     "t": 659,
      "title": "ChaFit · La dieta"
     },
     {
-     "t": 680,
+     "t": 718,
      "title": "ChaFit · El entrenador"
     },
     {
-     "t": 706,
+     "t": 744,
      "title": "ChaFit · El gimnasio"
     },
     {
-     "t": 730,
+     "t": 769,
      "title": "ChaFit · Cierre"
     },
     {
-     "t": 743,
+     "t": 782,
      "title": "ICG Vault"
     },
     {
-     "t": 768,
+     "t": 807,
      "title": "ICG Vault · Lo básico: fichas, voto rápido y biblioteca"
     },
     {
-     "t": 808,
+     "t": 847,
      "title": "ICG Vault · Tu voto pesa más"
     },
     {
-     "t": 829,
+     "t": 868,
      "title": "ICG Vault · Cofres y acompañantes"
     },
     {
-     "t": 847,
+     "t": 886,
      "title": "ICG Vault · A jugar: Duelo, Inmortales y retos diarios"
     },
     {
-     "t": 905,
+     "t": 944,
      "title": "ICG Vault · Comunidad"
     },
     {
-     "t": 955,
+     "t": 994,
      "title": "ICG Vault · Web, iPhone y Android"
     },
     {
-     "t": 979,
+     "t": 1018,
      "title": "ICG Vault · Cierre"
     }
    ],
@@ -150,131 +154,135 @@
   {
    "id": "tfm-resumen",
    "title": "TFM resumido",
-   "subtitle": "Sistema SDD + los tres productos en un minuto cada uno",
+   "subtitle": "Intro de los cuatro repositorios + sistema SDD + los tres productos en un minuto cada uno",
    "file": "tfm-resumen.mp4",
-   "bytes": 57861414,
-   "duration": 487.8,
+   "bytes": 60004809,
+   "duration": 526.6,
    "vtt": "videos/tfm-resumen.vtt",
    "thumb": "assets/img/thumbs/tfm-resumen.webp",
    "chapters": [
     {
      "t": 0,
+     "title": "Introducción: cuatro repositorios"
+    },
+    {
+     "t": 39,
      "title": "Sistema SDD/TDD con agentes"
     },
     {
-     "t": 30,
+     "t": 69,
      "title": "Sistema SDD/TDD con agentes · Instalar en tres pasos"
     },
     {
-     "t": 62,
+     "t": 101,
      "title": "Sistema SDD/TDD con agentes · Actualizar un proyecto"
     },
     {
-     "t": 82,
+     "t": 121,
      "title": "Sistema SDD/TDD con agentes · El circuito: cinco fases"
     },
     {
-     "t": 127,
+     "t": 166,
      "title": "Sistema SDD/TDD con agentes · Tres niveles y seis puertas"
     },
     {
-     "t": 160,
+     "t": 199,
      "title": "Sistema SDD/TDD con agentes · Veinte agentes"
     },
     {
-     "t": 180,
+     "t": 219,
      "title": "Sistema SDD/TDD con agentes · Veintisiete skills"
     },
     {
-     "t": 198,
+     "t": 237,
      "title": "Sistema SDD/TDD con agentes · Garantías"
     },
     {
-     "t": 218,
+     "t": 257,
      "title": "Sistema SDD/TDD con agentes · Entornos compatibles"
     },
     {
-     "t": 232,
+     "t": 271,
      "title": "Sistema SDD/TDD con agentes · Preguntas"
     },
     {
-     "t": 264,
+     "t": 303,
      "title": "Sistema SDD/TDD con agentes · Cierre"
     },
     {
-     "t": 279,
+     "t": 318,
      "title": "RRSS Studio · LeadView"
     },
     {
-     "t": 291,
+     "t": 330,
      "title": "RRSS Studio · LeadView · Analiza tu app"
     },
     {
-     "t": 303,
+     "t": 342,
      "title": "RRSS Studio · LeadView · Competencia, clientes y virales"
     },
     {
-     "t": 315,
+     "t": 354,
      "title": "RRSS Studio · LeadView · Crea contenido"
     },
     {
-     "t": 326,
+     "t": 365,
      "title": "RRSS Studio · LeadView · Laboratorio de clips"
     },
     {
-     "t": 343,
+     "t": 382,
      "title": "RRSS Studio · LeadView · Cierre"
     },
     {
-     "t": 349,
+     "t": 388,
      "title": "ChaFit"
     },
     {
-     "t": 358,
+     "t": 397,
      "title": "ChaFit · Entrenar"
     },
     {
-     "t": 377,
+     "t": 416,
      "title": "ChaFit · Nutrición"
     },
     {
-     "t": 386,
+     "t": 425,
      "title": "ChaFit · Progreso y ayuda"
     },
     {
-     "t": 398,
+     "t": 437,
      "title": "ChaFit · Entrenadores y gimnasios"
     },
     {
-     "t": 407,
+     "t": 446,
      "title": "ChaFit · Cierre"
     },
     {
-     "t": 416,
+     "t": 455,
      "title": "ICG Vault"
     },
     {
-     "t": 429,
+     "t": 468,
      "title": "ICG Vault · Fichas"
     },
     {
-     "t": 437,
+     "t": 476,
      "title": "ICG Vault · Tu voto pesa más"
     },
     {
-     "t": 449,
+     "t": 488,
      "title": "ICG Vault · Recompensas"
     },
     {
-     "t": 460,
+     "t": 499,
      "title": "ICG Vault · Juegos"
     },
     {
-     "t": 471,
+     "t": 510,
      "title": "ICG Vault · Comunidad"
     },
     {
-     "t": 477,
+     "t": 516,
      "title": "ICG Vault · Cierre"
     }
    ],
