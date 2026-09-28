@@ -93,6 +93,36 @@
   .hud button, .hud a { all: unset; cursor: pointer; padding: 4px 10px; border-radius: 999px; color: #C3CAD4; }
   .hud button:hover, .hud button:focus-visible, .hud a:hover, .hud a:focus-visible { background: #1f2630; }
   .progress { position: fixed; left: 0; top: 0; height: 3px; background: var(--accent); z-index: 5; transition: width .25s; }
+  /* Slide «cuatro repositorios» */
+  .repos { flex: 1; min-height: 0; display: grid; grid-template-columns: 600px 230px 1fr; margin-top: 30px; }
+  .core { background: var(--card); border: 1px solid var(--rule); border-top: 5px solid var(--accent); border-radius: 22px; padding: 30px 32px; display: flex; flex-direction: column; gap: 16px; }
+  .core h3 { font: 600 38px/1.15 var(--sans); margin: 0; }
+  .core p { font-size: 23px; line-height: 1.4; color: var(--ink2); }
+  .core .shot { margin-top: auto; border-radius: 12px; overflow: hidden; border: 1px solid var(--rule); height: 150px; }
+  .core .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .stats4 { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 14px 0; }
+  .stats4 b { display: block; font: 500 46px/1 var(--serif); }
+  .stats4 span { font-size: 17px; color: var(--muted); }
+  .links-v { display: flex; flex-direction: column; gap: 6px; font: 500 20px var(--mono); }
+  .wires { width: 100%; height: 100%; overflow: visible; }
+  .wires path { fill: none; stroke: #3A4452; stroke-width: 2.5; }
+  .wires text { font: 500 17px var(--sans); fill: var(--muted); }
+  .prods { display: grid; grid-template-rows: repeat(3, 1fr); gap: 20px; min-height: 0; }
+  .rcard { display: grid; grid-template-columns: 150px 1fr; gap: 26px; align-items: center; background: var(--card); border: 1px solid var(--rule); border-left: 5px solid var(--c); border-radius: 20px; padding: 16px 26px 16px 16px; min-height: 0; }
+  .rcard > img { width: 150px; height: 190px; object-fit: cover; object-position: center top; border-radius: 12px; display: block; }
+  .rcard h3 { font: 600 31px/1.1 var(--sans); margin: 0; display: flex; gap: 14px; align-items: center; }
+  .rcard .tag { font: 600 14px var(--sans); letter-spacing: .08em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--rule); color: var(--muted); white-space: nowrap; }
+  .rcard p { font-size: 21px; line-height: 1.35; color: var(--ink2); margin-top: 6px; }
+  .rcard .lk { display: flex; gap: 22px; flex-wrap: wrap; font: 500 19px var(--mono); margin-top: 8px; }
+  .demo { display: inline-flex; gap: 12px; align-items: baseline; margin-top: 8px; padding: 5px 12px; border: 1px dashed #334050; border-radius: 10px; background: #0B0E13; font: 500 19px var(--mono); color: var(--ink); }
+  .demo span { font: 600 14px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--warn); }
+  .demo.none { color: var(--muted); border-style: solid; border-color: var(--rule); background: none; }
+  .demo.none span { color: var(--muted); }
+  /* Modo grabación (?rec): la intro del vídeo revela los bloques por pasos y no muestra credenciales. */
+  body.rec [data-step] { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
+  body.rec [data-step].in { opacity: 1; transform: none; }
+  body.rec .demo, body.rec .hud, body.rec .progress { display: none !important; }
+  body.rec .slide::after { content: none; }
   @media print {
     @page { size: 1920px 1080px; margin: 0; }
     html, body { overflow: visible; height: auto; background: var(--bg); }
@@ -123,7 +153,59 @@
   <div class="foot"><span>RRSS Studio · ChaFit · ICG Vault</span></div>
 </section>
 
-<!-- 2 · Problema -->
+<!-- 2 · Cuatro repositorios -->
+<section class="slide" aria-label="El TFM en cuatro repositorios">
+  <span class="kicker">El TFM en cuatro repositorios</span>
+  <h2>Un método y tres productos <em>reales</em>.</h2>
+  <div class="repos">
+    <div class="core" data-step="1">
+      <span class="kicker" style="color:var(--accent);font-size:18px">Núcleo · el método</span>
+      <h3>Sistema SDD/TDD con agentes</h3>
+      <p>Kit instalable con <code style="color:var(--accent)">npx</code> que gobierna a los agentes: especificación primero, TDD con evidencia y la persona decide en seis puertas.</p>
+      <div class="stats4"><div><b>20</b><span>agentes</span></div><div><b>27</b><span>skills</span></div><div><b>6</b><span>gates</span></div><div><b>375</b><span>comprobaciones</span></div></div>
+      <div class="links-v"><a href="https://github.com/jechamo/Estructura_inicial_claude">github.com/jechamo/Estructura_inicial_claude</a><a href="https://jechamo.github.io/Estructura_inicial_claude/">jechamo.github.io/Estructura_inicial_claude</a></div>
+      <div class="demo none"><span>Acceso</span>kit instalable, sin login</div>
+      <div class="shot"><img src="../assets/img/screens/sdd-site.webp" alt="Web del sistema SDD/TDD"></div>
+    </div>
+    <svg class="wires" viewBox="0 0 230 709" preserveAspectRatio="none" aria-hidden="true">
+      <g data-step="2"><path d="M0 354.5 C 115 354.5, 115 111.5, 230 111.5"/><text x="186" y="97" text-anchor="middle">crea</text></g>
+      <g data-step="3"><path d="M0 354.5 L 230 354.5"/><text x="118" y="318" text-anchor="middle">especifica</text><text x="118" y="340" text-anchor="middle">y evoluciona</text></g>
+      <g data-step="4"><path d="M0 354.5 C 115 354.5, 115 597.5, 230 597.5"/><text x="150" y="640" text-anchor="middle">audita</text><text x="150" y="662" text-anchor="middle">y evoluciona</text></g>
+    </svg>
+    <div class="prods">
+      <div class="rcard" style="--c:var(--rrss)" data-step="2">
+        <img src="../assets/img/frames/rrss/appmap.webp" style="object-position:left top" alt="RRSS Studio: mapa funcional de una app">
+        <div>
+          <h3>RRSS Studio <span class="tag">greenfield · local</span></h3>
+          <p>Nació con el método: analiza un producto y crea contenido para redes con IA.</p>
+          <div class="lk"><a href="https://github.com/jechamo/rrss-automation-app">github.com/jechamo/rrss-automation-app</a></div>
+          <div class="demo none"><span>Acceso</span>app local, sin login</div>
+        </div>
+      </div>
+      <div class="rcard" style="--c:var(--chafit)" data-step="3">
+        <img src="../assets/img/frames/chafit/ai-routine.webp" alt="ChaFit: rutina con IA">
+        <div>
+          <h3>ChaFit <span class="tag">en producción · web, iOS y Android</span></h3>
+          <p>Entrenamiento para clientes, entrenadores y gimnasios, con 7 specs y TDD.</p>
+          <div class="lk"><a href="https://github.com/jechamo/chafit360">github.com/jechamo/chafit360</a><a href="https://chafit.es">chafit.es</a></div>
+          <div class="demo"><span>Demo</span>client3@demo.chafit.es · demo123456</div>
+        </div>
+      </div>
+      <div class="rcard" style="--c:var(--icg)" data-step="4">
+        <img src="../assets/img/frames/icg/leaderboard.webp" alt="ICG Vault: clasificación de usuarios">
+        <div>
+          <h3>ICG Vault <span class="tag">en producción · web, iOS y Android</span></h3>
+          <p>Red social de cine, series y videojuegos, auditada con el modelo SDD.</p>
+          <div class="lk"><a href="https://github.com/jechamo/icgbolt">github.com/jechamo/icgbolt</a><a href="https://icgvault.es">icgvault.es</a></div>
+          <div class="demo"><span>Demo</span>Pepis · demo123456</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot" data-step="5"><span>Documentación, arquitectura y esta presentación:</span><a href="https://github.com/jechamo/TFM">github.com/jechamo/TFM</a></div>
+</section>
+
+<!-- 3 · Problema -->
 <section class="slide" aria-label="El problema">
   <span class="kicker">El problema</span>
   <h2 class="xl">Los agentes escriben deprisa.<br><em>Sin método</em>, esa velocidad se paga.</h2>
@@ -138,7 +220,7 @@
   </div>
 </section>
 
-<!-- 3 · Solución -->
+<!-- 4 · Solución -->
 <section class="slide" aria-label="La solución">
   <span class="kicker">La solución</span>
   <h2 class="xl">La spec manda, el test demuestra<br>y <em>la persona decide</em>.</h2>
@@ -153,7 +235,7 @@
   </div>
 </section>
 
-<!-- 4 · SDD/TDD -->
+<!-- 5 · SDD/TDD -->
 <section class="slide" aria-label="SDD y TDD">
   <span class="kicker">SDD + TDD</span>
   <h2>Diez fases, seis puertas, <em>tres niveles</em>.</h2>
@@ -161,7 +243,7 @@
   <div class="foot"><span><b style="color:var(--ink)">light</b> · un fichero no ejecutable</span><span><b style="color:var(--ink)">compact</b> · un módulo, TDD completo</span><span><b style="color:var(--ink)">full</b> · seguridad, datos, API o varios módulos</span><a class="play" href="../video.html?v=tfm-completo&amp;t=82">Vídeo · 1:22</a></div>
 </section>
 
-<!-- 5 · Agentes -->
+<!-- 6 · Agentes -->
 <section class="slide" aria-label="Arquitectura agentic">
   <span class="kicker">Sistema de agentes</span>
   <h2>20 agentes. Solo 3 delegan. <em>Quien juzga no escribe.</em></h2>
@@ -169,7 +251,7 @@
   <div class="foot"><span>27 skills · 7 hooks · profundidad máxima de dos saltos · auditores de solo lectura</span><a class="play" href="../video.html?v=tfm-completo&amp;t=160">Vídeo · 2:40</a></div>
 </section>
 
-<!-- 6 · Workflow -->
+<!-- 7 · Workflow -->
 <section class="slide" aria-label="Flujo de trabajo">
   <span class="kicker">Flujo de trabajo</span>
   <h2>Agentes que proponen, <em>scripts que verifican</em>.</h2>
@@ -197,7 +279,7 @@
   </div>
 </section>
 
-<!-- 7 · Arquitectura global -->
+<!-- 8 · Arquitectura global -->
 <section class="slide" aria-label="Arquitectura global">
   <span class="kicker">Arquitectura global</span>
   <h2>Un sistema, <em>tres aplicaciones</em>.</h2>
@@ -205,7 +287,7 @@
   <div class="foot"><a href="https://github.com/jechamo/Estructura_inicial_claude">github.com/jechamo/Estructura_inicial_claude</a><a href="https://jechamo.github.io/Estructura_inicial_claude/">Web del sistema</a></div>
 </section>
 
-<!-- 8 · RRSS -->
+<!-- 9 · RRSS -->
 <section class="slide" aria-label="RRSS Studio">
   <span class="kicker"><span class="dot" style="background:var(--rrss)"></span>Greenfield · aplicación local</span>
   <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:60px">
@@ -223,7 +305,7 @@
   <div class="foot"><a href="https://github.com/jechamo/rrss-automation-app">github.com/jechamo/rrss-automation-app</a><a class="play" href="../video.html?v=tfm-completo&amp;t=279">Vídeo · 4:39</a><a class="play" href="../video.html?v=rrss-4min">Recorrido de 4 min</a></div>
 </section>
 
-<!-- 9 · Arquitectura RRSS -->
+<!-- 10 · Arquitectura RRSS -->
 <section class="slide" aria-label="Arquitectura de RRSS Studio">
   <span class="kicker">RRSS Studio · arquitectura</span>
   <h2>Monolito modular local: <em>un proceso, muchas IA</em>.</h2>
@@ -238,7 +320,7 @@
   <div class="foot"><a href="../../docs/architecture/rrss-architecture.md" data-gh="docs/architecture/rrss-architecture.md">Documento de arquitectura</a><a href="../diagrams/interactive/rrss-container.html">Diagrama interactivo</a></div>
 </section>
 
-<!-- 10 · ChaFit -->
+<!-- 11 · ChaFit -->
 <section class="slide" aria-label="ChaFit">
   <span class="kicker"><span class="dot" style="background:var(--chafit)"></span>Brownfield · web, iOS y Android</span>
   <div class="cols" style="grid-template-columns:1fr 860px;gap:60px;flex:1;min-height:0">
@@ -257,7 +339,7 @@
   <div class="foot"><a href="https://chafit.es">chafit.es</a><a href="https://apps.apple.com/app/chafit/id6759172876">App Store</a><a href="https://play.google.com/store/apps/details?id=com.chafit.app">Google Play</a><a href="https://github.com/jechamo/chafit360">GitHub</a><a class="play" href="../video.html?v=tfm-completo&amp;t=518">Vídeo · 8:38</a><a class="play" href="../video.html?v=chafit-4min">Recorrido de 4 min</a></div>
 </section>
 
-<!-- 11 · Arquitectura ChaFit -->
+<!-- 12 · Arquitectura ChaFit -->
 <section class="slide" aria-label="Arquitectura de ChaFit">
   <span class="kicker">ChaFit · arquitectura</span>
   <h2>Una SPA, tres plataformas; <em>claves solo en el servidor</em>.</h2>
@@ -272,7 +354,7 @@
   <div class="foot"><a href="../../docs/architecture/chafit-architecture.md" data-gh="docs/architecture/chafit-architecture.md">Documento de arquitectura</a><a href="../diagrams/interactive/chafit-container.html">Diagrama interactivo</a><a href="https://github.com/jechamo/chafit360">github.com/jechamo/chafit360</a></div>
 </section>
 
-<!-- 12 · ICG Vault -->
+<!-- 13 · ICG Vault -->
 <section class="slide" aria-label="ICG Vault">
   <span class="kicker"><span class="dot" style="background:var(--icg)"></span>Brownfield · web, iOS y Android</span>
   <div class="cols" style="grid-template-columns:1fr 860px;gap:60px;flex:1;min-height:0">
@@ -291,7 +373,7 @@
   <div class="foot"><a href="https://icgvault.es">icgvault.es</a><a href="https://apps.apple.com/es/app/icg-vault/id6759173751">App Store</a><a href="https://play.google.com/store/apps/details?id=com.icgvault.app">Google Play</a><a href="https://github.com/jechamo/icgbolt">GitHub</a><a class="play" href="../video.html?v=tfm-completo&amp;t=743">Vídeo · 12:23</a><a class="play" href="../video.html?v=icg-vault-4min">Recorrido de 4 min</a></div>
 </section>
 
-<!-- 13 · Arquitectura ICG -->
+<!-- 14 · Arquitectura ICG -->
 <section class="slide" aria-label="Arquitectura de ICG Vault">
   <span class="kicker">ICG Vault · arquitectura</span>
   <h2>Reglas del juego en SQL; <em>catálogo tras un proxy</em>.</h2>
@@ -306,7 +388,7 @@
   <div class="foot"><a href="../../docs/architecture/icgvault-architecture.md" data-gh="docs/architecture/icgvault-architecture.md">Documento de arquitectura</a><a href="../diagrams/interactive/icgvault-container.html">Diagrama interactivo</a><a href="https://github.com/jechamo/icgbolt">github.com/jechamo/icgbolt</a></div>
 </section>
 
-<!-- 14 · Integraciones e IA -->
+<!-- 15 · Integraciones e IA -->
 <section class="slide" aria-label="Integraciones e IA">
   <span class="kicker">Integraciones e IA</span>
   <h2><em>32</em> integraciones, <em>33</em> funcionalidades con IA.</h2>
@@ -325,7 +407,7 @@
   <div class="foot"><a href="../../docs/architecture/external-integrations.md" data-gh="docs/architecture/external-integrations.md">Matriz de integraciones</a><a href="../../docs/architecture/ai-integrations.md" data-gh="docs/architecture/ai-integrations.md">Inventario de IA</a></div>
 </section>
 
-<!-- 15 · Auditorías -->
+<!-- 16 · Auditorías -->
 <section class="slide" aria-label="Auditorías">
   <span class="kicker">Auditorías con el modelo SDD</span>
   <h2>El sistema también <em>audita</em> lo ya construido.</h2>
@@ -353,7 +435,7 @@
   <div class="foot"><a href="../../docs/audits/audit-methodology.md" data-gh="docs/audits/audit-methodology.md">Metodología</a><span>Informes completos privados; publicados solo los resúmenes saneados</span></div>
 </section>
 
-<!-- 16 · Calidad -->
+<!-- 17 · Calidad -->
 <section class="slide" aria-label="Calidad">
   <span class="kicker">Calidad · ejecutado el 26/09/2026</span>
   <h2>Tests ejecutados, <em>no declarados</em>.</h2>
@@ -371,7 +453,7 @@
   </div>
 </section>
 
-<!-- 17 · Seguridad -->
+<!-- 18 · Seguridad -->
 <section class="slide" aria-label="Seguridad">
   <span class="kicker">Seguridad</span>
   <h2>Desde el diseño, <em>no al final</em>.</h2>
@@ -387,14 +469,14 @@
         <li>ChaFit, spec 005: el asesor detectó una función invocable sin sesión → migración + rollback → <b>validado</b>.</li>
         <li>Claves de pago y de IA <b>nunca en el cliente</b>, en ninguno de los tres productos.</li>
         <li>Auditorías publicadas <b>solo como resumen saneado</b>.</li>
-        <li>Credenciales de demo solo en el <b>formulario privado</b> de entrega.</li>
+        <li>Cuentas demo <b>sin rol de administrador</b>; su contraseña se cambia tras la defensa.</li>
       </ul>
     </div>
   </div>
   <div class="foot"><a href="../../docs/security/security.md" data-gh="docs/security/security.md">Documento de seguridad</a></div>
 </section>
 
-<!-- 18 · Máster -->
+<!-- 19 · Máster -->
 <section class="slide" aria-label="Relación con el máster">
   <span class="kicker">Relación con el máster</span>
   <h2>Del temario a la <em>evidencia</em>.</h2>
@@ -412,7 +494,7 @@
   <div class="foot"><a href="../../docs/evidence/master-evidence-matrix.md" data-gh="docs/evidence/master-evidence-matrix.md">Matriz de evidencias del máster</a></div>
 </section>
 
-<!-- 19 · Resultados -->
+<!-- 20 · Resultados -->
 <section class="slide" aria-label="Resultados">
   <span class="kicker">Resultados</span>
   <h2>Lo que se puede <em>comprobar</em>.</h2>
@@ -430,7 +512,7 @@
   </div>
 </section>
 
-<!-- 20 · Aprendizajes -->
+<!-- 21 · Aprendizajes -->
 <section class="slide" aria-label="Aprendizajes">
   <span class="kicker">Aprendizajes</span>
   <h2>Lo que me llevo.</h2>
@@ -445,7 +527,7 @@
   </div>
 </section>
 
-<!-- 21 · Conclusión -->
+<!-- 22 · Conclusión -->
 <section class="slide" aria-label="Conclusión y enlaces">
   <span class="kicker">Conclusión</span>
   <h2 class="xl" style="max-width:1560px">La IA escribe el código; <em>el sistema se asegura</em> de que esté bien hecho.</h2>
@@ -464,6 +546,9 @@
 <script>
 (function () {
   // Los documentos del repo se abren en GitHub cuando la presentación no está abierta como fichero local.
+  // Modo grabación (?rec): lo usa tfm-video/tours/intro-repos.cjs para revelar la slide 2 por pasos.
+  if (/[?&]rec(=|&|$)/.test(location.search)) document.body.classList.add('rec');
+  window.setStep = function (n) { document.querySelectorAll('[data-step]').forEach(function (e) { e.classList.toggle('in', +e.dataset.step <= n); }); };
   var GH = 'https://github.com/jechamo/TFM/blob/HEAD/';
   if (location.protocol !== 'file:') document.querySelectorAll('a[data-gh]').forEach(function (a) { a.href = GH + a.dataset.gh; });
   var slides = Array.prototype.slice.call(document.querySelectorAll('.slide')), i = 0;

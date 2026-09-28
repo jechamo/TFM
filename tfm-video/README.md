@@ -31,7 +31,7 @@ raw/*.mp4 ──► edit.py (pasada 1: encuadre · zooms · cortes · acelerados
 ## Cómo grabar (para que el montaje quede bien)
 
 - **OBS Studio**, 1920×1080 a 30 fps, x264 con CRF 23 (o unos 6.000 kbps). Voz en la pista 1.
-- **Un archivo por sección del [guion](../docs/05-guion-video.md)**: `01-intro.mp4`, `02-plantilla.mp4`, `03-rrss.mp4`…
+- **Un archivo por sección del [guion](../VIDEO_SCRIPT.md)**: `01-intro.mp4`, `02-plantilla.mp4`, `03-rrss.mp4`…
   Si te equivocas, **haz una pausa de 2 segundos y repite la frase**: el corte de silencios facilita quitar la toma mala.
 - **Móvil**: grábalo con la grabación de pantalla del propio sistema (iOS o Android) y **da una palmada o di «sync»**
   al empezar, visible y audible en las dos grabaciones, para poder sincronizarlas (`phone_offset`).

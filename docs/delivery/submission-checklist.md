@@ -11,7 +11,7 @@
 | Versión desplegada | ✅ chafit.es · icgvault.es · web del sistema · web del TFM | README |
 | Slides | ✅ publicadas | https://jechamo.github.io/TFM/slides/ |
 | Vídeo | ✅ publicado (16:30 y 8:08) | https://jechamo.github.io/TFM/video.html?v=tfm-completo |
-| Usuario y contraseña DEMO | ⏳ en el formulario privado | [criterio](../security/security.md#credenciales-demo-criterio) |
+| Usuario y contraseña DEMO | ✅ en la slide 2, el README y el formulario | [criterio](../security/security.md#credenciales-demo-criterio) |
 
 ## Formulario final
 

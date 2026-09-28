@@ -69,8 +69,8 @@ La columna *Narración* resume la locución real (el texto completo está en los
 | Sistema, SDD, agentes y workflow | Parte 1 completa |
 | RRSS, ChaFit e ICG Vault | Partes 2, 3 y 4 |
 | IA e integraciones | 5:12–7:47 (RRSS), 8:58–10:20 (ChaFit), 12:48 y 13:49 (ICG Vault) |
-| Arquitectura | **no aparece en pantalla**: cubierta por las slides 7, 9, 11 y 13 y por la web |
-| Auditorías, resultados y relación con el máster | **no aparecen**: cubiertos por las slides 15, 16, 18 y 19 |
+| Arquitectura | **no aparece en pantalla**: cubierta por las slides 8, 10, 12 y 14 y por la web |
+| Auditorías, resultados y relación con el máster | **no aparecen**: cubiertos por las slides 16, 17, 19 y 20 |
 
 ## Bloque técnico opcional (ACCIÓN REQUERIDA DEL AUTOR, opcional)
 
@@ -78,10 +78,10 @@ Si el tribunal espera que el vídeo cubra también arquitectura, auditorías y m
 
 | Tiempo | Narración propuesta | Pantalla | Acción | Mensaje |
 |---|---|---|---|---|
-| 0:00 | «Soy Jorge Chamorro. Mi TFM es un sistema de ingeniería de software con agentes que he aplicado a tres productos reales.» | slide 1 | — | quién y qué |
-| 0:15 | «Los agentes escriben deprisa, pero se autocertifican. En ChaFit eso acabó en 317 filas desplazadas en producción.» | slide 2 | — | el problema con un dato real |
-| 0:30 | «La spec manda, el test demuestra y la persona decide: diez fases, seis puertas y verificación fuera del modelo.» | slides 3–4 | — | la solución |
-| 0:50 | «Cada producto tiene su arquitectura modelada como código: un monolito local, una SPA con Edge Functions y una red social con la lógica del juego en SQL.» | slides 9, 11 y 13 | — | arquitectura |
-| 1:15 | «Treinta y dos integraciones y treinta y tres funcionalidades con IA, sin claves en el cliente.» | slide 14 | — | integraciones e IA |
-| 1:30 | «El sistema también audita: 53 hallazgos en ChaFit y 48 en ICG Vault. Las correcciones están planificadas y pendientes de aprobación.» | slide 15 | — | auditorías, con honestidad |
-| 1:45 | «46 de 54 competencias del máster tienen evidencia enlazada. A continuación, el sistema y los productos en acción.» | slides 18–19 | — | máster y transición |
+| 0:00 | «Soy Jorge Chamorro. Mi TFM es un sistema de ingeniería de software con agentes que he aplicado a tres productos reales, en cuatro repositorios.» | slides 1–2 | — | quién y qué |
+| 0:15 | «Los agentes escriben deprisa, pero se autocertifican. En ChaFit eso acabó en 317 filas desplazadas en producción.» | slide 3 | — | el problema con un dato real |
+| 0:30 | «La spec manda, el test demuestra y la persona decide: diez fases, seis puertas y verificación fuera del modelo.» | slides 4–5 | — | la solución |
+| 0:50 | «Cada producto tiene su arquitectura modelada como código: un monolito local, una SPA con Edge Functions y una red social con la lógica del juego en SQL.» | slides 10, 12 y 14 | — | arquitectura |
+| 1:15 | «Treinta y dos integraciones y treinta y tres funcionalidades con IA, sin claves en el cliente.» | slide 15 | — | integraciones e IA |
+| 1:30 | «El sistema también audita: 53 hallazgos en ChaFit y 48 en ICG Vault. Las correcciones están planificadas y pendientes de aprobación.» | slide 16 | — | auditorías, con honestidad |
+| 1:45 | «46 de 54 competencias del máster tienen evidencia enlazada. A continuación, el sistema y los productos en acción.» | slides 19–20 | — | máster y transición |

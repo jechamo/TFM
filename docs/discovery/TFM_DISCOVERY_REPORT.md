@@ -101,7 +101,7 @@ Todos 1920×1080, H.264/AAC, **narración sintética**, solo en local.
 ## 8. Riesgos para la entrega
 
 1. **Repositorios privados** (ChaFit, ICG Vault): el tribunal necesitará acceso de lectura.
-2. **Credenciales demo**: publicarlas en un README público mientras las críticas de control de acceso sigan abiertas expone datos de usuarios reales. Recomendación: entregarlas solo en el formulario privado hasta cerrar las críticas.
+2. **Credenciales demo**: publicarlas en un README público mientras las críticas de control de acceso sigan abiertas expone datos de usuarios reales. Recomendación: entregarlas solo en el formulario privado hasta cerrar las críticas. *Actualización 28/09/2026: el autor decidió publicarlas en la slide 2 y el README con condiciones; ver [seguridad](../security/security.md#credenciales-demo-criterio).*
 3. **Vídeo con narración sintética**: las bases piden un vídeo en el que el autor explique el proyecto; conviene confirmarlo con el tutor o grabar una introducción con voz propia.
 4. **Vídeos solo en local**: hay que publicarlos (GitHub Release + reproductor en Pages, o YouTube) para que los enlaces funcionen.
 

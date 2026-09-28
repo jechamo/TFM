@@ -6,6 +6,9 @@ con los tiempos desplazados. Los vídeos de origen están en media/final (fuera 
 Uso:
     python tfm-video/combine.py completo   # SDD + RRSS/ChaFit/ICG Vault de ~4 min  → ~16:30
     python tfm-video/combine.py resumen    # SDD + RRSS/ChaFit/ICG Vault de ~1 min  → ~8:08
+
+Si existe media/final/intro/intro.mp4 (intro de los cuatro repositorios, montada con narrated.py), va delante en
+las dos variantes y los capítulos y subtítulos se desplazan solos. Sin ese fichero se genera lo de siempre.
 """
 import json
 import re
@@ -21,6 +24,9 @@ VARIANTS = {
     "resumen": [("Sistema SDD/TDD con agentes", "sdd/sdd"), ("RRSS Studio · LeadView", "rrss-1min/rrss-1min"),
                 ("ChaFit", "chafit-1min/chafit-1min"), ("ICG Vault", "icg-vault-1min/icg-vault-1min")],
 }
+
+
+INTRO = ("Introducción · cuatro repositorios", "intro/intro")
 
 
 def duration(p: Path) -> float:
@@ -47,6 +53,11 @@ def parse_srt_time(s: str) -> float:
 
 def main(variant: str) -> None:
     parts = VARIANTS[variant]
+    if (FINAL / f"{INTRO[1]}.mp4").exists():
+        parts = [INTRO, *parts]
+        print("Con intro: media/final/intro/intro.mp4")
+    else:
+        print("Sin intro (no existe media/final/intro/intro.mp4)")
     out_dir = FINAL / f"tfm-{variant}"
     out_dir.mkdir(parents=True, exist_ok=True)
     offset, chapters, srt_blocks, idx = 0.0, [], [], 1

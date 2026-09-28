@@ -151,7 +151,16 @@ La narración de los vídeos es sintética.
 
 ## 19. Credenciales de demo
 
-ChaFit e ICG Vault tienen login. Las cuentas de demo se entregan **solo en el formulario privado de entrega** y no se publican en el repositorio mientras las correcciones críticas de las auditorías estén pendientes. → [criterio](docs/security/security.md)
+ChaFit e ICG Vault tienen login; las cuentas de demo también están en la [slide 2](https://jechamo.github.io/TFM/slides/#2).
+
+| App | Web | Usuario | Contraseña |
+|---|---|---|---|
+| ChaFit | [chafit.es](https://chafit.es) | `client3@demo.chafit.es` | `demo123456` |
+| ICG Vault | [icgvault.es](https://icgvault.es) | `Pepis` | `demo123456` |
+
+RRSS Studio (app local) y el sistema SDD (kit instalable) no tienen login.
+
+Son cuentas sin rol de administrador y su contraseña se cambiará después de la defensa. → [criterio](docs/security/security.md#credenciales-demo-criterio)
 
 ## 20. Repositorios
 
