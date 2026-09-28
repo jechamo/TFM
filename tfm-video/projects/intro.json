@@ -1,0 +1,49 @@
+{
+  "name": "intro",
+  "final_dir": "../../media/final/intro",
+  "raw": "../../media/Originales/video/Intro.mp4",
+  "layout": "screen",
+  "voice": "../../media/Originales/voz/Main_intro.mp3",
+  "voice_offset": 0.8,
+  "script": "../voz/intro.md#0",
+  "music": {
+    "file": "../../media/Originales/Musica/main_intro.mp3",
+    "_comentario": "107,7 BPM, compás 2,228 s, rejilla desde 0,14 s. Compases 0-11 (intro suave, subida y golpe de percusión en el compás 8 = 17,97 s, justo cuando se nombra RRSS Studio) y salto al compás 76 (mismo punto de frase) para entrar en el final: el golpe del compás 80 cae a los 35.79 s, tras «Primero, el sistema», y la cola suena hasta el final.",
+    "parts": [
+      [
+        0.0,
+        26.881
+      ],
+      [
+        169.499,
+        184.0
+      ]
+    ],
+    "offset": 0.0,
+    "db": -10,
+    "fade_out": 1.5
+  },
+  "sfx": "../../media/assets/whoosh.ogg",
+  "sfx_db": -16,
+  "duration": 38.79,
+  "_duracion": "Voz + golpe final de la música + 3 s de cola. intro_timeline.py graba la slide con esta duración como mínimo.",
+  "cards": [
+    {
+      "kind": "intro",
+      "t": 0.0,
+      "dur": 4.2,
+      "title": "Del máster a *producción*",
+      "sub": "Trabajo de Fin de Máster · Jorge Chamorro"
+    }
+  ],
+  "shots": [
+    [
+      0.0,
+      0.0,
+      38.79
+    ]
+  ],
+  "zooms": [],
+  "callouts": [],
+  "chapters": []
+}

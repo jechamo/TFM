@@ -33,8 +33,14 @@
 | Auditorías completas | fuera del repositorio; solo resúmenes saneados |
 | Identificadores de proyectos Supabase, webhooks, IDs de Assistant | no publicados |
 | Capturas | fotogramas del autor y páginas públicas; se descartó un fotograma con una notificación personal visible |
-| Credenciales demo | **no se publican** en el repositorio mientras las críticas de control de acceso sigan abiertas; se entregan en el formulario privado |
+| Credenciales demo | publicadas en la slide 2 y en el README por decisión del autor (28/09/2026); cuentas sin rol de administrador y contraseña que se cambia tras la defensa |
 
 ## Credenciales demo: criterio
 
-Las cuentas demo de ChaFit e ICG Vault acceden a productos con **usuarios reales**. Publicarlas en un repositorio público mientras siguen abiertos hallazgos críticos de control de acceso facilitaría a cualquiera el primer paso. Recomendación: aplicar primero las correcciones de permisos de la fase 1 (baratas y reversibles), verificar que las cuentas demo están aisladas y, entonces, añadirlas al README. Hasta entonces se facilitan solo en el formulario de entrega.
+Las cuentas demo de ChaFit e ICG Vault acceden a productos con **usuarios reales**. La recomendación técnica era no publicarlas mientras siguieran abiertos hallazgos críticos de control de acceso, porque facilitan a cualquiera el primer paso. **Decisión del autor (28/09/2026): se publican** en la slide 2 y en el README para que el tribunal pueda probar las apps sin pasos extra, con tres condiciones:
+
+1. Las cuentas demo no tienen rol de administrador.
+2. Las correcciones de permisos de la fase 1 de las auditorías (baratas y reversibles) se aplican en cuanto se aprueben.
+3. La contraseña de ambas cuentas se cambia después de la defensa. Retirar la slide no «despublica» las credenciales: si se revierte, hay que cambiar las contraseñas igualmente.
+
+En el vídeo no aparecen: la intro se graba en modo `?rec`, que oculta las credenciales.

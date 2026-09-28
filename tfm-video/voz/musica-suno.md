@@ -124,6 +124,41 @@ vocals, lyrics, rap, choir, aggressive drops, dubstep, EDM festival, guitar solo
 
 ---
 
+## Intro del TFM (cuatro repositorios)
+
+Sintonía corta que va justo antes del vídeo del sistema SDD. Mismo estilo y tempo que la pista del SDD, para que el
+paso de una a otra no chirríe. Guárdala como `media/Originales/Musica/Intro_Music.mp3`.
+
+**Título:** `TFM – Four Repos`
+
+**Style of Music:**
+
+```text
+instrumental cinematic tech intro, minimal electronic, soft pulsing synth arpeggio, warm pads, subtle piano motif, gradual build to a light confident beat, clean and modern, 108 BPM, 4/4, no vocals
+```
+
+**Exclude styles:**
+
+```text
+vocals, lyrics, rap, choir, aggressive drops, dubstep, EDM festival, lo-fi, tempo changes, long fade out
+```
+
+**Lyrics** (en modo *Custom*):
+
+```text
+[Intro: soft pads and a single pulsing arpeggio]
+[Build-up: light percussion enters]
+[Main Groove: steady, space for voiceover]
+[Build-up]
+[Outro: final hit, clean stop]
+[End]
+```
+
+- Basta con **1:00 o más**: la intro dura ≈ 35 s y se corta por compases, con el golpe final al acabar la voz.
+- Quédate con la versión de arranque más limpio: los primeros 2-3 s suenan solos, antes de la voz.
+
+---
+
 ## Si no quieres usar Suno en YouTube
 
 Según las condiciones de Suno que conozco, el uso comercial solo está permitido si generas la canción con un plan de

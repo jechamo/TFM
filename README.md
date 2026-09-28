@@ -8,7 +8,7 @@ Trabajo de Fin de Máster · **Jorge Chamorro** ([@jechamo](https://github.com/j
 |---|---|
 | 🌐 **Web del TFM** | <https://jechamo.github.io/TFM/> |
 | 🎞️ **Slides** | <https://jechamo.github.io/TFM/slides/> · [PDF](https://jechamo.github.io/TFM/slides/TFM-Jorge-Chamorro.pdf) |
-| 🎬 **Vídeo (16:30)** | <https://jechamo.github.io/TFM/video.html?v=tfm-completo> · [resumen de 8 min](https://jechamo.github.io/TFM/video.html?v=tfm-resumen) |
+| 🎬 **Vídeo (17:09)** | <https://jechamo.github.io/TFM/video.html?v=tfm-completo> · [resumen de 9 min](https://jechamo.github.io/TFM/video.html?v=tfm-resumen) |
 | 🧱 **Sistema SDD/TDD** | [github.com/jechamo/Estructura_inicial_claude](https://github.com/jechamo/Estructura_inicial_claude) · [web](https://jechamo.github.io/Estructura_inicial_claude/) |
 | 🎥 **RRSS Studio** | [github.com/jechamo/rrss-automation-app](https://github.com/jechamo/rrss-automation-app) (aplicación local) |
 | 🏋️ **ChaFit** | [github.com/jechamo/chafit360](https://github.com/jechamo/chafit360) · [chafit.es](https://chafit.es) · [App Store](https://apps.apple.com/app/chafit/id6759172876) · [Google Play](https://play.google.com/store/apps/details?id=com.chafit.app) |
@@ -143,15 +143,24 @@ La [guía de demo](docs/delivery/demo-guide.md) propone un recorrido de 10 a 15 
 
 | Vídeo | Duración |
 |---|---|
-| [TFM completo: sistema + RRSS + ChaFit + ICG Vault](https://jechamo.github.io/TFM/video.html?v=tfm-completo) | 16:30 |
-| [Resumen](https://jechamo.github.io/TFM/video.html?v=tfm-resumen) | 8:08 |
+| [TFM completo: intro de los cuatro repositorios + sistema + RRSS + ChaFit + ICG Vault](https://jechamo.github.io/TFM/video.html?v=tfm-completo) | 17:09 |
+| [Resumen](https://jechamo.github.io/TFM/video.html?v=tfm-resumen) | 8:47 |
 | [Sistema SDD/TDD](https://jechamo.github.io/TFM/video.html?v=sdd) · [RRSS](https://jechamo.github.io/TFM/video.html?v=rrss-4min) · [ChaFit](https://jechamo.github.io/TFM/video.html?v=chafit-4min) · [ICG Vault](https://jechamo.github.io/TFM/video.html?v=icg-vault-4min) | 4–5 min cada uno |
 
 La narración de los vídeos es sintética.
 
 ## 19. Credenciales de demo
 
-ChaFit e ICG Vault tienen login. Las cuentas de demo se entregan **solo en el formulario privado de entrega** y no se publican en el repositorio mientras las correcciones críticas de las auditorías estén pendientes. → [criterio](docs/security/security.md)
+ChaFit e ICG Vault tienen login; las cuentas de demo también están en la [slide 2](https://jechamo.github.io/TFM/slides/#2).
+
+| App | Web | Usuario | Contraseña |
+|---|---|---|---|
+| ChaFit | [chafit.es](https://chafit.es) | `client3@demo.chafit.es` | `demo123456` |
+| ICG Vault | [icgvault.es](https://icgvault.es) | `Pepis` | `demo123456` |
+
+RRSS Studio (app local) y el sistema SDD (kit instalable) no tienen login.
+
+Son cuentas sin rol de administrador y su contraseña se cambiará después de la defensa. → [criterio](docs/security/security.md#credenciales-demo-criterio)
 
 ## 20. Repositorios
 

@@ -15,8 +15,14 @@
 ## Demostración en vivo sin riesgo
 
 - **RRSS Studio**: la suite E2E simulada recorre los flujos principales sin red ni claves.
-- **ChaFit / ICG Vault**: navegar las páginas públicas y, con la cuenta demo del formulario de entrega, las áreas de cliente y de usuario. No usar funciones de administración ni generar con IA en directo (consumen cuota).
+- **ChaFit / ICG Vault**: navegar las páginas públicas y, con la cuenta demo (slide 2 o README), las áreas de cliente y de usuario. No usar funciones de administración ni generar con IA en directo (consumen cuota).
 
 ## Cuentas demo
 
-Se facilitan en el formulario privado de entrega (ver [seguridad](../security/security.md#credenciales-demo-criterio)).
+| App | Web | Usuario | Contraseña |
+|---|---|---|---|
+| ChaFit | [chafit.es](https://chafit.es) | `client3@demo.chafit.es` | `demo123456` |
+| ICG Vault | [icgvault.es](https://icgvault.es) | `Pepis` | `demo123456` |
+
+
+Criterio y condiciones: [seguridad](../security/security.md#credenciales-demo-criterio).

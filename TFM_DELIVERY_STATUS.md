@@ -11,9 +11,9 @@ Arquitectura:    COMPLETADO   (modelo C4 como código en architecture/model, 5 m
 Diagramas:       COMPLETADO   (56 SVG + PNG, 12 Archify interactivos, workspace Structurizr generado)
 Código:          COMPLETADO   (sin cambios en los productos; tests re-ejecutados el 26/09/2026)
 Deploy:          COMPLETADO   (GitHub Pages desde la rama claude/wonderful-mayer-8d0vkf, 26/09/2026)
-Slides:          COMPLETADO   (21 diapositivas HTML + PDF con 32 enlaces activos), publicadas
-Vídeo:           COMPLETADO   (16:30 y 8:08 + 7 vídeos por producto), publicados en Pages y en el release media-v1
-Credenciales:    PENDIENTE    → probar las cuentas demo (acción 3) y darlas solo en el formulario privado
+Slides:          COMPLETADO   (22 diapositivas HTML + PDF con enlaces activos), publicadas
+Vídeo:           COMPLETADO   (17:09 y 8:47 + 7 vídeos por producto), publicados en Pages y en el release media-v1
+Credenciales:    PUBLICADAS   en la slide 2 y el README por decisión del autor; falta probarlas (acción 3)
 Capturas:        COMPLETADO   (fotogramas reales y capturas públicas); opcionales en SCREENSHOTS_REQUIRED.md
 ```
 
@@ -27,13 +27,13 @@ Vídeo:        https://jechamo.github.io/TFM/video.html?v=tfm-completo
 
 ChaFit:
 URL:              https://chafit.es  (iOS y Android en las tiendas)
-Usuario DEMO:     en el formulario privado
-Contraseña DEMO:  en el formulario privado
+Usuario DEMO:     client3@demo.chafit.es
+Contraseña DEMO:  demo123456
 
 ICG Vault:
 URL:              https://icgvault.es  (iOS y Android en las tiendas)
-Usuario DEMO:     en el formulario privado
-Contraseña DEMO:  en el formulario privado
+Usuario DEMO:     Pepis
+Contraseña DEMO:  demo123456
 ```
 
 Comprobado el 26/09/2026 con un navegador limpio: la web, las slides, el PDF, los diagramas interactivos y el vídeo cargan con sus estilos; el vídeo se reproduce y salta a cada capítulo.
@@ -75,7 +75,7 @@ Publicado: commit `f9af83b`, release [`media-v1`](https://github.com/jechamo/TFM
 | | |
 |---|---|
 | Qué | iniciar sesión con la cuenta demo de ChaFit y la de ICG Vault en web y en móvil |
-| Por qué | Claude no puede iniciar sesión en sitios en producción; hay que confirmar que funcionan, que **no tienen rol de administrador** y si ICG Vault pide el nombre de usuario o el email |
+| Por qué | están publicadas en la slide 2 y el README; Claude no puede iniciar sesión en sitios en producción, así que hay que confirmar que funcionan, que **no tienen rol de administrador** y si ICG Vault pide el nombre de usuario o el email (si pide email, corregir la slide 2 y el README) |
 | Resultado esperado | ambas entran y muestran contenido de demostración |
 | Después de la defensa | cambiar la contraseña de ambas cuentas |
 
@@ -85,11 +85,33 @@ Los vídeos usan narración sintética. Confirmar con el tutor que es aceptable 
 
 ### 5 · Mención al Agent SDK en el vídeo de RRSS (opcional)
 
-En 7:47 la locución dice «Claude Code o el Agent SDK»; en el código el Agent SDK es un marcador sin implementar. Está declarado como PARCIAL. Opcional: volver a narrar esa frase.
+En 8:26 del vídeo completo (3:12 del vídeo de RRSS) la locución dice «Claude Code o el Agent SDK»; en el código el Agent SDK es un marcador sin implementar. Está declarado como PARCIAL. Opcional: volver a narrar esa frase.
 
 ### 6 · Rellenar el formulario
 
 Valores en [`docs/delivery/submission-checklist.md`](docs/delivery/submission-checklist.md) y, con las credenciales, en `docs/delivery/author-private.md` (local, fuera de git).
+
+### 7 · Intro del vídeo (cuatro repositorios) · ✅ montada (28/09/2026)
+
+| | |
+|---|---|
+| Voz | `media/Originales/voz/Main_intro.mp3` (ElevenLabs, 34 s) · texto en [`tfm-video/voz/intro.md`](tfm-video/voz/intro.md) |
+| Música | `media/Originales/Musica/main_intro.mp3` (Suno, 107,7 BPM) · prompt en [`musica-suno.md`](tfm-video/voz/musica-suno.md#intro-del-tfm-cuatro-repositorios), cortada por compases en `projects/intro.json` |
+| Resultado | `media/final/intro/intro.mp4` (0:39) delante de `tfm-completo` (17:09) y `tfm-resumen` (8:47); vídeos en el release `media-v2` |
+| Regenerar | `python intro_timeline.py projects/intro.json` → `node tours/intro-repos.cjs …/Intro.mp4 …/Intro.timeline.json` → `python narrated.py projects/intro.json` → `python combine.py completo` y `resumen` → `python ../tools/prepare-videos.py --release media-vN` |
+
+## Cómo volver a la versión entregada
+
+Cada cambio posterior a la entrega se integra con **un único merge** en la rama publicada. La versión entregada queda marcada con la etiqueta `entrega-v1`.
+
+| Qué deshacer | Cómo | Efecto |
+|---|---|---|
+| Web, slides y documentación | `git revert -m 1 <commit del merge>` y `git push` en `claude/wonderful-mayer-8d0vkf` (y lo mismo en `main`) | Pages vuelve a desplegar la versión anterior en ~1 min |
+| Vídeos | incluido en el revert: `site/data/videos.json` vuelve a apuntar al release `media-v1`, que nunca se modifica | la web vuelve a servir los MP4 originales |
+| Copias locales | `media/final/_v1/` guarda `tfm-completo` y `tfm-resumen` anteriores | restaurar copiando las carpetas |
+| Ver la versión entregada sin tocar nada | `git checkout entrega-v1` | solo lectura, en local |
+
+Las credenciales demo, una vez publicadas, no se «despublican» con el revert: si se revierte, hay que cambiar las contraseñas.
 
 ## Verificado en esta revisión
 
@@ -100,5 +122,5 @@ Valores en [`docs/delivery/submission-checklist.md`](docs/delivery/submission-ch
 | ChaFit: contratos Node y Deno | 109 + 100 en verde |
 | Árboles de trabajo de los productos | sin cambios tras la inspección |
 | Web del TFM publicada y en local (escritorio y 390 px) | sin desbordamiento horizontal; diagramas y catálogo de vídeos cargan también abriendo el HTML como fichero |
-| Slides: 21 diapositivas a 1920×1080 | sin elementos fuera del lienzo; PDF de 21 páginas con 32 enlaces absolutos |
+| Slides: 22 diapositivas a 1920×1080 | sin elementos fuera del lienzo; PDF de 22 páginas con enlaces absolutos |
 | Auditorías publicadas | solo resúmenes saneados; informes completos fuera del repositorio |

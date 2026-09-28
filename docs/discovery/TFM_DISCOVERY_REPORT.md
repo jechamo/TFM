@@ -83,8 +83,8 @@ Ambas concluyen lo mismo: **la app funciona, pero la capa de datos necesita endu
 | `rrss-4min` / `rrss-1min` | 3:59 / 1:10 | RRSS Studio | Análisis, competencia, leads, virales, creación de contenido, laboratorio de clips, motor de IA, prueba sobre la propia plantilla del TFM |
 | `chafit-4min` / `chafit-1min` | 3:44 / 1:07 | ChaFit | Cliente (entrenar, progreso, fichas, "tu máquina"), dieta y foto al plato, entrenador, gimnasio |
 | `icg-vault-4min` / `icg-vault-1min` | 4:07 / 1:11 | ICG Vault | Fichas y voto, poder de voto, cofres, juegos, comunidad, multiplataforma |
-| `tfm-completo` (generado) | 16:30 | Todo | SDD + los tres productos de ~4 min, con capítulos y subtítulos |
-| `tfm-resumen` (generado) | 8:08 | Todo | SDD + los tres productos de ~1 min |
+| `tfm-completo` (generado) | 17:09 | Todo | SDD + los tres productos de ~4 min, con capítulos y subtítulos |
+| `tfm-resumen` (generado) | 8:47 | Todo | SDD + los tres productos de ~1 min |
 
 Todos 1920×1080, H.264/AAC, **narración sintética**, solo en local.
 
@@ -101,7 +101,7 @@ Todos 1920×1080, H.264/AAC, **narración sintética**, solo en local.
 ## 8. Riesgos para la entrega
 
 1. **Repositorios privados** (ChaFit, ICG Vault): el tribunal necesitará acceso de lectura.
-2. **Credenciales demo**: publicarlas en un README público mientras las críticas de control de acceso sigan abiertas expone datos de usuarios reales. Recomendación: entregarlas solo en el formulario privado hasta cerrar las críticas.
+2. **Credenciales demo**: publicarlas en un README público mientras las críticas de control de acceso sigan abiertas expone datos de usuarios reales. Recomendación: entregarlas solo en el formulario privado hasta cerrar las críticas. *Actualización 28/09/2026: el autor decidió publicarlas en la slide 2 y el README con condiciones; ver [seguridad](../security/security.md#credenciales-demo-criterio).*
 3. **Vídeo con narración sintética**: las bases piden un vídeo en el que el autor explique el proyecto; conviene confirmarlo con el tutor o grabar una introducción con voz propia.
 4. **Vídeos solo en local**: hay que publicarlos (GitHub Release + reproductor en Pages, o YouTube) para que los enlaces funcionen.
 

@@ -39,7 +39,7 @@
   <h1>Del máster a <em>producción</em></h1>
   <p class="lead">Un sistema de ingeniería de software dirigido por especificaciones, con <strong>20 agentes de IA</strong>, TDD y verificación fuera del modelo, construido con lo aprendido en el máster y <strong>usado de verdad</strong> para crear, evolucionar y auditar tres productos: RRSS Studio, ChaFit e ICG Vault.</p>
   <div class="cta">
-    <a class="btn primary" href="video.html?v=tfm-completo"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>Ver el vídeo (16:30)</a>
+    <a class="btn primary" href="video.html?v=tfm-completo"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>Ver el vídeo (17:09)</a>
     <a class="btn" href="slides/">Presentación</a>
     <a class="btn" href="https://github.com/jechamo/TFM">Repositorio del TFM</a>
     <a class="btn" href="https://github.com/jechamo/Estructura_inicial_claude">Sistema SDD en GitHub</a>
@@ -92,7 +92,7 @@
 <section id="sdd">
   <div class="wrap">
     <div class="sec-head"><span class="sec-num">§03</span><div><span class="kicker">SDD + TDD</span><h2>Diez fases, seis puertas y <em>tres niveles</em> de circuito.</h2><p class="lead">Cada fase deja en el repositorio el artefacto que necesita la siguiente. El nivel —light, compact o full— lo decide la ruta del cambio, nunca el agente, y ninguno se salta los controles.</p></div></div>
-    <figure class="fig"><div class="scroll"><img class="themed" data-light="diagrams/svg/sdd-circuit.svg" data-dark="diagrams/svg/sdd-circuit-dark.svg" src="diagrams/svg/sdd-circuit.svg" alt="Circuito SDD: intake, arquitectura, specify, clarify, design, plan, tasks, implement, verify y ship, con los gates humanos 1 a 6." loading="lazy"></div><figcaption><span>El circuito con sus gates humanos</span><span class="links"><a href="video.html?v=tfm-completo&amp;t=82">▶ En el vídeo (1:22)</a><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/04-sdd-methodology.md">Metodología</a></span></figcaption></figure>
+    <figure class="fig"><div class="scroll"><img class="themed" data-light="diagrams/svg/sdd-circuit.svg" data-dark="diagrams/svg/sdd-circuit-dark.svg" src="diagrams/svg/sdd-circuit.svg" alt="Circuito SDD: intake, arquitectura, specify, clarify, design, plan, tasks, implement, verify y ship, con los gates humanos 1 a 6." loading="lazy"></div><figcaption><span>El circuito con sus gates humanos</span><span class="links"><a href="video.html?v=tfm-completo&amp;t=121">▶ En el vídeo (2:01)</a><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/04-sdd-methodology.md">Metodología</a></span></figcaption></figure>
     <div style="margin-top:34px;display:grid;gap:18px">
       <div>
         <h3 style="margin-bottom:14px">TDD sobre producción</h3>
@@ -115,7 +115,7 @@
 <section id="agentes">
   <div class="wrap">
     <div class="sec-head"><span class="sec-num">§04</span><div><span class="kicker">Sistema de agentes</span><h2>Veinte agentes. Solo tres delegan. <em>Quien juzga no escribe.</em></h2><p class="lead">Orquestación, fases y especialistas con profundidad máxima de dos saltos. Los auditores son de solo lectura y los hooks —no el modelo— registran qué ocurrió realmente.</p></div></div>
-    <figure class="fig"><div class="scroll"><img class="themed" data-light="diagrams/svg/sdd-agents.svg" data-dark="diagrams/svg/sdd-agents-dark.svg" src="diagrams/svg/sdd-agents.svg" alt="Jerarquía de 20 agentes: orchestrator delega en 8 agentes de fase; implementer delega en 6 especialistas; hay 5 especialistas más." loading="lazy"></div><figcaption><span>Delegación y auditoría</span><span class="links"><a href="video.html?v=tfm-completo&amp;t=160">▶ En el vídeo (2:40)</a><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/06-agentic-system.md">Sistema de agentes</a></span></figcaption></figure>
+    <figure class="fig"><div class="scroll"><img class="themed" data-light="diagrams/svg/sdd-agents.svg" data-dark="diagrams/svg/sdd-agents-dark.svg" src="diagrams/svg/sdd-agents.svg" alt="Jerarquía de 20 agentes: orchestrator delega en 8 agentes de fase; implementer delega en 6 especialistas; hay 5 especialistas más." loading="lazy"></div><figcaption><span>Delegación y auditoría</span><span class="links"><a href="video.html?v=tfm-completo&amp;t=199">▶ En el vídeo (3:19)</a><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/06-agentic-system.md">Sistema de agentes</a></span></figcaption></figure>
     <div class="grid g3" style="margin-top:26px">
       <div class="card"><span class="tag">Guardas</span><h4>guard-write · guard-bash</h4><p>Bloquean secretos y comandos destructivos; piden permiso para push, commits e infraestructura.</p></div>
       <div class="card"><span class="tag">Trazas</span><h4>observed ≠ declared</h4><p><code>execution-log.jsonl</code> append-only escrito por el host; la CI contrasta los <em>trailers</em> de commit con la base exacta.</p></div>
@@ -152,7 +152,7 @@
         </div>
       </div>
       <figure class="fig" style="margin-top:26px"><div class="scroll"><img class="themed" data-light="diagrams/svg/rrss-container.svg" data-dark="diagrams/svg/rrss-container-dark.svg" src="diagrams/svg/rrss-container.svg" alt="Arquitectura de contenedores de RRSS Studio: interfaz, servidor Next.js, SQLite, Vault, medios, herramientas locales y proveedores de IA." loading="lazy"></div>
-        <figcaption><span>Monolito modular local en un único proceso Node</span><span class="links"><a href="video.html?v=tfm-completo&amp;t=279">▶ Vídeo (4:39)</a><a href="diagrams/interactive/rrss-container.html">Explorar</a><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/case-studies/rrss.md">Caso de estudio</a><a href="https://github.com/jechamo/rrss-automation-app">Repositorio</a></span></figcaption></figure>
+        <figcaption><span>Monolito modular local en un único proceso Node</span><span class="links"><a href="video.html?v=tfm-completo&amp;t=318">▶ Vídeo (5:18)</a><a href="diagrams/interactive/rrss-container.html">Explorar</a><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/case-studies/rrss.md">Caso de estudio</a><a href="https://github.com/jechamo/rrss-automation-app">Repositorio</a></span></figcaption></figure>
     </article>
 
     <!-- ChaFit -->
@@ -179,7 +179,7 @@
         </div>
       </div>
       <figure class="fig" style="margin-top:26px"><div class="scroll"><img class="themed" data-light="diagrams/svg/chafit-container.svg" data-dark="diagrams/svg/chafit-container-dark.svg" src="diagrams/svg/chafit-container.svg" alt="Arquitectura de contenedores de ChaFit: cliente web y móvil, pasarela Supabase, Auth, API de datos, Storage, Edge Functions, PostgreSQL y servicios externos." loading="lazy"></div>
-        <figcaption><span>SPA única para web y móvil sobre Supabase; claves solo en Edge Functions</span><span class="links"><a href="video.html?v=tfm-completo&amp;t=518">▶ Vídeo (8:38)</a><a href="diagrams/interactive/chafit-container.html">Explorar</a><a href="diagrams/svg/chafit-seq-routine.svg">Secuencia de IA</a><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/case-studies/chafit.md">Caso de estudio</a><a href="https://github.com/jechamo/chafit360">Repositorio</a></span></figcaption></figure>
+        <figcaption><span>SPA única para web y móvil sobre Supabase; claves solo en Edge Functions</span><span class="links"><a href="video.html?v=tfm-completo&amp;t=557">▶ Vídeo (9:17)</a><a href="diagrams/interactive/chafit-container.html">Explorar</a><a href="diagrams/svg/chafit-seq-routine.svg">Secuencia de IA</a><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/case-studies/chafit.md">Caso de estudio</a><a href="https://github.com/jechamo/chafit360">Repositorio</a></span></figcaption></figure>
     </article>
 
     <!-- ICG Vault -->
@@ -206,7 +206,7 @@
         </div>
       </div>
       <figure class="fig" style="margin-top:26px"><div class="scroll"><img class="themed" data-light="diagrams/svg/icgvault-container.svg" data-dark="diagrams/svg/icgvault-container-dark.svg" src="diagrams/svg/icgvault-container.svg" alt="Arquitectura de contenedores de ICG Vault: cliente, pasarela Supabase, servicios, PostgreSQL con 175 RPC, Edge Functions y bus hacia TMDB, IGDB, HowLongToBeat, Metacritic, RSS y OpenAI." loading="lazy"></div>
-        <figcaption><span>Lógica de juego en SQL; catálogo externo e IA siempre detrás de Edge Functions</span><span class="links"><a href="video.html?v=tfm-completo&amp;t=743">▶ Vídeo (12:23)</a><a href="diagrams/interactive/icgvault-container.html">Explorar</a><a href="diagrams/svg/icgvault-seq-catalog.svg">Flujo de catálogo</a><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/case-studies/icgvault.md">Caso de estudio</a><a href="https://github.com/jechamo/icgbolt">Repositorio</a></span></figcaption></figure>
+        <figcaption><span>Lógica de juego en SQL; catálogo externo e IA siempre detrás de Edge Functions</span><span class="links"><a href="video.html?v=tfm-completo&amp;t=782">▶ Vídeo (13:02)</a><a href="diagrams/interactive/icgvault-container.html">Explorar</a><a href="diagrams/svg/icgvault-seq-catalog.svg">Flujo de catálogo</a><a href="https://github.com/jechamo/TFM/blob/HEAD/docs/case-studies/icgvault.md">Caso de estudio</a><a href="https://github.com/jechamo/icgbolt">Repositorio</a></span></figcaption></figure>
     </article>
   </div>
 </section>
