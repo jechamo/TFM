@@ -11,8 +11,8 @@ Trabajo de Fin de Máster · **Jorge Chamorro** ([@jechamo](https://github.com/j
 | 🎬 **Vídeo (17:09)** | <https://jechamo.github.io/TFM/video.html?v=tfm-completo> · [resumen de 9 min](https://jechamo.github.io/TFM/video.html?v=tfm-resumen) |
 | 🧱 **Sistema SDD/TDD** | [github.com/jechamo/Estructura_inicial_claude](https://github.com/jechamo/Estructura_inicial_claude) · [web](https://jechamo.github.io/Estructura_inicial_claude/) |
 | 🎥 **RRSS Studio** | [github.com/jechamo/rrss-automation-app](https://github.com/jechamo/rrss-automation-app) (aplicación local) |
-| 🏋️ **ChaFit** | [github.com/jechamo/chafit360](https://github.com/jechamo/chafit360) · [chafit.es](https://chafit.es) · [App Store](https://apps.apple.com/app/chafit/id6759172876) · [Google Play](https://play.google.com/store/apps/details?id=com.chafit.app) |
-| 🎮 **ICG Vault** | [github.com/jechamo/icgbolt](https://github.com/jechamo/icgbolt) · [icgvault.es](https://icgvault.es) · [App Store](https://apps.apple.com/es/app/icg-vault/id6759173751) · [Google Play](https://play.google.com/store/apps/details?id=com.icgvault.app) |
+| 🏋️ **ChaFit** | [github.com/jechamo/chafit360](https://github.com/jechamo/chafit360) 🔒 · [chafit.es](https://chafit.es) · [App Store](https://apps.apple.com/app/chafit/id6759172876) · [Google Play](https://play.google.com/store/apps/details?id=com.chafit.app) |
+| 🎮 **ICG Vault** | [github.com/jechamo/icgbolt](https://github.com/jechamo/icgbolt) 🔒 · [icgvault.es](https://icgvault.es) · [App Store](https://apps.apple.com/es/app/icg-vault/id6759173751) · [Google Play](https://play.google.com/store/apps/details?id=com.icgvault.app) |
 
 ![Del máster al sistema SDD/TDD y de ahí a los tres productos](architecture/exported/svg/tfm-overview.svg)
 
@@ -103,7 +103,21 @@ Modelo C4 como código en [`architecture/model/`](architecture/model/), del que 
 
 ## 12. Auditorías
 
-El sistema también audita lo ya construido. El orchestrator coordinó a database-expert (MCP de solo lectura), security-auditor, code-reviewer y ux-designer, contrastó los hallazgos con la base real y produjo informe y plan: **ChaFit, 53 hallazgos (15 críticos)** e **ICG Vault, 48 (16 críticos)**, el 23/09/2026. **Las correcciones todavía no se han aplicado**: el plan está pendiente del gate humano. Solo se publican resúmenes saneados. → [Metodología](docs/audits/audit-methodology.md) · [ChaFit](docs/audits/chafit-audit-summary.md) · [ICG Vault](docs/audits/icgvault-audit-summary.md)
+El sistema también audita lo ya construido. El 23/09/2026 se instaló el kit en copias de ChaFit e ICG Vault y el `orchestrator` coordinó una **auditoría de extremo a extremo en solo lectura**:
+
+- `database-expert`: la base de datos de producción por MCP de Supabase.
+- `security-auditor`, con la skill `security-scan`: OWASP Web 2025, API 2023, LLM 2025 y ASVS 5.0.
+- `code-reviewer` y `performance-optimizer`: buenas prácticas, arquitectura y rendimiento.
+- `ux-designer`: UI y accesibilidad (WCAG 2.2 AA y Nielsen).
+
+Los especialistas usaron modelos de Anthropic, OpenAI y Google, y los hooks registraron la ejecución. El orquestador contrastó cada conclusión con el código y la base real.
+
+| | Hallazgos | Estado | Informe completo 🔒 | Resumen público |
+|---|---|---|---|---|
+| ChaFit | **53** (15 críticos) | **pendiente de aplicar** | [chafit360 · docs/audits](https://github.com/jechamo/chafit360/blob/auditoria-2026-09-23/docs/audits/2026-09-23-auditoria-integral.md) | [resumen](docs/audits/chafit-audit-summary.md) |
+| ICG Vault | **48** (16 críticos) | **pendiente de aplicar** | [icgbolt · docs/audits](https://github.com/jechamo/icgbolt/blob/auditoria-2026-09-23/docs/audits/2026-09-23-auditoria-integral.md) | [resumen](docs/audits/icgvault-audit-summary.md) |
+
+Las correcciones esperan el gate humano; cada una entrará como spec con TDD y *rollback*. → [Cómo se hizo y por qué está pendiente](docs/audits/audit-methodology.md)
 
 ## 13. Stack
 
@@ -169,8 +183,10 @@ Son cuentas sin rol de administrador y su contraseña se cambiará después de l
 | [jechamo/TFM](https://github.com/jechamo/TFM) | esta entrega: documentación, arquitectura como código, web, slides y pipeline de vídeo |
 | [jechamo/Estructura_inicial_claude](https://github.com/jechamo/Estructura_inicial_claude) | sistema SDD/TDD (v0.9.1) |
 | [jechamo/rrss-automation-app](https://github.com/jechamo/rrss-automation-app) | RRSS Studio · LeadView |
-| [jechamo/chafit360](https://github.com/jechamo/chafit360) | ChaFit |
-| [jechamo/icgbolt](https://github.com/jechamo/icgbolt) | ICG Vault |
+| [jechamo/chafit360](https://github.com/jechamo/chafit360) 🔒 | ChaFit y su auditoría completa (rama `auditoria-2026-09-23`) |
+| [jechamo/icgbolt](https://github.com/jechamo/icgbolt) 🔒 | ICG Vault y su auditoría completa (rama `auditoria-2026-09-23`) |
+
+🔒 **Privados:** su historial de git contiene ficheros `.env` con claves de entorno de los proyectos, e incluyen las auditorías completas, que describen vulnerabilidades explotables de apps en producción con usuarios reales todavía sin corregir. **Se ha dado acceso de lectura al tribunal.**
 
 ## 21. Documentación
 

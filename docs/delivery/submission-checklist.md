@@ -7,7 +7,7 @@
 | Requisito | Estado | Dónde |
 |---|---|---|
 | README completo (descripción, stack, instalación, ejecución, estructura, funcionalidades, arquitectura, integraciones, demo, URLs) | ✅ | [`README.md`](../../README.md) |
-| Código fuente en GitHub | ✅ los cinco repositorios enlazados · ⚠️ ChaFit e ICG Vault siguen privados hasta que se publiquen | [repositorios](../../README.md#20-repositorios) |
+| Código fuente en GitHub | ✅ los cinco repositorios enlazados · 🔒 ChaFit e ICG Vault privados (claves `.env` en el historial y auditoría completa), con acceso para el tribunal | [repositorios](../../README.md#20-repositorios) |
 | Versión desplegada | ✅ chafit.es · icgvault.es · web del sistema · web del TFM | README |
 | Slides | ✅ publicadas | https://jechamo.github.io/TFM/slides/ |
 | Vídeo | ✅ publicado (17:09 y 8:47) | https://jechamo.github.io/TFM/video.html?v=tfm-completo |
@@ -30,7 +30,7 @@
 
 - [x] Publicar vídeos (GitHub Release `media-v1`) y web/slides (push de la rama con Pages activo).
 - [x] Comprobar que `https://jechamo.github.io/TFM/`, `/slides/` y `/video.html` cargan y reproducen.
-- [ ] Hacer públicos `chafit360` e `icgbolt` (ver [acción 2](../../TFM_DELIVERY_STATUS.md#2--repositorios-de-chafit-e-icg-vault)) o dar acceso de lectura al tribunal.
+- [ ] Dar acceso de lectura al tribunal en `chafit360` e `icgbolt`, que siguen privados (ver [acción 2](../../TFM_DELIVERY_STATUS.md#2--repositorios-de-chafit-e-icg-vault-privados-con-acceso-para-el-tribunal)).
 - [ ] Probar el login de las cuentas demo en web y móvil.
 - [ ] Confirmar con el tutor que la narración sintética es aceptable (o grabar la introducción con voz propia).
 - [ ] Revisar [`TFM_DELIVERY_STATUS.md`](../../TFM_DELIVERY_STATUS.md).

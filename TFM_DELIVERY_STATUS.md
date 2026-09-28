@@ -60,15 +60,15 @@ Publicado: commit `f9af83b`, release [`media-v1`](https://github.com/jechamo/TFM
 
 </details>
 
-### 2 · Repositorios de ChaFit e ICG Vault
+### 2 · Repositorios de ChaFit e ICG Vault: privados, con acceso para el tribunal
 
 | | |
 |---|---|
-| Qué | [`jechamo/chafit360`](https://github.com/jechamo/chafit360) y [`jechamo/icgbolt`](https://github.com/jechamo/icgbolt) ya están enlazados en README, web y slides, pero siguen privados |
-| Por qué | mientras sean privados, el tribunal verá un 404 al pinchar |
-| Cómo | hacerlos públicos (Settings → General → Danger Zone → Change visibility) o invitar al tribunal como lectores |
-| Antes de publicarlos | las migraciones dejan a la vista las políticas y funciones de base de datos que las auditorías marcan como críticas: conviene aplicar al menos esas correcciones (son retiradas de permisos, rápidas y reversibles) |
-| Historial revisado (26/09/2026) | ambos repositorios versionaron `.env` (ChaFit ya no; ICG Vault todavía sí), pero solo con variables `VITE_*` de cliente, que ya viajan en el *bundle* público: URL y clave publicable de Supabase, id de proyecto, token público `pk.` de Mapbox e ids de cliente de Google. Ningún commit contiene claves de OpenAI, Stripe, Resend, GitHub, `service_role` ni claves privadas. Recomendable: restringir por URL el token de Mapbox |
+| Qué | [`jechamo/chafit360`](https://github.com/jechamo/chafit360) y [`jechamo/icgbolt`](https://github.com/jechamo/icgbolt) **siguen privados** y se enlazan con un 🔒 en README, web y slides |
+| Por qué | su historial de git contiene ficheros `.env` con claves de entorno, y cada uno incluye su **auditoría completa** (rama `auditoria-2026-09-23`, `docs/audits/2026-09-23-auditoria-integral.md`), que describe vulnerabilidades explotables todavía sin corregir |
+| Cómo | en cada repositorio: Settings → Collaborators → *Add people* → la cuenta del tribunal (en `docs/delivery/author-private.md`, fuera de git) con rol **Read** |
+| El repo `TFM` | **se queda público**: GitHub Pages no publica desde repos privados en el plan gratuito, y la web, las slides y el vídeo del formulario dejarían de funcionar. No contiene detalles explotables: solo recuentos, categorías OWASP y el método |
+| Historial revisado (26/09/2026) | los `.env` versionados solo tienen variables `VITE_*` de cliente, que ya viajan en el *bundle* público: URL y clave publicable de Supabase, id de proyecto, token público `pk.` de Mapbox e ids de cliente de Google. Ningún commit contiene claves de OpenAI, Stripe, Resend, GitHub, `service_role` ni claves privadas. Recomendable: restringir por URL el token de Mapbox |
 
 ### 3 · Probar las cuentas demo
 

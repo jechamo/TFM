@@ -189,7 +189,7 @@ figure { margin: 0; }
 footer { border-top: 1px solid var(--rule); padding: 48px 0 60px; color: var(--muted); font-size: 14.5px; }
 footer .wrap { display: flex; flex-wrap: wrap; gap: 20px 40px; justify-content: space-between; }
 .note { font-size: 14px; color: var(--muted); border-left: 2px solid var(--rule); padding-left: 14px; margin-top: 18px; }
-.badge-pend { font: 600 11px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--warn); border: 1px solid color-mix(in srgb, var(--warn) 40%, var(--rule)); padding: 4px 8px; border-radius: 999px; }
+.badge-pend { white-space: nowrap; font: 600 11px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--warn); border: 1px solid color-mix(in srgb, var(--warn) 40%, var(--rule)); padding: 4px 8px; border-radius: 999px; }
 
 /* Ajustes de maquetación */
 .grid > * { min-width: 0; }

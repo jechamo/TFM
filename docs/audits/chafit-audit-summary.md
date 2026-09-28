@@ -1,8 +1,8 @@
 # ChaFit · Resumen saneado de la auditoría integral (23/09/2026)
 
-> **Estado:** auditoría obtenida con el modelo SDD (agentes del sistema coordinados por el `orchestrator`). **Las correcciones todavía no se han aplicado**: el plan está pendiente de aprobación humana.
+> **Estado:** auditoría de extremo a extremo (frontend, Edge Functions, base de datos de producción, IA, UI y accesibilidad) obtenida con el sistema SDD: el `orchestrator` coordinó a `database-expert`, `security-auditor` (skill `security-scan`) y `code-reviewer`, con modelos de tres proveedores. **Las correcciones están pendientes de aplicar**: el plan espera el gate humano. [Cómo se hizo](audit-methodology.md).
 >
-> Informe completo: privado (fuera del repositorio). Este resumen omite deliberadamente cualquier detalle explotable.
+> **Informe completo:** [`jechamo/chafit360` · `docs/audits/2026-09-23-auditoria-integral.md`](https://github.com/jechamo/chafit360/blob/auditoria-2026-09-23/docs/audits/2026-09-23-auditoria-integral.md) (repositorio privado: el informe describe vulnerabilidades explotables de una app en producción y el historial contiene claves de entorno (`.env`); **acceso de lectura concedido al tribunal**). Este resumen omite deliberadamente cualquier detalle explotable.
 
 ## Veredicto
 

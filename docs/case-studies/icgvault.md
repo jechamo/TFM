@@ -1,6 +1,6 @@
 # Caso de estudio · ICG Vault
 
-> Producción: [icgvault.es](https://icgvault.es) · [App Store](https://apps.apple.com/app/id6759173751) · [Google Play](https://play.google.com/store/apps/details?id=com.icgvault.app) · repositorio [`jechamo/icgbolt`](https://github.com/jechamo/icgbolt) · versión 72 en `main`
+> Producción: [icgvault.es](https://icgvault.es) · [App Store](https://apps.apple.com/app/id6759173751) · [Google Play](https://play.google.com/store/apps/details?id=com.icgvault.app) · repositorio privado [`jechamo/icgbolt`](https://github.com/jechamo/icgbolt) (claves `.env` en el historial y auditoría completa; acceso para el tribunal) · versión 72 en `main`
 
 ![ICG Vault en producción](../../site/assets/img/screens/icgvault-landing.webp)
 
