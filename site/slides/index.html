@@ -118,6 +118,20 @@
   .demo span { font: 600 14px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--warn); }
   .demo.none { color: var(--muted); border-style: solid; border-color: var(--rule); background: none; }
   .demo.none span { color: var(--muted); }
+  /* Repos privados (ChaFit, ICG Vault): candado junto al enlace */
+  .lock::before { content: ""; display: inline-block; width: .8em; height: .8em; margin-right: .35em; vertical-align: -.05em; background: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 7V5a4 4 0 1 1 8 0v2h1v8H3V7h1zm2 0h4V5a2 2 0 1 0-4 0v2z'/%3E%3C/svg%3E") center/contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 7V5a4 4 0 1 1 8 0v2h1v8H3V7h1zm2 0h4V5a2 2 0 1 0-4 0v2z'/%3E%3C/svg%3E") center/contain no-repeat; }
+  .audit { display: grid; grid-template-columns: 760px 1fr; gap: 48px; flex: 1; min-height: 0; margin-top: 30px; }
+  .how { background: var(--card); border: 1px solid var(--rule); border-top: 5px solid var(--accent); border-radius: 22px; padding: 30px 34px; display: flex; flex-direction: column; gap: 16px; }
+  .how ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 13px; counter-reset: s; }
+  .how li { font-size: 23px; line-height: 1.35; color: var(--ink2); padding-left: 44px; position: relative; }
+  .how li::before { counter-increment: s; content: counter(s); position: absolute; left: 0; top: 1px; width: 30px; height: 30px; border-radius: 50%; border: 1px solid #1f4a44; color: var(--accent); font: 600 16px/30px var(--mono); text-align: center; }
+  .how li b { color: var(--ink); }
+  .how .meta { font-size: 19px; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 14px; }
+  .res { display: grid; grid-template-rows: 1fr 1fr; gap: 22px; min-height: 0; }
+  .res .card { padding: 24px 30px; display: flex; flex-direction: column; justify-content: center; }
+  .res .sbar { margin-top: 8px; font-size: 20px; grid-template-columns: 250px 1fr 44px; }
+  .res .top { display: flex; align-items: baseline; gap: 20px; }
+  .res .top a { margin-left: auto; font-size: 20px; }
   /* Modo grabación (?rec): la intro del vídeo revela los bloques por pasos y no muestra credenciales. */
   body.rec [data-step] { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
   body.rec [data-step].in { opacity: 1; transform: none; }
@@ -187,7 +201,7 @@
         <div>
           <h3>ChaFit <span class="tag">en producción · web, iOS y Android</span></h3>
           <p>Entrenamiento para clientes, entrenadores y gimnasios, con 7 specs y TDD.</p>
-          <div class="lk"><a href="https://github.com/jechamo/chafit360">github.com/jechamo/chafit360</a><a href="https://chafit.es">chafit.es</a></div>
+          <div class="lk"><a class="lock" href="https://github.com/jechamo/chafit360">github.com/jechamo/chafit360</a><a href="https://chafit.es">chafit.es</a></div>
           <div class="demo"><span>Demo</span>client3@demo.chafit.es · demo123456</div>
         </div>
       </div>
@@ -196,13 +210,13 @@
         <div>
           <h3>ICG Vault <span class="tag">en producción · web, iOS y Android</span></h3>
           <p>Red social de cine, series y videojuegos, auditada con el modelo SDD.</p>
-          <div class="lk"><a href="https://github.com/jechamo/icgbolt">github.com/jechamo/icgbolt</a><a href="https://icgvault.es">icgvault.es</a></div>
+          <div class="lk"><a class="lock" href="https://github.com/jechamo/icgbolt">github.com/jechamo/icgbolt</a><a href="https://icgvault.es">icgvault.es</a></div>
           <div class="demo"><span>Demo</span>Pepis · demo123456</div>
         </div>
       </div>
     </div>
   </div>
-  <div class="foot" data-step="5"><span>Documentación, arquitectura y esta presentación:</span><a href="https://github.com/jechamo/TFM">github.com/jechamo/TFM</a></div>
+  <div class="foot" data-step="5"><span>Documentación:</span><a href="https://github.com/jechamo/TFM">github.com/jechamo/TFM</a><span class="lock" style="color:var(--muted);font-size:17px">ChaFit e ICG Vault, privados: claves <code>.env</code> en el historial y auditoría con vulnerabilidades · acceso para el tribunal</span></div>
 </section>
 
 <!-- 3 · Problema -->
@@ -336,7 +350,7 @@
       <div style="width:260px;margin-top:30px"><div class="phone"><img src="../assets/img/frames/chafit/meal-photo.webp" alt="Registro de comida a partir de una foto"></div><div class="cap">Foto al plato</div></div>
     </div>
   </div>
-  <div class="foot"><a href="https://chafit.es">chafit.es</a><a href="https://apps.apple.com/app/chafit/id6759172876">App Store</a><a href="https://play.google.com/store/apps/details?id=com.chafit.app">Google Play</a><a href="https://github.com/jechamo/chafit360">GitHub</a><a class="play" href="../video.html?v=tfm-completo&amp;t=557">Vídeo · 9:17</a><a class="play" href="../video.html?v=chafit-4min">Recorrido de 4 min</a></div>
+  <div class="foot"><a href="https://chafit.es">chafit.es</a><a href="https://apps.apple.com/app/chafit/id6759172876">App Store</a><a href="https://play.google.com/store/apps/details?id=com.chafit.app">Google Play</a><a class="lock" href="https://github.com/jechamo/chafit360">GitHub</a><a class="play" href="../video.html?v=tfm-completo&amp;t=557">Vídeo · 9:17</a><a class="play" href="../video.html?v=chafit-4min">Recorrido de 4 min</a></div>
 </section>
 
 <!-- 12 · Arquitectura ChaFit -->
@@ -351,7 +365,7 @@
       <div><b>109 + 100</b><span>tests en verde hoy; JSON Schema estricto en la frontera de la IA.</span></div>
     </div>
   </div>
-  <div class="foot"><a href="../../docs/architecture/chafit-architecture.md" data-gh="docs/architecture/chafit-architecture.md">Documento de arquitectura</a><a href="../diagrams/interactive/chafit-container.html">Diagrama interactivo</a><a href="https://github.com/jechamo/chafit360">github.com/jechamo/chafit360</a></div>
+  <div class="foot"><a href="../../docs/architecture/chafit-architecture.md" data-gh="docs/architecture/chafit-architecture.md">Documento de arquitectura</a><a href="../diagrams/interactive/chafit-container.html">Diagrama interactivo</a><a class="lock" href="https://github.com/jechamo/chafit360">github.com/jechamo/chafit360</a><span>privado · acceso para el tribunal</span></div>
 </section>
 
 <!-- 13 · ICG Vault -->
@@ -370,7 +384,7 @@
       <div style="width:260px;margin-top:30px"><div class="phone"><img src="../assets/img/frames/icg/zoomout.webp" alt="Juego diario Zoom Out"></div><div class="cap">Juegos diarios</div></div>
     </div>
   </div>
-  <div class="foot"><a href="https://icgvault.es">icgvault.es</a><a href="https://apps.apple.com/es/app/icg-vault/id6759173751">App Store</a><a href="https://play.google.com/store/apps/details?id=com.icgvault.app">Google Play</a><a href="https://github.com/jechamo/icgbolt">GitHub</a><a class="play" href="../video.html?v=tfm-completo&amp;t=782">Vídeo · 13:02</a><a class="play" href="../video.html?v=icg-vault-4min">Recorrido de 4 min</a></div>
+  <div class="foot"><a href="https://icgvault.es">icgvault.es</a><a href="https://apps.apple.com/es/app/icg-vault/id6759173751">App Store</a><a href="https://play.google.com/store/apps/details?id=com.icgvault.app">Google Play</a><a class="lock" href="https://github.com/jechamo/icgbolt">GitHub</a><a class="play" href="../video.html?v=tfm-completo&amp;t=782">Vídeo · 13:02</a><a class="play" href="../video.html?v=icg-vault-4min">Recorrido de 4 min</a></div>
 </section>
 
 <!-- 14 · Arquitectura ICG -->
@@ -385,7 +399,7 @@
       <div><b>81 de 97</b><span>PR desde ramas de agentes, revisadas y fusionadas por el autor.</span></div>
     </div>
   </div>
-  <div class="foot"><a href="../../docs/architecture/icgvault-architecture.md" data-gh="docs/architecture/icgvault-architecture.md">Documento de arquitectura</a><a href="../diagrams/interactive/icgvault-container.html">Diagrama interactivo</a><a href="https://github.com/jechamo/icgbolt">github.com/jechamo/icgbolt</a></div>
+  <div class="foot"><a href="../../docs/architecture/icgvault-architecture.md" data-gh="docs/architecture/icgvault-architecture.md">Documento de arquitectura</a><a href="../diagrams/interactive/icgvault-container.html">Diagrama interactivo</a><a class="lock" href="https://github.com/jechamo/icgbolt">github.com/jechamo/icgbolt</a><span>privado · acceso para el tribunal</span></div>
 </section>
 
 <!-- 15 · Integraciones e IA -->
@@ -409,30 +423,39 @@
 
 <!-- 16 · Auditorías -->
 <section class="slide" aria-label="Auditorías">
-  <span class="kicker">Auditorías con el modelo SDD</span>
+  <span class="kicker">Auditorías con el sistema SDD · 23/09/2026</span>
   <h2>El sistema también <em>audita</em> lo ya construido.</h2>
-  <div class="body">
-    <div class="cols c2" style="gap:56px">
+  <div class="audit">
+    <div class="how">
+      <span class="kicker" style="color:var(--accent);font-size:18px">De extremo a extremo · solo lectura</span>
+      <ol>
+        <li><b>orchestrator</b> diagnostica, reparte el trabajo y contrasta cada conclusión con el código y la base real.</li>
+        <li><b>database-expert</b>: producción por <b>MCP de Supabase</b> (políticas, funciones, permisos, Storage), sin leer datos personales.</li>
+        <li><b>security-auditor</b> con la skill <code style="color:var(--accent)">security-scan</code>: OWASP Web 2025, API 2023, LLM 2025 y ASVS 5.0.</li>
+        <li><b>code-reviewer</b> y <b>performance-optimizer</b>: buenas prácticas, arquitectura y rendimiento.</li>
+        <li><b>ux-designer</b>: UI, usabilidad (Nielsen) y accesibilidad WCAG 2.2 AA.</li>
+      </ol>
+      <p class="meta">Modelos de Anthropic, OpenAI y Google; ejecución observada por los hooks. Cada hallazgo lleva evidencia, corrección, riesgo del cambio y <i>rollback</i>.</p>
+      <div style="display:flex;gap:18px;align-items:center;margin-top:auto"><span class="pend">Correcciones pendientes de aplicar</span><span style="font-size:19px;color:var(--muted)">gate humano → spec + TDD</span></div>
+    </div>
+    <div class="res">
       <div class="card">
-        <span class="n">ChaFit · 23/09/2026</span>
-        <div style="display:flex;align-items:baseline;gap:24px;margin:18px 0 20px"><span class="big" style="font-size:104px">53</span><span style="font-size:27px;color:var(--ink2)">hallazgos · <b style="color:var(--human)">15 críticos</b></span></div>
+        <div class="top"><span class="n">ChaFit</span><span class="big" style="font-size:78px">53</span><span style="font-size:24px;color:var(--ink2)">hallazgos · <b style="color:var(--human)">15 críticos</b></span><a class="lock" href="https://github.com/jechamo/chafit360/blob/auditoria-2026-09-23/docs/audits/2026-09-23-auditoria-integral.md">Informe completo</a></div>
         <div class="sbar"><span>Seguridad de aplicación</span><span class="t"><i class="i-c" style="width:16%"></i><i class="i-d" style="width:36%"></i><i class="i-m" style="width:8%"></i></span><span class="v">15</span></div>
         <div class="sbar"><span>Datos y Edge Functions</span><span class="t"><i class="i-c" style="width:20%"></i><i class="i-d" style="width:24%"></i><i class="i-m" style="width:8%"></i></span><span class="v">13</span></div>
         <div class="sbar"><span>Calidad de código</span><span class="t"><i class="i-c" style="width:12%"></i><i class="i-d" style="width:24%"></i></span><span class="v">9</span></div>
         <div class="sbar"><span>UI y accesibilidad</span><span class="t"><i class="i-c" style="width:12%"></i><i class="i-d" style="width:44%"></i><i class="i-m" style="width:8%"></i></span><span class="v">16</span></div>
       </div>
       <div class="card">
-        <span class="n">ICG Vault · 23/09/2026</span>
-        <div style="display:flex;align-items:baseline;gap:24px;margin:18px 0 20px"><span class="big" style="font-size:104px">48</span><span style="font-size:27px;color:var(--ink2)">hallazgos · <b style="color:var(--human)">16 críticos</b></span></div>
+        <div class="top"><span class="n">ICG Vault</span><span class="big" style="font-size:78px">48</span><span style="font-size:24px;color:var(--ink2)">hallazgos · <b style="color:var(--human)">16 críticos</b></span><a class="lock" href="https://github.com/jechamo/icgbolt/blob/auditoria-2026-09-23/docs/audits/2026-09-23-auditoria-integral.md">Informe completo</a></div>
         <div class="sbar"><span>Seguridad</span><span class="t"><i class="i-c" style="width:36%"></i><i class="i-d" style="width:40%"></i><i class="i-m" style="width:24%"></i></span><span class="v">25</span></div>
         <div class="sbar"><span>Calidad y rendimiento</span><span class="t"><i class="i-c" style="width:16%"></i><i class="i-d" style="width:28%"></i><i class="i-m" style="width:20%"></i></span><span class="v">16</span></div>
         <div class="sbar"><span>UI y accesibilidad</span><span class="t"><i class="i-c" style="width:12%"></i><i class="i-d" style="width:8%"></i><i class="i-m" style="width:8%"></i></span><span class="v">7</span></div>
-        <div class="legend"><span><i class="i-c"></i>crítica</span><span><i class="i-d"></i>deseable</span><span><i class="i-m"></i>mínima</span></div>
+        <div class="legend" style="margin-top:14px"><span><i class="i-c"></i>crítica</span><span><i class="i-d"></i>deseable</span><span><i class="i-m"></i>mínima</span></div>
       </div>
     </div>
-    <div style="display:flex;gap:30px;align-items:center;margin-top:50px"><p style="font-size:27px;color:var(--ink2)">orchestrator → database-expert (MCP de solo lectura), security-auditor, code-reviewer y ux-designer → contraste con la base real → informe y plan por fases.</p><span class="pend">Correcciones pendientes</span></div>
   </div>
-  <div class="foot"><a href="../../docs/audits/audit-methodology.md" data-gh="docs/audits/audit-methodology.md">Metodología</a><span>Informes completos privados; publicados solo los resúmenes saneados</span></div>
+  <div class="foot"><a href="../../docs/audits/audit-methodology.md" data-gh="docs/audits/audit-methodology.md">Cómo se hizo</a><span class="lock">Informes completos en los repos privados de cada app: describen vulnerabilidades explotables · acceso para el tribunal</span></div>
 </section>
 
 <!-- 17 · Calidad -->
@@ -534,7 +557,7 @@
   <div class="body">
     <div class="cols c3" style="font-size:28px;gap:70px">
       <div><p class="kicker" style="font-size:19px;margin-bottom:22px">Entrega</p><div style="display:grid;gap:16px"><a href="https://jechamo.github.io/TFM/">Web del TFM</a><a class="play" href="../video.html?v=tfm-completo">Vídeo completo · 17:09</a><a class="play" href="../video.html?v=tfm-resumen">Vídeo resumen · 8:47</a><a href="https://github.com/jechamo/TFM">Repositorio del TFM</a></div></div>
-      <div><p class="kicker" style="font-size:19px;margin-bottom:22px">Código</p><div style="display:grid;gap:16px"><a href="https://github.com/jechamo/Estructura_inicial_claude">Sistema SDD/TDD</a><a href="https://jechamo.github.io/Estructura_inicial_claude/">Web del sistema</a><a href="https://github.com/jechamo/rrss-automation-app">RRSS Studio</a><a href="https://github.com/jechamo/chafit360">ChaFit</a><a href="https://github.com/jechamo/icgbolt">ICG Vault</a></div></div>
+      <div><p class="kicker" style="font-size:19px;margin-bottom:22px">Código</p><div style="display:grid;gap:16px"><a href="https://github.com/jechamo/Estructura_inicial_claude">Sistema SDD/TDD</a><a href="https://jechamo.github.io/Estructura_inicial_claude/">Web del sistema</a><a href="https://github.com/jechamo/rrss-automation-app">RRSS Studio</a><a class="lock" href="https://github.com/jechamo/chafit360">ChaFit</a><a class="lock" href="https://github.com/jechamo/icgbolt">ICG Vault</a><span style="color:var(--muted);font-size:20px;line-height:1.35">Privados: claves de entorno en el historial y auditorías con vulnerabilidades. Acceso concedido al tribunal.</span></div></div>
       <div><p class="kicker" style="font-size:19px;margin-bottom:22px">En producción</p><div style="display:grid;gap:16px"><a href="https://chafit.es">chafit.es</a><a href="https://icgvault.es">icgvault.es</a><a class="play" href="../video.html?v=chafit-4min">ChaFit · recorrido</a><a class="play" href="../video.html?v=icg-vault-4min">ICG Vault · recorrido</a></div></div>
     </div>
   </div>

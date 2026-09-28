@@ -61,7 +61,7 @@ Son productos en producción; para evaluarlos no hace falta instalarlos:
 | ChaFit | <https://chafit.es> | [App Store](https://apps.apple.com/app/chafit/id6759172876) | [Google Play](https://play.google.com/store/apps/details?id=com.chafit.app) |
 | ICG Vault | <https://icgvault.es> | [App Store](https://apps.apple.com/app/id6759173751) | [Google Play](https://play.google.com/store/apps/details?id=com.icgvault.app) |
 
-Código: [`jechamo/chafit360`](https://github.com/jechamo/chafit360) y [`jechamo/icgbolt`](https://github.com/jechamo/icgbolt). Ejecutarlos en local requiere un proyecto Supabase propio con sus migraciones y secretos (no incluidos).
+Código: [`jechamo/chafit360`](https://github.com/jechamo/chafit360) y [`jechamo/icgbolt`](https://github.com/jechamo/icgbolt). Son **privados**: su historial contiene ficheros `.env` con claves de entorno y cada uno incluye su auditoría completa, con vulnerabilidades descritas y todavía sin corregir. El tribunal tiene acceso de lectura. Ejecutarlos en local requiere un proyecto Supabase propio con sus migraciones y secretos (no incluidos).
 
 ## 4. Este repositorio (entrega del TFM)
 
